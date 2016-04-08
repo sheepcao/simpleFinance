@@ -93,6 +93,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="gradientView" destination="8bC-Xf-vdC" id="wIl-xm-tJ0"/>
+                        <outlet property="luckyText" destination="5LT-Ng-Qgg" id="cbv-JF-mTF"/>
                         <outlet property="moneyLuckView" destination="aVT-32-h2x" id="kz4-ux-uXm"/>
                     </connections>
                 </viewController>

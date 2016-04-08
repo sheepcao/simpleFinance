@@ -19,6 +19,7 @@
 		A42D1CAD1CB657C300C208A0 /* summeryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1CAB1CB657C300C208A0 /* summeryViewController.m */; };
 		A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42D1CAC1CB657C300C208A0 /* summeryViewController.xib */; };
 		A42D1CB11CB6636600C208A0 /* SammeryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42D1CB01CB6636600C208A0 /* SammeryView.xib */; };
+		A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A481F9C01CB769960003100F /* myMaskTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		A42D1CAC1CB657C300C208A0 /* summeryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = summeryViewController.xib; sourceTree = "<group>"; };
 		A42D1CAF1CB65EA000C208A0 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 		A42D1CB01CB6636600C208A0 /* SammeryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SammeryView.xib; sourceTree = "<group>"; };
+		A481F9BF1CB769960003100F /* myMaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myMaskTableViewCell.h; sourceTree = "<group>"; };
+		A481F9C01CB769960003100F /* myMaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myMaskTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +120,8 @@
 				A42D1CAB1CB657C300C208A0 /* summeryViewController.m */,
 				A42D1CAC1CB657C300C208A0 /* summeryViewController.xib */,
 				A42D1CB01CB6636600C208A0 /* SammeryView.xib */,
+				A481F9BF1CB769960003100F /* myMaskTableViewCell.h */,
+				A481F9C01CB769960003100F /* myMaskTableViewCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 			files = (
 				A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
+				A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */,
 				A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */,
 				A42D1CA71CB63D2B00C208A0 /* summeryTableViewCell.m in Sources */,
 				A42D1C8B1CB60AC900C208A0 /* main.m in Sources */,
@@ -346,6 +352,7 @@
 				A42D1C9F1CB60AC900C208A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
