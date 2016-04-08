@@ -8,6 +8,7 @@
 
 #import "SideMenuViewController.h"
 #import "global.h"
+#import "MFSideMenu.h"
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -24,6 +25,7 @@
     menuTable.dataSource = self;
     menuTable.scrollEnabled = NO;
     menuTable.backgroundColor = [UIColor clearColor];
+    menuTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:menuTable];
     
 }
@@ -57,13 +59,25 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryNone;
         cell.backgroundColor = [UIColor clearColor];
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"Item %d", indexPath.row];
     cell.textLabel.textColor = TextColor;
     return cell;
+}
+
+
+#pragma mark -
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    
+    
+    [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 @end

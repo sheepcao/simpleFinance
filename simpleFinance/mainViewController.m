@@ -64,6 +64,9 @@
     
     
     moneyLuckSpace = self.moneyLuckView.frame.size.height + self.moneyLuckView.frame.origin.y - topBarHeight;
+    if (IS_IPHONE_5_OR_LESS) {
+        moneyLuckSpace = moneyLuckSpace-40;
+    }
     NSLog(@"moneyLuckSpace---:%f",moneyLuckSpace);
     
     [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
@@ -73,9 +76,9 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
-    if (self.maintableView.contentOffset.y > -0.0001 && self.maintableView.contentOffset.y - moneyLuckSpace/2 < 0.000001) {
+    if (self.maintableView.contentOffset.y > -0.0001 && self.maintableView.contentOffset.y - moneyLuckSpace*2/5 < 0.000001) {
         
-        self.luckyText.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace/2);
+        self.luckyText.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace*2/5);
         
         
     }else if (self.maintableView.contentOffset.y > -0.0001)
@@ -105,12 +108,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if (IS_IPHONE_5_OR_LESS) {
-            return moneyLuckSpace-40;
-        }else
-        {
-            return moneyLuckSpace;
-        }
+        return moneyLuckSpace;
     }else
         return rowHeight;
 }
