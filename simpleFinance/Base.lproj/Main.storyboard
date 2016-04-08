@@ -33,7 +33,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置生日，随时掌握财运 &gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="5LT-Ng-Qgg">
-                                        <rect key="frame" x="25" y="80" width="364" height="94"/>
+                                        <rect key="frame" x="25" y="80" width="364" height="102"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
                                         <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -69,7 +69,7 @@
                                     <constraint firstItem="3fR-Xx-Re1" firstAttribute="top" secondItem="aVT-32-h2x" secondAttribute="top" constant="32" id="Nkh-23-A7I"/>
                                     <constraint firstItem="5LT-Ng-Qgg" firstAttribute="leading" secondItem="aVT-32-h2x" secondAttribute="leading" constant="25" id="WeT-Ja-W6N"/>
                                     <constraint firstAttribute="trailing" secondItem="E3g-Co-XUe" secondAttribute="trailing" constant="25" id="dfv-bR-plI"/>
-                                    <constraint firstAttribute="bottom" secondItem="5LT-Ng-Qgg" secondAttribute="bottom" constant="10" id="oGh-ph-EeA"/>
+                                    <constraint firstAttribute="bottom" secondItem="5LT-Ng-Qgg" secondAttribute="bottom" constant="2" id="oGh-ph-EeA"/>
                                     <constraint firstItem="5LT-Ng-Qgg" firstAttribute="top" secondItem="3fR-Xx-Re1" secondAttribute="bottom" constant="15" id="uoH-Gj-kMb"/>
                                 </constraints>
                             </view>

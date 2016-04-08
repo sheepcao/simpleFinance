@@ -20,6 +20,8 @@
 @interface mainViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
     CGFloat moneyLuckSpace;
+    CGFloat bottomHeight;
+
 }
 
 @end
@@ -29,6 +31,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (IS_IPHONE_6P) {
+        bottomHeight = 65;
+    }else
+    {
+        bottomHeight = bottomBar;
+    }
     
     self.navigationController.navigationBarHidden = YES;
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
@@ -42,7 +51,7 @@
 
     self.luckyText.alpha = 1.0f;
     
-    self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, topBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT- bottomBar -topBarHeight) style:UITableViewStylePlain];
+    self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, topBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT- bottomHeight -topBarHeight) style:UITableViewStylePlain];
     self.maintableView.showsVerticalScrollIndicator = NO;
     self.maintableView.backgroundColor = [UIColor clearColor];
     self.maintableView.delegate = self;
@@ -96,7 +105,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return moneyLuckSpace;
+        if (IS_IPHONE_5_OR_LESS) {
+            return moneyLuckSpace-40;
+        }else
+        {
+            return moneyLuckSpace;
+        }
     }else
         return rowHeight;
 }
