@@ -10,6 +10,7 @@
 #import "global.h"
 #import "summeryViewController.h"
 #import "myMaskTableViewCell.h"
+#import "MFSideMenu.h"
 
 
 
@@ -29,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.navigationBarHidden = YES;
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                  @{UIFontDescriptorFamilyAttribute: @"Marion",
                                                    UIFontDescriptorNameAttribute:@"Marion-Thin",
@@ -253,5 +255,11 @@
 
 }
 
+- (IBAction)menuTapped:(id)sender {
+    [self.menuContainerViewController toggleRightSideMenuCompletion:^{
+    
+    }];
+    
+}
 
 @end

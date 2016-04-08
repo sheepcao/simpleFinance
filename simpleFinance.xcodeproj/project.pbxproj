@@ -19,6 +19,12 @@
 		A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42D1CAC1CB657C300C208A0 /* summeryViewController.xib */; };
 		A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A481F9C01CB769960003100F /* myMaskTableViewCell.m */; };
 		A490C1761CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C1751CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m */; };
+		A490C1841CB7A887006EEEF1 /* FabonacciNum.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C1791CB7A887006EEEF1 /* FabonacciNum.m */; };
+		A490C1851CB7A887006EEEF1 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C17C1CB7A887006EEEF1 /* MFSideMenuContainerViewController.m */; };
+		A490C1861CB7A887006EEEF1 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C17E1CB7A887006EEEF1 /* MFSideMenuShadow.m */; };
+		A490C1891CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C1831CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m */; };
+		A490C1921CB7B1B3006EEEF1 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C1901CB7B1B3006EEEF1 /* SideMenuViewController.m */; };
+		A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A490C1911CB7B1B3006EEEF1 /* SideMenuViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +49,18 @@
 		A481F9C01CB769960003100F /* myMaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myMaskTableViewCell.m; sourceTree = "<group>"; };
 		A490C1741CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+UILabel_UILabelDynamicHeight.h"; sourceTree = "<group>"; };
 		A490C1751CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+UILabel_UILabelDynamicHeight.m"; sourceTree = "<group>"; };
+		A490C1781CB7A887006EEEF1 /* FabonacciNum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FabonacciNum.h; sourceTree = "<group>"; };
+		A490C1791CB7A887006EEEF1 /* FabonacciNum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FabonacciNum.m; sourceTree = "<group>"; };
+		A490C17A1CB7A887006EEEF1 /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
+		A490C17B1CB7A887006EEEF1 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
+		A490C17C1CB7A887006EEEF1 /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
+		A490C17D1CB7A887006EEEF1 /* MFSideMenuShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuShadow.h; sourceTree = "<group>"; };
+		A490C17E1CB7A887006EEEF1 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
+		A490C1821CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
+		A490C1831CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		A490C18F1CB7B1B3006EEEF1 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
+		A490C1901CB7B1B3006EEEF1 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
+		A490C1911CB7B1B3006EEEF1 /* SideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuViewController.xib; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -88,10 +106,14 @@
 		A42D1C881CB60AC900C208A0 /* simpleFinance */ = {
 			isa = PBXGroup;
 			children = (
+				A490C1771CB7A887006EEEF1 /* MFSideMenu */,
 				A42D1CA01CB6365A00C208A0 /* LGGradientBackgroundView */,
 				A42D1CAF1CB65EA000C208A0 /* global.h */,
 				A42D1C8C1CB60AC900C208A0 /* AppDelegate.h */,
 				A42D1C8D1CB60AC900C208A0 /* AppDelegate.m */,
+				A490C18F1CB7B1B3006EEEF1 /* SideMenuViewController.h */,
+				A490C1901CB7B1B3006EEEF1 /* SideMenuViewController.m */,
+				A490C1911CB7B1B3006EEEF1 /* SideMenuViewController.xib */,
 				A42D1C8F1CB60AC900C208A0 /* mainViewController.h */,
 				A42D1C901CB60AC900C208A0 /* mainViewController.m */,
 				A42D1CA91CB64C3800C208A0 /* cells */,
@@ -133,6 +155,22 @@
 				A481F9C01CB769960003100F /* myMaskTableViewCell.m */,
 			);
 			name = cells;
+			sourceTree = "<group>";
+		};
+		A490C1771CB7A887006EEEF1 /* MFSideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				A490C1781CB7A887006EEEF1 /* FabonacciNum.h */,
+				A490C1791CB7A887006EEEF1 /* FabonacciNum.m */,
+				A490C17A1CB7A887006EEEF1 /* MFSideMenu.h */,
+				A490C17B1CB7A887006EEEF1 /* MFSideMenuContainerViewController.h */,
+				A490C17C1CB7A887006EEEF1 /* MFSideMenuContainerViewController.m */,
+				A490C17D1CB7A887006EEEF1 /* MFSideMenuShadow.h */,
+				A490C17E1CB7A887006EEEF1 /* MFSideMenuShadow.m */,
+				A490C1821CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.h */,
+				A490C1831CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m */,
+			);
+			path = MFSideMenu;
 			sourceTree = "<group>";
 		};
 		F005D24909418A1E6F61B3D8 /* Pods */ = {
@@ -204,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
@@ -266,13 +305,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A490C1921CB7B1B3006EEEF1 /* SideMenuViewController.m in Sources */,
 				A490C1761CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m in Sources */,
 				A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */,
+				A490C1861CB7A887006EEEF1 /* MFSideMenuShadow.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
 				A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */,
 				A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */,
 				A42D1C8B1CB60AC900C208A0 /* main.m in Sources */,
 				A42D1CAD1CB657C300C208A0 /* summeryViewController.m in Sources */,
+				A490C1851CB7A887006EEEF1 /* MFSideMenuContainerViewController.m in Sources */,
+				A490C1891CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				A490C1841CB7A887006EEEF1 /* FabonacciNum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

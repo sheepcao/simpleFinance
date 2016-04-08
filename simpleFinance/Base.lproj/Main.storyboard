@@ -10,7 +10,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="mainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="mainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVT-32-h2x">
-                                <rect key="frame" x="0.0" y="0.5" width="414" height="184"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="184"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="简  簿" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fR-Xx-Re1">
                                         <rect key="frame" x="95" y="32" width="225" height="33"/>
@@ -47,19 +47,28 @@
                                             <action selector="skinChange:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Ye-mw-JeT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3g-Co-XUe">
-                                        <rect key="frame" x="343" y="35" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3g-Co-XUe">
+                                        <rect key="frame" x="343" y="33.5" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="YsF-Jt-cJA"/>
+                                            <constraint firstAttribute="width" constant="46" id="wDm-ao-GpB"/>
+                                        </constraints>
                                         <state key="normal" title="Menu">
                                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="menuTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NLZ-U2-1CD"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="5LT-Ng-Qgg" firstAttribute="centerX" secondItem="aVT-32-h2x" secondAttribute="centerX" id="1sv-yh-fOC"/>
                                     <constraint firstItem="3fR-Xx-Re1" firstAttribute="centerX" secondItem="aVT-32-h2x" secondAttribute="centerX" id="4o7-WC-ul5"/>
+                                    <constraint firstItem="E3g-Co-XUe" firstAttribute="centerY" secondItem="3fR-Xx-Re1" secondAttribute="centerY" id="56q-4o-GeJ"/>
                                     <constraint firstItem="3fR-Xx-Re1" firstAttribute="top" secondItem="aVT-32-h2x" secondAttribute="top" constant="32" id="Nkh-23-A7I"/>
                                     <constraint firstItem="5LT-Ng-Qgg" firstAttribute="leading" secondItem="aVT-32-h2x" secondAttribute="leading" constant="25" id="WeT-Ja-W6N"/>
+                                    <constraint firstAttribute="trailing" secondItem="E3g-Co-XUe" secondAttribute="trailing" constant="25" id="dfv-bR-plI"/>
                                     <constraint firstAttribute="bottom" secondItem="5LT-Ng-Qgg" secondAttribute="bottom" constant="10" id="oGh-ph-EeA"/>
                                     <constraint firstItem="5LT-Ng-Qgg" firstAttribute="top" secondItem="3fR-Xx-Re1" secondAttribute="bottom" constant="15" id="uoH-Gj-kMb"/>
                                 </constraints>
@@ -67,7 +76,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.16470588235294117" green="0.49411764705882355" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="aVT-32-h2x" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="SSQ-kj-LIZ"/>
+                            <constraint firstItem="aVT-32-h2x" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="HAa-mx-TFT"/>
                             <constraint firstItem="aVT-32-h2x" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:4" id="cKu-vP-6Nl"/>
                             <constraint firstItem="aVT-32-h2x" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="gBE-jb-bq0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aVT-32-h2x" secondAttribute="trailing" constant="-20" id="tk9-mN-b5w"/>

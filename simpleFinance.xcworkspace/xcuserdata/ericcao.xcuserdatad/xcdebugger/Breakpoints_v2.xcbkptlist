@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/mainViewController.m"
-            timestampString = "481797483.23724"
+            timestampString = "481800390.215828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/mainViewController.m"
-            timestampString = "481797483.23724"
+            timestampString = "481800390.215828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "-scrollViewDidEndDragging:willDecelerate:"
             landmarkType = "5">
          </BreakpointContent>

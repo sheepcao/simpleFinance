@@ -7,7 +7,9 @@
 //
 
 #import "AppDelegate.h"
-
+#import "mainViewController.h"
+#import "SideMenuViewController.h"
+#import "MFSideMenuContainerViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -15,8 +17,31 @@
 @implementation AppDelegate
 
 
+- (mainViewController *)demoController {
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    mainViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"mainViewController"];
+    
+    return vc;
+}
+
+- (UINavigationController *)navigationController {
+    return [[UINavigationController alloc]
+            initWithRootViewController:[self demoController]];
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    SideMenuViewController *rightMenuViewController = [[SideMenuViewController alloc] init];
+    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
+                                                    containerWithCenterViewController:[self navigationController]
+                                                    leftMenuViewController:nil
+                                                    rightMenuViewController:rightMenuViewController];
+    self.window.rootViewController = container;
+    [self.window makeKeyAndVisible];
+
     return YES;
 }
 
