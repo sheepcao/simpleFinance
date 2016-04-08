@@ -9,6 +9,10 @@
 #import "summeryViewController.h"
 
 @interface summeryViewController ()
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *midLineHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineHeight;
+
 
 @end
 
@@ -17,8 +21,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
 }
-
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    [self.downLineHeight setConstant:0.6f];
+    [self.midLineHeight setConstant:0.6f];
+    [self.upLineHeight setConstant:0.6f];
+    
+    [self.view setNeedsUpdateConstraints];
+    
+    [self.view layoutIfNeeded];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

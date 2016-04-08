@@ -25,6 +25,13 @@
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
 
+#define summaryViewHeight 136
+#define bottomBar 50
+#define rowHeight 48
+#define topBarHeight 75
+
+#define TextColor [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
+
 #define REVIEW_URL @"https://itunes.apple.com/cn/app/dota-quan-zi/id1028906602?ls=1&mt=8"
 
 #define ALLAPP_URL @"itms://itunes.apple.com/us/artist/cao-guangxu/id844914783"

@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aVT-32-h2x">
-                                <rect key="frame" x="0.0" y="0.5" width="414" height="257.5"/>
+                                <rect key="frame" x="0.0" y="0.5" width="414" height="184"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="简  簿" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fR-Xx-Re1">
                                         <rect key="frame" x="95" y="32" width="225" height="33"/>
@@ -32,13 +32,13 @@
                                         <color key="textColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置生日，随时掌握财运 &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5LT-Ng-Qgg">
-                                        <rect key="frame" x="25" y="73" width="364" height="174.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置生日，随时掌握财运 &gt;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="5LT-Ng-Qgg">
+                                        <rect key="frame" x="25" y="80" width="364" height="94"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
                                         <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umQ-be-jHq">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umQ-be-jHq">
                                         <rect key="frame" x="25" y="32" width="46" height="30"/>
                                         <state key="normal" title="夜">
                                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -61,14 +61,14 @@
                                     <constraint firstItem="3fR-Xx-Re1" firstAttribute="top" secondItem="aVT-32-h2x" secondAttribute="top" constant="32" id="Nkh-23-A7I"/>
                                     <constraint firstItem="5LT-Ng-Qgg" firstAttribute="leading" secondItem="aVT-32-h2x" secondAttribute="leading" constant="25" id="WeT-Ja-W6N"/>
                                     <constraint firstAttribute="bottom" secondItem="5LT-Ng-Qgg" secondAttribute="bottom" constant="10" id="oGh-ph-EeA"/>
-                                    <constraint firstItem="5LT-Ng-Qgg" firstAttribute="top" secondItem="3fR-Xx-Re1" secondAttribute="bottom" constant="8" id="uoH-Gj-kMb"/>
+                                    <constraint firstItem="5LT-Ng-Qgg" firstAttribute="top" secondItem="3fR-Xx-Re1" secondAttribute="bottom" constant="15" id="uoH-Gj-kMb"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.16470588235294117" green="0.49411764705882355" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="aVT-32-h2x" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="SSQ-kj-LIZ"/>
-                            <constraint firstItem="aVT-32-h2x" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="7:20" id="cKu-vP-6Nl"/>
+                            <constraint firstItem="aVT-32-h2x" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:4" id="cKu-vP-6Nl"/>
                             <constraint firstItem="aVT-32-h2x" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="gBE-jb-bq0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aVT-32-h2x" secondAttribute="trailing" constant="-20" id="tk9-mN-b5w"/>
                         </constraints>

@@ -10,8 +10,11 @@
 
 @interface myMaskTableViewCell : UITableViewCell
 
-@property (nonatomic,strong) NSString *title;
-@property (nonatomic,strong) NSString *money;
+@property (nonatomic,strong) UILabel *category;
+@property (nonatomic,strong) UILabel *title;
+@property (nonatomic,strong) UILabel *money;
+@property (nonatomic,strong) UIView *seperator;
+
 
 - (void)maskCellFromTop:(CGFloat)margin;
 @end

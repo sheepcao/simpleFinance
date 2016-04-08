@@ -7,16 +7,12 @@
 //
 
 #import "mainViewController.h"
-#import "summeryTableViewCell.h"
 #import "global.h"
 #import "summeryViewController.h"
 #import "myMaskTableViewCell.h"
 
 
-#define summaryViewHeight 136
-#define bottomBar 50
-#define rowHeight 40
-#define topBarHeight 75
+
 
 
 
@@ -32,6 +28,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                 @{UIFontDescriptorFamilyAttribute: @"Marion",
+                                                   UIFontDescriptorNameAttribute:@"Marion-Thin",
+                                                   UIFontDescriptorSizeAttribute: @15.2f
+                                                   }];
+    self.luckyText.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
+    
+    [self.luckyText setText:@"本周财运:\n\t理财敏感度高，适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘。"];
 
     self.luckyText.alpha = 1.0f;
     
@@ -41,7 +46,10 @@
     self.maintableView.delegate = self;
     self.maintableView.dataSource = self;
     self.maintableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.maintableView.canCancelContentTouches = YES;
+    self.maintableView.delaysContentTouches = YES;
     [self.gradientView addSubview:self.maintableView];
+    [self.gradientView bringSubviewToFront:self.maintableView];
     
     
     moneyLuckSpace = self.moneyLuckView.frame.size.height + self.moneyLuckView.frame.origin.y - topBarHeight;
@@ -54,9 +62,9 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
-    if (self.maintableView.contentOffset.y > -0.0001 && self.maintableView.contentOffset.y - moneyLuckSpace/3 < 0.000001) {
+    if (self.maintableView.contentOffset.y > -0.0001 && self.maintableView.contentOffset.y - moneyLuckSpace/2 < 0.000001) {
         
-        self.luckyText.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace/4);
+        self.luckyText.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace/2);
         
         
     }else if (self.maintableView.contentOffset.y > -0.0001)
@@ -166,21 +174,7 @@
         return cell;
         
     }
-//    else if (indexPath.section == 1) {
-//        summeryTableViewCell *topCell =(summeryTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"summeryTableViewCell"];
-//        if (nil == topCell)
-//        {
-//            topCell = [[[NSBundle mainBundle]loadNibNamed:@"summeryTableViewCell" owner:self options:nil] objectAtIndex:0];//加载nib文件
-//            topCell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            
-//            topCell.backgroundColor = [UIColor clearColor];
-//            
-//        }
-//    
-//        
-//        return topCell;
-//        
-//    }
+
     else
     {
         NSString *CellIdentifier = @"Cell1";
@@ -192,7 +186,9 @@
             cell.backgroundColor = [UIColor clearColor];
             
         }
-        [cell.textLabel setText:@"123231231321"];
+        [cell.category setText:@"吃喝 - 老铺烤鸭老铺烤鸭老铺烤鸭老铺烤鸭老铺烤鸭老铺烤鸭"];
+        [cell.seperator setBackgroundColor:[UIColor purpleColor]];
+        [cell.money setText:@"120"];
         
         return cell;
         
@@ -208,28 +204,54 @@
         }
     }
 }
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView// called when scroll view grinds to a halt
+{
+    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+        [UIView animateWithDuration:0.35f animations:^(void){
+            [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
+        }];
+    }else
+        return;
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
 
-
-- (IBAction)skinChange:(id)sender {
-    NSLog(@"skinChange");
-    self.gradientView.inputColor0 = [UIColor darkGrayColor];
-    self.gradientView.inputColor1 = [UIColor blackColor];
-    [self.gradientView setNeedsDisplay];
+        if (!decelerate) {
+            [UIView animateWithDuration:0.35f animations:^(void){
+                [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
+            }];
+        }else
+            return;
+        
+    }else
+        return;
 }
 
-//-(UIImage *)imageCutter
-//{
-//    UIGraphicsBeginImageContext(self.view.bounds.size);
-//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    UIImage *sourceImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    
-//    //now we will position the image, X/Y away from top left corner to get the portion we want
-//    CGSize size = CGSizeMake(SCREEN_WIDTH, summaryViewHeight);
-//    UIGraphicsBeginImageContext(size);
-//    [sourceImage drawAtPoint:CGPointMake(0, 65)];
-//    UIImage *croppedImage = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    return croppedImage;
-//}
+
+
+
+
+- (IBAction)skinChange:(UIButton *)sender {
+    NSLog(@"skinChange");
+    if (sender.tag == 1) {
+        self.gradientView.inputColor0 = [UIColor darkGrayColor];
+        self.gradientView.inputColor1 = [UIColor blackColor];
+        [sender setTitle:@"白" forState:UIControlStateNormal];
+        [self.gradientView setNeedsDisplay];
+        sender.tag = 10;
+
+    }else
+    {
+        self.gradientView.inputColor0 = [UIColor colorWithRed:89/255.0f green:175/255.0f blue:185/255.0f alpha:1.0f];
+        self.gradientView.inputColor1 = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:195/255.0f alpha:1.0f];
+        [sender setTitle:@"夜" forState:UIControlStateNormal];
+        sender.tag = 1;
+
+        [self.gradientView setNeedsDisplay];
+    }
+
+}
+
+
 @end

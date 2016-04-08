@@ -8,6 +8,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="summeryViewController">
             <connections>
+                <outlet property="downLineHeight" destination="2cj-ie-hbh" id="cIa-Pr-f63"/>
+                <outlet property="midLineHeight" destination="qxn-cm-x3w" id="V57-70-sl9"/>
+                <outlet property="upLineHeight" destination="0gn-0T-75Y" id="Doh-bz-l3D"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,7 +25,7 @@
                         <constraint firstAttribute="width" constant="44" id="Z9e-Ca-ee6"/>
                         <constraint firstAttribute="height" constant="33" id="fKY-oc-VYW"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -112,12 +115,12 @@
                         <constraint firstAttribute="width" constant="44" id="biG-ti-T5B"/>
                         <constraint firstAttribute="height" constant="33" id="maV-vI-s2c"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Dw-iy-bSj">
-                    <rect key="frame" x="97" y="78" width="108" height="33"/>
+                    <rect key="frame" x="112" y="78" width="93" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="66" id="GbL-8f-J3b"/>
                         <constraint firstAttribute="width" constant="60" id="gKK-IF-YST"/>
@@ -134,17 +137,17 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预算余额:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mgi-DR-rcd">
-                    <rect key="frame" x="31" y="78" width="65" height="33"/>
+                    <rect key="frame" x="31" y="78" width="80" height="33"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="65" id="4gI-it-xbK"/>
+                        <constraint firstAttribute="width" constant="80" id="4gI-it-xbK"/>
                         <constraint firstAttribute="height" constant="33" id="r4P-Kq-ruI"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojV-MO-fiT">
-                    <rect key="frame" x="97" y="25" width="107.5" height="33"/>
+                    <rect key="frame" x="112" y="25" width="92.5" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="33" id="BHH-U9-DxE"/>
                         <constraint firstAttribute="width" constant="66" id="Wf3-Sb-S0i"/>
@@ -175,17 +178,17 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当月预算:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yWv-F1-Dw8">
-                    <rect key="frame" x="31" y="25" width="65" height="33"/>
+                    <rect key="frame" x="31" y="25" width="80" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="33" id="0i5-Ku-yB0"/>
-                        <constraint firstAttribute="width" constant="65" id="Lah-UI-pfZ"/>
+                        <constraint firstAttribute="width" constant="80" id="Lah-UI-pfZ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYA-rS-xis">
-                    <rect key="frame" x="96.5" y="25.5" width="107.5" height="33"/>
+                    <rect key="frame" x="111.5" y="25.5" width="92.5" height="33"/>
                     <connections>
                         <action selector="planMoney:" destination="-1" eventType="touchUpInside" id="zST-48-Dnp"/>
                     </connections>
@@ -196,7 +199,7 @@
                         <constraint firstAttribute="width" constant="44" id="d50-De-VMm"/>
                         <constraint firstAttribute="height" constant="33" id="pxn-nT-xG2"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
