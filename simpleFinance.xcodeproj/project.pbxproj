@@ -1,0 +1,353 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A42D1C8B1CB60AC900C208A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C8A1CB60AC900C208A0 /* main.m */; };
+		A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C8D1CB60AC900C208A0 /* AppDelegate.m */; };
+		A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C901CB60AC900C208A0 /* mainViewController.m */; };
+		A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A42D1C921CB60AC900C208A0 /* Main.storyboard */; };
+		A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A42D1C951CB60AC900C208A0 /* Assets.xcassets */; };
+		A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A42D1C971CB60AC900C208A0 /* LaunchScreen.storyboard */; };
+		A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1CA21CB6365A00C208A0 /* LGGradientBackgroundView.m */; };
+		A42D1CA71CB63D2B00C208A0 /* summeryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1CA51CB63D2B00C208A0 /* summeryTableViewCell.m */; };
+		A42D1CA81CB63D2B00C208A0 /* summeryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42D1CA61CB63D2B00C208A0 /* summeryTableViewCell.xib */; };
+		A42D1CAD1CB657C300C208A0 /* summeryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1CAB1CB657C300C208A0 /* summeryViewController.m */; };
+		A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42D1CAC1CB657C300C208A0 /* summeryViewController.xib */; };
+		A42D1CB11CB6636600C208A0 /* SammeryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A42D1CB01CB6636600C208A0 /* SammeryView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A42D1C861CB60AC900C208A0 /* simpleFinance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simpleFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A42D1C8A1CB60AC900C208A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A42D1C8C1CB60AC900C208A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A42D1C8D1CB60AC900C208A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A42D1C8F1CB60AC900C208A0 /* mainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mainViewController.h; sourceTree = "<group>"; };
+		A42D1C901CB60AC900C208A0 /* mainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = mainViewController.m; sourceTree = "<group>"; };
+		A42D1C931CB60AC900C208A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A42D1C951CB60AC900C208A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A42D1C981CB60AC900C208A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A42D1C9A1CB60AC900C208A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A42D1CA11CB6365A00C208A0 /* LGGradientBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGGradientBackgroundView.h; sourceTree = "<group>"; };
+		A42D1CA21CB6365A00C208A0 /* LGGradientBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGGradientBackgroundView.m; sourceTree = "<group>"; };
+		A42D1CA41CB63D2B00C208A0 /* summeryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = summeryTableViewCell.h; sourceTree = "<group>"; };
+		A42D1CA51CB63D2B00C208A0 /* summeryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = summeryTableViewCell.m; sourceTree = "<group>"; };
+		A42D1CA61CB63D2B00C208A0 /* summeryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = summeryTableViewCell.xib; sourceTree = "<group>"; };
+		A42D1CAA1CB657C300C208A0 /* summeryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = summeryViewController.h; sourceTree = "<group>"; };
+		A42D1CAB1CB657C300C208A0 /* summeryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = summeryViewController.m; sourceTree = "<group>"; };
+		A42D1CAC1CB657C300C208A0 /* summeryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = summeryViewController.xib; sourceTree = "<group>"; };
+		A42D1CAF1CB65EA000C208A0 /* global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
+		A42D1CB01CB6636600C208A0 /* SammeryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SammeryView.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A42D1C831CB60AC900C208A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A42D1C7D1CB60AC900C208A0 = {
+			isa = PBXGroup;
+			children = (
+				A42D1C881CB60AC900C208A0 /* simpleFinance */,
+				A42D1C871CB60AC900C208A0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A42D1C871CB60AC900C208A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A42D1C861CB60AC900C208A0 /* simpleFinance.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A42D1C881CB60AC900C208A0 /* simpleFinance */ = {
+			isa = PBXGroup;
+			children = (
+				A42D1CA01CB6365A00C208A0 /* LGGradientBackgroundView */,
+				A42D1CAF1CB65EA000C208A0 /* global.h */,
+				A42D1C8C1CB60AC900C208A0 /* AppDelegate.h */,
+				A42D1C8D1CB60AC900C208A0 /* AppDelegate.m */,
+				A42D1C8F1CB60AC900C208A0 /* mainViewController.h */,
+				A42D1C901CB60AC900C208A0 /* mainViewController.m */,
+				A42D1CA91CB64C3800C208A0 /* cells */,
+				A42D1C921CB60AC900C208A0 /* Main.storyboard */,
+				A42D1C951CB60AC900C208A0 /* Assets.xcassets */,
+				A42D1C971CB60AC900C208A0 /* LaunchScreen.storyboard */,
+				A42D1C9A1CB60AC900C208A0 /* Info.plist */,
+				A42D1C891CB60AC900C208A0 /* Supporting Files */,
+			);
+			path = simpleFinance;
+			sourceTree = "<group>";
+		};
+		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A42D1C8A1CB60AC900C208A0 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A42D1CA01CB6365A00C208A0 /* LGGradientBackgroundView */ = {
+			isa = PBXGroup;
+			children = (
+				A42D1CA11CB6365A00C208A0 /* LGGradientBackgroundView.h */,
+				A42D1CA21CB6365A00C208A0 /* LGGradientBackgroundView.m */,
+			);
+			path = LGGradientBackgroundView;
+			sourceTree = "<group>";
+		};
+		A42D1CA91CB64C3800C208A0 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				A42D1CA41CB63D2B00C208A0 /* summeryTableViewCell.h */,
+				A42D1CA51CB63D2B00C208A0 /* summeryTableViewCell.m */,
+				A42D1CA61CB63D2B00C208A0 /* summeryTableViewCell.xib */,
+				A42D1CAA1CB657C300C208A0 /* summeryViewController.h */,
+				A42D1CAB1CB657C300C208A0 /* summeryViewController.m */,
+				A42D1CAC1CB657C300C208A0 /* summeryViewController.xib */,
+				A42D1CB01CB6636600C208A0 /* SammeryView.xib */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A42D1C851CB60AC900C208A0 /* simpleFinance */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A42D1C9D1CB60AC900C208A0 /* Build configuration list for PBXNativeTarget "simpleFinance" */;
+			buildPhases = (
+				A42D1C821CB60AC900C208A0 /* Sources */,
+				A42D1C831CB60AC900C208A0 /* Frameworks */,
+				A42D1C841CB60AC900C208A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = simpleFinance;
+			productName = simpleFinance;
+			productReference = A42D1C861CB60AC900C208A0 /* simpleFinance.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A42D1C7E1CB60AC900C208A0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = sheepcao;
+				TargetAttributes = {
+					A42D1C851CB60AC900C208A0 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = A42D1C811CB60AC900C208A0 /* Build configuration list for PBXProject "simpleFinance" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A42D1C7D1CB60AC900C208A0;
+			productRefGroup = A42D1C871CB60AC900C208A0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A42D1C851CB60AC900C208A0 /* simpleFinance */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A42D1C841CB60AC900C208A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
+				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
+				A42D1CA81CB63D2B00C208A0 /* summeryTableViewCell.xib in Resources */,
+				A42D1CB11CB6636600C208A0 /* SammeryView.xib in Resources */,
+				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
+				A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A42D1C821CB60AC900C208A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */,
+				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
+				A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */,
+				A42D1CA71CB63D2B00C208A0 /* summeryTableViewCell.m in Sources */,
+				A42D1C8B1CB60AC900C208A0 /* main.m in Sources */,
+				A42D1CAD1CB657C300C208A0 /* summeryViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A42D1C921CB60AC900C208A0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A42D1C931CB60AC900C208A0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A42D1C971CB60AC900C208A0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A42D1C981CB60AC900C208A0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A42D1C9B1CB60AC900C208A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A42D1C9C1CB60AC900C208A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A42D1C9E1CB60AC900C208A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = simpleFinance/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sheepcao.simpleFinance;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A42D1C9F1CB60AC900C208A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = simpleFinance/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sheepcao.simpleFinance;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A42D1C811CB60AC900C208A0 /* Build configuration list for PBXProject "simpleFinance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A42D1C9B1CB60AC900C208A0 /* Debug */,
+				A42D1C9C1CB60AC900C208A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A42D1C9D1CB60AC900C208A0 /* Build configuration list for PBXNativeTarget "simpleFinance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A42D1C9E1CB60AC900C208A0 /* Debug */,
+				A42D1C9F1CB60AC900C208A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A42D1C7E1CB60AC900C208A0 /* Project object */;
+}
