@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface myMaskTableViewCell : UITableViewCell
+{
+    CGFloat fontSize;
+
+}
 
 @property (nonatomic,strong) UILabel *category;
 @property (nonatomic,strong) UILabel *title;

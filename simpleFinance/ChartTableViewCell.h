@@ -10,5 +10,8 @@
 
 @interface ChartTableViewCell : UITableViewCell
 
+@property (nonatomic,strong) UIButton *centerButton;
+
 -(void)drawPie;
+-(void)updatePieWith:(NSArray *)array;
 @end

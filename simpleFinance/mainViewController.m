@@ -12,6 +12,7 @@
 #import "myMaskTableViewCell.h"
 #import "MFSideMenu.h"
 #import "ChartTableViewCell.h"
+#import "PNChart.h"
 
 
 
@@ -88,6 +89,11 @@
     }else if (self.maintableView.contentOffset.y < -0.00001)
     {
         [self.maintableView setContentOffset:CGPointMake(0, 0)];
+    }else
+    {
+        self.moneyBookText.alpha = 1.0f;
+        self.titleTextLabel.alpha = 0.0f;
+        self.luckyText.alpha = 0.0f;
     }
     
 }
@@ -117,7 +123,7 @@
     attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
     self.luckyText.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
     
-    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:@"\t理财敏感度高，适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘。适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘"];
+    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:@"\t理财敏感度高，适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘。"];
     
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:attributeFontDescriptor.pointSize *0.43];
@@ -169,7 +175,7 @@
         return moneyLuckSpace;
     }else if(indexPath.section == 1 && indexPath.row == 9)
     {
-        return 250;
+        return 260;
     }
     else
         return rowHeight;
@@ -256,15 +262,26 @@
         NSLog(@"row:%d",indexPath.row);
         NSString *CellIdentifier = @"CellBottom";
         
+        static int count = 10;
+        
         ChartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[ChartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
-            
+
+            [cell drawPie];
+            [cell.centerButton addTarget:self action:@selector(switchMoneyChart) forControlEvents:UIControlEventTouchUpInside];
         }
         
-        [cell drawPie];
+        NSArray *items = @[[PNPieChartDataItem dataItemWithValue:40+count color:PNRed
+                                                     description:@"吃喝玩乐"],
+                           [PNPieChartDataItem dataItemWithValue:20+count color:PNBlue description:@"阅读"],
+                           [PNPieChartDataItem dataItemWithValue:20+count color:PNGreen description:@"一般消费"],
+                           ];
+
+        [cell updatePieWith:items];
+        count = count+10;
         
         
         return cell;
@@ -361,6 +378,11 @@
     
     }];
     
+}
+
+-(void)switchMoneyChart
+{
+    NSLog(@"oooooo");
 }
 
 @end

@@ -12,7 +12,6 @@
 #define  pointRadius 8
 
 @implementation myMaskTableViewCell
-CGFloat fontSize;
 
 
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -50,7 +49,7 @@ CGFloat fontSize;
                 UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                              @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
                                                                UIFontDescriptorNameAttribute:@"AvenirNext-Medium",
-                                                               UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize+1.5]
+                                                               UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize+1.6]
                                                                }];
         
         [self.money setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
@@ -104,7 +103,7 @@ CGFloat fontSize;
     [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:rangeSecondPart];
     [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0] range:rangeFirstPart];
     
-     [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.92 green:0.92 blue:0.92 alpha:1.0f] range:rangeSecondPart];
+     [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0f] range:rangeSecondPart];
     
     
     self.category.attributedText = attributedText;

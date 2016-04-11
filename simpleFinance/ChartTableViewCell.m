@@ -41,7 +41,7 @@
                        [PNPieChartDataItem dataItemWithValue:10 color:PNGreen description:@"一般消费"],
                        ];
     
-    self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-120, 5.0, 240.0, 240.0) items:items];
+    self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-120, 15.0, 240.0, 240.0) items:items];
     self.pieChart.descriptionTextColor = [UIColor whiteColor];
     self.pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:14.0];
     [self.pieChart strokeChart];
@@ -49,7 +49,27 @@
     self.pieChart.shouldHighlightSectorOnTouch = NO;
     self.pieChart.labelPercentageCutoff = 0.1;
     [self addSubview:self.pieChart];
+    
+    self.centerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.pieChart.innerCircleRadius*2+4, self.pieChart.innerCircleRadius*2+4)];
+    [self.centerButton setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];
+    self.centerButton.layer.cornerRadius = self.centerButton.frame.size.width/2
+    ;
+    self.centerButton.layer.borderWidth = 0.8f;
+    self.centerButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.centerButton.backgroundColor = [UIColor lightGrayColor];
+    [self addSubview:self.centerButton];
+    
 
+    
+
+}
+-(void)updatePieWith:(NSArray *)array
+{
+ 
+    [self.pieChart setItems:array];
+    [self.pieChart recompute];
+    [self.pieChart strokeChart];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -57,5 +77,6 @@
 
     // Configure the view for the selected state
 }
+
 
 @end

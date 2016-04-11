@@ -33,7 +33,7 @@
 
 @interface PNPieChart()
 
-@property (nonatomic) NSArray *items;
+//@property (nonatomic,strong) NSArray *items;
 @property (nonatomic) NSArray *endPercentages;
 
 @property (nonatomic) UIView         *contentView;
