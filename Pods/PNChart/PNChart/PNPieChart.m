@@ -10,6 +10,27 @@
 //needed for the expected label size
 #import "PNLineChart.h"
 
+
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+#define IS_IPHONE_4_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+#define IS_IPHONE_5_OR_LESS (IS_IPHONE && SCREEN_MAX_LENGTH < 667.0)
+
+#define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
+
+
+
 @interface PNPieChart()
 
 @property (nonatomic) NSArray *items;
@@ -43,6 +64,8 @@
 
 @implementation PNPieChart
 
+CGFloat fontSize;
+
 -(id)initWithFrame:(CGRect)frame items:(NSArray *)items{
     self = [self initWithFrame:frame];
     if(self){
@@ -58,11 +81,23 @@
 }
 
 - (void)baseInit{
+    
+    
+    if (IS_IPHONE_5_OR_LESS) {
+        fontSize = 15.5f;
+    }else if(IS_IPHONE_6)
+    {
+        fontSize = 16.5f;
+    }else
+    {
+        fontSize = 18.0f;
+    }
+    
     _selectedItems = [NSMutableDictionary dictionary];
     _outerCircleRadius  = CGRectGetWidth(self.bounds) / 2;
     _innerCircleRadius  = CGRectGetWidth(self.bounds) / 6;
     _descriptionTextColor = [UIColor whiteColor];
-    _descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:18.0];
+    _descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:fontSize];
     _descriptionTextShadowColor  = [[UIColor blackColor] colorWithAlphaComponent:0.4];
     _descriptionTextShadowOffset =  CGSizeMake(0, 1);
     _duration = 1.0;
@@ -170,7 +205,7 @@
     //If value is less than cutoff, show no label
     if ([self ratioForItemAtIndex:index] < self.labelPercentageCutoff )
     {
-        descriptionLabel.text = nil;
+        descriptionLabel.text = titleValue;
     }
     
     CGPoint center = CGPointMake(_outerCircleRadius + distance * sin(rad),

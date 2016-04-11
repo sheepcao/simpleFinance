@@ -11,6 +11,7 @@
 #import "summeryViewController.h"
 #import "myMaskTableViewCell.h"
 #import "MFSideMenu.h"
+#import "ChartTableViewCell.h"
 
 
 
@@ -21,7 +22,7 @@
 {
     CGFloat moneyLuckSpace;
     CGFloat bottomHeight;
-
+    CGFloat fontSize;
 }
 
 @end
@@ -38,17 +39,12 @@
     {
         bottomHeight = bottomBar;
     }
+
+    [self configLuckyText];
+    self.titleTextLabel.alpha = 1.0f;
+    self.moneyBookText.alpha = 0.0f;
     
     self.navigationController.navigationBarHidden = YES;
-    UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Marion",
-                                                   UIFontDescriptorNameAttribute:@"Marion-Thin",
-                                                   UIFontDescriptorSizeAttribute: @15.2f
-                                                   }];
-    self.luckyText.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
-    
-    [self.luckyText setText:@"本周财运:\n\t理财敏感度高，适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘。"];
-
     self.luckyText.alpha = 1.0f;
     
     self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, topBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT- bottomHeight -topBarHeight) style:UITableViewStylePlain];
@@ -79,12 +75,74 @@
     if (self.maintableView.contentOffset.y > -0.0001 && self.maintableView.contentOffset.y - moneyLuckSpace*2/5 < 0.000001) {
         
         self.luckyText.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace*2/5);
+        self.titleTextLabel.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace*2/5);
+        self.moneyBookText.alpha = 0.0f;
         
-        
-    }else if (self.maintableView.contentOffset.y > -0.0001)
+    }else if (self.maintableView.contentOffset.y > -0.0001 && self.maintableView.contentOffset.y - moneyLuckSpace < 0.000001)
     {
+        self.moneyBookText.alpha = self.maintableView.contentOffset.y/moneyLuckSpace;
+        self.titleTextLabel.alpha = 0.0f;
         self.luckyText.alpha = 0.0f;
+
+
+    }else if (self.maintableView.contentOffset.y < -0.00001)
+    {
+        [self.maintableView setContentOffset:CGPointMake(0, 0)];
     }
+    
+}
+
+-(void)configLuckyText
+{
+    
+
+    if (IS_IPHONE_5_OR_LESS) {
+        fontSize = 12.5f;
+    }else if(IS_IPHONE_6)
+    {
+        fontSize = 14.0f;
+    }else
+    {
+        fontSize = 15.5f;
+    }
+    
+    
+    UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
+                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize]
+                                                   }];
+    
+    CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(12 * (CGFloat)M_PI / 180), 1, 0, 0);
+    attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
+    self.luckyText.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
+    
+    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:@"\t理财敏感度高，适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘。适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘"];
+    
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    [style setLineSpacing:attributeFontDescriptor.pointSize *0.43];
+    [attrString addAttribute:NSParagraphStyleAttributeName
+                       value:style
+                       range:NSMakeRange(0, attrString.length)];
+    self.luckyText.attributedText = attrString;
+    self.luckyText.numberOfLines = 6;
+    self.luckyText.alpha = 1.0f;    
+    self.luckyText.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.45];
+    self.luckyText.shadowOffset =  CGSizeMake(0, 0.5);
+
+
+//
+//        for(NSString *fontfamilyname in [UIFont familyNames])
+//        {
+//            NSLog(@"family:'%@'",fontfamilyname);
+//            for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
+//            {
+//                NSLog(@"\tfont:'%@'",fontName);
+//            }
+//            NSLog(@"-------------");
+//        }
+//        NSLog(@"========%d Fonts",[UIFont familyNames].count);
+//    
     
 }
 
@@ -109,7 +167,11 @@
 {
     if (indexPath.section == 0) {
         return moneyLuckSpace;
-    }else
+    }else if(indexPath.section == 1 && indexPath.row == 9)
+    {
+        return 250;
+    }
+    else
         return rowHeight;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -163,9 +225,10 @@
     if (section == 0) {
         return 1;
     }else if(section == 1)
-        
-        return (self.maintableView.frame.size.height-summaryViewHeight)/rowHeight + 1;
-    else
+    {
+    
+        return 10<((self.maintableView.frame.size.height-summaryViewHeight)/rowHeight)?((self.maintableView.frame.size.height-summaryViewHeight)/rowHeight)+1:10;
+    }else
         return 10;
     
 }
@@ -173,8 +236,7 @@
 
 
 
-- (myMaskTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"cellForRowAtIndexPath");
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         static NSString *CellIdentifier = @"Cell";
         
@@ -189,8 +251,28 @@
         
     }
 
-    else
+    else if(indexPath.section == 1 && indexPath.row == 9)
     {
+        NSLog(@"row:%d",indexPath.row);
+        NSString *CellIdentifier = @"CellBottom";
+        
+        ChartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[ChartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor clearColor];
+            
+        }
+        
+        [cell drawPie];
+        
+        
+        return cell;
+        
+    }else
+    {
+        
+        NSLog(@"row:%d",indexPath.row);
         NSString *CellIdentifier = @"Cell1";
         
         myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -200,9 +282,12 @@
             cell.backgroundColor = [UIColor clearColor];
             
         }
-        [cell.category setText:@"吃喝 - 老铺烤鸭老铺烤鸭老铺烤鸭老铺烤鸭老铺烤鸭老铺烤鸭"];
+       
+        [cell.category setText:@"吃喝 - 老铺烤鸭"];
         [cell.seperator setBackgroundColor:[UIColor purpleColor]];
         [cell.money setText:@"120"];
+        
+        [cell makeTextStyle];
         
         return cell;
         
@@ -211,11 +296,15 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    for (myMaskTableViewCell *cell in self.maintableView.visibleCells) {
-        CGFloat hiddenFrameHeight = scrollView.contentOffset.y + summaryViewHeight - cell.frame.origin.y;
-        if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-            [cell maskCellFromTop:hiddenFrameHeight];
+    for (UITableViewCell *cell in self.maintableView.visibleCells) {
+        if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
+            myMaskTableViewCell *oneCell = (myMaskTableViewCell *)cell;
+            CGFloat hiddenFrameHeight = scrollView.contentOffset.y + summaryViewHeight - cell.frame.origin.y;
+            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                [oneCell maskCellFromTop:hiddenFrameHeight];
+            }
         }
+       
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView// called when scroll view grinds to a halt

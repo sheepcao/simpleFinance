@@ -5,6 +5,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SourceHanSansCN-Normal.ttf">
+            <string>SourceHanSansCN-Normal</string>
+            <string>SourceHanSansCN-Normal</string>
+            <string>SourceHanSansCN-Normal</string>
+            <string>SourceHanSansCN-Normal</string>
+            <string>SourceHanSansCN-Normal</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="summeryViewController">
             <connections>
@@ -25,9 +34,11 @@
                         <constraint firstAttribute="width" constant="44" id="Z9e-Ca-ee6"/>
                         <constraint firstAttribute="height" constant="33" id="fKY-oc-VYW"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="15"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272203947334" green="0.38512541118421051" blue="0.38258120888157893" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-vl-D4w" userLabel="downline">
                     <rect key="frame" x="0.0" y="129" width="414" height="1"/>
@@ -42,9 +53,11 @@
                         <constraint firstAttribute="height" constant="33" id="C71-2b-9GU"/>
                         <constraint firstAttribute="width" constant="60" id="XZf-Ju-FWd"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272200000003" green="0.38512541119999999" blue="0.38258120890000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="XZf-Ju-FWd"/>
@@ -58,9 +71,11 @@
                         <constraint firstAttribute="width" constant="60" id="rCE-Hi-Z5Q"/>
                         <constraint firstAttribute="height" constant="33" id="xPp-Q3-m0P"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272200000003" green="0.38512541119999999" blue="0.38258120890000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="INw-UE-F2z"/>
@@ -100,9 +115,11 @@
                         <constraint firstAttribute="height" constant="33" id="5UO-CU-SLV"/>
                         <constraint firstAttribute="width" constant="60" id="QAo-Wj-793"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272200000003" green="0.38512541119999999" blue="0.38258120890000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="QAo-Wj-793"/>
@@ -115,9 +132,11 @@
                         <constraint firstAttribute="width" constant="44" id="biG-ti-T5B"/>
                         <constraint firstAttribute="height" constant="33" id="maV-vI-s2c"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="15"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272203947334" green="0.38512541118421051" blue="0.38258120888157893" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Dw-iy-bSj">
                     <rect key="frame" x="112" y="78" width="93" height="33"/>
@@ -126,9 +145,11 @@
                         <constraint firstAttribute="width" constant="60" id="gKK-IF-YST"/>
                         <constraint firstAttribute="height" constant="33" id="vHa-v4-ePu"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272200000003" green="0.38512541119999999" blue="0.38258120890000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="GbL-8f-J3b"/>
@@ -142,9 +163,11 @@
                         <constraint firstAttribute="width" constant="80" id="4gI-it-xbK"/>
                         <constraint firstAttribute="height" constant="33" id="r4P-Kq-ruI"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="16"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272203947334" green="0.38512541118421051" blue="0.38258120888157893" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojV-MO-fiT">
                     <rect key="frame" x="112" y="25" width="92.5" height="33"/>
@@ -153,9 +176,11 @@
                         <constraint firstAttribute="width" constant="66" id="Wf3-Sb-S0i"/>
                         <constraint firstAttribute="width" constant="60" id="ykW-rW-0EY"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272200000003" green="0.38512541119999999" blue="0.38258120890000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="Wf3-Sb-S0i"/>
@@ -183,9 +208,11 @@
                         <constraint firstAttribute="height" constant="33" id="0i5-Ku-yB0"/>
                         <constraint firstAttribute="width" constant="80" id="Lah-UI-pfZ"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="16"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272203947334" green="0.38512541118421051" blue="0.38258120888157893" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYA-rS-xis">
                     <rect key="frame" x="111.5" y="25.5" width="92.5" height="33"/>
@@ -199,9 +226,11 @@
                         <constraint firstAttribute="width" constant="44" id="d50-De-VMm"/>
                         <constraint firstAttribute="height" constant="33" id="pxn-nT-xG2"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="15"/>
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
+                    <color key="shadowColor" red="0.38484272203947334" green="0.38512541118421051" blue="0.38258120888157893" alpha="1" colorSpace="calibratedRGB"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
             </subviews>
             <constraints>

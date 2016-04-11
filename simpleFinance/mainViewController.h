@@ -10,6 +10,8 @@
 #import "LGGradientBackgroundView/LGGradientBackgroundView.h"
 
 @interface mainViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *moneyBookText;
 
 @property (weak, nonatomic) IBOutlet UIView *moneyLuckView;
 @property (weak, nonatomic) IBOutlet UILabel *luckyText;

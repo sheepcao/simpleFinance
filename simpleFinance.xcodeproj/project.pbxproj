@@ -25,6 +25,8 @@
 		A490C1891CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C1831CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m */; };
 		A490C1921CB7B1B3006EEEF1 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C1901CB7B1B3006EEEF1 /* SideMenuViewController.m */; };
 		A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A490C1911CB7B1B3006EEEF1 /* SideMenuViewController.xib */; };
+		A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A490C1991CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf */; };
+		A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C19C1CBB822F006EEEF1 /* ChartTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,9 @@
 		A490C18F1CB7B1B3006EEEF1 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
 		A490C1901CB7B1B3006EEEF1 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
 		A490C1911CB7B1B3006EEEF1 /* SideMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SideMenuViewController.xib; sourceTree = "<group>"; };
+		A490C1991CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
+		A490C19B1CBB822F006EEEF1 /* ChartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartTableViewCell.h; sourceTree = "<group>"; };
+		A490C19C1CBB822F006EEEF1 /* ChartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartTableViewCell.m; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -131,6 +136,7 @@
 		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A490C1991CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf */,
 				A42D1C8A1CB60AC900C208A0 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -153,6 +159,8 @@
 				A42D1CAC1CB657C300C208A0 /* summeryViewController.xib */,
 				A481F9BF1CB769960003100F /* myMaskTableViewCell.h */,
 				A481F9C01CB769960003100F /* myMaskTableViewCell.m */,
+				A490C19B1CBB822F006EEEF1 /* ChartTableViewCell.h */,
+				A490C19C1CBB822F006EEEF1 /* ChartTableViewCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -244,6 +252,7 @@
 			files = (
 				A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
+				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
 				A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */,
@@ -309,6 +318,7 @@
 				A490C1761CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m in Sources */,
 				A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */,
 				A490C1861CB7A887006EEEF1 /* MFSideMenuShadow.m in Sources */,
+				A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
 				A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */,
 				A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */,

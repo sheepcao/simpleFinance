@@ -17,4 +17,5 @@
 
 
 - (void)maskCellFromTop:(CGFloat)margin;
+-(void)makeTextStyle;
 @end
