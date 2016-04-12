@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PNChart.h"
 
 @interface ChartTableViewCell : UITableViewCell
+
+@property (nonatomic, strong) PNPieChart *pieChart;
 
 @property (nonatomic,strong) UIButton *centerButton;
 
 -(void)drawPie;
 -(void)updatePieWith:(NSArray *)array;
+-(void)switchCenterButtonToOutcome:(BOOL)isShowOutcome ByMoney:(NSString *)money;
 @end

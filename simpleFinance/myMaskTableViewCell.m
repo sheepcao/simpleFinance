@@ -55,9 +55,9 @@
         [self.money setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
         
         self.category.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.48];
-        self.category.shadowOffset =  CGSizeMake(0, 0.75);
+        self.category.shadowOffset =  CGSizeMake(0, 0.65);
         self.money.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.48];
-        self.money.shadowOffset =  CGSizeMake(0, 0.75);
+        self.money.shadowOffset =  CGSizeMake(0, 0.65);
         
         self.category.textColor = TextColor;
         self.title.textColor = TextColor;
@@ -122,6 +122,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+    
     
     // Configure the view for the selected state
 }

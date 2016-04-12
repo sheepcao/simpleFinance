@@ -12,7 +12,6 @@
 #import "myMaskTableViewCell.h"
 #import "MFSideMenu.h"
 #import "ChartTableViewCell.h"
-#import "PNChart.h"
 
 
 
@@ -24,6 +23,11 @@
     CGFloat moneyLuckSpace;
     CGFloat bottomHeight;
     CGFloat fontSize;
+    NSIndexPath *pieChartIndexPath;
+    BOOL isSwitchingChart;
+    BOOL isShowOutcomeChart;
+
+
 }
 
 @end
@@ -40,7 +44,7 @@
     {
         bottomHeight = bottomBar;
     }
-
+    
     [self configLuckyText];
     self.titleTextLabel.alpha = 1.0f;
     self.moneyBookText.alpha = 0.0f;
@@ -56,6 +60,10 @@
     self.maintableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.maintableView.canCancelContentTouches = YES;
     self.maintableView.delaysContentTouches = YES;
+    
+    isSwitchingChart = NO;
+    isShowOutcomeChart = YES;
+    
     [self.gradientView addSubview:self.maintableView];
     [self.gradientView bringSubviewToFront:self.maintableView];
     
@@ -67,7 +75,7 @@
     NSLog(@"moneyLuckSpace---:%f",moneyLuckSpace);
     
     [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
-
+    
     
 }
 
@@ -84,8 +92,8 @@
         self.moneyBookText.alpha = self.maintableView.contentOffset.y/moneyLuckSpace;
         self.titleTextLabel.alpha = 0.0f;
         self.luckyText.alpha = 0.0f;
-
-
+        
+        
     }else if (self.maintableView.contentOffset.y < -0.00001)
     {
         [self.maintableView setContentOffset:CGPointMake(0, 0)];
@@ -101,7 +109,7 @@
 -(void)configLuckyText
 {
     
-
+    
     if (IS_IPHONE_5_OR_LESS) {
         fontSize = 12.5f;
     }else if(IS_IPHONE_6)
@@ -132,23 +140,23 @@
                        range:NSMakeRange(0, attrString.length)];
     self.luckyText.attributedText = attrString;
     self.luckyText.numberOfLines = 6;
-    self.luckyText.alpha = 1.0f;    
+    self.luckyText.alpha = 1.0f;
     self.luckyText.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.45];
     self.luckyText.shadowOffset =  CGSizeMake(0, 0.5);
-
-
-//
-//        for(NSString *fontfamilyname in [UIFont familyNames])
-//        {
-//            NSLog(@"family:'%@'",fontfamilyname);
-//            for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
-//            {
-//                NSLog(@"\tfont:'%@'",fontName);
-//            }
-//            NSLog(@"-------------");
-//        }
-//        NSLog(@"========%d Fonts",[UIFont familyNames].count);
-//    
+    
+    
+    //
+    //        for(NSString *fontfamilyname in [UIFont familyNames])
+    //        {
+    //            NSLog(@"family:'%@'",fontfamilyname);
+    //            for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
+    //            {
+    //                NSLog(@"\tfont:'%@'",fontName);
+    //            }
+    //            NSLog(@"-------------");
+    //        }
+    //        NSLog(@"========%d Fonts",[UIFont familyNames].count);
+    //
     
 }
 
@@ -156,8 +164,8 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
- 
-
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -193,10 +201,26 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"didSelectRowAtIndexPath");
+    myMaskTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
+    [cell.money setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
     
+    //    [self presentViewController:self animated:YES completion:^(void){
+    //
+    //        [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
+    //    }];
     
 }
 
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"didDeselectRowAtIndexPath");
+    myMaskTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell.category setTextColor:TextColor];
+    [cell.money setTextColor:TextColor];
+    
+}
 
 
 
@@ -215,11 +239,11 @@
     {
         summeryViewController *summaryVC = [[summeryViewController alloc] initWithNibName:@"summeryViewController" bundle:nil];
         [summaryVC.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, summaryViewHeight)];
-//        [summaryVC.view setBackgroundColor:[UIColor colorWithPatternImage:[self imageCutter]]];
+        //        [summaryVC.view setBackgroundColor:[UIColor colorWithPatternImage:[self imageCutter]]];
         summaryVC.view.opaque = NO;
         
         [self addChildViewController:summaryVC];
-
+        
         return summaryVC.view;
     }else
         return nil;
@@ -227,12 +251,12 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
     if (section == 0) {
         return 1;
     }else if(section == 1)
     {
-    
+        
         return 10<((self.maintableView.frame.size.height-summaryViewHeight)/rowHeight)?((self.maintableView.frame.size.height-summaryViewHeight)/rowHeight)+1:10;
     }else
         return 10;
@@ -256,32 +280,71 @@
         return cell;
         
     }
-
+    
     else if(indexPath.section == 1 && indexPath.row == 9)
     {
-        NSLog(@"row:%d",indexPath.row);
-        NSString *CellIdentifier = @"CellBottom";
+        NSLog(@"row:%ld",(long)indexPath.row);
+        pieChartIndexPath = indexPath;
+        static NSString *CellPieIdentifier = @"CellBottom";
         
-        static int count = 10;
         
-        ChartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        ChartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellPieIdentifier];
         if (cell == nil) {
-            cell = [[ChartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[ChartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellPieIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
 
             [cell drawPie];
-            [cell.centerButton addTarget:self action:@selector(switchMoneyChart) forControlEvents:UIControlEventTouchUpInside];
+            [cell.centerButton addTarget:self action:@selector(switchMoneyChart:) forControlEvents:UIControlEventTouchUpInside];
         }
         
-        NSArray *items = @[[PNPieChartDataItem dataItemWithValue:40+count color:PNRed
-                                                     description:@"吃喝玩乐"],
-                           [PNPieChartDataItem dataItemWithValue:20+count color:PNBlue description:@"阅读"],
-                           [PNPieChartDataItem dataItemWithValue:20+count color:PNGreen description:@"一般消费"],
-                           ];
+        if (isSwitchingChart) {
+            NSArray *items;
+            cell.pieChart.displayAnimated = YES;
 
-        [cell updatePieWith:items];
-        count = count+10;
+            if (isShowOutcomeChart) {
+                items = @[[PNPieChartDataItem dataItemWithValue:30 color:PNRed
+                                                             description:@"吃喝玩乐"],
+                                   [PNPieChartDataItem dataItemWithValue:60 color:PNBlue description:@"阅读"],
+                                   ];
+                isShowOutcomeChart = NO;
+                [cell switchCenterButtonToOutcome:NO ByMoney:@"12000"];
+            }else{
+                items = @[[PNPieChartDataItem dataItemWithValue:40 color:PNRed
+                                                    description:@"吃喝玩乐"],
+                          [PNPieChartDataItem dataItemWithValue:20 color:PNBlue description:@"阅读"],
+                          [PNPieChartDataItem dataItemWithValue:20 color:PNGreen description:@"一般消费"],
+                          ];
+                isShowOutcomeChart = YES;
+                [cell switchCenterButtonToOutcome:YES ByMoney:@"580"];
+
+            }
+
+            [cell updatePieWith:items];
+            isSwitchingChart = NO;
+        }else
+        {
+            NSArray *items;
+            cell.pieChart.displayAnimated = NO;
+            if (isShowOutcomeChart) {
+                items = @[[PNPieChartDataItem dataItemWithValue:40 color:PNRed
+                                                    description:@"吃喝玩乐"],
+                          [PNPieChartDataItem dataItemWithValue:20 color:PNBlue description:@"阅读"],
+                          [PNPieChartDataItem dataItemWithValue:20 color:PNGreen description:@"一般消费"],
+                          ];
+                [cell switchCenterButtonToOutcome:YES ByMoney:@"580"];
+
+        
+            }else{
+                items = @[[PNPieChartDataItem dataItemWithValue:30 color:PNRed
+                                                    description:@"吃喝玩乐"],
+                          [PNPieChartDataItem dataItemWithValue:60 color:PNBlue description:@"阅读"],
+                          ];
+                [cell switchCenterButtonToOutcome:NO ByMoney:@"12000"];
+            }
+            
+            [cell updatePieWith:items];
+        }
         
         
         return cell;
@@ -289,17 +352,17 @@
     }else
     {
         
-        NSLog(@"row:%d",indexPath.row);
-        NSString *CellIdentifier = @"Cell1";
+        NSLog(@"row:%ld",(long)indexPath.row);
+        NSString *CellItemIdentifier = @"Cell1";
         
-        myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellItemIdentifier];
         if (cell == nil) {
-            cell = [[myMaskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[myMaskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellItemIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
             
         }
-       
+        
         [cell.category setText:@"吃喝 - 老铺烤鸭"];
         [cell.seperator setBackgroundColor:[UIColor purpleColor]];
         [cell.money setText:@"120"];
@@ -321,7 +384,7 @@
                 [oneCell maskCellFromTop:hiddenFrameHeight];
             }
         }
-       
+        
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView// called when scroll view grinds to a halt
@@ -336,7 +399,7 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
-
+        
         if (!decelerate) {
             [UIView animateWithDuration:0.35f animations:^(void){
                 [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
@@ -360,29 +423,34 @@
         [sender setTitle:@"白" forState:UIControlStateNormal];
         [self.gradientView setNeedsDisplay];
         sender.tag = 10;
-
+        
     }else
     {
         self.gradientView.inputColor0 = [UIColor colorWithRed:89/255.0f green:175/255.0f blue:185/255.0f alpha:1.0f];
         self.gradientView.inputColor1 = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:195/255.0f alpha:1.0f];
         [sender setTitle:@"夜" forState:UIControlStateNormal];
         sender.tag = 1;
-
+        
         [self.gradientView setNeedsDisplay];
     }
-
+    
 }
 
 - (IBAction)menuTapped:(id)sender {
     [self.menuContainerViewController toggleRightSideMenuCompletion:^{
-    
+        
     }];
     
 }
 
--(void)switchMoneyChart
+-(void)switchMoneyChart:(UIButton *)sender
 {
     NSLog(@"oooooo");
+    isSwitchingChart = YES;
+    
+    
+    NSArray *indexArray = @[pieChartIndexPath];
+    [self.maintableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
 }
 
 @end
