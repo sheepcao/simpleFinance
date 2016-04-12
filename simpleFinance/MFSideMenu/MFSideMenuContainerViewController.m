@@ -319,6 +319,7 @@ typedef enum {
                                              initWithTarget:self
                                              action:@selector(centerViewControllerTapped:)];
     [tapRecognizer setDelegate:self];
+    tapRecognizer.cancelsTouchesInView = NO;
     return tapRecognizer;
 }
 
@@ -542,6 +543,11 @@ typedef enum {
 #pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UIButton class ]]) {
+        // accept only touchs on superview, not accept touchs on subviews
+        return  NO;
+    }
+    
     if([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]] &&
        self.menuState != MFSideMenuStateClosed) return YES;
     
@@ -734,6 +740,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         }
     }
 }
+
 
 #pragma mark -
 #pragma mark - Center View Controller Movement

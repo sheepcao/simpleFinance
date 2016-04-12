@@ -12,7 +12,8 @@
 #import "myMaskTableViewCell.h"
 #import "MFSideMenu.h"
 #import "ChartTableViewCell.h"
-
+#import "RoundedButton.h"
+#import "BottomView.h"
 
 
 
@@ -46,6 +47,7 @@
     }
     
     [self configLuckyText];
+    
     self.titleTextLabel.alpha = 1.0f;
     self.moneyBookText.alpha = 0.0f;
     
@@ -75,6 +77,8 @@
     NSLog(@"moneyLuckSpace---:%f",moneyLuckSpace);
     
     [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
+    
+    [self configBottomBar];
     
     
 }
@@ -160,6 +164,42 @@
     
 }
 
+-(void)configBottomBar
+{
+    BottomView *bottomView = [[BottomView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-bottomHeight, SCREEN_WIDTH, bottomHeight)];
+    bottomView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:bottomView];
+    
+
+    // add new item button----------------------------------------------------
+    RoundedButton *addMoneyButton = [[RoundedButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-bottomHeight/2, -9, bottomHeight, bottomHeight)];
+    [addMoneyButton setTitle:@"＋" forState:UIControlStateNormal];
+    addMoneyButton.titleLabel.font = [UIFont boldSystemFontOfSize:42.0f];
+    [addMoneyButton addTarget:self action:@selector(popAddNewView:) forControlEvents:UIControlEventTouchUpInside];
+    //for button style on diff states.
+    [addMoneyButton addTarget:self action:@selector(tapDownAddNewButton:) forControlEvents:UIControlEventTouchDown];
+    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchCancel];
+    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragExit];
+    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragOutside];
+    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchUpOutside];
+
+    [bottomView addSubview:addMoneyButton];
+    
+}
+
+-(void)tapDownAddNewButton:(RoundedButton *)sender
+{
+    [sender selectedStyle];
+
+}
+-(void)tapUpAddNewButton:(RoundedButton *)sender
+{
+    [sender notSelectedStyle];
+}
+-(void)popAddNewView:(RoundedButton *)sender
+{
+    [sender notSelectedStyle];
+}
 
 
 - (void)viewWillLayoutSubviews {
@@ -303,9 +343,9 @@
             cell.pieChart.displayAnimated = YES;
 
             if (isShowOutcomeChart) {
-                items = @[[PNPieChartDataItem dataItemWithValue:30 color:PNRed
+                items = @[[PNPieChartDataItem dataItemWithValue:30 color:PNTwitterColor
                                                              description:@"吃喝玩乐"],
-                                   [PNPieChartDataItem dataItemWithValue:60 color:PNBlue description:@"阅读"],
+                                   [PNPieChartDataItem dataItemWithValue:60 color:PNMauve description:@"阅读"],
                                    ];
                 isShowOutcomeChart = NO;
                 [cell switchCenterButtonToOutcome:NO ByMoney:@"12000"];
@@ -333,12 +373,11 @@
                           [PNPieChartDataItem dataItemWithValue:20 color:PNGreen description:@"一般消费"],
                           ];
                 [cell switchCenterButtonToOutcome:YES ByMoney:@"580"];
-
         
             }else{
-                items = @[[PNPieChartDataItem dataItemWithValue:30 color:PNRed
+                items = @[[PNPieChartDataItem dataItemWithValue:30 color:PNTwitterColor
                                                     description:@"吃喝玩乐"],
-                          [PNPieChartDataItem dataItemWithValue:60 color:PNBlue description:@"阅读"],
+                          [PNPieChartDataItem dataItemWithValue:60 color:PNMauve description:@"阅读"],
                           ];
                 [cell switchCenterButtonToOutcome:NO ByMoney:@"12000"];
             }
