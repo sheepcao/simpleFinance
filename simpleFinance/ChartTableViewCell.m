@@ -51,15 +51,31 @@
     [self addSubview:self.pieChart];
     
     self.centerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.pieChart.innerCircleRadius*2, self.pieChart.innerCircleRadius*2)];
-    [self.centerButton setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];
-    self.centerButton.layer.cornerRadius = self.centerButton.frame.size.width/2
-    ;
+    [self.centerButton setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];    ;
     self.centerButton.layer.borderWidth = 0.8f;
     self.centerButton.layer.borderColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f].CGColor;
-    self.centerButton.backgroundColor = [UIColor clearColor];
+    self.centerButton.backgroundColor = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:194/255.0f alpha:1.0f];
     self.centerButton.titleLabel.numberOfLines = 2;
-    [self.centerButton setTitleShadowColor: [[UIColor blackColor] colorWithAlphaComponent:0.48] forState:UIControlStateNormal] ;
-    self.centerButton.titleLabel.shadowOffset =  CGSizeMake(0, 0.65);
+    
+    self.centerButton.layer.cornerRadius = self.centerButton.frame.size.width/2;
+    self.centerButton.layer.masksToBounds = NO;
+    self.centerButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.centerButton.layer.shadowOpacity = 1.0;
+    self.centerButton.layer.shadowRadius = 1.5f;
+    self.centerButton.layer.shadowOffset = CGSizeMake(0.0f, 1.5f);
+    self.centerButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
+    
+    self.centerButton.titleLabel.layer.shadowColor =  [UIColor blackColor].CGColor;
+    self.centerButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
+
+
+    UIImageView *switchImage= [[UIImageView alloc] initWithFrame:CGRectMake(self.centerButton.frame.size.width/3, self.centerButton.frame.size.height*3/4, self.centerButton.frame.size.width/3, self.centerButton.frame.size.height/6)];
+    [switchImage setImage:[UIImage imageNamed:@"switchChart.png"]];
+//    switchImage.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
+
+    [self.centerButton addSubview:switchImage];
+
+    
     [self addSubview:self.centerButton];
 
     
@@ -72,21 +88,18 @@
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                               @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
                                                 UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
-                                                UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 15.0f]
+                                                UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat:  self.centerButton.frame.size.width/4.8]
                                                 }];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:attributeFontDescriptor.pointSize *0.45];
+    [style setLineSpacing:attributeFontDescriptor.pointSize *0.41];
     style.alignment = NSTextAlignmentCenter;
 
     if (isShowOutcome) {
         attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"支 出\n%@",money]];
-
     }else
     {
         attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"收 入\n%@",money]];
-
     }
-    
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.78];
     shadow.shadowBlurRadius = 0.0;

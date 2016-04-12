@@ -41,5 +41,4 @@
 #define ALLAPP_URL @"itms://itunes.apple.com/us/artist/cao-guangxu/id844914783"
 
 
-
 #endif /* global_h */

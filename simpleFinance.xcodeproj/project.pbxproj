@@ -35,6 +35,9 @@
 		A4CC24391CBCC846007A94F1 /* ATCTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24331CBCC846007A94F1 /* ATCTransitioningDelegate.m */; };
 		A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC243D1CBCDB8A007A94F1 /* RoundedButton.m */; };
 		A4CC24421CBCE2E0007A94F1 /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24411CBCE2E0007A94F1 /* BottomView.m */; };
+		A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24431CBCE82F007A94F1 /* switchChart.png */; };
+		A4CC244B1CBCFEA4007A94F1 /* addNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24491CBCFEA4007A94F1 /* addNewItemViewController.m */; };
+		A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4CC244A1CBCFEA4007A94F1 /* addNewItemViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +93,10 @@
 		A4CC243D1CBCDB8A007A94F1 /* RoundedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedButton.m; sourceTree = "<group>"; };
 		A4CC24401CBCE2E0007A94F1 /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomView.h; sourceTree = "<group>"; };
 		A4CC24411CBCE2E0007A94F1 /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BottomView.m; sourceTree = "<group>"; };
+		A4CC24431CBCE82F007A94F1 /* switchChart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchChart.png; sourceTree = "<group>"; };
+		A4CC24481CBCFEA4007A94F1 /* addNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addNewItemViewController.h; sourceTree = "<group>"; };
+		A4CC24491CBCFEA4007A94F1 /* addNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addNewItemViewController.m; sourceTree = "<group>"; };
+		A4CC244A1CBCFEA4007A94F1 /* addNewItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = addNewItemViewController.xib; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -145,6 +152,9 @@
 				A490C1911CB7B1B3006EEEF1 /* SideMenuViewController.xib */,
 				A42D1C8F1CB60AC900C208A0 /* mainViewController.h */,
 				A42D1C901CB60AC900C208A0 /* mainViewController.m */,
+				A4CC24481CBCFEA4007A94F1 /* addNewItemViewController.h */,
+				A4CC24491CBCFEA4007A94F1 /* addNewItemViewController.m */,
+				A4CC244A1CBCFEA4007A94F1 /* addNewItemViewController.xib */,
 				A42D1CA91CB64C3800C208A0 /* cells */,
 				A42D1C921CB60AC900C208A0 /* Main.storyboard */,
 				A42D1C951CB60AC900C208A0 /* Assets.xcassets */,
@@ -160,6 +170,7 @@
 		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A4CC24431CBCE82F007A94F1 /* switchChart.png */,
 				A490C1991CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf */,
 				A42D1C8A1CB60AC900C208A0 /* main.m */,
 			);
@@ -319,6 +330,8 @@
 				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
+				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
+				A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */,
 				A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +407,7 @@
 				A42D1C8B1CB60AC900C208A0 /* main.m in Sources */,
 				A4CC24351CBCC846007A94F1 /* ATCAnimatedTransitioningBounce.m in Sources */,
 				A4CC24341CBCC846007A94F1 /* ATCAnimatedTransitioning.m in Sources */,
+				A4CC244B1CBCFEA4007A94F1 /* addNewItemViewController.m in Sources */,
 				A42D1CAD1CB657C300C208A0 /* summeryViewController.m in Sources */,
 				A490C1851CB7A887006EEEF1 /* MFSideMenuContainerViewController.m in Sources */,
 				A4CC24361CBCC846007A94F1 /* ATCAnimatedTransitioningFade.m in Sources */,

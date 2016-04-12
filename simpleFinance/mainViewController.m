@@ -14,6 +14,7 @@
 #import "ChartTableViewCell.h"
 #import "RoundedButton.h"
 #import "BottomView.h"
+#import "addNewItemViewController.h"
 
 
 
@@ -30,6 +31,7 @@
 
 
 }
+@property (nonatomic,strong) ATCTransitioningDelegate *atcTD;
 
 @end
 
@@ -199,6 +201,19 @@
 -(void)popAddNewView:(RoundedButton *)sender
 {
     [sender notSelectedStyle];
+    addNewItemViewController *addItemVC = [[addNewItemViewController alloc] initWithNibName:@"addNewItemViewController" bundle:nil];
+    
+    self.atcTD = [[ATCTransitioningDelegate alloc] initWithPresentationTransition:ATCTransitionAnimationTypeBounce
+                                                              dismissalTransition:ATCTransitionAnimationTypeBounce
+                                                                        direction:ATCTransitionAnimationDirectionBottom
+                                                                         duration:0.65f];
+    
+    // Apply it to the modal presentation
+    addItemVC.modalPresentationStyle = UIModalPresentationCustom;
+    addItemVC.transitioningDelegate = self.atcTD;
+    
+    self.atcTD.interactive = YES;
+    [self  presentViewController:addItemVC animated:YES completion:nil];
 }
 
 
@@ -212,6 +227,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark -
+#pragma mark Transitioning animation delegate
+//-(void)setupTransitioningDelegate{
+//    
+//    
+//    // Set up our delegate
+//    self.atcTD = [[ATCTransitioningDelegate alloc] initWithPresentationTransition:ATCTransitionAnimationTypeBounce
+//                                                              dismissalTransition:ATCTransitionAnimationTypeFloat
+//                                                                        direction:ATCTransitionAnimationDirectionBottom
+//                                                                         duration:0.55f];
+//    self.navigationController.delegate = self.atcTD;
+//    
+//    
+//}
 
 
 
@@ -223,7 +252,7 @@
         return moneyLuckSpace;
     }else if(indexPath.section == 1 && indexPath.row == 9)
     {
-        return 260;
+        return 270;
     }
     else
         return rowHeight;
