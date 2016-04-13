@@ -15,6 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="tintColor" red="0.96078431372549022" green="0.47843137254901963" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="point" keyPath="inputPoint0">
                     <point key="value" x="0.5" y="0.0"/>

@@ -33,6 +33,12 @@
 		A4CC244B1CBCFEA4007A94F1 /* addNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24491CBCFEA4007A94F1 /* addNewItemViewController.m */; };
 		A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4CC244A1CBCFEA4007A94F1 /* addNewItemViewController.xib */; };
 		A4CC244F1CBDDE29007A94F1 /* topBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC244E1CBDDE29007A94F1 /* topBarView.m */; };
+		A4CC24521CBE239B007A94F1 /* numberPadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24511CBE239B007A94F1 /* numberPadButton.m */; };
+		A4CC24581CBE46F6007A94F1 /* equal.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24531CBE46F6007A94F1 /* equal.png */; };
+		A4CC24591CBE46F6007A94F1 /* finish.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24541CBE46F6007A94F1 /* finish.png */; };
+		A4CC245A1CBE46F6007A94F1 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24551CBE46F6007A94F1 /* minus.png */; };
+		A4CC245B1CBE46F6007A94F1 /* multiply.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24561CBE46F6007A94F1 /* multiply.png */; };
+		A4CC245C1CBE46F6007A94F1 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24571CBE46F6007A94F1 /* plus.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +88,13 @@
 		A4CC244A1CBCFEA4007A94F1 /* addNewItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = addNewItemViewController.xib; sourceTree = "<group>"; };
 		A4CC244D1CBDDE29007A94F1 /* topBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topBarView.h; sourceTree = "<group>"; };
 		A4CC244E1CBDDE29007A94F1 /* topBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topBarView.m; sourceTree = "<group>"; };
+		A4CC24501CBE239B007A94F1 /* numberPadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = numberPadButton.h; sourceTree = "<group>"; };
+		A4CC24511CBE239B007A94F1 /* numberPadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = numberPadButton.m; sourceTree = "<group>"; };
+		A4CC24531CBE46F6007A94F1 /* equal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = equal.png; sourceTree = "<group>"; };
+		A4CC24541CBE46F6007A94F1 /* finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finish.png; sourceTree = "<group>"; };
+		A4CC24551CBE46F6007A94F1 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
+		A4CC24561CBE46F6007A94F1 /* multiply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiply.png; sourceTree = "<group>"; };
+		A4CC24571CBE46F6007A94F1 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -155,6 +168,11 @@
 		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A4CC24531CBE46F6007A94F1 /* equal.png */,
+				A4CC24541CBE46F6007A94F1 /* finish.png */,
+				A4CC24551CBE46F6007A94F1 /* minus.png */,
+				A4CC24561CBE46F6007A94F1 /* multiply.png */,
+				A4CC24571CBE46F6007A94F1 /* plus.png */,
 				A4CC24431CBCE82F007A94F1 /* switchChart.png */,
 				A490C1991CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf */,
 				A42D1C8A1CB60AC900C208A0 /* main.m */,
@@ -219,6 +237,8 @@
 				A4CC24411CBCE2E0007A94F1 /* BottomView.m */,
 				A4CC244D1CBDDE29007A94F1 /* topBarView.h */,
 				A4CC244E1CBDDE29007A94F1 /* topBarView.m */,
+				A4CC24501CBE239B007A94F1 /* numberPadButton.h */,
+				A4CC24511CBE239B007A94F1 /* numberPadButton.m */,
 			);
 			name = customView;
 			sourceTree = "<group>";
@@ -293,10 +313,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */,
+				A4CC245A1CBE46F6007A94F1 /* minus.png in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
+				A4CC245B1CBE46F6007A94F1 /* multiply.png in Resources */,
+				A4CC24591CBE46F6007A94F1 /* finish.png in Resources */,
 				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
+				A4CC245C1CBE46F6007A94F1 /* plus.png in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
+				A4CC24581CBE46F6007A94F1 /* equal.png in Resources */,
 				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
 				A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */,
 				A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */,
@@ -370,6 +395,7 @@
 				A4CC24421CBCE2E0007A94F1 /* BottomView.m in Sources */,
 				A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */,
 				A42D1C8B1CB60AC900C208A0 /* main.m in Sources */,
+				A4CC24521CBE239B007A94F1 /* numberPadButton.m in Sources */,
 				A4CC244B1CBCFEA4007A94F1 /* addNewItemViewController.m in Sources */,
 				A42D1CAD1CB657C300C208A0 /* summeryViewController.m in Sources */,
 				A490C1851CB7A887006EEEF1 /* MFSideMenuContainerViewController.m in Sources */,
