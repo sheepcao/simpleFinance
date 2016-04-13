@@ -8,6 +8,7 @@
 
 #import "addNewItemViewController.h"
 #import "global.h"
+#import "topBarView.h"
 
 @interface addNewItemViewController ()
 
@@ -18,14 +19,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-60, 10, 30, 30)];
-    [closeViewButton setTitle:@"X" forState:UIControlStateNormal];
-    [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
-    closeViewButton.backgroundColor = [UIColor blueColor];
-    [self.view addSubview:closeViewButton];
+
     
+    [self configTopbar];
     [self configNumberPad];
     
+}
+
+-(void)configTopbar
+{
+    topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+    topbar.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:topbar];
+    
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-60, 26, 30, 30)];
+    [closeViewButton setTitle:@"X" forState:UIControlStateNormal];
+    [closeViewButton .titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
+    closeViewButton.backgroundColor = [UIColor clearColor];
+    [topbar addSubview:closeViewButton];
 }
 
 -(void)configNumberPad
@@ -46,14 +58,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

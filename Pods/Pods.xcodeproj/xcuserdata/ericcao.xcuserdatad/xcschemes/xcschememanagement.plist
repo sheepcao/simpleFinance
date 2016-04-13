@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RZTransitions.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UICountingLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,11 +42,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>07236B7F88F596C2EE6D3580A35C08C6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>11929A53A8AD141288485C2968E5803E</key>
 		<dict>
 			<key>primary</key>
@@ -58,6 +58,16 @@
 			<true/>
 		</dict>
 		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D48F3A4873D45E3510C6ECCAB3719A02</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E493B3B28C5F2B4AB75FC78777D103E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

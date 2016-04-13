@@ -227,22 +227,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark -
-#pragma mark Transitioning animation delegate
-//-(void)setupTransitioningDelegate{
-//    
-//    
-//    // Set up our delegate
-//    self.atcTD = [[ATCTransitioningDelegate alloc] initWithPresentationTransition:ATCTransitionAnimationTypeBounce
-//                                                              dismissalTransition:ATCTransitionAnimationTypeFloat
-//                                                                        direction:ATCTransitionAnimationDirectionBottom
-//                                                                         duration:0.55f];
-//    self.navigationController.delegate = self.atcTD;
-//    
-//    
-//}
-
-
 
 #pragma mark -
 #pragma mark Table view delegate

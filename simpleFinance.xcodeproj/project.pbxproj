@@ -38,6 +38,7 @@
 		A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24431CBCE82F007A94F1 /* switchChart.png */; };
 		A4CC244B1CBCFEA4007A94F1 /* addNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24491CBCFEA4007A94F1 /* addNewItemViewController.m */; };
 		A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4CC244A1CBCFEA4007A94F1 /* addNewItemViewController.xib */; };
+		A4CC244F1CBDDE29007A94F1 /* topBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC244E1CBDDE29007A94F1 /* topBarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,8 @@
 		A4CC24481CBCFEA4007A94F1 /* addNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addNewItemViewController.h; sourceTree = "<group>"; };
 		A4CC24491CBCFEA4007A94F1 /* addNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addNewItemViewController.m; sourceTree = "<group>"; };
 		A4CC244A1CBCFEA4007A94F1 /* addNewItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = addNewItemViewController.xib; sourceTree = "<group>"; };
+		A4CC244D1CBDDE29007A94F1 /* topBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topBarView.h; sourceTree = "<group>"; };
+		A4CC244E1CBDDE29007A94F1 /* topBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topBarView.m; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -252,6 +255,8 @@
 				A4CC243D1CBCDB8A007A94F1 /* RoundedButton.m */,
 				A4CC24401CBCE2E0007A94F1 /* BottomView.h */,
 				A4CC24411CBCE2E0007A94F1 /* BottomView.m */,
+				A4CC244D1CBDDE29007A94F1 /* topBarView.h */,
+				A4CC244E1CBDDE29007A94F1 /* topBarView.m */,
 			);
 			name = customView;
 			sourceTree = "<group>";
@@ -393,6 +398,7 @@
 			files = (
 				A490C1921CB7B1B3006EEEF1 /* SideMenuViewController.m in Sources */,
 				A490C1761CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m in Sources */,
+				A4CC244F1CBDDE29007A94F1 /* topBarView.m in Sources */,
 				A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */,
 				A490C1861CB7A887006EEEF1 /* MFSideMenuShadow.m in Sources */,
 				A4CC24381CBCC846007A94F1 /* ATCAnimatedTransitioningSquish.m in Sources */,
