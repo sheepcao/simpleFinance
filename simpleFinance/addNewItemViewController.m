@@ -29,16 +29,27 @@
 
 -(void)configTopbar
 {
-    topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 64)];
+    topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
     topbar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:topbar];
     
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-60, 26, 30, 30)];
-    [closeViewButton setTitle:@"X" forState:UIControlStateNormal];
-    [closeViewButton .titleLabel setFont:[UIFont boldSystemFontOfSize:20.0f]];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 27, 60, 40)];
+    closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    closeViewButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+    [closeViewButton setTitle:@"取消" forState:UIControlStateNormal];
+    [closeViewButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
+    
+//    UISegmentedControl *moneyTypeSeg = [[UISegmentedControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4, 24, SCREEN_WIDTH/4, 40)];
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
+    UISegmentedControl *moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
+    moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 30, SCREEN_WIDTH*3/7, 30);
+    moneyTypeSeg.tintColor =  [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f];
+    moneyTypeSeg.selectedSegmentIndex = 0;
+    [topbar addSubview:moneyTypeSeg];
+    
 }
 
 -(void)configNumberPad
@@ -54,20 +65,43 @@
     
     for (int i = 0; i<4; i++) { // 4 coloum
         for (int j = 0; j<4; j++) {  // 4 row
-//            numberPadButton * btn = [[numberPadButton alloc] initWithFrame:CGRectMake(1+i * (buttonWidth+1.2), 1+j*(buttonHeight+1.2), buttonWidth, buttonHeight)];
             numberPadButton * btn = [[numberPadButton alloc] initWithFrame:CGRectMake(1+i * (buttonWidth), 1+j*(buttonHeight), buttonWidth, buttonHeight)];
 
             btn.tag = j*4+i+1;
             [btn setupSymbols];
             [numberPadView addSubview:btn];
-            [btn addSelectedBack];
-
             [btn setTitle:[NSString stringWithFormat:@"%@",btn.symbolText] forState:UIControlStateNormal];
-            
+//            
+            [btn addTarget:self action:@selector(keyTapped:) forControlEvents:UIControlEventTouchUpInside];
+//            //for button style on diff states.
+//            [btn addTarget:self action:@selector(keyTapDown:) forControlEvents:UIControlEventTouchDown];
+////            [btn addTarget:self action:@selector(KeyTapCancel:) forControlEvents:UIControlEventTouchCancel];
+////            [btn addTarget:self action:@selector(KeyTapCancel:) forControlEvents:UIControlEventTouchDragExit];
+////            [btn addTarget:self action:@selector(KeyTapCancel:) forControlEvents:UIControlEventTouchDragOutside];
+//            [btn addTarget:self action:@selector(KeyTapCancel:) forControlEvents:UIControlEventTouchUpOutside];
+//
+//            
             
         }
     }
 }
+
+-(void)keyTapped:(numberPadButton *)sender
+{
+    NSLog(@"%@",sender.symbolText);
+    
+}
+//-(void)keyTapDown:(numberPadButton *)sender
+//{
+//    [sender keySelectedStyle];
+//    NSLog(@"%@",sender.symbolText);
+//    
+//}
+//-(void)KeyTapCancel:(numberPadButton *)sender
+//{
+//    [sender keyNotSelectedStyle];
+//    
+//}
 
 -(void)closeVC
 {

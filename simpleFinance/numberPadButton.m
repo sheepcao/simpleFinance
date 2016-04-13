@@ -34,34 +34,75 @@
         self.layer.borderWidth = 0.5f;
 
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
 
+        
 
     }
     return self;
 }
 
--(void)addSelectedBack
-{
+- (void) setHighlighted:(BOOL)highlighted {
+    [super setHighlighted:highlighted];
     
-//    self.selectedBack = [[UIView alloc] initWithFrame:CGRectMake(selfFrame.origin.x-0.6,selfFrame.origin.y-0.6, selfFrame.size.width+1.8, selfFrame.size.height+1.8)];
-    
-//    if (self.tag > 12) {
-//        [self.selectedBack setFrame:CGRectMake(selfFrame.origin.x-0.6,selfFrame.origin.y-0.6, selfFrame.size.width+1.8, selfFrame.size.height+1)];
-//    }
-//    self.selectedBack.backgroundColor = [UIColor colorWithRed:245/255.0f green:122/255.0f blue:18/255.0f alpha:1.0f];
-//    if (!self.superview) {
-//        NSLog(@"key button haven't been added to super view");
-//    }
-//    [self.superview addSubview:self.selectedBack];
-//    [self.superview bringSubviewToFront:self];
-//    
-    if (self.tag == 13) {
+    if (highlighted) {
+        if (self.tag == 13) {
+            return;
+        }
+        if ((self.tag==4) || (self.tag==8)  || (self.tag==12)  || (self.tag==16) ) {
+            self.backgroundColor=symbolSelectedColor;
+        }else
+        {
+            self.backgroundColor = numberSelectedColor;
+        }
     }
-    
-    
-
+    else {
+        if (self.tag == 13) {
+            return;
+        }
+        if ((self.tag==4) || (self.tag==8)  || (self.tag==12)  || (self.tag==16) ) {
+            self.backgroundColor = symbolColor;
+        }else
+        {
+            self.backgroundColor = numberColor;
+        }
+    }
 }
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+//-(void)keySelectedStyle
+//{
+//    if ((self.tag==4) || (self.tag==8)  || (self.tag==12) || (self.tag==13) || (self.tag==16) ) {
+//        [self setBackgroundColor:symbolSelectedColor];
+//    }else
+//    {
+//        self.backgroundColor = numberSelectedColor;
+//    }
+//
+//}
+//
+//-(void)keyNotSelectedStyle
+//{
+//    if ((self.tag==4) || (self.tag==8)  || (self.tag==12) || (self.tag==13) || (self.tag==16) ) {
+//        self.backgroundColor = symbolColor;
+//    }else
+//    {
+//        self.backgroundColor = numberColor;
+//    }
+//    
+//}
 
 -(void)setupNumbers
 {
@@ -123,7 +164,7 @@
             fontSize = 22;
             self.backgroundColor = symbolColor;
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [self setImage:[UIImage imageNamed:@"multiply.png"] forState:UIControlStateNormal];
+            [self setImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
             break;
         case 5:
             self.symbolText = @"4";

@@ -22,7 +22,9 @@
         self.layer.shadowOpacity = 0.8;
         self.layer.shadowRadius = 2;
         self.layer.shadowOffset = CGSizeMake(0.0f, 1.5f);
-    }
+
+        
+}
     return self;
 }
 

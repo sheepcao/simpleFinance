@@ -24,10 +24,10 @@
                     <point key="value" x="0.5" y="1"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="inputColor0">
-                    <color key="value" red="0.080155222039473686" green="0.27862870065789475" blue="0.28484786184210525" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="value" red="0.34908834010000001" green="0.68733613100000002" blue="0.72708303100000005" alpha="1" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="inputColor1">
-                    <color key="value" red="0.053916529605263157" green="0.21404708059210525" blue="0.26457134046052633" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="value" red="0.1036123742" green="0.50974657749999996" blue="0.76079570190000001" alpha="1" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="number" keyPath="implementMethod">
                     <integer key="value" value="1"/>

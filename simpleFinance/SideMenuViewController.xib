@@ -28,7 +28,7 @@
                     <color key="value" red="0.21229954769736842" green="0.27862870065789475" blue="0.28484786184210525" alpha="1" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="inputColor1">
-                    <color key="value" red="0.0" green="0.12549019607843137" blue="0.16078431372549021" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="value" red="0.0" green="0.12549019607843137" blue="0.70343338815789469" alpha="1" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="number" keyPath="implementMethod">
                     <integer key="value" value="1"/>

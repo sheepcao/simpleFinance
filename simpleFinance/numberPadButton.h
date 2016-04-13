@@ -19,5 +19,5 @@
 
 -(void)setupSymbols;
 -(void)setupNumbers;
--(void)addSelectedBack;
+
 @end

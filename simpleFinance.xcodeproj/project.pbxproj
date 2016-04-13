@@ -39,6 +39,7 @@
 		A4CC245A1CBE46F6007A94F1 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24551CBE46F6007A94F1 /* minus.png */; };
 		A4CC245B1CBE46F6007A94F1 /* multiply.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24561CBE46F6007A94F1 /* multiply.png */; };
 		A4CC245C1CBE46F6007A94F1 /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24571CBE46F6007A94F1 /* plus.png */; };
+		A4CC245E1CBE4AF8007A94F1 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC245D1CBE4AF8007A94F1 /* delete.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,7 @@
 		A4CC24551CBE46F6007A94F1 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
 		A4CC24561CBE46F6007A94F1 /* multiply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = multiply.png; sourceTree = "<group>"; };
 		A4CC24571CBE46F6007A94F1 /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		A4CC245D1CBE4AF8007A94F1 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -168,6 +170,7 @@
 		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A4CC245D1CBE4AF8007A94F1 /* delete.png */,
 				A4CC24531CBE46F6007A94F1 /* equal.png */,
 				A4CC24541CBE46F6007A94F1 /* finish.png */,
 				A4CC24551CBE46F6007A94F1 /* minus.png */,
@@ -316,6 +319,7 @@
 				A4CC245A1CBE46F6007A94F1 /* minus.png in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
 				A4CC245B1CBE46F6007A94F1 /* multiply.png in Resources */,
+				A4CC245E1CBE4AF8007A94F1 /* delete.png in Resources */,
 				A4CC24591CBE46F6007A94F1 /* finish.png in Resources */,
 				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
 				A4CC245C1CBE46F6007A94F1 /* plus.png in Resources */,
