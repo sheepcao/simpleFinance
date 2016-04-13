@@ -164,7 +164,7 @@
             fontSize = 22;
             self.backgroundColor = symbolColor;
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [self setImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
+            [self setImage:[UIImage imageNamed:@"delete1.png"] forState:UIControlStateNormal];
             break;
         case 5:
             self.symbolText = @"4";
@@ -181,7 +181,7 @@
             fontSize = 22;
             self.backgroundColor = symbolColor;
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [self setImage:[UIImage imageNamed:@"plus.png"] forState:UIControlStateNormal];
+            [self setImage:[UIImage imageNamed:@"plus1.png"] forState:UIControlStateNormal];
 
             break;
         case 9:
@@ -199,7 +199,7 @@
             fontSize = 22;
             self.backgroundColor = symbolColor;
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [self setImage:[UIImage imageNamed:@"minus.png"] forState:UIControlStateNormal];
+            [self setImage:[UIImage imageNamed:@"minus1.png"] forState:UIControlStateNormal];
 
             break;
         case 13:
@@ -227,7 +227,7 @@
             fontSize = 22;
             self.backgroundColor = symbolColor;
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            [self setImage:[UIImage imageNamed:@"finish.png"] forState:UIControlStateNormal];
+            [self setImage:[UIImage imageNamed:@"equal1.png"] forState:UIControlStateNormal];
 
             break;
             
