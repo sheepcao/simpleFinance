@@ -9,6 +9,7 @@
 #import "addNewItemViewController.h"
 #import "global.h"
 #import "topBarView.h"
+#import "RZTransitions.h"
 
 @interface addNewItemViewController ()
 
@@ -23,7 +24,6 @@
     
     [self configTopbar];
     [self configNumberPad];
-    
 }
 
 -(void)configTopbar
@@ -43,7 +43,7 @@
 -(void)configNumberPad
 {
     UIView *numberPadView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH*3/4, SCREEN_WIDTH, SCREEN_WIDTH*3/4)];
-    numberPadView.backgroundColor = [UIColor blueColor];
+    numberPadView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:numberPadView];
 }
 

@@ -158,6 +158,7 @@ static NSString* const kRZTTransitionsKeySpacer = @"_";
     
     // Find the dismissed view controller's view controller it is returning to
     UIViewController *presentingViewController = dismissed.presentingViewController;
+
     if ( [presentingViewController isKindOfClass:[UINavigationController class]] ) {
         UIViewController *childVC = (UIViewController *)[[presentingViewController childViewControllers] lastObject];
         if ( childVC != nil ) {
@@ -177,7 +178,15 @@ static NSString* const kRZTTransitionsKeySpacer = @"_";
     if ( animationController == nil ) {
         keyValue.toViewControllerClass = nil;
         keyValue.fromViewControllerClass = [dismissed class];
-        animationController = (id<RZAnimationControllerProtocol>)[self.animationControllers objectForKey:keyValue];
+//        animationController = (id<RZAnimationControllerProtocol>)[self.animationControllers objectForKey:keyValue];
+        //eric:force the animation style....
+        NSArray *items = [self.animationControllers  allKeys];
+        if (items.count>0) {
+            animationController = (id<RZAnimationControllerProtocol>)[self.animationControllers objectForKey:[items objectAtIndex:0]];
+        }
+        
+
+
         
         // TODO: Check if from vc class is a navigation controller as well...
     }

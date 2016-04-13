@@ -27,12 +27,6 @@
 		A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A490C1911CB7B1B3006EEEF1 /* SideMenuViewController.xib */; };
 		A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A490C1991CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf */; };
 		A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C19C1CBB822F006EEEF1 /* ChartTableViewCell.m */; };
-		A4CC24341CBCC846007A94F1 /* ATCAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24291CBCC846007A94F1 /* ATCAnimatedTransitioning.m */; };
-		A4CC24351CBCC846007A94F1 /* ATCAnimatedTransitioningBounce.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC242B1CBCC846007A94F1 /* ATCAnimatedTransitioningBounce.m */; };
-		A4CC24361CBCC846007A94F1 /* ATCAnimatedTransitioningFade.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC242D1CBCC846007A94F1 /* ATCAnimatedTransitioningFade.m */; };
-		A4CC24371CBCC846007A94F1 /* ATCAnimatedTransitioningFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC242F1CBCC846007A94F1 /* ATCAnimatedTransitioningFloat.m */; };
-		A4CC24381CBCC846007A94F1 /* ATCAnimatedTransitioningSquish.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24311CBCC846007A94F1 /* ATCAnimatedTransitioningSquish.m */; };
-		A4CC24391CBCC846007A94F1 /* ATCTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24331CBCC846007A94F1 /* ATCTransitioningDelegate.m */; };
 		A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC243D1CBCDB8A007A94F1 /* RoundedButton.m */; };
 		A4CC24421CBCE2E0007A94F1 /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24411CBCE2E0007A94F1 /* BottomView.m */; };
 		A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24431CBCE82F007A94F1 /* switchChart.png */; };
@@ -78,18 +72,6 @@
 		A490C1991CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceHanSansCN-Normal.ttf"; sourceTree = "<group>"; };
 		A490C19B1CBB822F006EEEF1 /* ChartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartTableViewCell.h; sourceTree = "<group>"; };
 		A490C19C1CBB822F006EEEF1 /* ChartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartTableViewCell.m; sourceTree = "<group>"; };
-		A4CC24281CBCC846007A94F1 /* ATCAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCAnimatedTransitioning.h; sourceTree = "<group>"; };
-		A4CC24291CBCC846007A94F1 /* ATCAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCAnimatedTransitioning.m; sourceTree = "<group>"; };
-		A4CC242A1CBCC846007A94F1 /* ATCAnimatedTransitioningBounce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCAnimatedTransitioningBounce.h; sourceTree = "<group>"; };
-		A4CC242B1CBCC846007A94F1 /* ATCAnimatedTransitioningBounce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCAnimatedTransitioningBounce.m; sourceTree = "<group>"; };
-		A4CC242C1CBCC846007A94F1 /* ATCAnimatedTransitioningFade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCAnimatedTransitioningFade.h; sourceTree = "<group>"; };
-		A4CC242D1CBCC846007A94F1 /* ATCAnimatedTransitioningFade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCAnimatedTransitioningFade.m; sourceTree = "<group>"; };
-		A4CC242E1CBCC846007A94F1 /* ATCAnimatedTransitioningFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCAnimatedTransitioningFloat.h; sourceTree = "<group>"; };
-		A4CC242F1CBCC846007A94F1 /* ATCAnimatedTransitioningFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCAnimatedTransitioningFloat.m; sourceTree = "<group>"; };
-		A4CC24301CBCC846007A94F1 /* ATCAnimatedTransitioningSquish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCAnimatedTransitioningSquish.h; sourceTree = "<group>"; };
-		A4CC24311CBCC846007A94F1 /* ATCAnimatedTransitioningSquish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCAnimatedTransitioningSquish.m; sourceTree = "<group>"; };
-		A4CC24321CBCC846007A94F1 /* ATCTransitioningDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ATCTransitioningDelegate.h; sourceTree = "<group>"; };
-		A4CC24331CBCC846007A94F1 /* ATCTransitioningDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ATCTransitioningDelegate.m; sourceTree = "<group>"; };
 		A4CC243C1CBCDB8A007A94F1 /* RoundedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedButton.h; sourceTree = "<group>"; };
 		A4CC243D1CBCDB8A007A94F1 /* RoundedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedButton.m; sourceTree = "<group>"; };
 		A4CC24401CBCE2E0007A94F1 /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomView.h; sourceTree = "<group>"; };
@@ -222,30 +204,10 @@
 		A4CC24261CBCC82E007A94F1 /* 3rd-party */ = {
 			isa = PBXGroup;
 			children = (
-				A4CC24271CBCC846007A94F1 /* Animation */,
 				A490C1771CB7A887006EEEF1 /* MFSideMenu */,
 				A42D1CA01CB6365A00C208A0 /* LGGradientBackgroundView */,
 			);
 			name = "3rd-party";
-			sourceTree = "<group>";
-		};
-		A4CC24271CBCC846007A94F1 /* Animation */ = {
-			isa = PBXGroup;
-			children = (
-				A4CC24281CBCC846007A94F1 /* ATCAnimatedTransitioning.h */,
-				A4CC24291CBCC846007A94F1 /* ATCAnimatedTransitioning.m */,
-				A4CC242A1CBCC846007A94F1 /* ATCAnimatedTransitioningBounce.h */,
-				A4CC242B1CBCC846007A94F1 /* ATCAnimatedTransitioningBounce.m */,
-				A4CC242C1CBCC846007A94F1 /* ATCAnimatedTransitioningFade.h */,
-				A4CC242D1CBCC846007A94F1 /* ATCAnimatedTransitioningFade.m */,
-				A4CC242E1CBCC846007A94F1 /* ATCAnimatedTransitioningFloat.h */,
-				A4CC242F1CBCC846007A94F1 /* ATCAnimatedTransitioningFloat.m */,
-				A4CC24301CBCC846007A94F1 /* ATCAnimatedTransitioningSquish.h */,
-				A4CC24311CBCC846007A94F1 /* ATCAnimatedTransitioningSquish.m */,
-				A4CC24321CBCC846007A94F1 /* ATCTransitioningDelegate.h */,
-				A4CC24331CBCC846007A94F1 /* ATCTransitioningDelegate.m */,
-			);
-			path = Animation;
 			sourceTree = "<group>";
 		};
 		A4CC243F1CBCE2C5007A94F1 /* customView */ = {
@@ -401,22 +363,16 @@
 				A4CC244F1CBDDE29007A94F1 /* topBarView.m in Sources */,
 				A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */,
 				A490C1861CB7A887006EEEF1 /* MFSideMenuShadow.m in Sources */,
-				A4CC24381CBCC846007A94F1 /* ATCAnimatedTransitioningSquish.m in Sources */,
 				A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
 				A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */,
-				A4CC24371CBCC846007A94F1 /* ATCAnimatedTransitioningFloat.m in Sources */,
 				A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */,
-				A4CC24391CBCC846007A94F1 /* ATCTransitioningDelegate.m in Sources */,
 				A4CC24421CBCE2E0007A94F1 /* BottomView.m in Sources */,
 				A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */,
 				A42D1C8B1CB60AC900C208A0 /* main.m in Sources */,
-				A4CC24351CBCC846007A94F1 /* ATCAnimatedTransitioningBounce.m in Sources */,
-				A4CC24341CBCC846007A94F1 /* ATCAnimatedTransitioning.m in Sources */,
 				A4CC244B1CBCFEA4007A94F1 /* addNewItemViewController.m in Sources */,
 				A42D1CAD1CB657C300C208A0 /* summeryViewController.m in Sources */,
 				A490C1851CB7A887006EEEF1 /* MFSideMenuContainerViewController.m in Sources */,
-				A4CC24361CBCC846007A94F1 /* ATCAnimatedTransitioningFade.m in Sources */,
 				A490C1891CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				A490C1841CB7A887006EEEF1 /* FabonacciNum.m in Sources */,
 			);

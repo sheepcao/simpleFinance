@@ -15,7 +15,7 @@
 #import "RoundedButton.h"
 #import "BottomView.h"
 #import "addNewItemViewController.h"
-
+#import "RZTransitions.h"
 
 
 
@@ -31,7 +31,6 @@
 
 
 }
-@property (nonatomic,strong) ATCTransitioningDelegate *atcTD;
 
 @end
 
@@ -82,6 +81,9 @@
     
     [self configBottomBar];
     
+    [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
+                                       fromViewController:[self class]
+                                                forAction:RZTransitionAction_PresentDismiss];
     
 }
 
@@ -201,21 +203,18 @@
 -(void)popAddNewView:(RoundedButton *)sender
 {
     [sender notSelectedStyle];
-    addNewItemViewController *addItemVC = [[addNewItemViewController alloc] initWithNibName:@"addNewItemViewController" bundle:nil];
-    
-    self.atcTD = [[ATCTransitioningDelegate alloc] initWithPresentationTransition:ATCTransitionAnimationTypeBounce
-                                                              dismissalTransition:ATCTransitionAnimationTypeBounce
-                                                                        direction:ATCTransitionAnimationDirectionBottom
-                                                                         duration:0.65f];
-    
-    // Apply it to the modal presentation
-    addItemVC.modalPresentationStyle = UIModalPresentationCustom;
-    addItemVC.transitioningDelegate = self.atcTD;
-    
-    self.atcTD.interactive = YES;
-    [self  presentViewController:addItemVC animated:YES completion:nil];
+
+    [self presentViewController:[self nextAddNewItemViewController] animated:YES completion:nil];
+
 }
 
+- (UIViewController *)nextAddNewItemViewController
+{
+    addNewItemViewController* addItemVC = [[addNewItemViewController alloc] init];
+    [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
+
+    return addItemVC;
+}
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
@@ -255,9 +254,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"didSelectRowAtIndexPath");
-    myMaskTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
-    [cell.money setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
+        myMaskTableViewCell *itemCell = (myMaskTableViewCell *)cell;
+        [itemCell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
+        [itemCell.money setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
+    }
+
     
     //    [self presentViewController:self animated:YES completion:^(void){
     //
