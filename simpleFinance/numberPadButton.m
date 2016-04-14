@@ -7,11 +7,6 @@
 //
 
 #import "numberPadButton.h"
-#define  symbolColor   [UIColor colorWithRed:196/255.0f green:178/255.0f blue:124/255.0f alpha:1.0f];
-#define  symbolSelectedColor   [UIColor colorWithRed:120/255.0f green:101/255.0f blue:76/255.0f alpha:1.0f];
-
-#define  numberColor   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f];
-#define  numberSelectedColor   [UIColor colorWithRed:124/255.0f green:167/255.0f blue:197/255.0f alpha:1.0f];
 
 @interface numberPadButton ()
 {
@@ -35,7 +30,7 @@
 
         [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 
-        
+        [self setBackgroundImage:[self imageWithColor:symbolSelectedColor] forState:UIControlStateDisabled];
 
     }
     return self;
@@ -82,27 +77,18 @@
     return image;
 }
 
-//-(void)keySelectedStyle
-//{
-//    if ((self.tag==4) || (self.tag==8)  || (self.tag==12) || (self.tag==13) || (self.tag==16) ) {
-//        [self setBackgroundColor:symbolSelectedColor];
-//    }else
-//    {
-//        self.backgroundColor = numberSelectedColor;
-//    }
-//
-//}
-//
-//-(void)keyNotSelectedStyle
-//{
-//    if ((self.tag==4) || (self.tag==8)  || (self.tag==12) || (self.tag==13) || (self.tag==16) ) {
-//        self.backgroundColor = symbolColor;
-//    }else
-//    {
-//        self.backgroundColor = numberColor;
-//    }
-//    
-//}
+-(void)keySelectedStyle
+{
+    self.layer.borderWidth = 2.0f;
+    [self setEnabled:NO];
+
+}
+
+-(void)keyNotSelectedStyle
+{
+    self.layer.borderWidth = 0.5f;
+    [self setEnabled:YES];
+}
 
 -(void)setupNumbers
 {
@@ -151,15 +137,19 @@
     switch (self.tag) {
         case 1:
             self.symbolText = @"7";
+            self.isNumber = YES;
             break;
         case 2:
             self.symbolText = @"8";
+            self.isNumber = YES;
             break;
         case 3:
             self.symbolText = @"9";
+            self.isNumber = YES;
             break;
         case 4:
-            self.symbolText = @"*";
+            self.symbolText = @"delete";
+            self.isNumber = NO;
             fontType = @"HelveticaNeue";
             fontSize = 22;
             self.backgroundColor = symbolColor;
@@ -168,15 +158,19 @@
             break;
         case 5:
             self.symbolText = @"4";
+            self.isNumber = YES;
             break;
         case 6:
             self.symbolText = @"5";
+            self.isNumber = YES;
             break;
         case 7:
             self.symbolText = @"6";
+            self.isNumber = YES;
             break;
         case 8:
             self.symbolText = @"+";
+            self.isNumber = NO;
             fontType = @"HelveticaNeue";
             fontSize = 22;
             self.backgroundColor = symbolColor;
@@ -186,15 +180,19 @@
             break;
         case 9:
             self.symbolText = @"1";
+            self.isNumber = YES;
             break;
         case 10:
             self.symbolText = @"2";
+            self.isNumber = YES;
             break;
         case 11:
             self.symbolText = @"3";
+            self.isNumber = YES;
             break;
         case 12:
             self.symbolText = @"-";
+            self.isNumber = NO;
             fontType = @"HelveticaNeue";
             fontSize = 22;
             self.backgroundColor = symbolColor;
@@ -205,6 +203,7 @@
         case 13:
     
             self.symbolText = @"备 注";
+            self.isNumber = NO;
             fontType = @"HelveticaNeue-Light";
             fontSize = 16;
             self.layer.borderWidth = 1.0f;
@@ -215,14 +214,17 @@
             break;
         case 14:
             self.symbolText = @"0";
+            self.isNumber = YES;
             break;
         case 15:
             self.symbolText = @".";
+            self.isNumber = YES;
             fontType = @"HelveticaNeue";
             fontSize = 22;
             break;
         case 16:
             self.symbolText = @"OK";
+            self.isNumber = NO;
             fontType = @"HelveticaNeue";
             fontSize = 22;
             self.backgroundColor = symbolColor;
