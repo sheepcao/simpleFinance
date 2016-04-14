@@ -14,9 +14,12 @@
 #import "LGGradientBackgroundView/LGGradientBackgroundView.h"
 
 #define topRowHeight 65
+#define categoryLabelWith 90
 
 @interface addNewItemViewController ()
 @property (nonatomic ,strong) UILabel *InputLabel;
+@property (nonatomic ,strong) UILabel *categoryLabel;
+
 @property (nonatomic ,strong) NSString *InputNumberString;
 @property (nonatomic ,strong) NSString *NumberToOperate;
 @property (nonatomic ,strong) numberPadButton *plusBtn;
@@ -86,24 +89,43 @@
     inputView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:inputView];
     self.inputAreaView = inputView;
-    self.InputLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH-30, SCREEN_WIDTH/4-15)];
+    self.InputLabel = [[UILabel alloc] initWithFrame:CGRectMake(categoryLabelWith, 5, SCREEN_WIDTH-15 - categoryLabelWith, SCREEN_WIDTH/4-15)];
     
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                  @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
                                                    UIFontDescriptorNameAttribute:@"HelveticaNeue-Thin",
-                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 45.0f]
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 42.0f]
                                                    }];
     
     [self.InputLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
     self.InputLabel.textColor = TextColor;
     self.InputLabel.textAlignment = NSTextAlignmentRight;
     self.InputLabel.adjustsFontSizeToFitWidth = YES;
-
     [inputView addSubview:self.InputLabel];
     
     self.InputNumberString = @"";
     self.NumberToOperate = @"0.00";
     [self.InputLabel setText:@"0.00"];
+    
+    
+    self.categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, inputView.frame.size.height/2-17, categoryLabelWith-10, 34)];
+    
+    UIFontDescriptor *categoryFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                 @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
+                                                   }];
+    
+    [self.categoryLabel setFont:[UIFont fontWithDescriptor:categoryFontDescriptor size:0.0]];
+    self.categoryLabel.textColor = TextColor;
+    self.categoryLabel.textAlignment = NSTextAlignmentCenter;
+    self.categoryLabel.adjustsFontSizeToFitWidth = YES;
+    [self.categoryLabel setText:@"吃喝"];
+    self.categoryLabel.layer.borderWidth = 2.0f;
+    self.categoryLabel.layer.borderColor = symbolColor.CGColor;
+    self.categoryLabel.layer.cornerRadius = 7;
+    [inputView addSubview:self.categoryLabel];
+    
     
 }
 
