@@ -16,7 +16,7 @@
 #define topRowHeight 65
 #define categoryLabelWith 90
 
-@interface addNewItemViewController ()
+@interface addNewItemViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,strong) UILabel *InputLabel;
 @property (nonatomic ,strong) UILabel *categoryLabel;
 
@@ -51,6 +51,7 @@
     [self configInputArea];
     [self configNumberPad];
     [self configNoteView];
+    [self configCategoryPad];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -184,16 +185,26 @@
 
 }
 
-
+-(void) configCategoryPad
+{
+    UITableView *categoryTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - (self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height) - self.keyPadView.frame.size.height)];
+    
+    categoryTable.showsVerticalScrollIndicator = NO;
+    categoryTable.backgroundColor = [UIColor clearColor];
+    categoryTable.delegate = self;
+    categoryTable.dataSource = self;
+    categoryTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    categoryTable.canCancelContentTouches = YES;
+    categoryTable.delaysContentTouches = YES;
+}
 
 -(void)configNumberPad
 {
     UIView *numberPadView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH*7/10, SCREEN_WIDTH, SCREEN_WIDTH*7/10)];
+    self.keyPadView = numberPadView;
     numberPadView.backgroundColor = [UIColor blackColor];
     [self.view addSubview:numberPadView];
-    
-    //    CGFloat buttonWidth = (numberPadView.frame.size.width-2)/4 - 1.2;
-    //    CGFloat buttonHeight = (numberPadView.frame.size.height-2)/4 - 1.2 ;
+
     CGFloat buttonWidth = (numberPadView.frame.size.width-2)/4 ;
     CGFloat buttonHeight = (numberPadView.frame.size.height-2)/4  ;
     
