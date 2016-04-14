@@ -207,8 +207,9 @@
             fontType = @"HelveticaNeue-Light";
             fontSize = 16;
             self.layer.borderWidth = 1.0f;
-            self.layer.borderColor = [UIColor darkGrayColor].CGColor;
-            self.backgroundColor = [UIColor colorWithRed:152/255.0f green:154/255.0f blue:156/255.0f alpha:1.0f];
+            self.layer.borderColor = [UIColor blackColor].CGColor;
+//            self.backgroundColor = [UIColor colorWithRed:152/255.0f green:154/255.0f blue:156/255.0f alpha:1.0f];
+            self.backgroundColor =  [UIColor colorWithRed:229/255.0f green:182/255.0f blue:127/255.0f alpha:1.0f];
             [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 
             break;

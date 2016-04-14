@@ -154,17 +154,17 @@
     
     
     
-//            for(NSString *fontfamilyname in [UIFont familyNames])
-//            {
-//                NSLog(@"family:'%@'",fontfamilyname);
-//                for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
-//                {
-//                    NSLog(@"\tfont:'%@'",fontName);
-//                }
-//                NSLog(@"-------------");
-//            }
-//            NSLog(@"========%d Fonts",[UIFont familyNames].count);
-//    
+            for(NSString *fontfamilyname in [UIFont familyNames])
+            {
+                NSLog(@"family:'%@'",fontfamilyname);
+                for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
+                {
+                    NSLog(@"\tfont:'%@'",fontName);
+                }
+                NSLog(@"-------------");
+            }
+            NSLog(@"========%d Fonts",[UIFont familyNames].count);
+    
     
 }
 
@@ -397,7 +397,6 @@
                           ];
                 [cell switchCenterButtonToOutcome:NO ByMoney:@"12000"];
             }
-            
             [cell updatePieWith:items];
         }
         

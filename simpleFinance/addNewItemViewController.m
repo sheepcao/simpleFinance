@@ -21,6 +21,13 @@
 @property (nonatomic ,strong) NSString *NumberToOperate;
 @property (nonatomic ,strong) numberPadButton *plusBtn;
 @property (nonatomic ,strong) numberPadButton *minusBtn;
+@property (nonatomic ,strong) UIView *noteView;
+@property (nonatomic ,strong) UITextView *noteBody;
+@property (nonatomic ,strong) UIButton *noteDoneButton;
+@property (nonatomic ,strong) UIView *keyPadView;
+@property (nonatomic ,strong) UIView *inputAreaView;
+
+
 @property BOOL doingPlus;
 @property BOOL doingMinus;
 
@@ -32,17 +39,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
     
     [self configTopbar];
     [self configInputArea];
     [self configNumberPad];
+    [self configNoteView];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
 }
 
 -(void)configTopbar
@@ -72,25 +82,86 @@
 
 -(void)configInputArea
 {
-    //    UIView *rootView = [[[NSBundle mainBundle] loadNibNamed:@"inputNumberView" owner:self options:nil] objectAtIndex:0];
-    self.InputLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, topRowHeight+5, SCREEN_WIDTH-30, SCREEN_WIDTH/4)];
+    topBarView *inputView = [[topBarView alloc] initWithFrame:CGRectMake(0, topRowHeight, SCREEN_WIDTH, SCREEN_WIDTH/4)];
+    inputView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:inputView];
+    self.inputAreaView = inputView;
+    self.InputLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH-30, SCREEN_WIDTH/4-15)];
     
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                   UIFontDescriptorNameAttribute:@"AvenirNext-Ultralight",
-                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 35.0f]
+                                                 @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue-Thin",
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 45.0f]
                                                    }];
     
     [self.InputLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
     self.InputLabel.textColor = TextColor;
     self.InputLabel.textAlignment = NSTextAlignmentRight;
-    [self.view addSubview:self.InputLabel];
+    self.InputLabel.adjustsFontSizeToFitWidth = YES;
+
+    [inputView addSubview:self.InputLabel];
     
     self.InputNumberString = @"";
     self.NumberToOperate = @"0.00";
     [self.InputLabel setText:@"0.00"];
     
 }
+
+-(void)configNoteView
+{
+    UIView *noteView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 150)];
+    noteView.backgroundColor = numberColor;
+    self.noteView = noteView;
+    [self.view addSubview:noteView];
+    UILabel *noteTitle = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 25, 3, 50, 18)];
+    noteTitle.backgroundColor = [UIColor clearColor];
+    UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                 @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue-Light",
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 17.0f]
+                                                   }];
+    [noteTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
+    [noteTitle setText:@"备注"];
+    [noteTitle setTextColor:[UIColor whiteColor]];
+    noteTitle.textAlignment = NSTextAlignmentCenter;
+    
+    
+    UIButton *finishNoteButton = [[UIButton alloc] initWithFrame:CGRectMake(noteView.frame.size.width - 70, noteView.frame.size.height - 40, 70, 44)];
+    [finishNoteButton setTitle:@"完成" forState:UIControlStateNormal];
+    finishNoteButton.layer.cornerRadius = 4.0f;
+    [finishNoteButton setBackgroundColor:[UIColor colorWithRed:242/255.0f green:191/255.0f blue:109/255.0f alpha:1.0f]];
+    [finishNoteButton addTarget:self action:@selector(finishNote) forControlEvents:UIControlEventTouchUpInside];
+    self.noteDoneButton = finishNoteButton;
+    [noteView addSubview:finishNoteButton];
+    
+    
+    UITextView *noteText = [[UITextView alloc] initWithFrame:CGRectMake(20, noteTitle.frame.origin.y+noteTitle.frame.size.height + 5, SCREEN_WIDTH-40, noteView.frame.size.height - (noteTitle.frame.origin.y+noteTitle.frame.size.height + 5) - finishNoteButton.frame.size.height)];
+    UIFontDescriptor *bodyFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                 @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue-LightItalic",
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 13.0f]
+                                                   }];
+    [noteText setFont:[UIFont fontWithDescriptor:bodyFontDescriptor size:0.0]];
+    noteText.backgroundColor = [UIColor clearColor];
+    [noteText setTextColor:[UIColor whiteColor]];
+    noteText.textAlignment = NSTextAlignmentLeft;
+    noteText.tintColor = [UIColor whiteColor];
+
+
+    self.noteBody = noteText;
+    [noteView addSubview:noteTitle];
+    [noteView addSubview:noteText];
+
+    
+}
+
+-(void)updateNotePad
+{
+    [self.noteDoneButton setFrame:CGRectMake(self.noteView.frame.size.width - 70, self.noteView.frame.size.height - 40, 70, 44)];
+    [self.noteBody setFrame:CGRectMake(20, 25, SCREEN_WIDTH-40, self.noteView.frame.size.height - 25 - self.noteDoneButton.frame.size.height)];
+
+}
+
 
 
 -(void)configNumberPad
@@ -129,7 +200,7 @@
 
 -(void)keyTapped:(numberPadButton *)sender
 {
-    NSLog(@"%@",sender.symbolText);
+//    NSLog(@"%@",sender.symbolText);
     
     if (sender.isNumber ){
         
@@ -158,7 +229,7 @@
                 [self.InputLabel setText:clean];
             }else
             {
-                NSString *clean = [NSString stringWithFormat:@"%lu", [self.InputNumberString integerValue]];
+                NSString *clean = [NSString stringWithFormat:@"%lld", [self.InputNumberString longLongValue]];
                 [self.InputLabel setText:clean];
                 
             }
@@ -167,6 +238,14 @@
     {
         if(sender.tag == 4) // delete button
         {
+            if (!self.plusBtn.enabled || !self.minusBtn.enabled) {
+                [self.plusBtn keyNotSelectedStyle];
+                [self.minusBtn keyNotSelectedStyle];
+                self.doingMinus = NO;
+                self.doingPlus = NO;
+                
+            }
+            
             self.InputNumberString = self.InputLabel.text;
             if (self.InputNumberString.length == 0) {
                 return;
@@ -307,14 +386,39 @@
             }
 
         }
+        
+        if (sender.tag == 13) // note button
+        {
+            [self.noteBody becomeFirstResponder];
+         
+        }
 
-        
-        
-        
     }
     
 }
 
+-(void)keyboardWasShown:(NSNotification*)notification
+{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        [self.noteView setFrame:CGRectMake(0, self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height, self.noteView.frame.size.width, SCREEN_HEIGHT-keyboardSize.height-(self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height))];
+        [self updateNotePad];
+    }];
+
+    [self.view layoutIfNeeded];
+}
+
+-(void)finishNote
+{
+    [UIView animateWithDuration:0.25f animations:^{
+        [self.noteView setFrame:CGRectMake(0, SCREEN_HEIGHT, self.noteView.frame.size.width, self.noteView.frame.size.height)];
+    }];
+    [self.view layoutIfNeeded];
+
+
+    [self.noteBody resignFirstResponder];
+}
 
 -(void)closeVC
 {
