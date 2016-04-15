@@ -14,8 +14,7 @@
 #import "LGGradientBackgroundView/LGGradientBackgroundView.h"
 #import "categoryTableViewCell.h"
 
-#define topRowHeight 65
-#define categoryLabelWith 90
+
 
 @interface addNewItemViewController ()<UITableViewDataSource,UITableViewDelegate,categoryTapDelegate>
 @property (nonatomic ,strong) UILabel *InputLabel;

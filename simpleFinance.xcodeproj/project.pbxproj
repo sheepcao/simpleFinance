@@ -40,6 +40,9 @@
 		A4CC246E1CBE8EC3007A94F1 /* plus1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC246A1CBE8EC3007A94F1 /* plus1.png */; };
 		A4CC24731CC084F2007A94F1 /* categoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24721CC084F2007A94F1 /* categoryTableViewCell.m */; };
 		A4CC24761CC0B361007A94F1 /* categoryButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24751CC0B361007A94F1 /* categoryButton.m */; };
+		A4CC247A1CC0D7DE007A94F1 /* calendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24781CC0D7DE007A94F1 /* calendarViewController.m */; };
+		A4CC247B1CC0D7DE007A94F1 /* calendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24791CC0D7DE007A94F1 /* calendarViewController.xib */; };
+		A4CC247D1CC0DABB007A94F1 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC247C1CC0DABB007A94F1 /* calendar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +102,10 @@
 		A4CC24721CC084F2007A94F1 /* categoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryTableViewCell.m; sourceTree = "<group>"; };
 		A4CC24741CC0B361007A94F1 /* categoryButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryButton.h; sourceTree = "<group>"; };
 		A4CC24751CC0B361007A94F1 /* categoryButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryButton.m; sourceTree = "<group>"; };
+		A4CC24771CC0D7DE007A94F1 /* calendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calendarViewController.h; sourceTree = "<group>"; };
+		A4CC24781CC0D7DE007A94F1 /* calendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = calendarViewController.m; sourceTree = "<group>"; };
+		A4CC24791CC0D7DE007A94F1 /* calendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = calendarViewController.xib; sourceTree = "<group>"; };
+		A4CC247C1CC0DABB007A94F1 /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -157,6 +164,9 @@
 				A4CC24481CBCFEA4007A94F1 /* addNewItemViewController.h */,
 				A4CC24491CBCFEA4007A94F1 /* addNewItemViewController.m */,
 				A4CC244A1CBCFEA4007A94F1 /* addNewItemViewController.xib */,
+				A4CC24771CC0D7DE007A94F1 /* calendarViewController.h */,
+				A4CC24781CC0D7DE007A94F1 /* calendarViewController.m */,
+				A4CC24791CC0D7DE007A94F1 /* calendarViewController.xib */,
 				A42D1CA91CB64C3800C208A0 /* cells */,
 				A42D1C921CB60AC900C208A0 /* Main.storyboard */,
 				A42D1C951CB60AC900C208A0 /* Assets.xcassets */,
@@ -172,6 +182,7 @@
 		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A4CC247C1CC0DABB007A94F1 /* calendar.png */,
 				A4CC24671CBE8EC3007A94F1 /* delete1.png */,
 				A4CC24681CBE8EC3007A94F1 /* equal1.png */,
 				A4CC24691CBE8EC3007A94F1 /* minus1.png */,
@@ -326,7 +337,9 @@
 				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
 				A4CC246E1CBE8EC3007A94F1 /* plus1.png in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
+				A4CC247D1CC0DABB007A94F1 /* calendar.png in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
+				A4CC247B1CC0D7DE007A94F1 /* calendarViewController.xib in Resources */,
 				A4CC246C1CBE8EC3007A94F1 /* equal1.png in Resources */,
 				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
 				A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */,
@@ -404,6 +417,7 @@
 				A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */,
 				A42D1C8B1CB60AC900C208A0 /* main.m in Sources */,
 				A4CC24521CBE239B007A94F1 /* numberPadButton.m in Sources */,
+				A4CC247A1CC0D7DE007A94F1 /* calendarViewController.m in Sources */,
 				A4CC244B1CBCFEA4007A94F1 /* addNewItemViewController.m in Sources */,
 				A42D1CAD1CB657C300C208A0 /* summeryViewController.m in Sources */,
 				A490C1851CB7A887006EEEF1 /* MFSideMenuContainerViewController.m in Sources */,

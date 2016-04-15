@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface topBarView : UIView
-
+@property (nonatomic,strong) UILabel *titleLabel;
 @end

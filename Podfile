@@ -4,4 +4,5 @@ pod 'MBProgressHUD', '~> 0.9.2'
 pod 'PNChart’
 pod 'FMDB’
 pod 'RZTransitions'
+pod 'FSCalendar'
 

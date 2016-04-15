@@ -31,7 +31,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当月收入:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6We-u0-J7T">
-                    <rect key="frame" x="246.5" y="14" width="65" height="33"/>
+                    <rect key="frame" x="247" y="14" width="65" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="65" id="Z9e-Ca-ee6"/>
                         <constraint firstAttribute="height" constant="33" id="fKY-oc-VYW"/>
@@ -50,7 +50,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5Q-3x-nn1">
-                    <rect key="frame" x="312.5" y="14" width="100" height="33"/>
+                    <rect key="frame" x="313" y="14" width="100" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="33" id="C71-2b-9GU"/>
                         <constraint firstAttribute="width" constant="60" id="XZf-Ju-FWd"/>
@@ -67,7 +67,7 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgN-8z-QWI">
-                    <rect key="frame" x="312" y="89" width="101" height="33"/>
+                    <rect key="frame" x="313" y="89" width="100" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="66" id="INw-UE-F2z"/>
                         <constraint firstAttribute="width" constant="60" id="rCE-Hi-Z5Q"/>
@@ -112,7 +112,7 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qmu-65-Hd1">
-                    <rect key="frame" x="312" y="51" width="101" height="33"/>
+                    <rect key="frame" x="313" y="51" width="100" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="33" id="5UO-CU-SLV"/>
                         <constraint firstAttribute="width" constant="60" id="QAo-Wj-793"/>
@@ -129,7 +129,7 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当月结余:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNS-ZU-Uhg">
-                    <rect key="frame" x="246" y="89" width="65" height="33"/>
+                    <rect key="frame" x="247" y="89" width="65" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="65" id="biG-ti-T5B"/>
                         <constraint firstAttribute="height" constant="33" id="maV-vI-s2c"/>
@@ -217,13 +217,13 @@
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zYA-rS-xis">
-                    <rect key="frame" x="111.5" y="25.5" width="92.5" height="33"/>
+                    <rect key="frame" x="112" y="25" width="92.5" height="33"/>
                     <connections>
                         <action selector="planMoney:" destination="-1" eventType="touchUpInside" id="zST-48-Dnp"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当月支出:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iog-Bh-uux">
-                    <rect key="frame" x="246" y="51" width="65" height="33"/>
+                    <rect key="frame" x="247" y="51" width="65" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="65" id="d50-De-VMm"/>
                         <constraint firstAttribute="height" constant="33" id="pxn-nT-xG2"/>
@@ -245,6 +245,17 @@
                     <color key="shadowColor" red="0.38484272200000003" green="0.38512541119999999" blue="0.38258120890000002" alpha="1" colorSpace="calibratedRGB"/>
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-tj-up4">
+                    <rect key="frame" x="368" y="135" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="F6e-vW-3Qq"/>
+                        <constraint firstAttribute="height" constant="30" id="jxr-wo-d7A"/>
+                    </constraints>
+                    <state key="normal" image="calendar.png"/>
+                    <connections>
+                        <action selector="showCalendar:" destination="-1" eventType="touchUpInside" id="SjO-D6-u4j"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="xPY-Gq-LUG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0Ps-FV-Odo"/>
@@ -258,6 +269,7 @@
                 <constraint firstItem="9Dw-iy-bSj" firstAttribute="centerY" secondItem="Mgi-DR-rcd" secondAttribute="centerY" id="Dt0-Fk-8Rv"/>
                 <constraint firstItem="iog-Bh-uux" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-18" id="Dwj-ZD-oKc"/>
                 <constraint firstItem="6Wv-0S-rtg" firstAttribute="leading" secondItem="oIm-yS-jMm" secondAttribute="trailing" constant="8" id="E2d-bH-ka5"/>
+                <constraint firstAttribute="trailing" secondItem="bp1-tj-up4" secondAttribute="trailing" constant="16" id="E6F-3e-vTR"/>
                 <constraint firstItem="6Wv-0S-rtg" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="1:13" id="Ej3-oG-C8W"/>
                 <constraint firstItem="i5Q-3x-nn1" firstAttribute="centerY" secondItem="6We-u0-J7T" secondAttribute="centerY" id="EpI-go-vpl"/>
                 <constraint firstItem="Qmu-65-Hd1" firstAttribute="leading" secondItem="iog-Bh-uux" secondAttribute="trailing" constant="1" id="FsP-tH-07H"/>
@@ -288,6 +300,7 @@
                 <constraint firstAttribute="trailing" secondItem="i5Q-3x-nn1" secondAttribute="trailing" constant="1" id="oQc-6r-XaS"/>
                 <constraint firstItem="ojV-MO-fiT" firstAttribute="leading" secondItem="yWv-F1-Dw8" secondAttribute="trailing" constant="1" id="sVf-K2-hk7"/>
                 <constraint firstItem="zYA-rS-xis" firstAttribute="centerX" secondItem="ojV-MO-fiT" secondAttribute="centerX" id="u2o-cr-Cj4"/>
+                <constraint firstItem="bp1-tj-up4" firstAttribute="centerY" secondItem="sMk-Qs-rjF" secondAttribute="centerY" id="vXv-Hn-bMl"/>
                 <constraint firstItem="oIm-yS-jMm" firstAttribute="leading" secondItem="ojV-MO-fiT" secondAttribute="trailing" constant="1" id="vwk-hX-Gqd"/>
                 <constraint firstItem="yWv-F1-Dw8" firstAttribute="leading" secondItem="B1M-vk-dWm" secondAttribute="trailing" id="w2r-Ql-tz4"/>
                 <constraint firstItem="oIm-yS-jMm" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-18" id="y17-eq-UmS"/>
@@ -300,4 +313,7 @@
             <point key="canvasLocation" x="341" y="356"/>
         </view>
     </objects>
+    <resources>
+        <image name="calendar.png" width="256" height="256"/>
+    </resources>
 </document>

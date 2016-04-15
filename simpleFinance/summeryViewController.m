@@ -7,6 +7,7 @@
 //
 
 #import "summeryViewController.h"
+#import "calendarViewController.h"
 
 @interface summeryViewController ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineHeight;
@@ -119,6 +120,11 @@
 
 - (IBAction)planMoney:(id)sender {
     NSLog(@"adasdasd");
+}
+- (IBAction)showCalendar:(id)sender {
+    
+    calendarViewController *calendarVC = [[calendarViewController alloc] initWithNibName:@"calendarViewController" bundle:nil];
+    [self.navigationController pushViewController:calendarVC animated:YES];
 }
 
 @end

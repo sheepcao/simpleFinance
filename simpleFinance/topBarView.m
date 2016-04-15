@@ -11,6 +11,27 @@
 
 @implementation topBarView
 
+-(id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-80, 28, 160, 40)];
+        
+        UIFontDescriptor *titleFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                 @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: (int)(SCREEN_WIDTH/16)]
+                                                   }];
+        title.font = [UIFont fontWithDescriptor:titleFontDescriptor size:0.0f];
+        title.textAlignment = NSTextAlignmentCenter;
+        [title setTextColor: [UIColor whiteColor]];
+        title.backgroundColor = [UIColor clearColor];
+        self.titleLabel = title;
+        [self addSubview:title];
+    }
+    return self;
+}
+
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     CGContextRef context = UIGraphicsGetCurrentContext();
