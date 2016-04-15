@@ -28,11 +28,19 @@
 
 
 
-#define summaryViewHeight 136
+#define summaryViewHeight 162
 #define bottomBar 50
 #define rowHeight 48
 #define topBarHeight 75
 
+#define categoryRowHeight 38
+
+
+#define  symbolColor   [UIColor colorWithRed:196/255.0f green:178/255.0f blue:124/255.0f alpha:1.0f]
+#define  symbolSelectedColor   [UIColor colorWithRed:120/255.0f green:101/255.0f blue:76/255.0f alpha:1.0f]
+
+#define  numberColor   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]
+#define  numberSelectedColor   [UIColor colorWithRed:124/255.0f green:167/255.0f blue:197/255.0f alpha:1.0f]
 
 #define TextColor [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
 

@@ -7,6 +7,7 @@
 //
 
 #import "numberPadButton.h"
+#import "global.h"
 
 @interface numberPadButton ()
 {

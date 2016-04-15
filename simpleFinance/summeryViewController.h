@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface summeryViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end

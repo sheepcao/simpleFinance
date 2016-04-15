@@ -12,11 +12,12 @@
 #import "RZTransitions.h"
 #import "numberPadButton.h"
 #import "LGGradientBackgroundView/LGGradientBackgroundView.h"
+#import "categoryTableViewCell.h"
 
 #define topRowHeight 65
 #define categoryLabelWith 90
 
-@interface addNewItemViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface addNewItemViewController ()<UITableViewDataSource,UITableViewDelegate,categoryTapDelegate>
 @property (nonatomic ,strong) UILabel *InputLabel;
 @property (nonatomic ,strong) UILabel *categoryLabel;
 
@@ -33,6 +34,8 @@
 
 @property BOOL doingPlus;
 @property BOOL doingMinus;
+@property BOOL initialState;
+
 
 
 @end
@@ -47,11 +50,12 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
+    self.initialState = YES;
     [self configTopbar];
     [self configInputArea];
     [self configNumberPad];
-    [self configNoteView];
     [self configCategoryPad];
+    [self configNoteView];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -67,12 +71,21 @@
     
     UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 27, 60, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
-    closeViewButton.titleLabel.textAlignment = NSTextAlignmentLeft;
+    closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [closeViewButton setTitle:@"取消" forState:UIControlStateNormal];
     [closeViewButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
+    
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
+    saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [saveButton setTitle:@"保存" forState:UIControlStateNormal];
+    [saveButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [saveButton addTarget:self action:@selector(saveItem:) forControlEvents:UIControlEventTouchUpInside];
+    saveButton.backgroundColor = [UIColor clearColor];
+    [topbar addSubview:saveButton];
     
     //    UISegmentedControl *moneyTypeSeg = [[UISegmentedControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4, 24, SCREEN_WIDTH/4, 40)];
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
@@ -121,7 +134,7 @@
     self.categoryLabel.textColor = TextColor;
     self.categoryLabel.textAlignment = NSTextAlignmentCenter;
     self.categoryLabel.adjustsFontSizeToFitWidth = YES;
-    [self.categoryLabel setText:@"吃喝"];
+    [self.categoryLabel setText:@""];
     self.categoryLabel.layer.borderWidth = 2.0f;
     self.categoryLabel.layer.borderColor = symbolColor.CGColor;
     self.categoryLabel.layer.cornerRadius = 7;
@@ -187,15 +200,18 @@
 
 -(void) configCategoryPad
 {
-    UITableView *categoryTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - (self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height) - self.keyPadView.frame.size.height)];
+    UITableView *categoryTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height +10, SCREEN_WIDTH, SCREEN_HEIGHT - (self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height) - self.keyPadView.frame.size.height-20)];
     
-    categoryTable.showsVerticalScrollIndicator = NO;
+    categoryTable.showsVerticalScrollIndicator = YES;
+    categoryTable.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     categoryTable.backgroundColor = [UIColor clearColor];
     categoryTable.delegate = self;
     categoryTable.dataSource = self;
     categoryTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    categoryTable.canCancelContentTouches = YES;
-    categoryTable.delaysContentTouches = YES;
+//    categoryTable.canCancelContentTouches = YES;
+//    categoryTable.delaysContentTouches = YES;
+    
+    [self.view addSubview:categoryTable];
 }
 
 -(void)configNumberPad
@@ -408,6 +424,7 @@
                 }
                 
                 self.NumberToOperate = @"0.00";
+                
             }
             
             if ([self.InputLabel.text isEqualToString:@"0.00"])
@@ -456,6 +473,53 @@
 -(void)closeVC
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)saveItem:(UIButton *)sender
+{
+    NSLog(@"saving item...");
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+#pragma mark table delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return ((int)(SCREEN_WIDTH/8));
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+- (categoryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"categoryCell";
+    
+    categoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[categoryTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor clearColor];
+        cell.categoryDelegate = self;
+    }
+    
+    NSArray *tempArray = @[@"日常",@"阅读",@"旅游",@"水电费"];
+    [cell contentWithCategories:tempArray];
+
+    if (indexPath.row == 0 && self.initialState) {
+        [self categoryTap:cell.firstButton];
+        self.initialState =NO;
+    }
+    
+    
+    return cell;
+}
+
+-(void)categoryTap:(categoryButton *)sender
+{
+    [self.categoryLabel setText:sender.titleLabel.text];
+//    [sender keySelectedStyle];
 }
 
 
