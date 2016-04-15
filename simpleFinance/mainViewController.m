@@ -47,6 +47,11 @@
         bottomHeight = bottomBar;
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(menuStateEventOccurred:)
+                                                 name:MFSideMenuStateNotificationEvent
+                                               object:nil];
+    
     [self configLuckyText];
     
     self.titleTextLabel.alpha = 1.0f;
@@ -495,6 +500,20 @@
         
     }];
     
+}
+
+- (void)menuStateEventOccurred:(NSNotification *)notification {
+    
+    NSLog(@"eventType:%@",[[notification userInfo] objectForKey:@"eventType"]);
+    
+    
+    if ([[[notification userInfo] objectForKey:@"eventType"] intValue] == MFSideMenuStateEventMenuDidClose) {
+        self.menuContainerViewController.panMode = MFSideMenuPanModeNone ;
+        
+    }else if([[[notification userInfo] objectForKey:@"eventType"] intValue] == MFSideMenuStateEventMenuDidOpen)
+    {
+        self.menuContainerViewController.panMode = MFSideMenuPanModeDefault ;
+    }
 }
 
 -(void)switchMoneyChart:(UIButton *)sender

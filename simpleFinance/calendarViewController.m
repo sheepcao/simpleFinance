@@ -11,7 +11,7 @@
 #import "global.h"
 #import "topBarView.h"
 
-@interface calendarViewController ()<FSCalendarDataSource,FSCalendarDelegate>
+@interface calendarViewController ()<FSCalendarDataSource,FSCalendarDelegate,FSCalendarDataSourceDeprecatedProtocol>
 
 @property (weak, nonatomic) FSCalendar *calendar;
 
@@ -49,6 +49,7 @@
     calendar.allowsMultipleSelection = YES;
     calendar.firstWeekday = 2;
     calendar.appearance.caseOptions = FSCalendarCaseOptionsWeekdayUsesDefaultCase|FSCalendarCaseOptionsHeaderUsesDefaultCase;
+    calendar.appearance.eventColor = [UIColor redColor];
     calendar.appearance.headerTitleColor = TextColor;
     calendar.appearance.weekdayTextColor = TextColor;
     calendar.appearance.titleDefaultColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.24 alpha:1.0];
@@ -67,10 +68,13 @@
     
     calendar.appearance.headerTitleFont = [UIFont fontWithDescriptor:monthFontDescriptor size:0.0f];
     calendar.appearance.weekdayFont = [UIFont fontWithDescriptor:dayFontDescriptor size:0.0f];
+    
 //    calendar.appearance.subtitleFont = [UIFont fontWithDescriptor:dayFontDescriptor size:0.0f];
 
     [self.view addSubview:calendar];
     self.calendar = calendar;
+    
+
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -78,6 +82,24 @@
 -(void)closeVC
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (BOOL)calendar:(FSCalendar *)calendar hasEventForDate:(NSDate *)date
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *date1 = [dateFormatter dateFromString:@"2016-04-01"];
+    NSDate *date2 = [dateFormatter dateFromString:@"2016-04-03"];
+    NSLog(@"%@", date1);
+    NSArray *dates = @[date1,date2];
+    for (int i = 0; i<dates.count; i++) {
+        if ([date isEqualToDate:dates[i]])
+        {
+            return YES;
+        }
+    }
+
+    return NO;
 }
 
 
