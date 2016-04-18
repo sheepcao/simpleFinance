@@ -246,12 +246,13 @@
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-tj-up4">
-                    <rect key="frame" x="368" y="135" width="30" height="30"/>
+                    <rect key="frame" x="369" y="137.5" width="25" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="30" id="F6e-vW-3Qq"/>
-                        <constraint firstAttribute="height" constant="30" id="jxr-wo-d7A"/>
+                        <constraint firstAttribute="width" constant="25" id="F6e-vW-3Qq"/>
+                        <constraint firstAttribute="height" constant="25" id="jxr-wo-d7A"/>
                     </constraints>
                     <state key="normal" image="calendar.png"/>
+                    <state key="highlighted" image="calendar1.png"/>
                     <connections>
                         <action selector="showCalendar:" destination="-1" eventType="touchUpInside" id="SjO-D6-u4j"/>
                     </connections>
@@ -269,7 +270,7 @@
                 <constraint firstItem="9Dw-iy-bSj" firstAttribute="centerY" secondItem="Mgi-DR-rcd" secondAttribute="centerY" id="Dt0-Fk-8Rv"/>
                 <constraint firstItem="iog-Bh-uux" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-18" id="Dwj-ZD-oKc"/>
                 <constraint firstItem="6Wv-0S-rtg" firstAttribute="leading" secondItem="oIm-yS-jMm" secondAttribute="trailing" constant="8" id="E2d-bH-ka5"/>
-                <constraint firstAttribute="trailing" secondItem="bp1-tj-up4" secondAttribute="trailing" constant="16" id="E6F-3e-vTR"/>
+                <constraint firstAttribute="trailing" secondItem="bp1-tj-up4" secondAttribute="trailing" constant="20" id="E6F-3e-vTR"/>
                 <constraint firstItem="6Wv-0S-rtg" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="1:13" id="Ej3-oG-C8W"/>
                 <constraint firstItem="i5Q-3x-nn1" firstAttribute="centerY" secondItem="6We-u0-J7T" secondAttribute="centerY" id="EpI-go-vpl"/>
                 <constraint firstItem="Qmu-65-Hd1" firstAttribute="leading" secondItem="iog-Bh-uux" secondAttribute="trailing" constant="1" id="FsP-tH-07H"/>
@@ -314,6 +315,7 @@
         </view>
     </objects>
     <resources>
-        <image name="calendar.png" width="256" height="256"/>
+        <image name="calendar.png" width="262" height="210"/>
+        <image name="calendar1.png" width="262" height="210"/>
     </resources>
 </document>

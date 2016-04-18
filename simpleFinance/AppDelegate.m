@@ -10,11 +10,14 @@
 #import "mainViewController.h"
 #import "SideMenuViewController.h"
 #import "MFSideMenuContainerViewController.h"
+#import "CommonUtility.h"
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+//@synthesize db;
 
 
 - (mainViewController *)demoController {
@@ -40,7 +43,11 @@
                                                     leftMenuViewController:nil
                                                     rightMenuViewController:rightMenuViewController];
     self.window.rootViewController = container;
+    
+    [self initDB];
     [self.window makeKeyAndVisible];
+    
+    
 
     return YES;
 }
@@ -65,6 +72,33 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+
+-(void)initDB
+{
+    
+//    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+//    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"JianBu.db"];
+//    NSLog(@"dbPath:%@",dbPath);
+//    db = [FMDatabase databaseWithPath:dbPath];
+
+    FMDatabase *db = [[CommonUtility sharedCommonUtility] db];
+    
+    if (![db open]) {
+        NSLog(@"Could not open db.");
+        return;
+    }
+    NSString *createItemTable = @"CREATE TABLE IF NOT EXISTS ITEMINFO (item_id INTEGER PRIMARY KEY AUTOINCREMENT,item_category TEXT,item_type INTEGER,item_description TEXT,money DECIMAL (15,2),create_time Date)";
+    NSString *createCategoryTable = @"CREATE TABLE IF NOT EXISTS CATEGORYINFO (category_id INTEGER PRIMARY KEY AUTOINCREMENT,category_name TEXT,category_type INTEGER,color_R Double,color_G Double,color_B Double)";
+    NSString *createLuckTable = @"CREATE TABLE IF NOT EXISTS LUCKINFO (luck_id INTEGER PRIMARY KEY AUTOINCREMENT,week_sequence INTEGER,luck_Cn TEXT,luck_En TEXT)";
+
+    
+    [db executeUpdate:createItemTable];
+    [db executeUpdate:createCategoryTable];
+    [db executeUpdate:createLuckTable];
+
+    
 }
 
 @end

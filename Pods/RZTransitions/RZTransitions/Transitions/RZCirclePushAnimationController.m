@@ -30,9 +30,9 @@
 #import "NSObject+RZTransitionsViewHelpers.h"
 #import <UIKit/UIKit.h>
 
-#define kRZCircleDefaultMaxScale    2.5f
-#define kRZCircleDefaultMinScale    0.25f
-#define kRZCircleAnimationTime      0.5f
+#define kRZCircleDefaultMaxScale    3.0f
+#define kRZCircleDefaultMinScale    0.1f
+#define kRZCircleAnimationTime      0.35f
 #define kRZCircleMaskAnimation      @"kRZCircleMaskAnimation"
 
 @interface RZCirclePushAnimationController ()

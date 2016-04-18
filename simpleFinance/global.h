@@ -9,6 +9,7 @@
 #ifndef global_h
 #define global_h
 
+#import "FMDatabase.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
