@@ -38,6 +38,10 @@
 @property (nonatomic,strong) summeryViewController *summaryVC;
 @property (nonatomic,strong) NSMutableArray *todayItems;
 
+@property double sumIncome;
+@property double sumExpense;
+
+
 @end
 
 @implementation mainViewController
@@ -192,6 +196,38 @@
     
     [db close];
 
+}
+
+-(NSMutableArray *)makePieData:(BOOL)isIncome
+{
+    self.sumIncome = 0.0f;
+    self.sumExpense = 0.0f;
+
+    NSMutableArray *itemsArray = [[NSMutableArray alloc] init];
+    if (isIncome) {
+        for (itemObj *item in self.todayItems) {
+            if (item.itemType == 1) {
+                [itemsArray addObject:[PNPieChartDataItem dataItemWithValue:item.moneyAmount color:[[CommonUtility sharedCommonUtility] categoryColor:item.itemCategory]
+                                                                description:item.itemCategory]];
+                self.sumIncome = self.sumIncome + item.moneyAmount;
+            }
+            
+        }
+
+    }else
+    {
+        for (itemObj *item in self.todayItems) {
+            if (item.itemType == 0) {
+                [itemsArray addObject:[PNPieChartDataItem dataItemWithValue:item.moneyAmount color:[[CommonUtility sharedCommonUtility] categoryColor:item.itemCategory]
+                                                                description:item.itemCategory]];
+                self.sumExpense = self.sumExpense + item.moneyAmount;
+
+            }
+            
+        }
+
+    }
+     return itemsArray;
 }
 
 -(void)configLuckyText
@@ -468,20 +504,14 @@
             cell.pieChart.displayAnimated = YES;
 
             if (isShowOutcomeChart) {
-                items = @[[PNPieChartDataItem dataItemWithValue:30 color:PNTwitterColor
-                                                             description:@"吃喝玩乐"],
-                                   [PNPieChartDataItem dataItemWithValue:60 color:PNMauve description:@"阅读"],
-                                   ];
+                items = [self makePieData:YES];
                 isShowOutcomeChart = NO;
-                [cell switchCenterButtonToOutcome:NO ByMoney:@"12000"];
+                [cell switchCenterButtonToOutcome:NO ByMoney:[NSString stringWithFormat:@"%.1f",self.sumIncome]];
             }else{
-                items = @[[PNPieChartDataItem dataItemWithValue:40 color:PNRed
-                                                    description:@"吃喝玩乐"],
-                          [PNPieChartDataItem dataItemWithValue:20 color:PNBlue description:@"阅读"],
-                          [PNPieChartDataItem dataItemWithValue:20 color:PNGreen description:@"一般消费"],
-                          ];
+                items = [self makePieData:NO];
+
                 isShowOutcomeChart = YES;
-                [cell switchCenterButtonToOutcome:YES ByMoney:@"580"];
+                [cell switchCenterButtonToOutcome:YES ByMoney:[NSString stringWithFormat:@"%.1f",self.sumExpense]];
 
             }
 
@@ -492,19 +522,14 @@
             NSArray *items;
             cell.pieChart.displayAnimated = NO;
             if (isShowOutcomeChart) {
-                items = @[[PNPieChartDataItem dataItemWithValue:40 color:PNRed
-                                                    description:@"吃喝玩乐"],
-                          [PNPieChartDataItem dataItemWithValue:20 color:PNBlue description:@"阅读"],
-                          [PNPieChartDataItem dataItemWithValue:20 color:PNGreen description:@"一般消费"],
-                          ];
-                [cell switchCenterButtonToOutcome:YES ByMoney:@"580"];
+                items = [self makePieData:NO];
+
+                [cell switchCenterButtonToOutcome:YES ByMoney:[NSString stringWithFormat:@"%.1f",self.sumExpense]];
         
             }else{
-                items = @[[PNPieChartDataItem dataItemWithValue:30 color:PNTwitterColor
-                                                    description:@"吃喝玩乐"],
-                          [PNPieChartDataItem dataItemWithValue:60 color:PNMauve description:@"阅读"],
-                          ];
-                [cell switchCenterButtonToOutcome:NO ByMoney:@"12000"];
+                items = [self makePieData:YES];
+
+                [cell switchCenterButtonToOutcome:NO ByMoney:[NSString stringWithFormat:@"%.1f",self.sumIncome]];
             }
             [cell updatePieWith:items];
         }
@@ -553,9 +578,9 @@
         }
         NSString *contentString = [NSString stringWithFormat:@"%@%@",category,description];
         [cell.category setText:contentString];
-        [cell.seperator setBackgroundColor:[UIColor purpleColor]];
         [cell.money setText:money];
         
+        [cell makeColor:category];
         [cell makeTextStyle];
         return cell;
         

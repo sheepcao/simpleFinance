@@ -213,5 +213,28 @@
     
 }
 
+-(UIColor *)categoryColor:(NSString *)categoryName
+{
+    UIColor *color = [UIColor lightGrayColor];
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"addNewItem/Could not open db.");
+        return color;
+    }
+    
+    FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where category_name = ?",categoryName];
+    while ([rs next]) {
+
+        double color_R  = [rs doubleForColumn:@"color_R"];
+        double color_G = [rs doubleForColumn:@"color_G"];
+        double color_B = [rs doubleForColumn:@"color_B"];
+        
+        color = [UIColor colorWithRed:color_R/255.0f green:color_G/255.0f blue:color_B/255.0f alpha:1.0f ];
+    }
+    [db close];
+    
+    return color;
+}
+
 
 @end

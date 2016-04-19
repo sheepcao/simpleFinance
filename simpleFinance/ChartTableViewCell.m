@@ -35,6 +35,7 @@
     [self.pieChart strokeChart];
     self.pieChart.displayAnimated = YES;
     self.pieChart.shouldHighlightSectorOnTouch = NO;
+    self.pieChart.userInteractionEnabled = NO;
     self.pieChart.labelPercentageCutoff = 0.1;
     self.pieChart.duration = 0.65f;
     [self addSubview:self.pieChart];
@@ -83,18 +84,18 @@
     [style setLineSpacing:attributeFontDescriptor.pointSize *0.41];
     style.alignment = NSTextAlignmentCenter;
     
-    if([money isEqualToString:@"0"])
-    {
-        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0"]];
+    //    if([money isEqualToString:@"0"])
+    //    {
+    //        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0"]];
+    //    }else
+    
+    if (isShowOutcome) {
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"支 出\n%@",money]];
     }else
     {
-        if (isShowOutcome) {
-            attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"支 出\n%@",money]];
-        }else
-        {
-            attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"收 入\n%@",money]];
-        }
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"收 入\n%@",money]];
     }
+    
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.78];
     shadow.shadowBlurRadius = 0.0;

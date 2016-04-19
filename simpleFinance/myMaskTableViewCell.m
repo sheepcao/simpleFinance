@@ -119,6 +119,12 @@
     
 }
 
+-(void)makeColor:(NSString *)category
+{
+    UIColor *seperatorColor = [[CommonUtility sharedCommonUtility] categoryColor:category];
+    [self.seperator setBackgroundColor:seperatorColor];
+}
+
 - (void)awakeFromNib {
     // Initialization code
     

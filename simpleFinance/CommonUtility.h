@@ -33,4 +33,5 @@
 
 -(NSMutableDictionary *)sortExpenseByCategory:(NSMutableArray *)array;
 -(NSMutableDictionary *)sortIncomeByCategory:(NSMutableArray *)array;
+-(UIColor *)categoryColor:(NSString *)categoryName;
 @end

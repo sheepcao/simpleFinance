@@ -91,6 +91,31 @@
     [db executeUpdate:createItemTable];
     [db executeUpdate:createCategoryTable];
     [db executeUpdate:createLuckTable];
+    
+    int categoryCount;
+    NSString *selectCategoryCount = @"select count (*) from CATEGORYINFO";
+    FMResultSet *rs = [db executeQuery:selectCategoryCount];
+    if ([rs next]) {
+        categoryCount = [rs intForColumnIndex:0];
+    }
+    if (categoryCount == 0) {
+        BOOL sql = [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('日常',0,71,53,58)"];
+        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('旅游',0,251,15,45)"];
+        [db executeUpdate:@" insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('水电费',0,253,177,85)"];
+        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('阅读',0,250,47,82)"];
+        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('医疗',0,255,250,105)"];
+        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('交通',0,59,237,124)"];
+        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('工资',1,71,53,205)"];
+        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('奖金',1,95,115,218)"];
+        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('外快',1,142,162,29)"];
+        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('红包',1,68,120,119)"];
+
+        
+        if (!sql) {
+            NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }
+    }
+    [db close];
 
     
 }
