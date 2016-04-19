@@ -18,4 +18,6 @@
 -(void)drawPie;
 -(void)updatePieWith:(NSArray *)array;
 -(void)switchCenterButtonToOutcome:(BOOL)isShowOutcome ByMoney:(NSString *)money;
+- (void)maskCellFromTop:(CGFloat)margin;
+
 @end

@@ -8,6 +8,7 @@
 
 
 #import "CommonUtility.h"
+#import "itemObj.h"
 
 @implementation CommonUtility
 
@@ -35,16 +36,76 @@
     }
     return self;
 }
-//
-//-(void) openDB
-//{
-//    if (![db open]) {
-//        NSLog(@"Could not open db.");
-//        return;
-//    }
-//}
 
 
+
+-(NSString *)firstMonthDate
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    NSDate *date = [NSDate date];
+    
+    NSDateComponents * currentDateComponents = [cal components: kCFCalendarUnitYear | NSCalendarUnitMonth fromDate: date];
+    NSDate * startOfMonth = [cal dateFromComponents: currentDateComponents];
+//    NSDate * endOfLastMonth = [startOfMonth dateByAddingTimeInterval: -1]; // One second before the start of this month
+
+    return    [self stringFromDate:startOfMonth];
+}
+-(NSString *)lastMonthDate
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+        
+    NSDate * plusOneMonthDate = [self dateByAddingMonths: 1];
+    NSDateComponents * plusOneMonthDateComponents = [cal components: kCFCalendarUnitYear | NSCalendarUnitMonth fromDate: plusOneMonthDate];
+    NSDate * endOfMonth = [cal dateFromComponents: plusOneMonthDateComponents]; // next month
+
+    return [self stringFromDate:endOfMonth];
+}
+- (NSDate *) dateByAddingMonths: (NSInteger) monthsToAdd
+{
+    NSCalendar * calendar = [NSCalendar currentCalendar];
+    NSDate *date = [NSDate date];
+
+    NSDateComponents * months = [[NSDateComponents alloc] init];
+    [months setMonth: monthsToAdd];
+    
+    return [calendar dateByAddingComponents: months toDate: date options: 0];
+}
+-(NSString *)tomorrowDate
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    NSDate *date = [NSDate date];
+    NSDateComponents *comps = [cal components:(kCFCalendarUnitYear | NSCalendarUnitMonth | kCFCalendarUnitDay)
+                                     fromDate:date];
+    
+    NSDate *today = [cal dateFromComponents:comps];
+    NSDate *tomorrow = [today dateByAddingTimeInterval:(24*60*60)];
+    
+    return [self stringFromDate:tomorrow];
+}
+-(NSString *)yesterdayDate
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    NSDate *date = [NSDate date];
+    NSDateComponents *comps = [cal components:(kCFCalendarUnitYear | NSCalendarUnitMonth | kCFCalendarUnitDay)
+                                     fromDate:date];
+    
+    NSDate *today = [cal dateFromComponents:comps];
+    NSDate *tomorrow = [today dateByAddingTimeInterval:(-24*60*60)];
+    
+    return [self stringFromDate:tomorrow];
+}
+- (NSString *)stringFromDate:(NSDate *)date{
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //zzz表示时区，zzz可以删除，这样返回的日期字符将不包含时区信息。
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *destDateString = [dateFormatter stringFromDate:date];
+    return destDateString;
+    
+}
 
 + (BOOL)isSystemLangChinese
 {
@@ -100,6 +161,57 @@
     return range.length != 0;
 }
 
+-(NSMutableDictionary *)sortIncomeByCategory:(NSMutableArray *)array
+{
+    NSMutableDictionary *incomeSortDic = [[NSMutableDictionary alloc] init];
+    for (NSObject *oneItem in array) {
+        if ([oneItem isKindOfClass:[itemObj class]]) {
+            itemObj *item = (itemObj *)oneItem;
+            if (item.itemType == 0) {
+                continue;
+            }
+            NSString *cateName = item.itemCategory;
+            double itemMoney = item.moneyAmount;
+            
+            NSNumber *savedMoney = [incomeSortDic objectForKey:cateName];
+            if (!savedMoney)
+            {
+                [incomeSortDic setObject:[NSNumber numberWithDouble:itemMoney] forKey:cateName];
+            }else
+            {
+                [incomeSortDic setObject:[NSNumber numberWithDouble:(itemMoney + [savedMoney doubleValue])] forKey:cateName];
+            }
+        }
+    }
+    return incomeSortDic;
+    
+}
+
+-(NSMutableDictionary *)sortExpenseByCategory:(NSMutableArray *)array
+{
+    NSMutableDictionary *expenseSortDic = [[NSMutableDictionary alloc] init];
+    for (NSObject *oneItem in array) {
+        if ([oneItem isKindOfClass:[itemObj class]]) {
+            itemObj *item = (itemObj *)oneItem;
+            if (item.itemType == 1) {
+                continue;
+            }
+            NSString *cateName = item.itemCategory;
+            double itemMoney = item.moneyAmount;
+            
+            NSNumber *savedMoney = [expenseSortDic objectForKey:cateName];
+            if (!savedMoney)
+            {
+                [expenseSortDic setObject:[NSNumber numberWithDouble:itemMoney] forKey:cateName];
+            }else
+            {
+                [expenseSortDic setObject:[NSNumber numberWithDouble:(itemMoney + [savedMoney doubleValue])] forKey:cateName];
+            }
+        }
+    }
+    return expenseSortDic;
+    
+}
 
 
 @end

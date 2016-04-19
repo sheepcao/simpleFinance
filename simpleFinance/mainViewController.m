@@ -16,6 +16,8 @@
 #import "BottomView.h"
 #import "addNewItemViewController.h"
 #import "RZTransitions.h"
+#import "CommonUtility.h"
+#import "itemObj.h"
 
 
 
@@ -32,9 +34,14 @@
 
 }
 
+@property (nonatomic,strong) FMDatabase *db;
+@property (nonatomic,strong) summeryViewController *summaryVC;
+@property (nonatomic,strong) NSMutableArray *todayItems;
+
 @end
 
 @implementation mainViewController
+@synthesize db;
 
 
 - (void)viewDidLoad {
@@ -47,10 +54,17 @@
         bottomHeight = bottomBar;
     }
     
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(menuStateEventOccurred:)
                                                  name:MFSideMenuStateNotificationEvent
                                                object:nil];
+    //add summary view controller as child view controller.
+    self.summaryVC = [[summeryViewController alloc] initWithNibName:@"summeryViewController" bundle:nil];
+    [self.summaryVC.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, summaryViewHeight)];
+    self.summaryVC.view.opaque = NO;
+    [self addChildViewController:self.summaryVC];
+    [self.summaryVC didMoveToParentViewController:self];
     
     [self configLuckyText];
     
@@ -117,6 +131,65 @@
         self.luckyText.alpha = 0.0f;
     }
     
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self prepareData];
+    NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
+    [self.maintableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+    [self.maintableView setContentOffset:CGPointMake(0, 0)];
+}
+
+-(void)prepareData
+{
+    self.todayItems = [[NSMutableArray alloc] init];
+
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"mainVC/Could not open db.");
+        return;
+    }
+    
+
+    NSString *yestoday = [[CommonUtility sharedCommonUtility] yesterdayDate];
+    NSString *tomorrow = [[CommonUtility sharedCommonUtility] tomorrowDate];
+    NSString *startMonthDay = [[CommonUtility sharedCommonUtility] firstMonthDate];
+    NSString *endMonthDay = [[CommonUtility sharedCommonUtility] lastMonthDate];
+
+    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where create_time > ? AND create_time < ?", yestoday,tomorrow];
+    while ([rs next]) {
+        itemObj *oneItem = [[itemObj alloc] init];
+        
+        oneItem.itemID = [NSNumber numberWithInt: [rs intForColumn:@"item_id"]];
+        
+        oneItem.itemCategory  = [rs stringForColumn:@"item_category"];
+        oneItem.itemDescription = [rs stringForColumn:@"item_description"];
+        oneItem.itemType = [rs intForColumn:@"item_type"];
+        oneItem.createdTime = [rs stringForColumn:@"create_time"];
+        oneItem.moneyAmount = [rs doubleForColumn:@"money"];
+        [self.todayItems addObject:oneItem];
+        
+    }
+//    
+    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where create_time >= ? AND create_time < ? AND item_type = 1", startMonthDay,endMonthDay];
+    if ([resultIncome next]) {
+       double sumIncome =  [resultIncome doubleForColumnIndex:0];
+        [self.summaryVC.monthIncome setText:[NSString stringWithFormat:@"%.0f",sumIncome]];
+    }
+    
+    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where create_time >= ? AND create_time < ? AND item_type = 0", startMonthDay,endMonthDay];
+    
+    if ([resultExpense next]) {
+        double sumExpense =  [resultExpense doubleForColumnIndex:0];
+        [self.summaryVC.monthExpense setText:[NSString stringWithFormat:@"%.0f",sumExpense]];
+    }
+    
+//    [self.summaryVC.view setNeedsDisplay];
+    
+    [db close];
+
 }
 
 -(void)configLuckyText
@@ -207,7 +280,9 @@
 }
 -(void)popAddNewView:(RoundedButton *)sender
 {
-    [sender notSelectedStyle];
+    if (sender) {
+        [sender notSelectedStyle];
+    }
 
     [self presentViewController:[self nextAddNewItemViewController] animated:YES completion:nil];
 
@@ -223,8 +298,6 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -238,9 +311,14 @@
 {
     if (indexPath.section == 0) {
         return moneyLuckSpace;
-    }else if(indexPath.section == 1 && indexPath.row == 9)
+    }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count)
     {
-        return 270;
+        if (self.todayItems.count == 0) {
+            return 60;
+        }else
+        {
+            return PieHeight;
+        }
     }
     else
         return rowHeight;
@@ -265,6 +343,14 @@
         [itemCell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
         [itemCell.money setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
     }
+    
+    if (indexPath.section == 1) {
+        if (self.todayItems.count == 0)
+        {
+            [self popAddNewView:nil];
+        }
+    }
+
 
     
     //    [self presentViewController:self animated:YES completion:^(void){
@@ -298,14 +384,8 @@
         return nil;
     }else if (section == 1)
     {
-        summeryViewController *summaryVC = [[summeryViewController alloc] initWithNibName:@"summeryViewController" bundle:nil];
-        [summaryVC.view setFrame:CGRectMake(0, 0, SCREEN_WIDTH, summaryViewHeight)];
-        //        [summaryVC.view setBackgroundColor:[UIColor colorWithPatternImage:[self imageCutter]]];
-        summaryVC.view.opaque = NO;
-        
-        [self addChildViewController:summaryVC];
-        
-        return summaryVC.view;
+
+        return self.summaryVC.view;
     }else
         return nil;
 }
@@ -317,10 +397,9 @@
         return 1;
     }else if(section == 1)
     {
-        
-        return 10<((self.maintableView.frame.size.height-summaryViewHeight)/rowHeight)?((self.maintableView.frame.size.height-summaryViewHeight)/rowHeight)+1:10;
+        return self.todayItems.count<((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)?((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)+1:self.todayItems.count + 1;
     }else
-        return 10;
+        return self.todayItems.count;
     
 }
 
@@ -342,9 +421,52 @@
         
     }
     
-    else if(indexPath.section == 1 && indexPath.row == 9)
+    else if(indexPath.section == 1 && indexPath.row == self.todayItems.count)
     {
+     
         NSLog(@"row:%ld",(long)indexPath.row);
+        
+        if (self.todayItems.count == 0)
+        {
+            //            NSArray *items;
+            //            cell.pieChart.displayAnimated = NO;
+            //            items = @[[PNPieChartDataItem dataItemWithValue:0 color:PNMauve
+            //                                                description:@"没有任何帐目"]
+            //                      ];
+            //            [cell updatePieWith:items];
+            //            [cell switchCenterButtonToOutcome:NO ByMoney:@"0"];
+            static NSString *CellIdentifier = @"emptyCell";
+            NSLog(@"row:%ld",(long)indexPath.row);
+            
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.backgroundColor = [UIColor clearColor];
+                
+                NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"本日尚无帐目记录"];
+
+                UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                             @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
+                                                               UIFontDescriptorNameAttribute:@"AvenirNext-Thin",
+                                                               UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
+                                                               }];
+                CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(5 * (CGFloat)M_PI / 180), 1, 0, 0);
+                attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
+                [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:NSMakeRange(0, attributedText.length)];
+                [attributedText addAttribute:NSForegroundColorAttributeName value:TextColor range:NSMakeRange(0, attributedText.length)];
+                [attributedText addAttribute:NSUnderlineStyleAttributeName value:@1 range:NSMakeRange(0, attributedText.length)];
+                
+                [cell.textLabel setAttributedText:attributedText];
+                cell.textLabel.textAlignment = NSTextAlignmentCenter;
+            }
+            
+            
+            
+            return cell;
+        }
+        
+        
         pieChartIndexPath = indexPath;
         static NSString *CellPieIdentifier = @"CellBottom";
         
@@ -358,7 +480,7 @@
             [cell drawPie];
             [cell.centerButton addTarget:self action:@selector(switchMoneyChart:) forControlEvents:UIControlEventTouchUpInside];
         }
-        
+      
         if (isSwitchingChart) {
             NSArray *items;
             cell.pieChart.displayAnimated = YES;
@@ -408,7 +530,7 @@
         
         return cell;
         
-    }else
+    }else if(indexPath.section == 1 && indexPath.row <self.todayItems.count)
     {
         
         NSLog(@"row:%ld",(long)indexPath.row);
@@ -421,14 +543,56 @@
             cell.backgroundColor = [UIColor clearColor];
             
         }
-        
-        [cell.category setText:@"吃喝 - 老铺烤鸭"];
+        NSString *category = @"";
+        NSString *description = @"";
+        NSString *money = @"";
+
+
+        if(self.todayItems.count>indexPath.row)
+        {
+            itemObj *oneItem = self.todayItems[indexPath.row];
+            category = oneItem.itemCategory;
+            description = oneItem.itemDescription;
+            if (oneItem.itemType == 0)
+            {
+                money = [NSString stringWithFormat:@"%.2f",(0 - oneItem.moneyAmount)] ;
+//                [cell.money setBackgroundColor:[UIColor colorWithRed:72/255.0f green:210/255.0f blue:86/255.0f alpha:1.0f]];
+                [cell.money setTextColor:[UIColor colorWithRed:72/255.0f green:210/255.0f blue:86/255.0f alpha:1.0f]];
+
+            }else
+            {
+                money =[NSString stringWithFormat:@"+%.2f",(oneItem.moneyAmount)] ;
+//                [cell.money setBackgroundColor:[UIColor colorWithRed:248/255.0f green:36/255.0f blue:43/255.0f alpha:1.0f]];
+                [cell.money setTextColor:[UIColor colorWithRed:211/255.0f green:65/255.0f blue:43/255.0f alpha:1.0f]];
+
+            }
+            
+            if (![description isEqualToString:@""]) {
+                description = [@" - " stringByAppendingString:description];
+            }
+        }
+        NSString *contentString = [NSString stringWithFormat:@"%@%@",category,description];
+        [cell.category setText:contentString];
         [cell.seperator setBackgroundColor:[UIColor purpleColor]];
-        [cell.money setText:@"120"];
+        [cell.money setText:money];
         
         [cell makeTextStyle];
+        return cell;
+        
+    }else
+    {// 补全table content 的实际长度，以便可以滑上去
+        static NSString *CellIdentifier = @"Cell";
+        NSLog(@"row:%ld",(long)indexPath.row);
+
+        myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[myMaskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor clearColor];
+        }
         
         return cell;
+
         
     }
     
@@ -443,6 +607,15 @@
                 [oneCell maskCellFromTop:hiddenFrameHeight];
             }
         }
+        
+        if ([cell isKindOfClass:[ChartTableViewCell class]]) {
+            ChartTableViewCell *oneCell = (ChartTableViewCell *)cell;
+            CGFloat hiddenFrameHeight = scrollView.contentOffset.y + summaryViewHeight - cell.frame.origin.y;
+            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                [oneCell maskCellFromTop:hiddenFrameHeight];
+            }
+        }
+
         
     }
 }

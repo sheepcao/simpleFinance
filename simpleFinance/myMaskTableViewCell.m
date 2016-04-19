@@ -8,6 +8,7 @@
 
 #import "myMaskTableViewCell.h"
 #import "global.h"
+#import "CommonUtility.h"
 
 #define  pointRadius 8
 
@@ -29,10 +30,11 @@
         
         
         
-        self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 7, (SCREEN_WIDTH-40-20-pointRadius*2)*1/4, rowHeight-6*2)];
+        self.money = [[roundFrameLabel alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 7, (SCREEN_WIDTH-6-20-pointRadius*2)*1/4, rowHeight-6*2)];
         self.category.textAlignment = NSTextAlignmentLeft;
         self.title.textAlignment = NSTextAlignmentLeft;
         self.money.textAlignment = NSTextAlignmentRight;
+
         
         
         if (IS_IPHONE_5_OR_LESS) {
@@ -56,12 +58,13 @@
         
         self.category.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.48];
         self.category.shadowOffset =  CGSizeMake(0, 0.65);
-        self.money.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.48];
-        self.money.shadowOffset =  CGSizeMake(0, 0.65);
+        self.money.shadowColor = [TextColor colorWithAlphaComponent:0.35];
+        self.money.shadowOffset =  CGSizeMake(0.16, 0.16);
         
         self.category.textColor = TextColor;
         self.title.textColor = TextColor;
         self.money.textColor = TextColor;
+        
         
         [self addSubview:self.category];
         [self addSubview:self.seperator];
@@ -91,23 +94,28 @@
     
     
     NSString *srcText = self.category.text;
-    NSRange range = [srcText rangeOfString:@" - "];
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:srcText];
-    NSRange rangeFirstPart,rangeSecondPart;
-    rangeFirstPart.location = 0;
-    rangeFirstPart.length = range.location;
-    
-    rangeSecondPart.location = range.location+range.length;
-    rangeSecondPart.length = srcText.length -range.length - rangeFirstPart.length;
-    
-    [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:rangeSecondPart];
-    [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0] range:rangeFirstPart];
-    
-     [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0f] range:rangeSecondPart];
-    
-    
+
+    if([CommonUtility myContainsStringFrom:srcText for:@" - "])
+    {
+        NSRange range = [srcText rangeOfString:@" - "];
+        NSRange rangeFirstPart,rangeSecondPart;
+        rangeFirstPart.location = 0;
+        rangeFirstPart.length = range.location;
+        
+        rangeSecondPart.location = range.location+range.length;
+        rangeSecondPart.length = srcText.length -range.length - rangeFirstPart.length;
+        
+        [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:rangeSecondPart];
+        [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0] range:rangeFirstPart];
+        
+        [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0f] range:rangeSecondPart];
+    } else
+    {
+        [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0] range:NSMakeRange(0, attributedText.length)];
+        [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0f] range:NSMakeRange(0, attributedText.length)];
+    }
     self.category.attributedText = attributedText;
-    
     
 }
 

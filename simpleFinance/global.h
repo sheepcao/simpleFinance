@@ -28,7 +28,7 @@
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
 
-
+#define PieHeight 270
 #define summaryViewHeight 162
 #define bottomBar 50
 #define rowHeight 48

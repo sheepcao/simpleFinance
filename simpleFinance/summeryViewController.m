@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *midLineHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineHeight;
 
-@property (strong, nonatomic)  NSString *todayDate;
 
 @end
 

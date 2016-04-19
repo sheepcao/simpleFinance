@@ -17,25 +17,14 @@
 
 - (void)awakeFromNib {
     // Initialization code
-
+    
 }
 
-//-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-//{
-//    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-//
-//    if (self) {
-//        
-//  
-//    }
-//    return self;
-//   
-//}
 
 -(void)drawPie
 {
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:80 color:PNRed
-                            description:@"吃喝"],
+                                                 description:@"吃喝"],
                        [PNPieChartDataItem dataItemWithValue:20 color:PNBlue description:@"阅读"],
                        [PNPieChartDataItem dataItemWithValue:10 color:PNGreen description:@"一般消费"],
                        ];
@@ -67,38 +56,44 @@
     
     self.centerButton.titleLabel.layer.shadowColor =  [UIColor blackColor].CGColor;
     self.centerButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
-
-
+    
+    
     UIImageView *switchImage= [[UIImageView alloc] initWithFrame:CGRectMake(self.centerButton.frame.size.width/3, self.centerButton.frame.size.height*3/4, self.centerButton.frame.size.width/3, self.centerButton.frame.size.height/6)];
     [switchImage setImage:[UIImage imageNamed:@"switchChart.png"]];
-//    switchImage.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
-
+    //    switchImage.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
+    
     [self.centerButton addSubview:switchImage];
-
+    
     
     [self addSubview:self.centerButton];
-
     
-
+    
+    
 }
 
 -(void)switchCenterButtonToOutcome:(BOOL)isShowOutcome ByMoney:(NSString *)money
 {
     NSMutableAttributedString* attrString;
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                              @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
-                                                UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat:  self.centerButton.frame.size.width/4.8]
-                                                }];
+                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
+                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat:  self.centerButton.frame.size.width/4.8]
+                                                   }];
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
     [style setLineSpacing:attributeFontDescriptor.pointSize *0.41];
     style.alignment = NSTextAlignmentCenter;
-
-    if (isShowOutcome) {
-        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"支 出\n%@",money]];
+    
+    if([money isEqualToString:@"0"])
+    {
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0"]];
     }else
     {
-        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"收 入\n%@",money]];
+        if (isShowOutcome) {
+            attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"支 出\n%@",money]];
+        }else
+        {
+            attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"收 入\n%@",money]];
+        }
     }
     NSShadow *shadow = [[NSShadow alloc] init];
     shadow.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.78];
@@ -117,16 +112,16 @@
     
     
     self.centerButton.titleLabel.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
-
-
+    
+    
     [self.centerButton setAttributedTitle:attrString forState:UIControlStateNormal];
-
-
+    
+    
 }
 
 -(void)updatePieWith:(NSArray *)array
 {
- 
+    
     [self.pieChart setItems:array];
     [self.pieChart recompute];
     [self.pieChart strokeChart];
@@ -135,9 +130,22 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
+
+- (void)maskCellFromTop:(CGFloat)margin {
+    self.layer.mask = [self visibilityMaskWithLocation:margin/self.frame.size.height];
+    self.layer.masksToBounds = YES;
+}
+
+- (CAGradientLayer *)visibilityMaskWithLocation:(CGFloat)location {
+    CAGradientLayer *mask = [CAGradientLayer layer];
+    mask.frame = self.bounds;
+    mask.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithWhite:1 alpha:0] CGColor], (id)[[UIColor colorWithWhite:1 alpha:1] CGColor], nil];
+    mask.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:location], [NSNumber numberWithFloat:location], nil];
+    return mask;
+}
 
 @end

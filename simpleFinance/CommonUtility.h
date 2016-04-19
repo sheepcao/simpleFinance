@@ -26,7 +26,11 @@
 + (void)tapSound:(NSString *)name withType:(NSString *)type;
 + (BOOL)isSystemVersionLessThan7;
 + (BOOL)myContainsStringFrom:(NSString*)str for:(NSString*)other;
+-(NSString *)tomorrowDate;
+-(NSString *)yesterdayDate;
+-(NSString *)firstMonthDate;
+-(NSString *)lastMonthDate;
 
-
-
+-(NSMutableDictionary *)sortExpenseByCategory:(NSMutableArray *)array;
+-(NSMutableDictionary *)sortIncomeByCategory:(NSMutableArray *)array;
 @end

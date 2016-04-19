@@ -45,6 +45,8 @@
 		A4CC247F1CC4AFE1007A94F1 /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC247E1CC4AFE1007A94F1 /* calendar.png */; };
 		A4CC24811CC4AFF8007A94F1 /* calendar1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24801CC4AFF8007A94F1 /* calendar1.png */; };
 		A4CC24841CC4CDDD007A94F1 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24831CC4CDDD007A94F1 /* CommonUtility.m */; };
+		A4CC24871CC4E964007A94F1 /* itemObj.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24861CC4E964007A94F1 /* itemObj.m */; };
+		A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +113,10 @@
 		A4CC24801CC4AFF8007A94F1 /* calendar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar1.png; sourceTree = "<group>"; };
 		A4CC24821CC4CDDD007A94F1 /* CommonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtility.h; sourceTree = "<group>"; };
 		A4CC24831CC4CDDD007A94F1 /* CommonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtility.m; sourceTree = "<group>"; };
+		A4CC24851CC4E964007A94F1 /* itemObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemObj.h; sourceTree = "<group>"; };
+		A4CC24861CC4E964007A94F1 /* itemObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemObj.m; sourceTree = "<group>"; };
+		A4CC24891CC60E69007A94F1 /* roundFrameLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = roundFrameLabel.h; sourceTree = "<group>"; };
+		A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = roundFrameLabel.m; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -158,6 +164,7 @@
 			children = (
 				A4CC24261CBCC82E007A94F1 /* 3rd-party */,
 				A42D1CAF1CB65EA000C208A0 /* global.h */,
+				A4CC24881CC4E968007A94F1 /* modal */,
 				A4CC243F1CBCE2C5007A94F1 /* customView */,
 				A42D1C8C1CB60AC900C208A0 /* AppDelegate.h */,
 				A42D1C8D1CB60AC900C208A0 /* AppDelegate.m */,
@@ -265,8 +272,19 @@
 				A4CC24511CBE239B007A94F1 /* numberPadButton.m */,
 				A4CC24741CC0B361007A94F1 /* categoryButton.h */,
 				A4CC24751CC0B361007A94F1 /* categoryButton.m */,
+				A4CC24891CC60E69007A94F1 /* roundFrameLabel.h */,
+				A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */,
 			);
 			name = customView;
+			sourceTree = "<group>";
+		};
+		A4CC24881CC4E968007A94F1 /* modal */ = {
+			isa = PBXGroup;
+			children = (
+				A4CC24851CC4E964007A94F1 /* itemObj.h */,
+				A4CC24861CC4E964007A94F1 /* itemObj.m */,
+			);
+			name = modal;
 			sourceTree = "<group>";
 		};
 		F005D24909418A1E6F61B3D8 /* Pods */ = {
@@ -414,9 +432,11 @@
 				A490C1921CB7B1B3006EEEF1 /* SideMenuViewController.m in Sources */,
 				A490C1761CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m in Sources */,
 				A4CC244F1CBDDE29007A94F1 /* topBarView.m in Sources */,
+				A4CC24871CC4E964007A94F1 /* itemObj.m in Sources */,
 				A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */,
 				A490C1861CB7A887006EEEF1 /* MFSideMenuShadow.m in Sources */,
 				A4CC24761CC0B361007A94F1 /* categoryButton.m in Sources */,
+				A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */,
 				A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */,
 				A4CC24841CC4CDDD007A94F1 /* CommonUtility.m in Sources */,
 				A4CC24731CC084F2007A94F1 /* categoryTableViewCell.m in Sources */,
