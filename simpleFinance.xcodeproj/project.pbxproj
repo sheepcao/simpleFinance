@@ -47,6 +47,7 @@
 		A4CC24841CC4CDDD007A94F1 /* CommonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24831CC4CDDD007A94F1 /* CommonUtility.m */; };
 		A4CC24871CC4E964007A94F1 /* itemObj.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24861CC4E964007A94F1 /* itemObj.m */; };
 		A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */; };
+		A4CC248E1CC61BC5007A94F1 /* categoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248D1CC61BC5007A94F1 /* categoryObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,8 @@
 		A4CC24861CC4E964007A94F1 /* itemObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemObj.m; sourceTree = "<group>"; };
 		A4CC24891CC60E69007A94F1 /* roundFrameLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = roundFrameLabel.h; sourceTree = "<group>"; };
 		A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = roundFrameLabel.m; sourceTree = "<group>"; };
+		A4CC248C1CC61BC5007A94F1 /* categoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryObject.h; sourceTree = "<group>"; };
+		A4CC248D1CC61BC5007A94F1 /* categoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryObject.m; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -281,6 +284,8 @@
 		A4CC24881CC4E968007A94F1 /* modal */ = {
 			isa = PBXGroup;
 			children = (
+				A4CC248C1CC61BC5007A94F1 /* categoryObject.h */,
+				A4CC248D1CC61BC5007A94F1 /* categoryObject.m */,
 				A4CC24851CC4E964007A94F1 /* itemObj.h */,
 				A4CC24861CC4E964007A94F1 /* itemObj.m */,
 			);
@@ -442,6 +447,7 @@
 				A4CC24731CC084F2007A94F1 /* categoryTableViewCell.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
 				A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */,
+				A4CC248E1CC61BC5007A94F1 /* categoryObject.m in Sources */,
 				A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */,
 				A4CC24421CBCE2E0007A94F1 /* BottomView.m in Sources */,
 				A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */,

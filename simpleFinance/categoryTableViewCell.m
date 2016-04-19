@@ -8,6 +8,7 @@
 
 #import "categoryTableViewCell.h"
 #import "global.h"
+#import "categoryObject.h"
 #define  symbolColor   [UIColor colorWithRed:196/255.0f green:178/255.0f blue:124/255.0f alpha:1.0f]
 
 
@@ -43,7 +44,7 @@
             [categoryLabel setTintColor:TextColor];
             categoryLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
             categoryLabel.titleLabel.adjustsFontSizeToFitWidth = YES;
-            categoryLabel.layer.borderWidth = 0.7f;
+            categoryLabel.layer.borderWidth = 0.0f;
             categoryLabel.layer.borderColor = TextColor.CGColor;
             categoryLabel.layer.cornerRadius =(int)(SCREEN_WIDTH/65);
             categoryLabel.tag = i+1;
@@ -59,13 +60,25 @@
     return  self;
 }
 
--(void)contentWithCategories:(NSArray *)cateArray
+-(void)contentWithCategories:(NSArray *)cateArray;
 {
+    for (int i = 0; i<4; i++) {
+        categoryButton *categoryLabel = (categoryButton *)[self viewWithTag:(i+1)];
+        [categoryLabel removeTarget:self.categoryDelegate action:@selector(categoryTap:) forControlEvents:UIControlEventTouchUpInside];
+        
+        categoryLabel.categoryColor = TextColor;
+        categoryLabel.layer.borderWidth = 0.0f;
+        [categoryLabel setTitle:@"" forState:UIControlStateNormal];
+    }
+    
     for (int i = 0; i<cateArray.count; i++) {
         categoryButton *categoryLabel = (categoryButton *)[self viewWithTag:(i+1)];
         [categoryLabel addTarget:self.categoryDelegate action:@selector(categoryTap:) forControlEvents:UIControlEventTouchUpInside];
-
-        [categoryLabel setTitle:[cateArray objectAtIndex:i] forState:UIControlStateNormal];
+        
+        categoryObject *oneCategory =(categoryObject *)cateArray[i];
+        categoryLabel.categoryColor = [UIColor colorWithRed:oneCategory.color_R/255.0f green:oneCategory.color_G/255.0f blue:oneCategory.color_B/255.0f alpha:1.0f];
+        categoryLabel.layer.borderWidth = 0.8f;
+        [categoryLabel setTitle:oneCategory.categoryName forState:UIControlStateNormal];
     }
 
 }

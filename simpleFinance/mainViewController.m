@@ -185,6 +185,8 @@
         double sumExpense =  [resultExpense doubleForColumnIndex:0];
         [self.summaryVC.monthExpense setText:[NSString stringWithFormat:@"%.0f",sumExpense]];
     }
+    NSInteger surplus =  [self.summaryVC.monthIncome.text integerValue] - [self.summaryVC.monthExpense.text integerValue];
+    [self.summaryVC.monthSurplus setText:[NSString stringWithFormat:@"%ld",(long)surplus]];
     
 //    [self.summaryVC.view setNeedsDisplay];
     
@@ -341,7 +343,7 @@
     if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
         myMaskTableViewCell *itemCell = (myMaskTableViewCell *)cell;
         [itemCell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
-        [itemCell.money setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
+//        [itemCell.money setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
     }
     
     if (indexPath.section == 1) {
@@ -351,13 +353,6 @@
         }
     }
 
-
-    
-    //    [self presentViewController:self animated:YES completion:^(void){
-    //
-    //        [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
-    //    }];
-    
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -365,7 +360,6 @@
     NSLog(@"didDeselectRowAtIndexPath");
     myMaskTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell.category setTextColor:TextColor];
-    [cell.money setTextColor:TextColor];
     
 }
 
@@ -428,13 +422,6 @@
         
         if (self.todayItems.count == 0)
         {
-            //            NSArray *items;
-            //            cell.pieChart.displayAnimated = NO;
-            //            items = @[[PNPieChartDataItem dataItemWithValue:0 color:PNMauve
-            //                                                description:@"没有任何帐目"]
-            //                      ];
-            //            [cell updatePieWith:items];
-            //            [cell switchCenterButtonToOutcome:NO ByMoney:@"0"];
             static NSString *CellIdentifier = @"emptyCell";
             NSLog(@"row:%ld",(long)indexPath.row);
             
@@ -460,17 +447,12 @@
                 [cell.textLabel setAttributedText:attributedText];
                 cell.textLabel.textAlignment = NSTextAlignmentCenter;
             }
-            
-            
-            
+
             return cell;
         }
-        
-        
         pieChartIndexPath = indexPath;
         static NSString *CellPieIdentifier = @"CellBottom";
-        
-        
+
         ChartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellPieIdentifier];
         if (cell == nil) {
             cell = [[ChartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellPieIdentifier];
@@ -556,13 +538,11 @@
             if (oneItem.itemType == 0)
             {
                 money = [NSString stringWithFormat:@"%.2f",(0 - oneItem.moneyAmount)] ;
-//                [cell.money setBackgroundColor:[UIColor colorWithRed:72/255.0f green:210/255.0f blue:86/255.0f alpha:1.0f]];
                 [cell.money setTextColor:[UIColor colorWithRed:72/255.0f green:210/255.0f blue:86/255.0f alpha:1.0f]];
 
             }else
             {
                 money =[NSString stringWithFormat:@"+%.2f",(oneItem.moneyAmount)] ;
-//                [cell.money setBackgroundColor:[UIColor colorWithRed:248/255.0f green:36/255.0f blue:43/255.0f alpha:1.0f]];
                 [cell.money setTextColor:[UIColor colorWithRed:211/255.0f green:65/255.0f blue:43/255.0f alpha:1.0f]];
 
             }
@@ -590,10 +570,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
         }
-        
         return cell;
-
-        
     }
     
 }
@@ -606,17 +583,13 @@
             if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                 [oneCell maskCellFromTop:hiddenFrameHeight];
             }
-        }
-        
-        if ([cell isKindOfClass:[ChartTableViewCell class]]) {
+        }else if ([cell isKindOfClass:[ChartTableViewCell class]]) {
             ChartTableViewCell *oneCell = (ChartTableViewCell *)cell;
             CGFloat hiddenFrameHeight = scrollView.contentOffset.y + summaryViewHeight - cell.frame.origin.y;
             if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                 [oneCell maskCellFromTop:hiddenFrameHeight];
             }
         }
-
-        
     }
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView// called when scroll view grinds to a halt

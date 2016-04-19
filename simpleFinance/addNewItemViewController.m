@@ -14,6 +14,7 @@
 #import "LGGradientBackgroundView/LGGradientBackgroundView.h"
 #import "categoryTableViewCell.h"
 #import "CommonUtility.h"
+#import "categoryObject.h"
 
 
 
@@ -31,8 +32,12 @@
 @property (nonatomic ,strong) UIButton *noteDoneButton;
 @property (nonatomic ,strong) UIView *keyPadView;
 @property (nonatomic ,strong) UIView *inputAreaView;
+@property (nonatomic ,strong) UITableView *categoryTableView;
+
 @property (nonatomic,strong) FMDatabase *db;
 
+@property (nonatomic,strong) NSMutableArray *incomeCategoryArray;
+@property (nonatomic,strong) NSMutableArray *expenseCategoryArray;
 
 @property BOOL doingPlus;
 @property BOOL doingMinus;
@@ -49,12 +54,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    db = [[CommonUtility sharedCommonUtility] db];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
+    
+    [self prepareCategoryData];
     
     self.initialState = YES;
     [self configTopbar];
@@ -67,6 +73,38 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+}
+
+-(void)prepareCategoryData
+{
+   self.expenseCategoryArray = [[NSMutableArray alloc] init];
+    self.incomeCategoryArray = [[NSMutableArray alloc] init];
+
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"addNewItem/Could not open db.");
+        return;
+    }
+    
+    FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO"];
+    while ([rs next]) {
+        categoryObject *oneCategory = [[categoryObject alloc] init];
+        
+        oneCategory.categoryName = [rs stringForColumn:@"category_name"];
+        
+        oneCategory.color_R  = [rs doubleForColumn:@"color_R"];
+        oneCategory.color_G = [rs doubleForColumn:@"color_G"];
+        oneCategory.color_B = [rs doubleForColumn:@"color_B"];
+        
+        if ([rs intForColumn:@"category_type"] == 0) {
+            [self.expenseCategoryArray addObject:oneCategory];
+        }else
+        {
+            [self.incomeCategoryArray addObject:oneCategory];
+        }
+    }
+    [db close];
+    
 }
 
 -(void)configTopbar
@@ -107,16 +145,10 @@
 -(void)segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;
     NSLog(@"Index %ld", Index);
-//    switch (Index) {
-//        case 0:
-//            
-//            break;
-//        case 1:
-//            break;
-//        default:
-//            break;
-//            
-//    }
+    self.initialState =YES;
+    [self prepareCategoryData];
+    [self.categoryTableView reloadData];
+
 }
 
     -(void)configInputArea
@@ -232,7 +264,7 @@
         categoryTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         //    categoryTable.canCancelContentTouches = YES;
         //    categoryTable.delaysContentTouches = YES;
-        
+        self.categoryTableView = categoryTable;
         [self.view addSubview:categoryTable];
     }
     
@@ -500,7 +532,9 @@
     -(void)saveItem:(UIButton *)sender
     {
         NSLog(@"saving item...");
-        [self validateData];
+        if (![self validateData]) {
+            return;
+        }
         
         if (![db open]) {
             NSLog(@"addNewItemVC/Could not open db.");
@@ -518,7 +552,7 @@
         
     }
     
-    -(void)validateData
+    -(BOOL)validateData
     {
         if ([self.InputLabel.text doubleValue]<0.001) {
             UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"忘记输入记账金额了吧,亲" preferredStyle:UIAlertControllerStyleAlert];
@@ -526,7 +560,9 @@
             UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
             [alert addAction:okAction];
             [self presentViewController:alert animated:YES completion:nil];
+            return NO;
         }
+        return YES;
     }
     
 #pragma mark table delegate
@@ -537,7 +573,12 @@
     
     - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
     {
-        return 10;
+        if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
+            return (self.expenseCategoryArray.count/4) + 1;
+        }else
+        {
+            return (self.incomeCategoryArray.count/4) + 1;
+        }
     }
     - (categoryTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
     {
@@ -551,7 +592,33 @@
             cell.categoryDelegate = self;
         }
         
-        NSArray *tempArray = @[@"日常",@"阅读",@"旅游",@"水电费"];
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
+            if (self.expenseCategoryArray.count/4 > indexPath.row)
+            {
+                for (NSInteger  i = 4* indexPath.row; i < 4* (indexPath.row + 1); i++) {
+                    [tempArray addObject:self.expenseCategoryArray[i]];
+                }
+            }else
+            {
+                for (NSInteger  i = 4* indexPath.row; i < self.expenseCategoryArray.count; i++) {
+                    [tempArray addObject:self.expenseCategoryArray[i]];
+                }
+            }
+        }else
+        {
+            if (self.incomeCategoryArray.count/4 > indexPath.row)
+            {
+                for (NSInteger  i = 4* indexPath.row; i < 4* (indexPath.row + 1); i++) {
+                    [tempArray addObject:self.incomeCategoryArray[i]];
+                }
+            }else
+            {
+                for (NSInteger  i = 4* indexPath.row; i < self.incomeCategoryArray.count; i++) {
+                    [tempArray addObject:self.incomeCategoryArray[i]];
+                }
+            }
+        }
         [cell contentWithCategories:tempArray];
         
         if (indexPath.row == 0 && self.initialState) {
@@ -566,6 +633,8 @@
     -(void)categoryTap:(categoryButton *)sender
     {
         [self.categoryLabel setText:sender.titleLabel.text];
+        self.categoryLabel.layer.borderColor = sender.categoryColor.CGColor;
+
         //    [sender keySelectedStyle];
     }
     

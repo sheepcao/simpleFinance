@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface categoryButton : UIButton
+@property (nonatomic,strong) UIColor *categoryColor;
 
 -(void)keySelectedStyle;
 -(void)keyNotSelectedStyle;

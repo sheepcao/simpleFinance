@@ -90,7 +90,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *date1 = [dateFormatter dateFromString:@"2016-04-01"];
     NSDate *date2 = [dateFormatter dateFromString:@"2016-04-03"];
-    NSLog(@"%@", date1);
+//    NSLog(@"%@", date1);
     NSArray *dates = @[date1,date2];
     for (int i = 0; i<dates.count; i++) {
         if ([date isEqualToDate:dates[i]])
@@ -108,14 +108,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

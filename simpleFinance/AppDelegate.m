@@ -77,12 +77,6 @@
 
 -(void)initDB
 {
-    
-//    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-//    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"JianBu.db"];
-//    NSLog(@"dbPath:%@",dbPath);
-//    db = [FMDatabase databaseWithPath:dbPath];
-
     FMDatabase *db = [[CommonUtility sharedCommonUtility] db];
     
     if (![db open]) {
