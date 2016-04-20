@@ -205,7 +205,9 @@ CGFloat fontSize;
     //If value is less than cutoff, show no label
     if ([self ratioForItemAtIndex:index] < self.labelPercentageCutoff )
     {
-        descriptionLabel.text = titleValue;
+        //eric:
+//        descriptionLabel.text = titleValue;
+        descriptionLabel.text = @"";
     }
     
     CGPoint center = CGPointMake(_outerCircleRadius + distance * sin(rad),

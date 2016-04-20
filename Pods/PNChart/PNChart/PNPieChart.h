@@ -66,4 +66,5 @@
 
 - (void)recompute;
 
+- (CGFloat)ratioForItemAtIndex:(NSUInteger)index;
 @end

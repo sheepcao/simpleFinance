@@ -84,11 +84,6 @@
     [style setLineSpacing:attributeFontDescriptor.pointSize *0.41];
     style.alignment = NSTextAlignmentCenter;
     
-    //    if([money isEqualToString:@"0"])
-    //    {
-    //        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"0"]];
-    //    }else
-    
     if (isShowOutcome) {
         attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"支 出\n%@",money]];
     }else

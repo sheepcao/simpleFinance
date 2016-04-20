@@ -143,7 +143,7 @@
 
 -(void)segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;
-    NSLog(@"Index %ld", Index);
+    NSLog(@"Index %ld", (long)Index);
     self.initialState =YES;
     [self prepareCategoryData];
     [self.categoryTableView reloadData];

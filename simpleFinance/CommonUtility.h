@@ -26,12 +26,17 @@
 + (void)tapSound:(NSString *)name withType:(NSString *)type;
 + (BOOL)isSystemVersionLessThan7;
 + (BOOL)myContainsStringFrom:(NSString*)str for:(NSString*)other;
+-(NSString *)todayDate;
 -(NSString *)tomorrowDate;
 -(NSString *)yesterdayDate;
 -(NSString *)firstMonthDate;
 -(NSString *)lastMonthDate;
+-(NSString *)firstNextMonthDate;
+//-(NSString *)oneDayBeforeDate:(NSString *)date;
+- (NSString *) dateByAddingDays: (NSString *)srcDate andDaysToAdd:(NSInteger) daysToAdd;
 
 -(NSMutableDictionary *)sortExpenseByCategory:(NSMutableArray *)array;
 -(NSMutableDictionary *)sortIncomeByCategory:(NSMutableArray *)array;
 -(UIColor *)categoryColor:(NSString *)categoryName;
+
 @end

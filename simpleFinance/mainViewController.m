@@ -157,13 +157,13 @@
         return;
     }
     
-
-    NSString *yestoday = [[CommonUtility sharedCommonUtility] yesterdayDate];
+    NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
+//    NSString *yestoday = [[CommonUtility sharedCommonUtility] yesterdayDate];
     NSString *tomorrow = [[CommonUtility sharedCommonUtility] tomorrowDate];
     NSString *startMonthDay = [[CommonUtility sharedCommonUtility] firstMonthDate];
-    NSString *endMonthDay = [[CommonUtility sharedCommonUtility] lastMonthDate];
+    NSString *endMonthDay = [[CommonUtility sharedCommonUtility] firstNextMonthDate];
 
-    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where create_time > ? AND create_time < ?", yestoday,tomorrow];
+    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", today,tomorrow];
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
         
@@ -178,13 +178,13 @@
         
     }
 //    
-    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where create_time >= ? AND create_time < ? AND item_type = 1", startMonthDay,endMonthDay];
+    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", today,endMonthDay];
     if ([resultIncome next]) {
        double sumIncome =  [resultIncome doubleForColumnIndex:0];
         [self.summaryVC.monthIncome setText:[NSString stringWithFormat:@"%.0f",sumIncome]];
     }
     
-    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where create_time >= ? AND create_time < ? AND item_type = 0", startMonthDay,endMonthDay];
+    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", startMonthDay,endMonthDay];
     
     if ([resultExpense next]) {
         double sumExpense =  [resultExpense doubleForColumnIndex:0];
@@ -192,8 +192,6 @@
     }
     NSInteger surplus =  [self.summaryVC.monthIncome.text integerValue] - [self.summaryVC.monthExpense.text integerValue];
     [self.summaryVC.monthSurplus setText:[NSString stringWithFormat:@"%ld",(long)surplus]];
-    
-//    [self.summaryVC.view setNeedsDisplay];
     
     [db close];
 
@@ -205,28 +203,54 @@
     self.sumExpense = 0.0f;
 
     NSMutableArray *itemsArray = [[NSMutableArray alloc] init];
+    NSMutableDictionary *itemDic = [[NSMutableDictionary alloc] init];
+    
     if (isIncome) {
         for (itemObj *item in self.todayItems) {
+            double moneyNow = 0.0;
             if (item.itemType == 1) {
-                [itemsArray addObject:[PNPieChartDataItem dataItemWithValue:item.moneyAmount color:[[CommonUtility sharedCommonUtility] categoryColor:item.itemCategory]
-                                                                description:item.itemCategory]];
+               NSNumber *oneCategoryMoney = [itemDic objectForKey:item.itemCategory];
+                if (oneCategoryMoney) {
+                    moneyNow = [oneCategoryMoney doubleValue] + item.moneyAmount;
+                }else
+                {
+                    moneyNow = item.moneyAmount;
+                }
+                [itemDic setObject:[NSNumber numberWithDouble:moneyNow] forKey:item.itemCategory];
+
+                
                 self.sumIncome = self.sumIncome + item.moneyAmount;
             }
-            
         }
+        for (NSString *keyCategory in [itemDic allKeys]) {
+            NSNumber *moneyEachCategory = [itemDic objectForKey:keyCategory];
+            [itemsArray addObject:[PNPieChartDataItem dataItemWithValue:[moneyEachCategory doubleValue] color:[[CommonUtility sharedCommonUtility] categoryColor:keyCategory]
+                                                            description:keyCategory]];
+        }
+
 
     }else
     {
         for (itemObj *item in self.todayItems) {
+            double moneyNow = 0.0;
             if (item.itemType == 0) {
-                [itemsArray addObject:[PNPieChartDataItem dataItemWithValue:item.moneyAmount color:[[CommonUtility sharedCommonUtility] categoryColor:item.itemCategory]
-                                                                description:item.itemCategory]];
+                NSNumber *oneCategoryMoney = [itemDic objectForKey:item.itemCategory];
+                if (oneCategoryMoney) {
+                    moneyNow = [oneCategoryMoney doubleValue] + item.moneyAmount;
+                }else
+                {
+                    moneyNow = item.moneyAmount;
+                }
+                [itemDic setObject:[NSNumber numberWithDouble:moneyNow] forKey:item.itemCategory];
+
                 self.sumExpense = self.sumExpense + item.moneyAmount;
-
             }
-            
         }
-
+        for (NSString *keyCategory in [itemDic allKeys]) {
+            NSNumber *moneyEachCategory = [itemDic objectForKey:keyCategory];
+            [itemsArray addObject:[PNPieChartDataItem dataItemWithValue:[moneyEachCategory doubleValue] color:[[CommonUtility sharedCommonUtility] categoryColor:keyCategory]
+                                                            description:keyCategory]];
+        }
     }
      return itemsArray;
 }
@@ -571,6 +595,8 @@
         NSString *money = @"";
 
 
+        
+        
         if(self.todayItems.count>indexPath.row)
         {
             itemObj *oneItem = self.todayItems[indexPath.row];

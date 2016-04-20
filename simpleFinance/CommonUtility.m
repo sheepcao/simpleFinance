@@ -51,7 +51,18 @@
 
     return    [self stringFromDate:startOfMonth];
 }
+
 -(NSString *)lastMonthDate
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    NSDate * plusOneMonthDate = [self dateByAddingMonths: 1];
+    NSDateComponents * plusOneMonthDateComponents = [cal components: kCFCalendarUnitYear | NSCalendarUnitMonth fromDate: plusOneMonthDate];
+    NSDate * endOfMonth = [[cal dateFromComponents: plusOneMonthDateComponents] dateByAddingTimeInterval: -1]; // next month
+    
+    return [self stringFromDate:endOfMonth];
+}
+-(NSString *)firstNextMonthDate
 {
     NSCalendar *cal = [NSCalendar currentCalendar];
         
@@ -61,6 +72,20 @@
 
     return [self stringFromDate:endOfMonth];
 }
+//-(NSString *)oneDayBeforeDate:(NSString *)date
+//{
+//    NSDate *srcDate = [self dateFromString:date];
+//    NSDate * oneDayBefor = [srcDate dateByAddingTimeInterval: -1]; // One second before the start of this month
+//    return [self stringFromDate:oneDayBefor];
+//
+//}
+//-(NSString *)oneDayAfterDate:(NSString *)date
+//{
+//    NSDate *srcDate = [self dateFromString:date];
+//    NSDate * oneDayBefor = [srcDate dateByAddingTimeInterval: -1]; // One second before the start of this month
+//    return [self stringFromDate:oneDayBefor];
+//    
+//}
 - (NSDate *) dateByAddingMonths: (NSInteger) monthsToAdd
 {
     NSCalendar * calendar = [NSCalendar currentCalendar];
@@ -71,6 +96,28 @@
     
     return [calendar dateByAddingComponents: months toDate: date options: 0];
 }
+- (NSString *) dateByAddingDays: (NSString *)srcDate andDaysToAdd:(NSInteger) daysToAdd
+{
+    NSCalendar * calendar = [NSCalendar currentCalendar];
+    NSDate *day = [self dateFromString:srcDate];
+    
+    NSDateComponents * days = [[NSDateComponents alloc] init];
+    [days setDay: daysToAdd];
+    NSDate *dstDate = [calendar dateByAddingComponents: days toDate: day options: 0];
+    return [self stringFromDate:dstDate];
+}
+-(NSString *)todayDate
+{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    
+    NSDate *date = [NSDate date];
+    NSDateComponents *comps = [cal components:(kCFCalendarUnitYear | NSCalendarUnitMonth | kCFCalendarUnitDay)
+                                     fromDate:date];
+    
+    NSDate *today = [cal dateFromComponents:comps];
+    return [self stringFromDate:today];
+}
+
 -(NSString *)tomorrowDate
 {
     NSCalendar *cal = [NSCalendar currentCalendar];
@@ -96,6 +143,14 @@
     NSDate *tomorrow = [today dateByAddingTimeInterval:(-24*60*60)];
     
     return [self stringFromDate:tomorrow];
+}
+
+-(NSDate *)dateFromString:(NSString *)pstrDate
+{
+    NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
+    [df1 setDateFormat:@"yyyy-MM-dd"];
+    NSDate *dtPostDate = [df1 dateFromString:pstrDate];
+    return dtPostDate;
 }
 - (NSString *)stringFromDate:(NSDate *)date{
     

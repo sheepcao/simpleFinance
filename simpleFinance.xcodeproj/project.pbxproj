@@ -50,6 +50,7 @@
 		A4CC24871CC4E964007A94F1 /* itemObj.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24861CC4E964007A94F1 /* itemObj.m */; };
 		A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */; };
 		A4CC248E1CC61BC5007A94F1 /* categoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248D1CC61BC5007A94F1 /* categoryObject.m */; };
+		A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +126,8 @@
 		A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = roundFrameLabel.m; sourceTree = "<group>"; };
 		A4CC248C1CC61BC5007A94F1 /* categoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryObject.h; sourceTree = "<group>"; };
 		A4CC248D1CC61BC5007A94F1 /* categoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryObject.m; sourceTree = "<group>"; };
+		A4E4A2E21CC7831C00E36AFE /* PieExplainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieExplainTableViewCell.h; sourceTree = "<group>"; };
+		A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieExplainTableViewCell.m; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -241,6 +244,8 @@
 				A481F9C01CB769960003100F /* myMaskTableViewCell.m */,
 				A490C19B1CBB822F006EEEF1 /* ChartTableViewCell.h */,
 				A490C19C1CBB822F006EEEF1 /* ChartTableViewCell.m */,
+				A4E4A2E21CC7831C00E36AFE /* PieExplainTableViewCell.h */,
+				A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -453,6 +458,7 @@
 				A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */,
 				A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */,
 				A4CC24841CC4CDDD007A94F1 /* CommonUtility.m in Sources */,
+				A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */,
 				A4CC24731CC084F2007A94F1 /* categoryTableViewCell.m in Sources */,
 				A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
