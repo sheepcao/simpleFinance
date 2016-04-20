@@ -113,7 +113,7 @@
     topbar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:topbar];
     
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 27, 60, 40)];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [closeViewButton setTitle:@"取消" forState:UIControlStateNormal];
@@ -122,7 +122,7 @@
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
     
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 27, 60, 40)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [saveButton setTitle:@"保存" forState:UIControlStateNormal];
@@ -131,7 +131,6 @@
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
-    //    UISegmentedControl *moneyTypeSeg = [[UISegmentedControl alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4, 24, SCREEN_WIDTH/4, 40)];
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 30, SCREEN_WIDTH*3/7, 30);

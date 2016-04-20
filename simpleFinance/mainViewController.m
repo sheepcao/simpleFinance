@@ -15,6 +15,7 @@
 #import "RoundedButton.h"
 #import "BottomView.h"
 #import "addNewItemViewController.h"
+#import "pieViewController.h"
 #import "RZTransitions.h"
 #import "CommonUtility.h"
 #import "itemObj.h"
@@ -305,6 +306,13 @@
 
     [bottomView addSubview:addMoneyButton];
     
+    UIButton *pieButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 10, bottomHeight-20, bottomHeight-20)];
+    [pieButton setBackgroundColor:[UIColor clearColor]];
+    [pieButton setTitle:@"饼" forState:UIControlStateNormal];
+    [pieButton addTarget:self action:@selector(popPieView) forControlEvents:UIControlEventTouchUpInside];
+    [bottomView addSubview:pieButton];
+
+
 }
 
 -(void)tapDownAddNewButton:(RoundedButton *)sender
@@ -331,6 +339,19 @@
     addNewItemViewController* addItemVC = [[addNewItemViewController alloc] init];
     [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
 
+    return addItemVC;
+}
+
+-(void)popPieView
+{
+    [self presentViewController:[self nextPieViewController] animated:YES completion:nil];
+
+}
+- (UIViewController *)nextPieViewController
+{
+    pieViewController* addItemVC = [[pieViewController alloc] init];
+    [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
+    
     return addItemVC;
 }
 
