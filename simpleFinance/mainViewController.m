@@ -494,7 +494,6 @@
             cell = [[ChartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellPieIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
-
             [cell drawPie];
             [cell.centerButton addTarget:self action:@selector(switchMoneyChart:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -502,14 +501,12 @@
         if (isSwitchingChart) {
             NSArray *items;
             cell.pieChart.displayAnimated = YES;
-
             if (isShowOutcomeChart) {
                 items = [self makePieData:YES];
                 isShowOutcomeChart = NO;
                 [cell switchCenterButtonToOutcome:NO ByMoney:[NSString stringWithFormat:@"%.1f",self.sumIncome]];
             }else{
                 items = [self makePieData:NO];
-
                 isShowOutcomeChart = YES;
                 [cell switchCenterButtonToOutcome:YES ByMoney:[NSString stringWithFormat:@"%.1f",self.sumExpense]];
 
@@ -523,12 +520,10 @@
             cell.pieChart.displayAnimated = NO;
             if (isShowOutcomeChart) {
                 items = [self makePieData:NO];
-
                 [cell switchCenterButtonToOutcome:YES ByMoney:[NSString stringWithFormat:@"%.1f",self.sumExpense]];
         
             }else{
                 items = [self makePieData:YES];
-
                 [cell switchCenterButtonToOutcome:NO ByMoney:[NSString stringWithFormat:@"%.1f",self.sumIncome]];
             }
             [cell updatePieWith:items];

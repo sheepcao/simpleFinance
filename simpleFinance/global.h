@@ -29,7 +29,7 @@
 
 
 #define PieHeight 270
-#define summaryViewHeight 162
+#define summaryViewHeight 156
 #define bottomBar 50
 #define rowHeight 48
 #define topBarHeight 75
