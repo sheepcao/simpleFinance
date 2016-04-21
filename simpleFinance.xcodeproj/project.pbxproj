@@ -51,6 +51,7 @@
 		A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */; };
 		A4CC248E1CC61BC5007A94F1 /* categoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248D1CC61BC5007A94F1 /* categoryObject.m */; };
 		A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */; };
+		A4E4A2EC1CC8B60B00E36AFE /* dateSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,8 @@
 		A4CC248D1CC61BC5007A94F1 /* categoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryObject.m; sourceTree = "<group>"; };
 		A4E4A2E21CC7831C00E36AFE /* PieExplainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieExplainTableViewCell.h; sourceTree = "<group>"; };
 		A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieExplainTableViewCell.m; sourceTree = "<group>"; };
+		A4E4A2EA1CC8B60B00E36AFE /* dateSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateSelectView.h; sourceTree = "<group>"; };
+		A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dateSelectView.m; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -192,6 +195,8 @@
 				A40551391CC72C0F00306EB0 /* pieViewController.h */,
 				A405513A1CC72C0F00306EB0 /* pieViewController.m */,
 				A405513B1CC72C0F00306EB0 /* pieViewController.xib */,
+				A4E4A2EA1CC8B60B00E36AFE /* dateSelectView.h */,
+				A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */,
 				A4CC24771CC0D7DE007A94F1 /* calendarViewController.h */,
 				A4CC24781CC0D7DE007A94F1 /* calendarViewController.m */,
 				A4CC24791CC0D7DE007A94F1 /* calendarViewController.xib */,
@@ -462,6 +467,7 @@
 				A4CC24731CC084F2007A94F1 /* categoryTableViewCell.m in Sources */,
 				A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
+				A4E4A2EC1CC8B60B00E36AFE /* dateSelectView.m in Sources */,
 				A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */,
 				A4CC248E1CC61BC5007A94F1 /* categoryObject.m in Sources */,
 				A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */,

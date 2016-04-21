@@ -13,11 +13,12 @@
 #import "CommonUtility.h"
 #import "itemObj.h"
 #import "PieExplainTableViewCell.h"
+#import "dateSelectView.h"
 
 @interface pieViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic ,strong) UISegmentedControl *moneyTypeSeg;
 @property (nonatomic, strong) PNPieChart *pieChart;
-@property (nonatomic,strong) UILabel *centerLabel;
+@property (nonatomic,strong) UIButton *centerLabel;
 @property (nonatomic,strong) NSMutableArray *timeWindowItems;
 @property (nonatomic,strong) NSArray *timeWindowCategories;
 @property (nonatomic,strong) FMDatabase *db;
@@ -174,6 +175,11 @@
     [self.moneyTypeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
     [topbar addSubview:self.moneyTypeSeg];
     
+    [self.moneyTypeSeg addObserver:self forKeyPath:@"selectedSegmentIndex" options:NSKeyValueObservingOptionNew context:nil];
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    [self segmentAction:self.moneyTypeSeg];
 }
 
 -(void)configPieWithStartDate:(NSString *)startDate AndEndDate:(NSString *)endDate
@@ -184,7 +190,7 @@
     self.myPieView = pieView;
     
     //add date selection ======================================================
-    UIButton *dateSelectionView = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/5, 5, SCREEN_WIDTH*3/5, SCREEN_WIDTH*0.15)];
+    UIButton *dateSelectionView = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/5, 5, SCREEN_WIDTH*3/5, SCREEN_WIDTH*0.14)];
     dateSelectionView.backgroundColor = [UIColor clearColor];
     [pieView addSubview:dateSelectionView];
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
@@ -198,6 +204,7 @@
     [midLine setTextColor:TextColor];
     [midLine setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0f]];
     [midLine setBackgroundColor:[UIColor clearColor]];
+    [dateSelectionView addTarget:self action:@selector(dateSelect) forControlEvents:UIControlEventTouchUpInside];
     [dateSelectionView addSubview:midLine];
     
     UILabel * startDateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, (dateSelectionView.frame.size.width - midLine.frame.size.width)/2, dateSelectionView.frame.size.height)];
@@ -220,7 +227,7 @@
     
     self.timeWindowCategories = [self makePieData:0];
     NSArray *items = self.timeWindowCategories;
-    self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-SCREEN_WIDTH*3/8, dateSelectionView.frame.size.height + dateSelectionView.frame.origin.y + 10, SCREEN_WIDTH *3/4, SCREEN_WIDTH *3/4) items:items];
+    self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-SCREEN_WIDTH*3/8, dateSelectionView.frame.size.height + dateSelectionView.frame.origin.y + 15, SCREEN_WIDTH *3/4, SCREEN_WIDTH *3/4) items:items];
     self.pieChart.descriptionTextColor = [UIColor whiteColor];
     self.pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:13.0];
     [self.pieChart strokeChart];
@@ -233,12 +240,12 @@
     self.pieChart.hasLegend = YES;
     [pieView addSubview:self.pieChart];
     
-    self.centerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.pieChart.innerCircleRadius*2, self.pieChart.innerCircleRadius*2)];
+    self.centerLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.pieChart.innerCircleRadius*2, self.pieChart.innerCircleRadius*2)];
     [self.centerLabel setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];
     self.centerLabel.layer.borderWidth = 0.8f;
     self.centerLabel.layer.borderColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f].CGColor;
     self.centerLabel.backgroundColor = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:194/255.0f alpha:1.0f];
-    self.centerLabel.numberOfLines = 2;
+    self.centerLabel.titleLabel.numberOfLines = 2;
     
     self.centerLabel.layer.cornerRadius = self.centerLabel.frame.size.width/2;
     self.centerLabel.layer.masksToBounds = YES;
@@ -248,10 +255,15 @@
     self.centerLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.5f);
     self.centerLabel.layer.shadowColor =  [UIColor blackColor].CGColor;
     self.centerLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
+    [self.centerLabel addTarget:self action:@selector(switchMoneyType) forControlEvents:UIControlEventTouchUpInside];
     [pieView addSubview:self.centerLabel];
     
     [self makeMidText:self.moneyTypeSeg.selectedSegmentIndex ByMoney: [NSString stringWithFormat:@"%.0f",self.sumExpense]];
     
+}
+-(void)switchMoneyType
+{
+    (self.moneyTypeSeg.selectedSegmentIndex == 0)?(self.moneyTypeSeg.selectedSegmentIndex = 1):(self.moneyTypeSeg.selectedSegmentIndex = 0);
 }
 
 -(void)makeMidText:(NSInteger)isShowOutcome ByMoney:(NSString *)money
@@ -288,8 +300,8 @@
                        value:shadow
                        range:NSMakeRange(0, attrString.length)];
     
-    self.centerLabel.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
-    [self.centerLabel setAttributedText:attrString];
+    self.centerLabel.titleLabel.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
+    [self.centerLabel setAttributedTitle:attrString forState:UIControlStateNormal];
 }
 -(void)updatePieWith:(NSArray *)array
 {
@@ -310,6 +322,24 @@
     self.detailTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.detailTable];
     
+}
+
+-(void)dateSelect
+{
+    dateSelectView *dateView = [[dateSelectView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.view addSubview:dateView];
+    [dateView.myDatePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+
+}
+
+-(void)datePickerValueChanged:(UIDatePicker *)sender
+{
+    NSLog(@"%@",sender.date);
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    NSLog(@"----------------------");
+    return SCREEN_WIDTH/3;
 }
 -(void)back
 {
@@ -396,6 +426,7 @@
     return cell;
     
 }
+
 
 
 @end

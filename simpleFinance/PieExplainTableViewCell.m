@@ -24,7 +24,6 @@
         
         self.categoryName = [[UILabel alloc] initWithFrame:CGRectMake(self.seperator.frame.size.width+self.seperator.frame.origin.x+10, 6, 100, thisRowHeight-6*2)];
         
-        
         self.MoneyRatio = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 95 , 7, 75, thisRowHeight-6*2)];
         self.MoneyRatio.textAlignment = NSTextAlignmentRight;
 
