@@ -15,7 +15,7 @@
 #import "PieExplainTableViewCell.h"
 #import "dateSelectView.h"
 
-@interface pieViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface pieViewController ()<UITableViewDataSource,UITableViewDelegate,FlatDatePickerDelegate>
 @property (nonatomic ,strong) UISegmentedControl *moneyTypeSeg;
 @property (nonatomic, strong) PNPieChart *pieChart;
 @property (nonatomic,strong) UIButton *centerLabel;
@@ -23,6 +23,11 @@
 @property (nonatomic,strong) NSArray *timeWindowCategories;
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) UIView *myPieView;
+@property (nonatomic,strong) dateSelectView *dateView;
+@property (nonatomic,strong) UILabel *startLabel;
+@property (nonatomic,strong) UILabel *endLabel;
+@property (nonatomic,strong) NSString *startTime;
+@property (nonatomic,strong) NSString *endTime;
 @property double sumIncome;
 @property double sumExpense;
 
@@ -36,11 +41,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    NSString *startDay = [[CommonUtility sharedCommonUtility] firstMonthDate];
+
+//    NSString *startDay = [[CommonUtility sharedCommonUtility] firstMonthDate];
     //    NSString *nextEndDay = [[CommonUtility sharedCommonUtility] firstNextMonthDate];
     //    NSString *endDay = [[CommonUtility sharedCommonUtility] lastMonthDate];
-    NSString *endDay = @"2016-04-20";
+    NSString *startDay = @"2016-04-20";
+
+    NSString *endDay = @"2016-04-21";
     NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDay andDaysToAdd:1];
     [self prepareDataFrom:startDay toDate:nextEndDay];
     [self configTopbar];
@@ -145,6 +152,13 @@
                                                             description:keyCategory]];
         }
     }
+    
+    if (isIncome == 0) {
+        [self makeMidText:isIncome ByMoney: [NSString stringWithFormat:@"%.0f",self.sumExpense]];
+    }else
+    {
+        [self makeMidText:isIncome ByMoney: [NSString stringWithFormat:@"%.0f",self.sumIncome]];
+    }
     return itemsArray;
 }
 
@@ -219,7 +233,8 @@
     [endDateLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0f]];
     [endDateLabel setText:endDate];
     
-    
+    self.startLabel = startDateLabel;
+    self.endLabel = endDateLabel;
     [dateSelectionView addSubview:startDateLabel];
     [dateSelectionView addSubview:endDateLabel];
     
@@ -322,25 +337,88 @@
     self.detailTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.detailTable];
     
+    //create date picker back view...
+    self.dateView = [[dateSelectView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+
+    
 }
 
 -(void)dateSelect
 {
-    dateSelectView *dateView = [[dateSelectView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [self.view addSubview:dateView];
-    [dateView.myDatePicker addTarget:self action:@selector(datePickerValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:self.dateView];
+    self.dateView.flatDatePicker.delegate =self;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *startDate = [dateFormatter dateFromString:self.startLabel.text];
+    [self.dateView.flatDatePicker setDate:startDate animated:NO];
+    [self.dateView.flatDatePicker.labelTitle setText:[NSString stringWithFormat:@"开始时间: %@",self.startLabel.text]];
+    [self.dateView.flatDatePicker makeTitle];
+
+    [self.dateView.flatDatePicker show];
+}
+
+
+#pragma mark - FlatDatePicker Delegate
+
+- (void)flatDatePicker:(FlatDatePicker*)datePicker dateDidChange:(NSDate*)date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    
+    NSString *value = [dateFormatter stringFromDate:date];
+
+    NSLog(@"date picker:%@",value);
+    if (!datePicker.isSelectingEndTime) {
+        [datePicker.labelTitle setText:[NSString stringWithFormat:@"开始时间: %@",value]];
+        [datePicker makeTitle];
+
+    }else
+    {
+        [datePicker.labelTitle setText:[NSString stringWithFormat:@"截止时间: %@",value]];
+        [datePicker makeTitle];
+
+    }
+    
+}
+
+- (void)flatDatePicker:(FlatDatePicker*)datePicker didCancel:(UIButton*)sender {
+    [self.dateView removeFromSuperview];
+}
+
+- (void)flatDatePicker:(FlatDatePicker*)datePicker didValid:(UIButton*)sender date:(NSDate*)date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+
+    NSString *value = [dateFormatter stringFromDate:date];
+    NSDate *endDate = [dateFormatter dateFromString:self.endLabel.text];
+    if (!datePicker.isSelectingEndTime) {
+        self.startTime = value;
+        [self.dateView.flatDatePicker setDate:endDate animated:NO];
+        [datePicker.labelTitle setText:[NSString stringWithFormat:@"截止时间: %@",self.endLabel.text]];
+        [datePicker makeTitle];
+
+    }else
+    {
+        self.endTime = value;
+        [self prepareDataFrom:self.startTime toDate:self.endTime];
+        
+        self.timeWindowCategories = [self makePieData:self.moneyTypeSeg.selectedSegmentIndex];
+        [self updatePieWith:self.timeWindowCategories];
+        [self.detailTable reloadData];
+
+        [self.dateView removeFromSuperview];
+        [self.startLabel setText:self.startTime];
+        [self.endLabel setText:self.endTime];
+
+    }
 
 }
 
--(void)datePickerValueChanged:(UIDatePicker *)sender
-{
-    NSLog(@"%@",sender.date);
-}
-
-- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    NSLog(@"----------------------");
-    return SCREEN_WIDTH/3;
-}
 -(void)back
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -352,12 +430,13 @@
     
     self.timeWindowCategories = [self makePieData:Index];
     [self updatePieWith:self.timeWindowCategories];
-    if (Index == 0) {
-        [self makeMidText:Index ByMoney: [NSString stringWithFormat:@"%.0f",self.sumExpense]];
-    }else
-    {
-        [self makeMidText:Index ByMoney: [NSString stringWithFormat:@"%.0f",self.sumIncome]];
-    }
+    [self.detailTable reloadData];
+//    if (Index == 0) {
+//        [self makeMidText:Index ByMoney: [NSString stringWithFormat:@"%.0f",self.sumExpense]];
+//    }else
+//    {
+//        [self makeMidText:Index ByMoney: [NSString stringWithFormat:@"%.0f",self.sumIncome]];
+//    }
     
 }
 

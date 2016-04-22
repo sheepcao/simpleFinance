@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FlatDatePicker.h"
 
 @interface dateSelectView : UIView
 @property (nonatomic,strong) UIDatePicker *myDatePicker;
 @property (nonatomic,strong) UIButton *startDateButton;
 @property (nonatomic,strong) UIButton *endtDateButton;
+@property (nonatomic, strong) FlatDatePicker *flatDatePicker;
 
 @end

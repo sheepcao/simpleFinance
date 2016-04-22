@@ -52,6 +52,11 @@
 		A4CC248E1CC61BC5007A94F1 /* categoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248D1CC61BC5007A94F1 /* categoryObject.m */; };
 		A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */; };
 		A4E4A2EC1CC8B60B00E36AFE /* dateSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */; };
+		A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2EE1CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png */; };
+		A4E4A2F51CC9BE6000E36AFE /* FlatDatePicker-Icon-Check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2EF1CC9BE6000E36AFE /* FlatDatePicker-Icon-Check@2x.png */; };
+		A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2F01CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png */; };
+		A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2F11CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png */; };
+		A4E4A2F81CC9BE6000E36AFE /* FlatDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2F31CC9BE6000E36AFE /* FlatDatePicker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +136,12 @@
 		A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieExplainTableViewCell.m; sourceTree = "<group>"; };
 		A4E4A2EA1CC8B60B00E36AFE /* dateSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateSelectView.h; sourceTree = "<group>"; };
 		A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dateSelectView.m; sourceTree = "<group>"; };
+		A4E4A2EE1CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Check.png"; sourceTree = "<group>"; };
+		A4E4A2EF1CC9BE6000E36AFE /* FlatDatePicker-Icon-Check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Check@2x.png"; sourceTree = "<group>"; };
+		A4E4A2F01CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Close.png"; sourceTree = "<group>"; };
+		A4E4A2F11CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Close@2x.png"; sourceTree = "<group>"; };
+		A4E4A2F21CC9BE6000E36AFE /* FlatDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatDatePicker.h; sourceTree = "<group>"; };
+		A4E4A2F31CC9BE6000E36AFE /* FlatDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatDatePicker.m; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -274,6 +285,7 @@
 		A4CC24261CBCC82E007A94F1 /* 3rd-party */ = {
 			isa = PBXGroup;
 			children = (
+				A4E4A2ED1CC9BE6000E36AFE /* FlatDatePicker */,
 				A490C1771CB7A887006EEEF1 /* MFSideMenu */,
 				A42D1CA01CB6365A00C208A0 /* LGGradientBackgroundView */,
 			);
@@ -308,6 +320,19 @@
 				A4CC24861CC4E964007A94F1 /* itemObj.m */,
 			);
 			name = modal;
+			sourceTree = "<group>";
+		};
+		A4E4A2ED1CC9BE6000E36AFE /* FlatDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				A4E4A2EE1CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png */,
+				A4E4A2EF1CC9BE6000E36AFE /* FlatDatePicker-Icon-Check@2x.png */,
+				A4E4A2F01CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png */,
+				A4E4A2F11CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png */,
+				A4E4A2F21CC9BE6000E36AFE /* FlatDatePicker.h */,
+				A4E4A2F31CC9BE6000E36AFE /* FlatDatePicker.m */,
+			);
+			path = FlatDatePicker;
 			sourceTree = "<group>";
 		};
 		F005D24909418A1E6F61B3D8 /* Pods */ = {
@@ -388,12 +413,16 @@
 				A4CC246E1CBE8EC3007A94F1 /* plus1.png in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
 				A4CC247F1CC4AFE1007A94F1 /* calendar.png in Resources */,
+				A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */,
+				A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */,
+				A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
 				A4CC247B1CC0D7DE007A94F1 /* calendarViewController.xib in Resources */,
 				A4CC24811CC4AFF8007A94F1 /* calendar1.png in Resources */,
 				A4CC246C1CBE8EC3007A94F1 /* equal1.png in Resources */,
 				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
 				A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */,
+				A4E4A2F51CC9BE6000E36AFE /* FlatDatePicker-Icon-Check@2x.png in Resources */,
 				A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,6 +489,7 @@
 				A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */,
 				A490C1861CB7A887006EEEF1 /* MFSideMenuShadow.m in Sources */,
 				A4CC24761CC0B361007A94F1 /* categoryButton.m in Sources */,
+				A4E4A2F81CC9BE6000E36AFE /* FlatDatePicker.m in Sources */,
 				A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */,
 				A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */,
 				A4CC24841CC4CDDD007A94F1 /* CommonUtility.m in Sources */,
