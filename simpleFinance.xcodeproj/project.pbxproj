@@ -57,6 +57,9 @@
 		A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2F01CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png */; };
 		A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2F11CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png */; };
 		A4E4A2F81CC9BE6000E36AFE /* FlatDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2F31CC9BE6000E36AFE /* FlatDatePicker.m */; };
+		A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */; };
+		A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */; };
+		A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +145,11 @@
 		A4E4A2F11CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Close@2x.png"; sourceTree = "<group>"; };
 		A4E4A2F21CC9BE6000E36AFE /* FlatDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatDatePicker.h; sourceTree = "<group>"; };
 		A4E4A2F31CC9BE6000E36AFE /* FlatDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatDatePicker.m; sourceTree = "<group>"; };
+		A4E938DD1CCB4CF300D5DA77 /* itemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemDetailViewController.h; sourceTree = "<group>"; };
+		A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemDetailViewController.m; sourceTree = "<group>"; };
+		A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemDetailViewController.xib; sourceTree = "<group>"; };
+		A4E938E21CCB5E8A00D5DA77 /* itemDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemDetailTableViewCell.h; sourceTree = "<group>"; };
+		A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemDetailTableViewCell.m; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -208,6 +216,9 @@
 				A405513B1CC72C0F00306EB0 /* pieViewController.xib */,
 				A4E4A2EA1CC8B60B00E36AFE /* dateSelectView.h */,
 				A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */,
+				A4E938DD1CCB4CF300D5DA77 /* itemDetailViewController.h */,
+				A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */,
+				A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */,
 				A4CC24771CC0D7DE007A94F1 /* calendarViewController.h */,
 				A4CC24781CC0D7DE007A94F1 /* calendarViewController.m */,
 				A4CC24791CC0D7DE007A94F1 /* calendarViewController.xib */,
@@ -262,6 +273,8 @@
 				A490C19C1CBB822F006EEEF1 /* ChartTableViewCell.m */,
 				A4E4A2E21CC7831C00E36AFE /* PieExplainTableViewCell.h */,
 				A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */,
+				A4E938E21CCB5E8A00D5DA77 /* itemDetailTableViewCell.h */,
+				A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -416,6 +429,7 @@
 				A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */,
 				A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */,
 				A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */,
+				A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
 				A4CC247B1CC0D7DE007A94F1 /* calendarViewController.xib in Resources */,
 				A4CC24811CC4AFF8007A94F1 /* calendar1.png in Resources */,
@@ -482,6 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */,
 				A490C1921CB7B1B3006EEEF1 /* SideMenuViewController.m in Sources */,
 				A490C1761CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m in Sources */,
 				A4CC244F1CBDDE29007A94F1 /* topBarView.m in Sources */,
@@ -498,6 +513,7 @@
 				A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
 				A4E4A2EC1CC8B60B00E36AFE /* dateSelectView.m in Sources */,
+				A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */,
 				A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */,
 				A4CC248E1CC61BC5007A94F1 /* categoryObject.m in Sources */,
 				A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */,

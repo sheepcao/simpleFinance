@@ -261,6 +261,7 @@
     self.centerLabel.layer.borderColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f].CGColor;
     self.centerLabel.backgroundColor = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:194/255.0f alpha:1.0f];
     self.centerLabel.titleLabel.numberOfLines = 2;
+    self.centerLabel.titleLabel.minimumScaleFactor = 0.8;
     
     self.centerLabel.layer.cornerRadius = self.centerLabel.frame.size.width/2;
     self.centerLabel.layer.masksToBounds = YES;

@@ -190,7 +190,13 @@ CGFloat fontSize;
     if (self.showAbsoluteValues) {
         titleValue = [NSString stringWithFormat:@"%.0f",currentDataItem.value];
     }else{
-        titleValue = [NSString stringWithFormat:@"%.0f%%",[self ratioForItemAtIndex:index] * 100];
+        //eric:
+        if ([self ratioForItemAtIndex:index]  > 0.99) {
+            titleValue = [NSString stringWithFormat:@"%.1f%%",[self ratioForItemAtIndex:index] * 100];
+        }else
+        {
+            titleValue = [NSString stringWithFormat:@"%.0f%%",[self ratioForItemAtIndex:index] * 100];
+        }
     }
     
     if (self.hideValues)

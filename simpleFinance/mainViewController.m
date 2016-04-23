@@ -19,6 +19,7 @@
 #import "RZTransitions.h"
 #import "CommonUtility.h"
 #import "itemObj.h"
+#import "itemDetailViewController.h"
 
 
 
@@ -420,12 +421,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"didSelectRowAtIndexPath");
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
-        myMaskTableViewCell *itemCell = (myMaskTableViewCell *)cell;
-        [itemCell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
-//        [itemCell.money setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
-    }
     
     if (indexPath.section == 1) {
         if (self.todayItems.count == 0)
@@ -434,6 +429,47 @@
         }
     }
 
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
+        myMaskTableViewCell *itemCell = (myMaskTableViewCell *)cell;
+        [itemCell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
+        
+        itemDetailViewController *itemDetailVC = [[itemDetailViewController alloc] initWithNibName:@"itemDetailViewController" bundle:nil];
+        NSString *category = @"";
+        NSString *description = @"";
+        NSString *money = @"";
+        NSString *itemTime = @"";
+
+        if (indexPath.row >= self.todayItems.count) {
+            return;
+        }else
+        {
+            itemObj *oneItem = self.todayItems[indexPath.row];
+            category = oneItem.itemCategory;
+            description = oneItem.itemDescription;
+            if ([[description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]] isEqualToString:@""]) {
+                description = @"无";
+            }
+            money = [NSString stringWithFormat:@"%.2f",(oneItem.moneyAmount)];
+            itemTime = oneItem.createdTime;
+            if (oneItem.itemType == 0)
+            {
+                category = [@"支出 > " stringByAppendingString:category];
+            }else
+            {
+                category = [@"收入 > " stringByAppendingString:category];
+            }
+        }
+        itemDetailVC.category = category;
+        itemDetailVC.money = money;
+        itemDetailVC.itemDescription = description;
+        itemDetailVC.itemCreatedTime = itemTime;
+
+        [self.navigationController pushViewController:itemDetailVC animated:YES];
+    }
+    
+   
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
