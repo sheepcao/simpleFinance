@@ -369,7 +369,8 @@
 
 -(void)popPieView
 {
-    [self presentViewController:[self nextPieViewController] animated:YES completion:nil];
+//    [self presentViewController:[self nextPieViewController] animated:YES completion:nil];
+    [self.navigationController pushViewController:[self nextPieViewController] animated:YES];
 
 }
 - (UIViewController *)nextPieViewController
@@ -489,7 +490,6 @@
     if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
         myMaskTableViewCell *itemCell = (myMaskTableViewCell *)cell;
         [itemCell.category setTextColor:TextColor];
-
     }
     
 }

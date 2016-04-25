@@ -10,6 +10,9 @@
 		4C80CCC20DA48D790E992198 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F224C2FC2319CE9430562FC7 /* libPods.a */; };
 		A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A405513A1CC72C0F00306EB0 /* pieViewController.m */; };
 		A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A405513B1CC72C0F00306EB0 /* pieViewController.xib */; };
+		A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */; };
+		A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */; };
+		A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C61CCE234F0008BFE2 /* dateShowView.m */; };
 		A42D1C8B1CB60AC900C208A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C8A1CB60AC900C208A0 /* main.m */; };
 		A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C8D1CB60AC900C208A0 /* AppDelegate.m */; };
 		A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C901CB60AC900C208A0 /* mainViewController.m */; };
@@ -67,6 +70,11 @@
 		A40551391CC72C0F00306EB0 /* pieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pieViewController.h; sourceTree = "<group>"; };
 		A405513A1CC72C0F00306EB0 /* pieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pieViewController.m; sourceTree = "<group>"; };
 		A405513B1CC72C0F00306EB0 /* pieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = pieViewController.xib; sourceTree = "<group>"; };
+		A425B2C01CCE04710008BFE2 /* categoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryDetailViewController.h; sourceTree = "<group>"; };
+		A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryDetailViewController.m; sourceTree = "<group>"; };
+		A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryDetailViewController.xib; sourceTree = "<group>"; };
+		A425B2C51CCE234F0008BFE2 /* dateShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateShowView.h; sourceTree = "<group>"; };
+		A425B2C61CCE234F0008BFE2 /* dateShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dateShowView.m; sourceTree = "<group>"; };
 		A42D1C861CB60AC900C208A0 /* simpleFinance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simpleFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42D1C8A1CB60AC900C208A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A42D1C8C1CB60AC900C208A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -211,14 +219,15 @@
 				A4CC24481CBCFEA4007A94F1 /* addNewItemViewController.h */,
 				A4CC24491CBCFEA4007A94F1 /* addNewItemViewController.m */,
 				A4CC244A1CBCFEA4007A94F1 /* addNewItemViewController.xib */,
-				A40551391CC72C0F00306EB0 /* pieViewController.h */,
-				A405513A1CC72C0F00306EB0 /* pieViewController.m */,
-				A405513B1CC72C0F00306EB0 /* pieViewController.xib */,
-				A4E4A2EA1CC8B60B00E36AFE /* dateSelectView.h */,
-				A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */,
 				A4E938DD1CCB4CF300D5DA77 /* itemDetailViewController.h */,
 				A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */,
 				A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */,
+				A40551391CC72C0F00306EB0 /* pieViewController.h */,
+				A405513A1CC72C0F00306EB0 /* pieViewController.m */,
+				A405513B1CC72C0F00306EB0 /* pieViewController.xib */,
+				A425B2C01CCE04710008BFE2 /* categoryDetailViewController.h */,
+				A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */,
+				A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */,
 				A4CC24771CC0D7DE007A94F1 /* calendarViewController.h */,
 				A4CC24781CC0D7DE007A94F1 /* calendarViewController.m */,
 				A4CC24791CC0D7DE007A94F1 /* calendarViewController.xib */,
@@ -320,6 +329,10 @@
 				A4CC24751CC0B361007A94F1 /* categoryButton.m */,
 				A4CC24891CC60E69007A94F1 /* roundFrameLabel.h */,
 				A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */,
+				A4E4A2EA1CC8B60B00E36AFE /* dateSelectView.h */,
+				A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */,
+				A425B2C51CCE234F0008BFE2 /* dateShowView.h */,
+				A425B2C61CCE234F0008BFE2 /* dateShowView.m */,
 			);
 			name = customView;
 			sourceTree = "<group>";
@@ -425,6 +438,7 @@
 				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
 				A4CC246E1CBE8EC3007A94F1 /* plus1.png in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
+				A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */,
 				A4CC247F1CC4AFE1007A94F1 /* calendar.png in Resources */,
 				A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */,
 				A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */,
@@ -505,10 +519,12 @@
 				A490C1861CB7A887006EEEF1 /* MFSideMenuShadow.m in Sources */,
 				A4CC24761CC0B361007A94F1 /* categoryButton.m in Sources */,
 				A4E4A2F81CC9BE6000E36AFE /* FlatDatePicker.m in Sources */,
+				A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */,
 				A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */,
 				A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */,
 				A4CC24841CC4CDDD007A94F1 /* CommonUtility.m in Sources */,
 				A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */,
+				A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */,
 				A4CC24731CC084F2007A94F1 /* categoryTableViewCell.m in Sources */,
 				A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,

@@ -14,6 +14,7 @@
 #import "itemObj.h"
 #import "PieExplainTableViewCell.h"
 #import "dateSelectView.h"
+#import "categoryDetailViewController.h"
 
 @interface pieViewController ()<UITableViewDataSource,UITableViewDelegate,FlatDatePickerDelegate>
 @property (nonatomic ,strong) UISegmentedControl *moneyTypeSeg;
@@ -456,7 +457,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"didSelectRowAtIndexPath");
-    
+    PNPieChartDataItem *oneItemOfPie = (PNPieChartDataItem *)self.timeWindowCategories[indexPath.row];
+    NSString *category = oneItemOfPie.textDescription;
+    categoryDetailViewController *categoryDetailVC = [[categoryDetailViewController alloc] initWithNibName:@"categoryDetailViewController" bundle:nil];
+    categoryDetailVC.categoryName = category;
+    [self.navigationController pushViewController:categoryDetailVC animated:YES];
     
 }
 
