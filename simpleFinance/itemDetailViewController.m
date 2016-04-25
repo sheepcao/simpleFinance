@@ -10,25 +10,70 @@
 #import "global.h"
 #import "topBarView.h"
 #import "itemDetailTableViewCell.h"
+#import "CommonUtility.h"
+#import "addNewItemViewController.h"
+#import "RZTransitions.h"
 
-@interface itemDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
+
+@interface itemDetailViewController ()<UITableViewDataSource,UITableViewDelegate,reloadDataDelegate>
 @property (nonatomic,strong) UITableView *itemInfoTable;
 @property (nonatomic,strong) topBarView *topBar;
+@property (nonatomic,strong) FMDatabase *db;
+@property (nonatomic,strong) UILabel *itemMoneyLabel;
 
 @end
 
 @implementation itemDetailViewController
+@synthesize db;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self configTopbar];
     [self configDetailTable];
+    [self configButton];
+    
+    [[RZTransitionsManager shared] setAnimationController:[[RZCirclePushAnimationController alloc] init]
+                                       fromViewController:[self class]
+                                                forAction:RZTransitionAction_PresentDismiss];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)refreshData
+{
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"mainVC/Could not open db.");
+        return;
+    }
+    
+    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where item_id = ?", self.currentItemID];
+    while ([rs next]) {
+        
+        self.categoryOnly  = [rs stringForColumn:@"item_category"];
+        self.itemType = [rs intForColumn:@"item_type"];
+        if (self.itemType == 0)
+        {
+            self.category = [@"支出 > " stringByAppendingString:self.categoryOnly];
+        }else
+        {
+            self.category = [@"收入 > " stringByAppendingString:self.categoryOnly];
+        }
+
+        self.itemDescription = [rs stringForColumn:@"item_description"];
+        self.money = [NSString stringWithFormat:@"%.2f", [rs doubleForColumn:@"money"]];
+        
+    }
+
+    [self.itemInfoTable reloadData];
+    [self.itemMoneyLabel setText:self.money];
+    
+    [db close];
+    
 }
 
 -(void)configTopbar
@@ -65,6 +110,7 @@
     moneyLabel.textAlignment = NSTextAlignmentCenter;
     moneyLabel.adjustsFontSizeToFitWidth = YES;
     [moneyLabel setText:self.money];
+    self.itemMoneyLabel  = moneyLabel;
     [self.topBar addSubview:moneyLabel];
 
 }
@@ -82,14 +128,6 @@
     
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return SCREEN_WIDTH/2;
-//}
-//- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    
-//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -132,6 +170,71 @@
             break;
     }
     return cell;
+}
+
+-(void)configButton
+{
+    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/5, self.itemInfoTable.frame.origin.y + self.itemInfoTable.frame.size.height + 20, SCREEN_WIDTH/5,SCREEN_WIDTH/5 )];
+    [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+    [deleteButton addTarget:self action:@selector(deleteTap) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/5-deleteButton.frame.size.width, deleteButton.frame.origin.y,deleteButton.frame.size.width,deleteButton.frame.size.height)];
+    [editButton setTitle:@"编辑" forState:UIControlStateNormal];
+    [editButton addTarget:self action:@selector(editTap) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:deleteButton];
+    [self.view addSubview:editButton];
+
+}
+
+-(void)deleteTap
+{
+    NSInteger itemID = [self.currentItemID integerValue];
+    if(itemID >=0)
+    {
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"永久删除这笔账目?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"是的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            db = [[CommonUtility sharedCommonUtility] db];
+            if (![db open]) {
+                NSLog(@"mainVC/Could not open db.");
+                return;
+            }
+            
+            NSString *sqlCommand = [NSString stringWithFormat:@"delete from ITEMINFO where item_id=%ld",(long)itemID];
+            BOOL sql = [db executeUpdate:sqlCommand];
+            if (!sql) {
+                NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+            }
+            [db close];
+            [self closeVC];
+        }];
+        
+        UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"不" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:yesAction];
+        [alert addAction:noAction];
+        [self presentViewController:alert animated:YES completion:nil];
+
+    }
+}
+-(void)editTap
+{
+    [self presentViewController:[self nextAddNewItemViewController] animated:YES completion:nil];
+}
+
+- (UIViewController *)nextAddNewItemViewController
+{
+    addNewItemViewController* addItemVC = [[addNewItemViewController alloc] init];
+    addItemVC.isEditing =  YES;
+    addItemVC.isEditingIncome = self.itemType;
+    addItemVC.editingID = self.currentItemID;
+    addItemVC.editingCategory = self.categoryOnly;
+    addItemVC.editingMoney = self.money;
+    addItemVC.editingNote = self.itemDescription;
+    addItemVC.refreshDelegate = self;
+    [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
+    
+    return addItemVC;
 }
 
 -(void)closeVC

@@ -68,6 +68,9 @@
     [self configNumberPad];
     [self configCategoryPad];
     [self configNoteView];
+    
+    // for editing item.
+    [self configEditingItem];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -86,12 +89,11 @@
         return;
     }
     
-    FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO"];
+    FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where is_deleted = 0"];
     while ([rs next]) {
         categoryObject *oneCategory = [[categoryObject alloc] init];
         
         oneCategory.categoryName = [rs stringForColumn:@"category_name"];
-        
         oneCategory.color_R  = [rs doubleForColumn:@"color_R"];
         oneCategory.color_G = [rs doubleForColumn:@"color_G"];
         oneCategory.color_B = [rs doubleForColumn:@"color_B"];
@@ -139,6 +141,10 @@
     [self.moneyTypeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
     [topbar addSubview:self.moneyTypeSeg];
     
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    [self segmentAction:self.moneyTypeSeg];
 }
 
 -(void)segmentAction:(UISegmentedControl *)Seg{
@@ -539,13 +545,27 @@
         NSLog(@"addNewItemVC/Could not open db.");
         return;
     }
-    BOOL sql = [db executeUpdate:@"insert into ITEMINFO (item_category,item_type,item_description,money,create_time) values (?,?,?,?,datetime('now', 'localtime'))" , self.categoryLabel.text, [NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.noteBody.text,[NSNumber numberWithDouble:[self.InputLabel.text doubleValue]]];
-    
-    if (!sql) {
-        NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+
+    if (self.isEditing) {
+        BOOL sql = [db executeUpdate:@"update ITEMINFO set item_category=? ,item_type = ? ,item_description = ? ,money = ? where item_id = ?" ,self.categoryLabel.text, [NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.noteBody.text,[NSNumber numberWithDouble:[self.InputLabel.text doubleValue]],self.editingID];
+        if (!sql) {
+            NSLog(@"ERROR123: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }else
+        {
+            [self.refreshDelegate refreshData];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     }else
     {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        BOOL sql = [db executeUpdate:@"insert into ITEMINFO (item_category,item_type,item_description,money,create_time) values (?,?,?,?,datetime('now', 'localtime'))" , self.categoryLabel.text, [NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.noteBody.text,[NSNumber numberWithDouble:[self.InputLabel.text doubleValue]]];
+        
+        if (!sql) {
+            NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }else
+        {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+
     }
     [db close];
     
@@ -620,7 +640,7 @@
     }
     [cell contentWithCategories:tempArray];
     
-    if (indexPath.row == 0 && self.initialState) {
+    if (indexPath.row == 0 && self.initialState && !self.isEditing) {
         [self categoryTap:cell.firstButton];
         self.initialState =NO;
     }
@@ -635,6 +655,21 @@
     self.categoryLabel.layer.borderColor = sender.categoryColor.CGColor;
     
     //    [sender keySelectedStyle];
+}
+
+
+#pragma mark prepare for edit item
+-(void)configEditingItem
+{
+    if(self.isEditing)
+    {
+        [self.categoryLabel setText:self.editingCategory];
+        self.categoryLabel.layer.borderColor = [[CommonUtility sharedCommonUtility] categoryColor:self.editingCategory].CGColor;
+        
+        [self.InputLabel setText:self.editingMoney];
+        [self.noteBody setText:self.editingNote];
+        [self.moneyTypeSeg setSelectedSegmentIndex:self.isEditingIncome];
+    }
 }
 
 

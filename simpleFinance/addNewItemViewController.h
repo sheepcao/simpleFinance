@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol reloadDataDelegate <NSObject>
+
+-(void)refreshData;
+@end
+
+
 @interface addNewItemViewController : UIViewController
+
+@property (nonatomic,weak)  id <reloadDataDelegate> refreshDelegate;
+
+@property BOOL isEditing;
+@property NSInteger isEditingIncome;
+@property (nonatomic,strong) NSString *editingMoney;
+@property (nonatomic,strong) NSString *editingNote;
+@property (nonatomic,strong) NSString *editingCategory;
+@property (nonatomic,strong) NSNumber *editingID;
+
 
 @end

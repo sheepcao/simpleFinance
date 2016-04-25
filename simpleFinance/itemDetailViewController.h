@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface itemDetailViewController : UIViewController
+
+@property (nonatomic,strong) NSNumber *currentItemID;
 @property (nonatomic,strong) NSString *money;
+@property int itemType;
 @property (nonatomic,strong) NSString *category;
+@property (nonatomic,strong) NSString *categoryOnly;
 @property (nonatomic,strong) NSString *itemDescription;
 @property (nonatomic,strong) NSString *itemCreatedTime;
 

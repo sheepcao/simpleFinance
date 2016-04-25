@@ -48,8 +48,8 @@
     NSString *startDay = @"2016-04-20";
 
     NSString *endDay = @"2016-04-21";
-    NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDay andDaysToAdd:1];
-    [self prepareDataFrom:startDay toDate:nextEndDay];
+//    NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDay andDaysToAdd:1];
+    [self prepareDataFrom:startDay toDate:endDay];
     [self configTopbar];
     [self configPieWithStartDate:startDay AndEndDate:endDay];
     [self configDetailTable];
@@ -71,7 +71,10 @@
         return;
     }
     
-    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", startDate,endDate];
+    NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDate andDaysToAdd:1];
+
+    
+    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", startDate,nextEndDay];
     
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];

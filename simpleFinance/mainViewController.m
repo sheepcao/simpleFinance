@@ -437,17 +437,22 @@
         
         itemDetailViewController *itemDetailVC = [[itemDetailViewController alloc] initWithNibName:@"itemDetailViewController" bundle:nil];
         NSString *category = @"";
+        NSString *categoryOnly = @"";
         NSString *description = @"";
         NSString *money = @"";
         NSString *itemTime = @"";
+        NSNumber *itemID = @(-1);
+        int itemType = -1;
 
         if (indexPath.row >= self.todayItems.count) {
             return;
         }else
         {
             itemObj *oneItem = self.todayItems[indexPath.row];
-            category = oneItem.itemCategory;
+            itemID = oneItem.itemID;
+            categoryOnly = oneItem.itemCategory;
             description = oneItem.itemDescription;
+            itemType = oneItem.itemType;
             if ([[description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]] isEqualToString:@""]) {
                 description = @"无";
             }
@@ -455,13 +460,16 @@
             itemTime = oneItem.createdTime;
             if (oneItem.itemType == 0)
             {
-                category = [@"支出 > " stringByAppendingString:category];
+                category = [@"支出 > " stringByAppendingString:categoryOnly];
             }else
             {
-                category = [@"收入 > " stringByAppendingString:category];
+                category = [@"收入 > " stringByAppendingString:categoryOnly];
             }
         }
+        itemDetailVC.currentItemID = itemID;
+        itemDetailVC.itemType = itemType;
         itemDetailVC.category = category;
+        itemDetailVC.categoryOnly = categoryOnly;
         itemDetailVC.money = money;
         itemDetailVC.itemDescription = description;
         itemDetailVC.itemCreatedTime = itemTime;
@@ -469,14 +477,20 @@
         [self.navigationController pushViewController:itemDetailVC animated:YES];
     }
     
+    [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
+    
    
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"didDeselectRowAtIndexPath");
-    myMaskTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell.category setTextColor:TextColor];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
+        myMaskTableViewCell *itemCell = (myMaskTableViewCell *)cell;
+        [itemCell.category setTextColor:TextColor];
+
+    }
     
 }
 
