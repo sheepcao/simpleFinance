@@ -533,7 +533,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        static NSString *CellIdentifier = @"Cell";
+        NSString *CellIdentifier = @"Cell";
         
         myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -553,7 +553,7 @@
         
         if (self.todayItems.count == 0)
         {
-            static NSString *CellIdentifier = @"emptyCell";
+            NSString *CellIdentifier = @"emptyCell";
             NSLog(@"row:%ld",(long)indexPath.row);
             
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -678,7 +678,7 @@
         
     }else
     {// 补全table content 的实际长度，以便可以滑上去
-        static NSString *CellIdentifier = @"Cell";
+        NSString *CellIdentifier = @"Cell";
         NSLog(@"row:%ld",(long)indexPath.row);
 
         myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

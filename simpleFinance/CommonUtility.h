@@ -39,4 +39,7 @@
 -(NSMutableDictionary *)sortIncomeByCategory:(NSMutableArray *)array;
 -(UIColor *)categoryColor:(NSString *)categoryName;
 
+-(NSDate *)dateFromString:(NSString *)pstrDate;
+- (NSString *)stringFromDate:(NSDate *)date;
+
 @end

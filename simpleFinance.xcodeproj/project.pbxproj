@@ -13,6 +13,7 @@
 		A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */; };
 		A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */; };
 		A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C61CCE234F0008BFE2 /* dateShowView.m */; };
+		A425B2CA1CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C91CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m */; };
 		A42D1C8B1CB60AC900C208A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C8A1CB60AC900C208A0 /* main.m */; };
 		A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C8D1CB60AC900C208A0 /* AppDelegate.m */; };
 		A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C901CB60AC900C208A0 /* mainViewController.m */; };
@@ -75,6 +76,8 @@
 		A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryDetailViewController.xib; sourceTree = "<group>"; };
 		A425B2C51CCE234F0008BFE2 /* dateShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateShowView.h; sourceTree = "<group>"; };
 		A425B2C61CCE234F0008BFE2 /* dateShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dateShowView.m; sourceTree = "<group>"; };
+		A425B2C81CCF0B0E0008BFE2 /* categoryItemsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryItemsTableViewCell.h; sourceTree = "<group>"; };
+		A425B2C91CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryItemsTableViewCell.m; sourceTree = "<group>"; };
 		A42D1C861CB60AC900C208A0 /* simpleFinance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simpleFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42D1C8A1CB60AC900C208A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A42D1C8C1CB60AC900C208A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -284,6 +287,8 @@
 				A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */,
 				A4E938E21CCB5E8A00D5DA77 /* itemDetailTableViewCell.h */,
 				A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */,
+				A425B2C81CCF0B0E0008BFE2 /* categoryItemsTableViewCell.h */,
+				A425B2C91CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -526,6 +531,7 @@
 				A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */,
 				A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */,
 				A4CC24731CC084F2007A94F1 /* categoryTableViewCell.m in Sources */,
+				A425B2CA1CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m in Sources */,
 				A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
 				A4E4A2EC1CC8B60B00E36AFE /* dateSelectView.m in Sources */,

@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *categoryName;
 @property (nonatomic, strong) NSString *startDate;
 @property (nonatomic, strong) NSString *endDate;
+@property NSInteger categoryType;
 
 
 @end

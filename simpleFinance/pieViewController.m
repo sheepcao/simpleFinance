@@ -17,6 +17,9 @@
 #import "categoryDetailViewController.h"
 
 @interface pieViewController ()<UITableViewDataSource,UITableViewDelegate,FlatDatePickerDelegate>
+{
+    BOOL isInitial;
+}
 @property (nonatomic ,strong) UISegmentedControl *moneyTypeSeg;
 @property (nonatomic, strong) PNPieChart *pieChart;
 @property (nonatomic,strong) UIButton *centerLabel;
@@ -29,6 +32,8 @@
 @property (nonatomic,strong) UILabel *endLabel;
 @property (nonatomic,strong) NSString *startTime;
 @property (nonatomic,strong) NSString *endTime;
+@property (nonatomic,strong) NSString *tempStartTime;
+
 @property double sumIncome;
 @property double sumExpense;
 
@@ -42,18 +47,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    isInitial = YES;
+    self.startTime= [[CommonUtility sharedCommonUtility] firstMonthDate];
+    self.endTime = [[CommonUtility sharedCommonUtility] lastMonthDate];
 
-//    NSString *startDay = [[CommonUtility sharedCommonUtility] firstMonthDate];
-    //    NSString *nextEndDay = [[CommonUtility sharedCommonUtility] firstNextMonthDate];
-    //    NSString *endDay = [[CommonUtility sharedCommonUtility] lastMonthDate];
-    NSString *startDay = @"2016-04-20";
-
-    NSString *endDay = @"2016-04-21";
-//    NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDay andDaysToAdd:1];
-    [self prepareDataFrom:startDay toDate:endDay];
+    [self prepareDataFrom:self.startTime toDate:self.endTime];
     [self configTopbar];
-    [self configPieWithStartDate:startDay AndEndDate:endDay];
+    [self configPieWithStartDate:self.startTime AndEndDate:self.endTime];
     [self configDetailTable];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (isInitial) {
+        isInitial = NO;
+    }else
+    {
+        [self prepareDataFrom:self.startTime toDate:self.endTime];
+        self.timeWindowCategories = [self makePieData:self.moneyTypeSeg.selectedSegmentIndex];
+        [self updatePieWith:self.timeWindowCategories];
+        [self.detailTable reloadData];
+        [self.startLabel setText:self.startTime];
+        [self.endLabel setText:self.endTime];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -402,13 +420,14 @@
     NSString *value = [dateFormatter stringFromDate:date];
     NSDate *endDate = [dateFormatter dateFromString:self.endLabel.text];
     if (!datePicker.isSelectingEndTime) {
-        self.startTime = value;
+        self.tempStartTime = value;
         [self.dateView.flatDatePicker setDate:endDate animated:NO];
         [datePicker.labelTitle setText:[NSString stringWithFormat:@"截止时间: %@",self.endLabel.text]];
         [datePicker makeTitle];
 
     }else
     {
+        self.startTime = self.tempStartTime;
         self.endTime = value;
         [self prepareDataFrom:self.startTime toDate:self.endTime];
         
@@ -461,6 +480,9 @@
     NSString *category = oneItemOfPie.textDescription;
     categoryDetailViewController *categoryDetailVC = [[categoryDetailViewController alloc] initWithNibName:@"categoryDetailViewController" bundle:nil];
     categoryDetailVC.categoryName = category;
+    categoryDetailVC.categoryType = self.moneyTypeSeg.selectedSegmentIndex;
+    categoryDetailVC.startDate = self.startLabel.text;
+    categoryDetailVC.endDate = self.endLabel.text;
     [self.navigationController pushViewController:categoryDetailVC animated:YES];
     
 }
