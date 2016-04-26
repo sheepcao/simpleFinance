@@ -10,15 +10,19 @@
 #import "FSCalendar.h"
 #import "global.h"
 #import "topBarView.h"
+#import "CommonUtility.h"
+#import "historyViewController.h"
 
 @interface calendarViewController ()<FSCalendarDataSource,FSCalendarDelegate,FSCalendarDataSourceDeprecatedProtocol>
 
 @property (weak, nonatomic) FSCalendar *calendar;
-
+@property (nonatomic,strong) FMDatabase *db;
+@property (nonatomic,strong) NSMutableArray *eventDateArray;
 
 @end
 
 @implementation calendarViewController
+@synthesize db;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,22 +42,21 @@
     [topbar addSubview:closeViewButton];
     
     
-    
-    
-    
     FSCalendar *calendar = [[FSCalendar alloc] initWithFrame:CGRectMake(0,  topRowHeight+10, SCREEN_WIDTH, SCREEN_HEIGHT- topRowHeight-10)];
     calendar.backgroundColor = [UIColor clearColor];
     calendar.dataSource = self;
     calendar.delegate = self;
     calendar.pagingEnabled = NO; // important
-    calendar.allowsMultipleSelection = YES;
+    calendar.allowsMultipleSelection = NO;
     calendar.firstWeekday = 2;
     calendar.appearance.caseOptions = FSCalendarCaseOptionsWeekdayUsesDefaultCase|FSCalendarCaseOptionsHeaderUsesDefaultCase;
     calendar.appearance.eventColor = [UIColor redColor];
     calendar.appearance.headerTitleColor = TextColor;
     calendar.appearance.weekdayTextColor = TextColor;
     calendar.appearance.titleDefaultColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.24 alpha:1.0];
-    calendar.appearance.selectionColor = [UIColor colorWithRed:223/255.0f green:162/255.0f blue:57/255.0f alpha:1.0f];
+//    calendar.appearance.selectionColor = [UIColor colorWithRed:223/255.0f green:162/255.0f blue:57/255.0f alpha:1.0f];
+    calendar.appearance.selectionColor = [UIColor clearColor];
+    calendar.appearance.titleSelectionColor = calendar.appearance.titleDefaultColor;
 
     UIFontDescriptor *monthFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                 @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
@@ -75,8 +78,47 @@
     self.calendar = calendar;
     
 
-
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self prepareData];
+    [self.calendar reloadData];
+}
+
+-(void)prepareData
+{
+    if (!self.eventDateArray) {
+        self.eventDateArray = [[NSMutableArray alloc] init];
+    }else
+    {
+        [self.eventDateArray removeAllObjects];
+    }
+    
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"mainVC/Could not open db.");
+        return;
+    }
+
+    FMResultSet *rs = [db executeQuery:@"select DISTINCT create_time from ITEMINFO"];
+    while ([rs next]) {
+        
+        NSString *dateString = [rs stringForColumn:@"create_time"];
+        NSArray *timeParts = [dateString componentsSeparatedByString:@" "];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *date = [dateFormatter dateFromString:timeParts[0]];
+
+        if(![self.eventDateArray containsObject:date])
+        {
+            [self.eventDateArray addObject:date];
+        }
+        
+    }
+    [db close];
 }
 
 -(void)closeVC
@@ -86,21 +128,42 @@
 
 - (BOOL)calendar:(FSCalendar *)calendar hasEventForDate:(NSDate *)date
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *date1 = [dateFormatter dateFromString:@"2016-04-01"];
-    NSDate *date2 = [dateFormatter dateFromString:@"2016-04-03"];
-//    NSLog(@"%@", date1);
-    NSArray *dates = @[date1,date2];
-    for (int i = 0; i<dates.count; i++) {
-        if ([date isEqualToDate:dates[i]])
+    
+    for (NSDate *eventDate in self.eventDateArray) {
+        if ([date isEqualToDate:eventDate])
         {
             return YES;
         }
     }
-
+   
     return NO;
 }
+
+- (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date
+{
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = [dateFormatter stringFromDate:today];
+    NSString *selectString = [dateFormatter stringFromDate:date];
+
+    if ([dateString isEqualToString:selectString]) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
+    for (NSDate *eventDate in self.eventDateArray) {
+        if ([date isEqualToDate:eventDate])
+        {
+            historyViewController *historyVC = [[historyViewController alloc] initWithNibName:@"historyViewController" bundle:nil];
+            historyVC.recordDate = selectString;
+            [self.navigationController pushViewController:historyVC animated:YES];
+            return;
+        }
+    }
+
+}
+
 
 
 - (void)didReceiveMemoryWarning {

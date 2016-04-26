@@ -21,10 +21,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     // Do any additional setup after loading the view from its nib.
+    NSString *today;
+    if (!self.historyDate || [self.historyDate isEqualToString:@""]) {
+        today = [self weekDayStr:self.todayDate];
+    }else
+    {
+        today = [self weekDayStr:self.historyDate];
+    }
     
-    NSString *today = [self weekDayStr:self.todayDate];
+    NSArray *dateParts = [today componentsSeparatedByString:@"-"];
+    NSString *year = @"";
+    NSString *month = @"";
+    if (dateParts.count>2) {
+        year = dateParts[0];
+        month = dateParts[1];
+    }
+    [self.yearLabel setText:year];
+    [self.monthLabel setText:[NSString stringWithFormat:@"%d",[month integerValue]]];
+    
     [self.dateLabel setText:today];
 }
 - (void)viewWillLayoutSubviews {

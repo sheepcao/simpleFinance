@@ -11,6 +11,7 @@
 @interface summeryViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic)  NSString *todayDate;
+@property (strong, nonatomic)  NSString *historyDate;
 
 @property (weak, nonatomic) IBOutlet UILabel *monthIncome;
 @property (weak, nonatomic) IBOutlet UILabel *monthExpense;
@@ -19,4 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *monthBudget;
 @property (weak, nonatomic) IBOutlet UILabel *budgetSurplus;
 @property (weak, nonatomic) IBOutlet UIButton *budgetButton;
+@property (weak, nonatomic) IBOutlet UILabel *yearLabel;
+@property (weak, nonatomic) IBOutlet UILabel *monthLabel;
 @end
