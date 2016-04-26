@@ -14,4 +14,6 @@
 @property (nonatomic,strong) UILabel *money;
 
 -(void)makeTextStyle;
+- (void)maskCellFromTop:(CGFloat)margin;
+
 @end

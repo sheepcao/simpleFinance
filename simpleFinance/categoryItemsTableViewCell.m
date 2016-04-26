@@ -19,9 +19,9 @@
     {
         
         
-        self.category = [[UILabel alloc] initWithFrame:CGRectMake(30, 3, (SCREEN_WIDTH-60)*3/5, SCREEN_WIDTH/8.5-3*2)];
+        self.category = [[UILabel alloc] initWithFrame:CGRectMake(25, 3, (SCREEN_WIDTH-50)*2/3, SCREEN_WIDTH/8.5-3*2)];
         
-        self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 3, (SCREEN_WIDTH-60)*2/5, self.category.frame.size.height)];
+        self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 3, (SCREEN_WIDTH-50)/3, self.category.frame.size.height)];
         self.category.textAlignment = NSTextAlignmentLeft;
         self.money.textAlignment = NSTextAlignmentRight;
 
@@ -31,15 +31,7 @@
                                                        UIFontDescriptorNameAttribute:@"AvenirNext-Medium",
                                                        UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/21]
                                                        }];
-//        UIFontDescriptor *titleFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-//                                                    @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-//                                                      UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
-//                                                       UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/22]
-//                                                       }];
-
-        
         [self.money setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
-//        [self.category setFont:[UIFont fontWithDescriptor:titleFontDescriptor size:0.0]];
 
         self.category.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.48];
         self.category.shadowOffset =  CGSizeMake(0, 0.65);
@@ -48,6 +40,7 @@
         
         self.category.textColor = TextColor;
         self.money.textColor = TextColor;
+        self.money.adjustsFontSizeToFitWidth = YES;
         
         
         [self addSubview:self.category];
@@ -61,14 +54,14 @@
     UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                           @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
                                                             UIFontDescriptorNameAttribute:@"AvenirNext-Regular",
-                                                            UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/21]
+                                                            UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/22]
                                                             }];
     
     
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                  @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
                                                    UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
-                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/21-2.0]
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/22-3.0]
                                                    }];
     
     
@@ -114,5 +107,16 @@
 
     // Configure the view for the selected state
 }
+- (void)maskCellFromTop:(CGFloat)margin {
+    self.layer.mask = [self visibilityMaskWithLocation:margin/self.frame.size.height];
+    self.layer.masksToBounds = YES;
+}
 
+- (CAGradientLayer *)visibilityMaskWithLocation:(CGFloat)location {
+    CAGradientLayer *mask = [CAGradientLayer layer];
+    mask.frame = self.bounds;
+    mask.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithWhite:1 alpha:0] CGColor], (id)[[UIColor colorWithWhite:1 alpha:1] CGColor], nil];
+    mask.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:location], [NSNumber numberWithFloat:location], nil];
+    return mask;
+}
 @end

@@ -445,8 +445,7 @@
 
 -(void)back
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;

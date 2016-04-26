@@ -20,7 +20,7 @@
 #import "itemDetailViewController.h"
 
 
-@interface categoryDetailViewController ()<UITableViewDataSource,UITableViewDelegate,FlatDatePickerDelegate>
+@interface categoryDetailViewController ()<UITableViewDataSource,UITableViewDelegate,FlatDatePickerDelegate,UIScrollViewDelegate>
 {
     CGFloat fontSize;
 }
@@ -125,6 +125,7 @@
     if ([resultMoney next]) {
         catgoryMoney =  [resultMoney doubleForColumnIndex:0];
         [self.moneyLabel setText:[NSString stringWithFormat:@"%.2f",catgoryMoney]];
+        
     }
     
     FMResultSet *resultRatio = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", startDate,nextEndDay,[NSNumber numberWithInteger:self.categoryType]];
@@ -134,7 +135,7 @@
             [self.moneyRatioLabel setText:[NSString stringWithFormat:@"%.2f%%",catgoryMoney*100/sumMoney]];
         }else
         {
-            [self.moneyRatioLabel setText:@""];
+            [self.moneyRatioLabel setText:@"0.00%"];
         }
     }
     
@@ -229,7 +230,7 @@
 -(void)configDateSelection
 {
     self.dateView = [[dateSelectView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    dateShowView *showDateView = [[dateShowView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/5, 65, SCREEN_WIDTH*3/5, 45)];
+    dateShowView *showDateView = [[dateShowView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/5, 70, SCREEN_WIDTH*3/5, 45)];
     [showDateView.startLabel setText:self.startDate];
     [showDateView.endLabel setText:self.endDate];
     [self.myTopBar addSubview:showDateView];
@@ -418,16 +419,18 @@
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, SCREEN_WIDTH/16)];
     headerView.backgroundColor = [UIColor clearColor];
-    UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-80, 0, 160, headerView.frame.size.height)];
-    dateLabel.textAlignment = NSTextAlignmentCenter;
-    dateLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/23];
-    dateLabel.textColor = [UIColor whiteColor];
-    
+    UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, headerView.frame.size.height - 18, 160, 18)];
+    dateLabel.textAlignment = NSTextAlignmentLeft;
+    dateLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/28];
+    dateLabel.textColor = [UIColor colorWithRed:253/255.0f green:197/255.0f blue:65/255.0f alpha:1.0f];
+    [headerView addSubview:dateLabel];
     NSArray *itemsOfDay = (NSArray *)self.timeWindowItems[section];
     if(itemsOfDay.count>0)
     {
         itemObj *oneItem = itemsOfDay[0];
-        [dateLabel setText:oneItem.createdTime];
+        NSArray *timeParts = [oneItem.createdTime componentsSeparatedByString:@" "];
+        NSString *dateString = timeParts[0];
+        [dateLabel setText:dateString];
     }
     return headerView;
 }
@@ -464,10 +467,24 @@
         NSString *contentString = [NSString stringWithFormat:@"%@%@",category,description];
         [cell.category setText:contentString];
         [cell.money setText:money];
+        [cell makeTextStyle];
+
     }
     
     return cell;
     
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    for (UITableViewCell *cell in self.itemsTable.visibleCells) {
+        if ([cell isKindOfClass:[categoryItemsTableViewCell class]]) {
+            categoryItemsTableViewCell *oneCell = (categoryItemsTableViewCell *)cell;
+            CGFloat hiddenFrameHeight = scrollView.contentOffset.y + [self tableView:self.itemsTable heightForHeaderInSection:0] - cell.frame.origin.y;
+            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                [oneCell maskCellFromTop:hiddenFrameHeight];
+            }
+        }
+    }
 }
 
 
