@@ -11,6 +11,8 @@
 #import "global.h"
 #import "CommonUtility.h"
 #import "trendTableViewCell.h"
+#import "PNChart.h"
+
 
 @interface trendViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
@@ -22,6 +24,7 @@
 
 @property (strong, nonatomic)  UITableView *maintableView;
 @property (nonatomic,strong) FMDatabase *db;
+@property (nonatomic,strong) PNLineChart *mylineChart;
 
 @end
 
@@ -32,6 +35,26 @@
     
     [self configTopbar];
     [self configTable];
+    [self configLineChartAxis];
+    [self configLineChart];
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    CGSize aSize = CGSizeMake(self.mylineChart.chartMarginLeft+15, self.mylineChart.frame.size.height);
+//    
+//    UIGraphicsBeginImageContext(aSize);
+//    [self.mylineChart.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *squareImage = UIGraphicsGetImageFromCurrentImageContext();
+//    
+//    UIGraphicsEndImageContext();
+//    
+//    //// Translate origin
+//    
+//    UIImageView *squareImageView = [[UIImageView alloc]initWithImage:squareImage];
+//    [squareImageView setFrame:CGRectMake(0, 0, aSize.width, aSize.height)];
+//    [self.mylineChart addSubview:squareImageView];
+    
 }
 
 
@@ -51,7 +74,7 @@
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"1天",@"1周",@"2周",@"4周",@"8周",nil];
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"1周",@"2周",@"4周",@"8周",@"全部",nil];
     UISegmentedControl *timeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     timeSeg.frame = CGRectMake(SCREEN_WIDTH*0.18, 35, SCREEN_WIDTH*0.64, 30);
     timeSeg.tintColor =  [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f];
@@ -92,6 +115,92 @@
     [self.view bringSubviewToFront:self.maintableView];
 }
 
+-(void)configLineChart
+{
+    CGFloat tableY = self.maintableView.frame.origin.y+self.maintableView.frame.size.height;
+    
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, 800, SCREEN_WIDTH/2)];
+    lineChart.chartMarginLeft = 0;
+    lineChart.backgroundColor = [UIColor clearColor];
+    lineChart.yLabelColor = [UIColor clearColor];
+    lineChart.xLabelColor = PNLightGrey;
+
+    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
+    
+    UIScrollView *chartScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(35, tableY, SCREEN_WIDTH-40, SCREEN_WIDTH/2)];
+    chartScroll.contentSize = CGSizeMake(800, chartScroll.frame.size.height);
+    chartScroll.delegate = self;
+    chartScroll.showsHorizontalScrollIndicator = NO;
+    [chartScroll addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
+
+    // Line Chart No.1
+    NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332];
+    PNLineChartData *data01 = [PNLineChartData new];
+    data01.inflexionPointStyle = PNLineChartPointStyleCircle;
+    data01.color = PNCleanGrey;
+    data01.lineWidth = 1.6f;
+    data01.itemCount = lineChart.xLabels.count;
+    data01.getData = ^(NSUInteger index) {
+        CGFloat yValue = [data01Array[index] floatValue];
+        return [PNLineChartDataItem dataItemWithY:yValue];
+    };
+    lineChart.chartData = @[data01];
+    lineChart.showLabel = YES;
+    lineChart.showCoordinateAxis = NO;
+    lineChart.showAxisX = YES;
+
+    lineChart.axisColor = PNLightGrey;
+    lineChart.axisWidth = 1.0f;
+    
+    [lineChart strokeChart];
+    
+    [chartScroll addSubview:lineChart];
+    [self.view addSubview:chartScroll];
+
+}
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    UIScrollView * scrollView = (UIScrollView *)object;
+    
+    if (scrollView.contentOffset.x < -0.00001)
+    {
+        [scrollView setContentOffset:CGPointMake(0, 0)];
+    }
+}
+
+-(void)configLineChartAxis
+{
+    CGFloat tableY = self.maintableView.frame.origin.y+self.maintableView.frame.size.height;
+
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, tableY, 800, SCREEN_WIDTH/2)];
+    lineChart.backgroundColor = [UIColor clearColor];
+    lineChart.chartMarginTop = 10;
+    lineChart.yLabelColor = PNLightGrey;
+    lineChart.xLabelColor = [UIColor clearColor];
+    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
+    
+    
+    // Line Chart No.1
+    NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332];
+    PNLineChartData *data01 = [PNLineChartData new];
+    data01.inflexionPointStyle = PNLineChartPointStyleCircle;
+    data01.color = PNCleanGrey;
+    data01.lineWidth = 1.6f;
+    data01.itemCount = lineChart.xLabels.count;
+    data01.getData = ^(NSUInteger index) {
+        CGFloat yValue = [data01Array[index] floatValue];
+        return [PNLineChartDataItem dataItemWithY:yValue];
+    };
+    lineChart.chartData = @[data01];
+    lineChart.showCoordinateAxis = NO;
+    lineChart.showAxisY = YES;
+    lineChart.axisColor = PNLightGrey;
+    lineChart.axisWidth = 1.0f;
+
+    [self.view addSubview:lineChart];
+    
+}
+
 -(void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -99,28 +208,28 @@
 -(void)segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;
     NSLog(@"Index %ld", (long)Index);
-    
+    NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
     switch (Seg.selectedSegmentIndex) {
         case 0:
-            self.startDate = [[CommonUtility sharedCommonUtility] yesterdayDate];
-            self.endDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.startDate andDaysToAdd:1];
-            break;
-        case 1:
             self.endDate = [[CommonUtility sharedCommonUtility] todayDate];
             self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-8];
             
             break;
-        case 2:
+        case 1:
             self.endDate = [[CommonUtility sharedCommonUtility] todayDate];
             self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-15];
             break;
-        case 3:
+        case 2:
             self.endDate = [[CommonUtility sharedCommonUtility] todayDate];
             self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-29];
             
             break;
-        case 4:
+        case 3:
             self.endDate = [[CommonUtility sharedCommonUtility] todayDate];
+            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-57];
+            break;
+        case 4:
+            self.endDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:today andDaysToAdd:1];
             self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-57];
             break;
             
@@ -151,7 +260,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"heightForRowAtIndexPath");
-    return rowHeight;
+    return SCREEN_WIDTH/9;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -226,11 +335,19 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    for (UITableViewCell *cell in self.maintableView.visibleCells) {
-        trendTableViewCell *oneCell = (trendTableViewCell *)cell;
-        CGFloat hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y;
-        if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
-            [oneCell maskCellFromTop:hiddenFrameHeight];
+    
+    if (![scrollView isKindOfClass:[UITableView class]]) {
+
+        
+    }else
+    {
+        
+        for (UITableViewCell *cell in self.maintableView.visibleCells) {
+            trendTableViewCell *oneCell = (trendTableViewCell *)cell;
+            CGFloat hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y;
+            if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
+                [oneCell maskCellFromTop:hiddenFrameHeight];
+            }
         }
     }
 }

@@ -58,6 +58,9 @@
  * Controls whether to show the coordinate axis. Default is NO.
  */
 @property (nonatomic, getter = isShowCoordinateAxis) BOOL showCoordinateAxis;
+@property  BOOL showAxisX;
+@property  BOOL showAxisY;
+
 @property (nonatomic) UIColor *axisColor;
 @property (nonatomic) CGFloat axisWidth;
 
@@ -92,7 +95,8 @@
  *  @return UIView of Legend
  */
 - (UIView*) getLegendWithMaxWidth:(CGFloat)mWidth;
-
+- (UIImageView*)drawOfaxisY;
 
 + (CGSize)sizeOfString:(NSString *)text withWidth:(float)width font:(UIFont *)font;
+
 @end

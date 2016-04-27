@@ -202,7 +202,7 @@
         for (int index = 0; index < xLabels.count; index++) {
             labelText = xLabels[index];
 
-            NSInteger x = (index *  _xLabelWidth + _chartMarginLeft + _xLabelWidth /2.0 );
+            NSInteger x = (index *  _xLabelWidth + _chartMarginLeft  );
             NSInteger y = _chartMarginBottom + _chartCavanHeight;
 
             PNChartLabel *label = [[PNChartLabel alloc] initWithFrame:CGRectMake(x, y, (NSInteger)_xLabelWidth, (NSInteger)_chartMarginBottom)];
@@ -328,6 +328,9 @@
         PNLineChartData *chartData = self.chartData[lineIndex];
         CAShapeLayer *chartLine = (CAShapeLayer *)self.chartLineArray[lineIndex];
         CAShapeLayer *pointLayer = (CAShapeLayer *)self.chartPointArray[lineIndex];
+        
+        //eric:
+        
         UIGraphicsBeginImageContext(self.frame.size);
         // setup the color of the chart line
         if (chartData.color) {
@@ -675,45 +678,63 @@
 - (void)drawRect:(CGRect)rect
 {
     if (self.isShowCoordinateAxis) {
-        CGFloat yAxisOffset = 10.f;
+        [self drawTwoAxis:rect];
+    }else if (self.showAxisX)
+    {
+        [self drawAxisX:rect];
+    }else if (self.showAxisY)
+    {
+        [self drawAxisY:rect];
+    }
 
+    [super drawRect:rect];
+}
+
+-(void)drawTwoAxis:(CGRect)rect
+{
+    
+        CGFloat yAxisOffset = 10.f;
+        
         CGContextRef ctx = UIGraphicsGetCurrentContext();
         UIGraphicsPushContext(ctx);
         CGContextSetLineWidth(ctx, self.axisWidth);
         CGContextSetStrokeColorWithColor(ctx, [self.axisColor CGColor]);
-
+        
         CGFloat xAxisWidth = CGRectGetWidth(rect) - (_chartMarginLeft + _chartMarginRight) / 2;
         CGFloat yAxisHeight = _chartMarginBottom + _chartCavanHeight;
-
+        
         // draw coordinate axis
         CGContextMoveToPoint(ctx, _chartMarginBottom + yAxisOffset, 0);
         CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset, yAxisHeight);
         CGContextAddLineToPoint(ctx, xAxisWidth, yAxisHeight);
         CGContextStrokePath(ctx);
-
+        
         // draw y axis arrow
         CGContextMoveToPoint(ctx, _chartMarginBottom + yAxisOffset - 3, 6);
         CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset, 0);
         CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset + 3, 6);
         CGContextStrokePath(ctx);
-
+        
         // draw x axis arrow
         CGContextMoveToPoint(ctx, xAxisWidth - 6, yAxisHeight - 3);
         CGContextAddLineToPoint(ctx, xAxisWidth, yAxisHeight);
         CGContextAddLineToPoint(ctx, xAxisWidth - 6, yAxisHeight + 3);
         CGContextStrokePath(ctx);
-
+        
         if (self.showLabel) {
-
+            
             // draw x axis separator
             CGPoint point;
+            //eric...fix x separator position
+            
             for (NSUInteger i = 0; i < [self.xLabels count]; i++) {
-                point = CGPointMake(2 * _chartMarginLeft +  (i * _xLabelWidth), _chartMarginBottom + _chartCavanHeight);
+                //                point = CGPointMake(2 * _chartMarginLeft +  (i * _xLabelWidth), _chartMarginBottom + _chartCavanHeight);
+                point = CGPointMake(_xLabelWidth/2 + _chartMarginLeft +  (i * _xLabelWidth), _chartMarginBottom + _chartCavanHeight);
                 CGContextMoveToPoint(ctx, point.x, point.y - 2);
                 CGContextAddLineToPoint(ctx, point.x, point.y);
                 CGContextStrokePath(ctx);
             }
-
+            
             // draw y axis separator
             CGFloat yStepHeight = _chartCavanHeight / _yLabelNum;
             for (NSUInteger i = 0; i < [self.xLabels count]; i++) {
@@ -723,26 +744,127 @@
                 CGContextStrokePath(ctx);
             }
         }
-
+        
         UIFont *font = [UIFont systemFontOfSize:11];
-
+        
         // draw y unit
         if ([self.yUnit length]) {
             CGFloat height = [PNLineChart sizeOfString:self.yUnit withWidth:30.f font:font].height;
             CGRect drawRect = CGRectMake(_chartMarginLeft + 10 + 5, 0, 30.f, height);
             [self drawTextInContext:ctx text:self.yUnit inRect:drawRect font:font];
         }
-
+        
         // draw x unit
         if ([self.xUnit length]) {
             CGFloat height = [PNLineChart sizeOfString:self.xUnit withWidth:30.f font:font].height;
             CGRect drawRect = CGRectMake(CGRectGetWidth(rect) - _chartMarginLeft + 5, _chartMarginBottom + _chartCavanHeight - height / 2, 25.f, height);
             [self drawTextInContext:ctx text:self.xUnit inRect:drawRect font:font];
         }
+    
+}
+
+-(void)drawAxisX:(CGRect)rect
+{
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    UIGraphicsPushContext(ctx);
+    CGContextSetLineWidth(ctx, self.axisWidth);
+    CGContextSetStrokeColorWithColor(ctx, [self.axisColor CGColor]);
+    
+    CGFloat xAxisWidth = CGRectGetWidth(rect) - (_chartMarginLeft + _chartMarginRight) / 2;
+    CGFloat yAxisHeight = _chartMarginBottom + _chartCavanHeight;
+    
+    // draw coordinate axis
+    CGContextMoveToPoint(ctx, _chartMarginLeft , yAxisHeight);
+    CGContextAddLineToPoint(ctx, xAxisWidth, yAxisHeight);
+    CGContextStrokePath(ctx);
+
+    
+    // draw x axis arrow
+    CGContextMoveToPoint(ctx, xAxisWidth - 6, yAxisHeight - 3);
+    CGContextAddLineToPoint(ctx, xAxisWidth, yAxisHeight);
+    CGContextAddLineToPoint(ctx, xAxisWidth - 6, yAxisHeight + 3);
+    CGContextStrokePath(ctx);
+    
+    if (self.showLabel) {
+        
+        // draw x axis separator
+        CGPoint point;
+        //eric...fix x separator position
+        
+        for (NSUInteger i = 0; i < [self.xLabels count]; i++) {
+            //                point = CGPointMake(2 * _chartMarginLeft +  (i * _xLabelWidth), _chartMarginBottom + _chartCavanHeight);
+            point = CGPointMake(_xLabelWidth/2 + _chartMarginLeft +  (i * _xLabelWidth), _chartMarginBottom + _chartCavanHeight);
+            CGContextMoveToPoint(ctx, point.x, point.y - 2);
+            CGContextAddLineToPoint(ctx, point.x, point.y);
+            CGContextStrokePath(ctx);
+        }
+        
+    }
+    
+    UIFont *font = [UIFont systemFontOfSize:11];
+
+    // draw x unit
+    if ([self.xUnit length]) {
+        CGFloat height = [PNLineChart sizeOfString:self.xUnit withWidth:30.f font:font].height;
+        CGRect drawRect = CGRectMake(CGRectGetWidth(rect) - _chartMarginLeft + 5, _chartMarginBottom + _chartCavanHeight - height / 2, 25.f, height);
+        [self drawTextInContext:ctx text:self.xUnit inRect:drawRect font:font];
+    }
+    
+}
+
+
+-(void)drawAxisY:(CGRect)rect
+{
+    
+    CGFloat yAxisOffset = 10.f;
+    
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    UIGraphicsPushContext(ctx);
+    CGContextSetLineWidth(ctx, self.axisWidth);
+    CGContextSetStrokeColorWithColor(ctx, [self.axisColor CGColor]);
+    
+    CGFloat yAxisHeight = _chartMarginBottom + _chartCavanHeight;
+    
+    // draw coordinate axis
+    CGContextMoveToPoint(ctx, _chartMarginBottom + yAxisOffset, 0);
+    CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset, yAxisHeight);
+    CGContextStrokePath(ctx);
+    
+    // draw y axis arrow
+    CGContextMoveToPoint(ctx, _chartMarginBottom + yAxisOffset - 3, 6);
+    CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset, 0);
+    CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset + 3, 6);
+    CGContextStrokePath(ctx);
+
+    if (self.showLabel) {
+        
+        // draw x axis separator
+        CGPoint point;
+
+        // draw y axis separator
+        CGFloat yStepHeight = _chartCavanHeight / _yLabelNum;
+        for (NSUInteger i = 0; i < [self.xLabels count]; i++) {
+            point = CGPointMake(_chartMarginBottom + yAxisOffset, (_chartCavanHeight - i * yStepHeight + _yLabelHeight / 2));
+            CGContextMoveToPoint(ctx, point.x, point.y);
+            CGContextAddLineToPoint(ctx, point.x + 2, point.y);
+            CGContextStrokePath(ctx);
+        }
+    }
+    
+    UIFont *font = [UIFont systemFontOfSize:11];
+    
+    // draw y unit
+    if ([self.yUnit length]) {
+        CGFloat height = [PNLineChart sizeOfString:self.yUnit withWidth:30.f font:font].height;
+        CGRect drawRect = CGRectMake(_chartMarginLeft + 10 + 5, 0, 30.f, height);
+        [self drawTextInContext:ctx text:self.yUnit inRect:drawRect font:font];
     }
 
-    [super drawRect:rect];
+    
 }
+
 
 #pragma mark private methods
 
@@ -1002,6 +1124,28 @@
     [squareImageView setFrame:CGRectMake(originX, originY, size + sw, size + sw)];
     return squareImageView;
 }
+
+//eric:
+- (UIImageView*)drawOfaxisY{
+    //Make the size a little bigger so it includes also border stroke
+    CGSize aSize = CGSizeMake(self.chartMarginLeft+5, self.frame.size.height);
+    
+
+    UIGraphicsBeginImageContextWithOptions(aSize, NO, 0.0);
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    //now get the image from the context
+    UIImage *squareImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    //// Translate origin
+  
+    UIImageView *squareImageView = [[UIImageView alloc]initWithImage:squareImage];
+    [squareImageView setFrame:CGRectMake(0, 0, aSize.width, aSize.height)];
+    return squareImageView;
+}
+
 
 #pragma mark setter and getter
 
