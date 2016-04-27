@@ -30,17 +30,43 @@
         today = [self weekDayStr:self.historyDate];
     }
     
-    NSArray *dateParts = [today componentsSeparatedByString:@"-"];
+    NSArray *dateParts = [self.todayDate componentsSeparatedByString:@"-"];
     NSString *year = @"";
     NSString *month = @"";
+    NSString *day = @"";
     if (dateParts.count>2) {
         year = dateParts[0];
         month = dateParts[1];
+        day = dateParts[2];
     }
-    [self.yearLabel setText:year];
-    [self.monthLabel setText:[NSString stringWithFormat:@"%d",[month integerValue]]];
     
-    [self.dateLabel setText:today];
+    if (self.isShowDaily) {
+        [self.timeUnitLabel setText:@"日"];
+        [self.yearLabel setText:[NSString stringWithFormat:@"%@-%ld",year,(long)[month integerValue]]];
+        [self.monthLabel setText:[NSString stringWithFormat:@"%ld",(long)[day integerValue]]];
+        [self.dateLabel setText:@""];
+        [self.dateLabel setHidden:YES];
+        [self.calendarButton setHidden:YES];
+        [self.expenseTitle setText:@"日支出"];
+        [self.incomeTitle setText:@"日收入"];
+        [self.surplusTitle setText:@"日结余"];
+        
+    }else
+    {
+        [self.timeUnitLabel setText:@"月"];
+        [self.yearLabel setText:year];
+        [self.monthLabel setText:[NSString stringWithFormat:@"%ld",(long)[month integerValue]]];
+        [self.dateLabel setText:today];
+        [self.dateLabel setHidden:NO];
+        [self.calendarButton setHidden:NO];
+        [self.expenseTitle setText:@"月支出"];
+        [self.incomeTitle setText:@"月收入"];
+        [self.surplusTitle setText:@"月结余"];
+    }
+    
+    NSLog(@"summeryViewController\viewDidLoad");
+
+
 }
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
@@ -50,6 +76,9 @@
     [self.upLineHeight setConstant:0.6f];
     
     [self.view setNeedsUpdateConstraints];
+    
+    //fit for daily or monthly
+    
     
     [self.view layoutIfNeeded];
     

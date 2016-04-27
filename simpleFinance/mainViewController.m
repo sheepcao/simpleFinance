@@ -179,7 +179,7 @@
         
     }
 //    
-    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", today,endMonthDay];
+    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", startMonthDay,endMonthDay];
     if ([resultIncome next]) {
        double sumIncome =  [resultIncome doubleForColumnIndex:0];
         [self.summaryVC.monthIncome setText:[NSString stringWithFormat:@"%.0f",sumIncome]];
@@ -582,7 +582,7 @@
             return cell;
         }
         pieChartIndexPath = indexPath;
-        static NSString *CellPieIdentifier = @"CellBottom";
+        NSString *CellPieIdentifier = @"CellBottom";
 
         ChartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellPieIdentifier];
         if (cell == nil) {

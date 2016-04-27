@@ -24,6 +24,8 @@
     CGFloat bottomHeight;
     BOOL isSwitchingChart;
     BOOL isShowOutcomeChart;
+    NSIndexPath *pieChartIndexPath;
+
 }
 @property (strong, nonatomic)  UITableView *maintableView;
 @property (nonatomic,strong) summeryViewController *summaryVC;
@@ -49,6 +51,8 @@
     [self.gradientView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     [self configTitle];
     [self configSummaryView];
+    [self configTable];
+    [self configBottomBar];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -92,10 +96,10 @@
     
     self.summaryVC = [[summeryViewController alloc] initWithNibName:@"summeryViewController" bundle:nil];
     self.summaryVC.historyDate = self.recordDate;
+    self.summaryVC.isShowDaily = YES;
     [self.summaryVC.view setFrame:CGRectMake(0, topRowHeight+10, SCREEN_WIDTH, summaryViewHeight)];
     self.summaryVC.view.opaque = NO;
     [self addChildViewController:self.summaryVC];
-    
     [self.summaryVC didMoveToParentViewController:self];
     [self.gradientView addSubview:self.summaryVC.view];
     
@@ -104,7 +108,7 @@
 -(void)configTable
 {
     CGFloat tableY = self.summaryVC.view.frame.origin.y+self.summaryVC.view.frame.size.height;
-    self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableY,SCREEN_WIDTH,SCREEN_HEIGHT- bottomHeight -tableY) style:UITableViewStylePlain];
+    self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableY - weekDayBarHeight,SCREEN_WIDTH,SCREEN_HEIGHT- bottomHeight -(tableY - weekDayBarHeight)) style:UITableViewStylePlain];
     self.maintableView.showsVerticalScrollIndicator = NO;
     self.maintableView.backgroundColor = [UIColor clearColor];
     self.maintableView.delegate = self;
@@ -140,7 +144,6 @@
         itemObj *oneItem = [[itemObj alloc] init];
         
         oneItem.itemID = [NSNumber numberWithInt: [rs intForColumn:@"item_id"]];
-        
         oneItem.itemCategory  = [rs stringForColumn:@"item_category"];
         oneItem.itemDescription = [rs stringForColumn:@"item_description"];
         oneItem.itemType = [rs intForColumn:@"item_type"];
@@ -156,7 +159,7 @@
         [self.summaryVC.monthIncome setText:[NSString stringWithFormat:@"%.0f",sumIncome]];
     }
     
-    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", thisDay,thisDay];
+    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", thisDay,nextEndDay];
     
     if ([resultExpense next]) {
         double sumExpense =  [resultExpense doubleForColumnIndex:0];
@@ -189,8 +192,6 @@
                     moneyNow = item.moneyAmount;
                 }
                 [itemDic setObject:[NSNumber numberWithDouble:moneyNow] forKey:item.itemCategory];
-                
-                
                 self.sumIncome = self.sumIncome + item.moneyAmount;
             }
         }
@@ -199,8 +200,6 @@
             [itemsArray addObject:[PNPieChartDataItem dataItemWithValue:[moneyEachCategory doubleValue] color:[[CommonUtility sharedCommonUtility] categoryColor:keyCategory]
                                                             description:keyCategory]];
         }
-        
-        
     }else
     {
         for (itemObj *item in self.dayItems) {
@@ -379,7 +378,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return self.dayItems.count<((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)?((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)+1:self.dayItems.count + 1;
+    return self.dayItems.count<((self.maintableView.frame.size.height - PieHeight)/rowHeight)?((self.maintableView.frame.size.height - PieHeight)/rowHeight)+1:self.dayItems.count + 1;
 }
 
 
@@ -423,7 +422,7 @@
             return cell;
         }
         pieChartIndexPath = indexPath;
-        static NSString *CellPieIdentifier = @"CellBottom";
+        NSString *CellPieIdentifier = @"CellBottom";
         
         ChartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellPieIdentifier];
         if (cell == nil) {
@@ -468,7 +467,7 @@
         
         return cell;
         
-    }else if(indexPath.section == 1 && indexPath.row <self.todayItems.count)
+    }else if(indexPath.row <self.dayItems.count)
     {
         
         NSLog(@"row:%ld",(long)indexPath.row);
@@ -488,9 +487,9 @@
         
         
         
-        if(self.todayItems.count>indexPath.row)
+        if(self.dayItems.count>indexPath.row)
         {
-            itemObj *oneItem = self.todayItems[indexPath.row];
+            itemObj *oneItem = self.dayItems[indexPath.row];
             category = oneItem.itemCategory;
             description = oneItem.itemDescription;
             if (oneItem.itemType == 0)
@@ -537,13 +536,13 @@
     for (UITableViewCell *cell in self.maintableView.visibleCells) {
         if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
             myMaskTableViewCell *oneCell = (myMaskTableViewCell *)cell;
-            CGFloat hiddenFrameHeight = scrollView.contentOffset.y + summaryViewHeight - cell.frame.origin.y;
+            CGFloat hiddenFrameHeight = scrollView.contentOffset.y - cell.frame.origin.y;
             if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                 [oneCell maskCellFromTop:hiddenFrameHeight];
             }
         }else if ([cell isKindOfClass:[ChartTableViewCell class]]) {
             ChartTableViewCell *oneCell = (ChartTableViewCell *)cell;
-            CGFloat hiddenFrameHeight = scrollView.contentOffset.y + summaryViewHeight - cell.frame.origin.y;
+            CGFloat hiddenFrameHeight = scrollView.contentOffset.y  - cell.frame.origin.y;
             if (hiddenFrameHeight >= 0 || hiddenFrameHeight <= cell.frame.size.height) {
                 [oneCell maskCellFromTop:hiddenFrameHeight];
             }
@@ -551,5 +550,11 @@
     }
 }
 
+-(void)switchMoneyChart:(UIButton *)sender
+{
+    isSwitchingChart = YES;
+    NSArray *indexArray = @[pieChartIndexPath];
+    [self.maintableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
+}
 
 @end
