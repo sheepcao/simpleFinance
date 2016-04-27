@@ -463,13 +463,6 @@
     self.timeWindowCategories = [self makePieData:Index];
     [self updatePieWith:self.timeWindowCategories];
     [self.detailTable reloadData];
-//    if (Index == 0) {
-//        [self makeMidText:Index ByMoney: [NSString stringWithFormat:@"%.0f",self.sumExpense]];
-//    }else
-//    {
-//        [self makeMidText:Index ByMoney: [NSString stringWithFormat:@"%.0f",self.sumIncome]];
-//    }
-    
 }
 
 

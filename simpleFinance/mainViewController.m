@@ -20,6 +20,7 @@
 #import "CommonUtility.h"
 #import "itemObj.h"
 #import "itemDetailViewController.h"
+#import "trendViewController.h"
 
 
 
@@ -337,6 +338,11 @@
     [pieButton addTarget:self action:@selector(popPieView) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:pieButton];
 
+    UIButton *TrendButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - (bottomHeight-20), 10, bottomHeight-20, bottomHeight-20)];
+    [TrendButton setBackgroundColor:[UIColor clearColor]];
+    [TrendButton setTitle:@"条" forState:UIControlStateNormal];
+    [TrendButton addTarget:self action:@selector(popTrendView) forControlEvents:UIControlEventTouchUpInside];
+    [bottomView addSubview:TrendButton];
 
 }
 
@@ -379,6 +385,13 @@
     [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
     
     return addItemVC;
+}
+
+-(void)popTrendView
+{
+    trendViewController *trendVC = [[trendViewController alloc] initWithNibName:@"trendViewController" bundle:nil];
+    [self.navigationController pushViewController:trendVC animated:YES];
+
 }
 
 - (void)viewWillLayoutSubviews {

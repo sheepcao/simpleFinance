@@ -16,6 +16,9 @@
 		A425B2CA1CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C91CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m */; };
 		A425B2D01CCF72400008BFE2 /* historyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2CE1CCF723F0008BFE2 /* historyViewController.m */; };
 		A425B2D11CCF72400008BFE2 /* historyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2CF1CCF723F0008BFE2 /* historyViewController.xib */; };
+		A425B2D61CD086440008BFE2 /* trendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2D41CD086440008BFE2 /* trendViewController.m */; };
+		A425B2D71CD086440008BFE2 /* trendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2D51CD086440008BFE2 /* trendViewController.xib */; };
+		A425B2DA1CD0C1440008BFE2 /* trendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2D91CD0C1440008BFE2 /* trendTableViewCell.m */; };
 		A42D1C8B1CB60AC900C208A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C8A1CB60AC900C208A0 /* main.m */; };
 		A42D1C8E1CB60AC900C208A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C8D1CB60AC900C208A0 /* AppDelegate.m */; };
 		A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A42D1C901CB60AC900C208A0 /* mainViewController.m */; };
@@ -83,6 +86,11 @@
 		A425B2CD1CCF723F0008BFE2 /* historyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyViewController.h; sourceTree = "<group>"; };
 		A425B2CE1CCF723F0008BFE2 /* historyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = historyViewController.m; sourceTree = "<group>"; };
 		A425B2CF1CCF723F0008BFE2 /* historyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = historyViewController.xib; sourceTree = "<group>"; };
+		A425B2D31CD086440008BFE2 /* trendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trendViewController.h; sourceTree = "<group>"; };
+		A425B2D41CD086440008BFE2 /* trendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = trendViewController.m; sourceTree = "<group>"; };
+		A425B2D51CD086440008BFE2 /* trendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = trendViewController.xib; sourceTree = "<group>"; };
+		A425B2D81CD0C1440008BFE2 /* trendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = trendTableViewCell.h; sourceTree = "<group>"; };
+		A425B2D91CD0C1440008BFE2 /* trendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = trendTableViewCell.m; sourceTree = "<group>"; };
 		A42D1C861CB60AC900C208A0 /* simpleFinance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simpleFinance.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A42D1C8A1CB60AC900C208A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A42D1C8C1CB60AC900C208A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -216,6 +224,19 @@
 			name = pieVC;
 			sourceTree = "<group>";
 		};
+		A425B2D21CD085F00008BFE2 /* historyVC */ = {
+			isa = PBXGroup;
+			children = (
+				A4CC24771CC0D7DE007A94F1 /* calendarViewController.h */,
+				A4CC24781CC0D7DE007A94F1 /* calendarViewController.m */,
+				A4CC24791CC0D7DE007A94F1 /* calendarViewController.xib */,
+				A425B2CD1CCF723F0008BFE2 /* historyViewController.h */,
+				A425B2CE1CCF723F0008BFE2 /* historyViewController.m */,
+				A425B2CF1CCF723F0008BFE2 /* historyViewController.xib */,
+			);
+			name = historyVC;
+			sourceTree = "<group>";
+		};
 		A42D1C7D1CB60AC900C208A0 = {
 			isa = PBXGroup;
 			children = (
@@ -250,14 +271,12 @@
 				A490C1911CB7B1B3006EEEF1 /* SideMenuViewController.xib */,
 				A42D1C8F1CB60AC900C208A0 /* mainViewController.h */,
 				A42D1C901CB60AC900C208A0 /* mainViewController.m */,
-				A425B2CD1CCF723F0008BFE2 /* historyViewController.h */,
-				A425B2CE1CCF723F0008BFE2 /* historyViewController.m */,
-				A425B2CF1CCF723F0008BFE2 /* historyViewController.xib */,
+				A425B2D31CD086440008BFE2 /* trendViewController.h */,
+				A425B2D41CD086440008BFE2 /* trendViewController.m */,
+				A425B2D51CD086440008BFE2 /* trendViewController.xib */,
 				A425B2CB1CCF63130008BFE2 /* itemsVC */,
 				A425B2CC1CCF631F0008BFE2 /* pieVC */,
-				A4CC24771CC0D7DE007A94F1 /* calendarViewController.h */,
-				A4CC24781CC0D7DE007A94F1 /* calendarViewController.m */,
-				A4CC24791CC0D7DE007A94F1 /* calendarViewController.xib */,
+				A425B2D21CD085F00008BFE2 /* historyVC */,
 				A42D1CA91CB64C3800C208A0 /* cells */,
 				A42D1C921CB60AC900C208A0 /* Main.storyboard */,
 				A42D1C951CB60AC900C208A0 /* Assets.xcassets */,
@@ -313,6 +332,8 @@
 				A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */,
 				A425B2C81CCF0B0E0008BFE2 /* categoryItemsTableViewCell.h */,
 				A425B2C91CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m */,
+				A425B2D81CD0C1440008BFE2 /* trendTableViewCell.h */,
+				A425B2D91CD0C1440008BFE2 /* trendTableViewCell.m */,
 			);
 			name = cells;
 			sourceTree = "<group>";
@@ -471,6 +492,7 @@
 				A4CC247F1CC4AFE1007A94F1 /* calendar.png in Resources */,
 				A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */,
 				A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */,
+				A425B2D71CD086440008BFE2 /* trendViewController.xib in Resources */,
 				A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */,
 				A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
@@ -552,6 +574,8 @@
 				A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */,
 				A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */,
 				A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */,
+				A425B2D61CD086440008BFE2 /* trendViewController.m in Sources */,
+				A425B2DA1CD0C1440008BFE2 /* trendTableViewCell.m in Sources */,
 				A4CC24841CC4CDDD007A94F1 /* CommonUtility.m in Sources */,
 				A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */,
 				A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */,

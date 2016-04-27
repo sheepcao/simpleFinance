@@ -158,9 +158,9 @@
                                      fromDate:date];
     
     NSDate *today = [cal dateFromComponents:comps];
-    NSDate *tomorrow = [today dateByAddingTimeInterval:(-24*60*60)];
+    NSDate *yesterday = [today dateByAddingTimeInterval:(-24*60*60)];
     
-    return [self stringFromDate:tomorrow];
+    return [self stringFromDate:yesterday];
 }
 
 -(NSDate *)dateFromString:(NSString *)pstrDate

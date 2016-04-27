@@ -200,11 +200,11 @@
     [topBar addSubview:moneyRatio];
     self.moneyRatioLabel = moneyRatio;
     
-    UIView *seperatorLine1 = [[UILabel alloc] initWithFrame:CGRectMake(moneyRatio.frame.origin.x - 1,moneyRatio.frame.origin.y , 1, moneyRatio.frame.size.height)];
+    UIView *seperatorLine1 = [[UILabel alloc] initWithFrame:CGRectMake(moneyRatio.frame.origin.x - 1,moneyRatio.frame.origin.y , 0.68, moneyRatio.frame.size.height)];
     [seperatorLine1 setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8]];
     [topBar addSubview:seperatorLine1];
     
-    UIView *seperatorLine2 = [[UILabel alloc] initWithFrame:CGRectMake(moneyRatio.frame.origin.x +moneyRatio.frame.size.width ,moneyRatio.frame.origin.y , 1, moneyRatio.frame.size.height)];
+    UIView *seperatorLine2 = [[UILabel alloc] initWithFrame:CGRectMake(moneyRatio.frame.origin.x +moneyRatio.frame.size.width ,moneyRatio.frame.origin.y , 0.68, moneyRatio.frame.size.height)];
     [seperatorLine2 setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.8]];
     [topBar addSubview:seperatorLine2];
     
