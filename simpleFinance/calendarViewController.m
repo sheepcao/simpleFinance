@@ -109,6 +109,9 @@
         NSString *dateString = [rs stringForColumn:@"create_time"];
         NSArray *timeParts = [dateString componentsSeparatedByString:@" "];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSCalendar *cal = [[NSCalendar alloc]
+                           initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        dateFormatter.calendar = cal;
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
         NSDate *date = [dateFormatter dateFromString:timeParts[0]];
 
@@ -142,25 +145,62 @@
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date
 {
     NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString = [dateFormatter stringFromDate:today];
-    NSString *selectString = [dateFormatter stringFromDate:date];
+    
+    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+    [dateFormatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    dateFormatter1.calendar = cal;
+    
+    NSString *selectString = [dateFormatter1 stringFromDate:date];
+    NSString *todayString = [dateFormatter1 stringFromDate:today];
+    
+    NSString *selectDayString = [selectString componentsSeparatedByString:@" "][0];
+    NSString *todayDayString = [todayString componentsSeparatedByString:@" "][0];
 
-    if ([dateString isEqualToString:selectString]) {
+    NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+    [dateFormatter2 setDateFormat:@"yyyy-MM-dd"];
+     dateFormatter2.calendar = cal;
+    
+    NSDate *todayDay = [dateFormatter2 dateFromString:todayDayString];
+    NSDate *selectedDay = [dateFormatter2 dateFromString:selectDayString];
+
+    
+    if ([selectedDay compare:todayDay] == NSOrderedDescending) {
+        NSLog(@"date is later than today");
+        return;
+    } else if ([selectedDay compare:todayDay] == NSOrderedAscending) {
+        NSLog(@"date is earlier than today");
+        
+        historyViewController *historyVC = [[historyViewController alloc] initWithNibName:@"historyViewController" bundle:nil];
+        historyVC.recordDate = selectDayString;
+        [self.navigationController pushViewController:historyVC animated:YES];
+        return;
+    } else {
         [self.navigationController popViewControllerAnimated:YES];
         return;
     }
     
-    for (NSDate *eventDate in self.eventDateArray) {
-        if ([date isEqualToDate:eventDate])
-        {
-            historyViewController *historyVC = [[historyViewController alloc] initWithNibName:@"historyViewController" bundle:nil];
-            historyVC.recordDate = selectString;
-            [self.navigationController pushViewController:historyVC animated:YES];
-            return;
-        }
-    }
+    
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+////    NSString *dateString = [dateFormatter stringFromDate:today];
+//    NSString *selectString = [dateFormatter stringFromDate:date];
+//
+//    if ([dateString isEqualToString:selectString]) {
+//        [self.navigationController popViewControllerAnimated:YES];
+//        return;
+//    }
+//    
+//    for (NSDate *eventDate in self.eventDateArray) {
+//        if ([date isEqualToDate:eventDate])
+//        {
+//            historyViewController *historyVC = [[historyViewController alloc] initWithNibName:@"historyViewController" bundle:nil];
+//            historyVC.recordDate = selectString;
+//            [self.navigationController pushViewController:historyVC animated:YES];
+//            return;
+//        }
+//    }
 
 }
 

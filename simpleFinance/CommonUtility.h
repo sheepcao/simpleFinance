@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong) AVAudioPlayer *myAudioPlayer;
 @property (nonatomic,strong) FMDatabase *db;
+@property (nonatomic,strong) NSDateFormatter *dateFormatter;
 
 + (CommonUtility *)sharedCommonUtility;
 + (BOOL)isSystemLangChinese;

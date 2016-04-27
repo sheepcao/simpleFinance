@@ -371,6 +371,9 @@
     [self.view addSubview:self.dateView];
     self.dateView.flatDatePicker.delegate =self;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    dateFormatter.calendar = cal;
     [dateFormatter setLocale:[NSLocale currentLocale]];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *startDate = [dateFormatter dateFromString:self.startLabel.text];
@@ -387,6 +390,9 @@
 - (void)flatDatePicker:(FlatDatePicker*)datePicker dateDidChange:(NSDate*)date {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    dateFormatter.calendar = cal;
     [dateFormatter setLocale:[NSLocale currentLocale]];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
@@ -414,6 +420,9 @@
 - (void)flatDatePicker:(FlatDatePicker*)datePicker didValid:(UIButton*)sender date:(NSDate*)date {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    dateFormatter.calendar = cal;
     [dateFormatter setLocale:[NSLocale currentLocale]];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
 

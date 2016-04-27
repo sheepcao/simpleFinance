@@ -24,13 +24,15 @@
     // Do any additional setup after loading the view from its nib.
     NSString *today;
     if (!self.historyDate || [self.historyDate isEqualToString:@""]) {
-        today = [self weekDayStr:self.todayDate];
+        today =self.todayDate;
     }else
     {
-        today = [self weekDayStr:self.historyDate];
+        today =self.historyDate;
     }
+    [self weekDayStr:today];
+
     
-    NSArray *dateParts = [self.todayDate componentsSeparatedByString:@"-"];
+    NSArray *dateParts = [today componentsSeparatedByString:@"-"];
     NSString *year = @"";
     NSString *month = @"";
     NSString *day = @"";
@@ -91,8 +93,9 @@
 
 -(NSString *)todayDate
 {
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    
+//    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSCalendar *cal = [[NSCalendar alloc]
+                                    initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [NSDate date];
     NSDateComponents *comps = [cal components:(kCFCalendarUnitYear | NSCalendarUnitMonth | kCFCalendarUnitDay)
                                      fromDate:date];
@@ -100,8 +103,12 @@
     return [self stringFromDate:today];
 }
 - (NSString *)stringFromDate:(NSDate *)date{
-    
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.calendar = cal;
+
     //zzz表示时区，zzz可以删除，这样返回的日期字符将不包含时区信息。
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *destDateString = [dateFormatter stringFromDate:date];
@@ -126,8 +133,9 @@
         [comps setDay:day];
     }
     
-    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
-
+//    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+   NSCalendar *currentCalendar = [[NSCalendar alloc]
+     initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *_date = [currentCalendar dateFromComponents:comps];
     NSDateComponents *weekdayComponents = [currentCalendar components:NSCalendarUnitWeekday fromDate:_date];
     NSInteger week = [weekdayComponents weekday];

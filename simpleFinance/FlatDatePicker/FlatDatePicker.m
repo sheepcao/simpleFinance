@@ -132,7 +132,9 @@
 #pragma mark Helpers
 
 - (NSInteger) yearOfDate:(NSDate*)date {
-	NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear| NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday |  NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal) fromDate:date];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	NSDateComponents *components = [cal components:(NSCalendarUnitYear| NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday |  NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitWeekday | NSCalendarUnitWeekdayOrdinal) fromDate:date];
 	return components.year;
 }
 
@@ -195,7 +197,8 @@
     [self removeSelectorSeconds];
 
     // Default parameters :
-    self.calendar = [NSCalendar currentCalendar];
+    self.calendar = [[NSCalendar alloc]
+                     initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     self.locale = [NSLocale currentLocale];
     self.timeZone = nil;
 
@@ -1095,12 +1098,17 @@
         NSString *dateString = [NSString stringWithFormat: @"%ld", (long)monthNumber];
         
         NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+        NSCalendar *cal = [[NSCalendar alloc]
+                           initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        dateFormatter.calendar = cal;
         if (self.timeZone != nil) [dateFormatter setTimeZone:self.timeZone];
         [dateFormatter setLocale:self.locale];
         [dateFormatter setDateFormat:@"MM"];
         NSDate* myDate = [dateFormatter dateFromString:dateString];
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.calendar = cal;
+
         if (self.timeZone != nil) [dateFormatter setTimeZone:self.timeZone];
         [dateFormatter setLocale:self.locale];
         [formatter setDateFormat:@"MM"];
