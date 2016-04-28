@@ -27,8 +27,10 @@
 @property (nonatomic,strong) NSString *startDate;
 @property (nonatomic,strong) NSString *endDate;
 @property (nonatomic,strong) UILabel *dateRangeLabel;
-
+@property (nonatomic,strong) UISegmentedControl *mySegmentedArray;
 @property (strong, nonatomic)  UITableView *maintableView;
+@property (strong, nonatomic) PNLineChart * mainChart;
+@property (strong, nonatomic) PNLineChart * axisChart;
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) PNLineChart *mylineChart;
 @property (nonatomic,strong) UIScrollView *mychartScroll;
@@ -36,6 +38,8 @@
 @property (nonatomic,strong) NSMutableArray *incomeDataArray;
 @property (nonatomic,strong) NSMutableArray *expenseDataArray;
 
+@property (nonatomic,strong) NSMutableArray *chartDataArray;
+@property (nonatomic,strong) NSMutableArray *chartDatesArray;
 
 @end
 
@@ -53,9 +57,11 @@
     sectionCount = 0;
     
     [self configTopbar];
-    [self configTable];
     [self configLineChartAxis];
     [self configLineChart];
+    [self configTable];
+//    [self configLineChartAxis];
+//    [self configLineChart];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -90,6 +96,7 @@
             double totalIncome =  [resultMoney doubleForColumnIndex:0];
             [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f",totalIncome]];
         }
+        
         FMResultSet *lastResultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", lastStartDate,lastnextEndDay,[NSNumber numberWithInt:i]];
         if ([lastResultMoney next]) {
             double lastTotalIncome =  [lastResultMoney doubleForColumnIndex:0];
@@ -167,6 +174,8 @@
         }
     }
     
+    
+    
     [db close];
     [UIView transitionWithView: self.maintableView
                       duration: 0.35f
@@ -176,9 +185,67 @@
          [self.maintableView reloadData];
      }
                     completion: nil];
-
+    
     
     [self tableView:self.maintableView didSelectRowAtIndexPath:currentIndexPath];
+    
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//load chart data...
+-(void)prepareChartDataFor:(NSString*)categoryName OfType:(NSInteger) moneyType
+{
+    self.chartDataArray = [[NSMutableArray alloc] init];
+    self.chartDatesArray = [[NSMutableArray alloc] init];
+    
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"mainVC/Could not open db.");
+        return;
+    }
+    for (int i = 0; i<7; i++) {
+        
+        NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:1];
+        
+        NSString *lastStartDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.startDate andDaysToAdd:daysOffsite * i];
+        NSString *lastnextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:nextEndDay andDaysToAdd:daysOffsite * i];
+        
+        NSArray *dateStartArray = [lastStartDate componentsSeparatedByString:@"-"];
+        NSArray *dateEndArray = [lastnextEndDay componentsSeparatedByString:@"-"];
+        
+        if (dateStartArray.count>2 && dateEndArray.count>2) {
+            if (self.mySegmentedArray.selectedSegmentIndex == 0) {
+                [self.chartDatesArray addObject:[NSString stringWithFormat:@"%@/%@",dateStartArray[1],dateStartArray[2]]];
+            }else
+            {
+                [self.chartDatesArray addObject:[NSString stringWithFormat:@"%@/%@-%@/%@",dateStartArray[1],dateStartArray[2],dateEndArray[1],dateEndArray[2]]];
+            }
+        }
+        
+        
+        FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ? AND item_category = ? ", lastStartDate,lastnextEndDay,[NSNumber numberWithInteger:moneyType],categoryName];
+        if ([resultMoney next]) {
+            double totalMoney =  [resultMoney doubleForColumnIndex:0];
+            [self.chartDataArray addObject:[NSNumber numberWithDouble:totalMoney]];
+            
+            
+        }
+    }
+    [db close];
+    [self.mainChart setXLabels:self.chartDatesArray];
+    NSArray * data01Array = [NSArray arrayWithArray:self.chartDataArray];
+    PNLineChartData *data01 = [PNLineChartData new];
+    data01.inflexionPointStyle = PNLineChartPointStyleCircle;
+    data01.color = PNCleanGrey;
+    data01.lineWidth = 1.6f;
+    data01.itemCount = self.chartDatesArray.count;
+    data01.getData = ^(NSUInteger index) {
+        CGFloat yValue = [data01Array[index] floatValue];
+        return [PNLineChartDataItem dataItemWithY:yValue];
+    };
+    [self.mainChart updateChartData:@[data01]];
+    [self.axisChart updateChartData:@[data01]];
+
 }
 
 
@@ -205,6 +272,7 @@
     timeSeg.selectedSegmentIndex = 1;
     [timeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
     [topbar addSubview:timeSeg];
+    self.mySegmentedArray = timeSeg;
     
     self.endDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-1];
     self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-7];
@@ -227,7 +295,7 @@
 -(void)configTable
 {
     CGFloat tableY = self.dateRangeLabel.frame.origin.y+self.dateRangeLabel.frame.size.height;
-    self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableY ,SCREEN_WIDTH,SCREEN_HEIGHT- SCREEN_WIDTH/2 -tableY) style:UITableViewStylePlain];
+    self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableY ,SCREEN_WIDTH,SCREEN_HEIGHT- SCREEN_WIDTH*3/5 -tableY - 5) style:UITableViewStylePlain];
     self.maintableView.showsVerticalScrollIndicator = NO;
     self.maintableView.backgroundColor = [UIColor clearColor];
     self.maintableView.delegate = self;
@@ -245,17 +313,18 @@
 
 -(void)configLineChart
 {
-    CGFloat tableY = self.maintableView.frame.origin.y+self.maintableView.frame.size.height;
+    CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*3/5;
     
-    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, 800, SCREEN_WIDTH/2)];
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, 800, SCREEN_WIDTH*3/5)];
     lineChart.chartMarginLeft = 0;
     lineChart.backgroundColor = [UIColor clearColor];
     lineChart.yLabelColor = [UIColor clearColor];
     lineChart.xLabelColor = PNLightGrey;
     
-    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
+//    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
+    [lineChart setXLabels:self.chartDatesArray];
     
-    UIScrollView *chartScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(35, tableY, SCREEN_WIDTH-40, SCREEN_WIDTH/2)];
+    UIScrollView *chartScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(35, tableY, SCREEN_WIDTH-40, SCREEN_WIDTH*3/5)];
     self.mychartScroll = chartScroll;
     chartScroll.contentSize = CGSizeMake(800, chartScroll.frame.size.height);
     chartScroll.delegate = self;
@@ -263,7 +332,8 @@
     [chartScroll addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
     
     // Line Chart No.1
-    NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332];
+//    NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332];
+    NSArray * data01Array = [NSArray arrayWithArray:self.chartDataArray];
     PNLineChartData *data01 = [PNLineChartData new];
     data01.inflexionPointStyle = PNLineChartPointStyleCircle;
     data01.color = PNCleanGrey;
@@ -285,6 +355,8 @@
     
     [chartScroll addSubview:lineChart];
     [self.view addSubview:chartScroll];
+    self.mainChart = lineChart;
+
     
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
@@ -299,18 +371,19 @@
 
 -(void)configLineChartAxis
 {
-    CGFloat tableY = self.maintableView.frame.origin.y+self.maintableView.frame.size.height;
+    CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*3/5;
     
-    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, tableY, 800, SCREEN_WIDTH/2)];
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, tableY, 800, SCREEN_WIDTH*3/5)];
     lineChart.backgroundColor = [UIColor clearColor];
     lineChart.chartMarginTop = 10;
     lineChart.yLabelColor = PNLightGrey;
     lineChart.xLabelColor = [UIColor clearColor];
-    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
+    [lineChart setXLabels:self.chartDatesArray];
     
     
     // Line Chart No.1
-    NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332];
+//    NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332];
+    NSArray * data01Array = [NSArray arrayWithArray:self.chartDataArray];
     PNLineChartData *data01 = [PNLineChartData new];
     data01.inflexionPointStyle = PNLineChartPointStyleCircle;
     data01.color = PNCleanGrey;
@@ -325,6 +398,8 @@
     lineChart.showAxisY = YES;
     lineChart.axisColor = PNLightGrey;
     lineChart.axisWidth = 1.0f;
+    
+    self.axisChart = lineChart;
     
     [self.view addSubview:lineChart];
     
@@ -418,8 +493,15 @@
         trendTableViewCell *itemCell = (trendTableViewCell *)cell;
         [itemCell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
         [itemCell.seperator setHidden:NO];
+        if (indexPath.section == 1) {
+            [self prepareChartDataFor:itemCell.category.text OfType:1];
+        }else if(indexPath.section == 2)
+        {
+            [self prepareChartDataFor:itemCell.category.text OfType:0];
+        }
     }
     currentIndexPath = indexPath;
+
     
 }
 
@@ -529,7 +611,7 @@
          [self.maintableView reloadData];
      }
                     completion: nil];
-
+    
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
