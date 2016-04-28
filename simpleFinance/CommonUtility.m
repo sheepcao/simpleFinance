@@ -284,7 +284,7 @@
     
 }
 
-+ (BOOL)myContainsStringFrom:(NSString*)str for:(NSString*)other {
++ (BOOL)myContainsStringFrom:(NSString*)str forSubstring:(NSString*)other{
     NSRange range = [str rangeOfString:other];
     return range.length != 0;
 }

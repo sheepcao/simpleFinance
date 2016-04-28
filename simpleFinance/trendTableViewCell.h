@@ -10,7 +10,10 @@
 
 @interface trendTableViewCell : UITableViewCell
 @property (nonatomic,strong) UILabel *category;
-@property (nonatomic,strong) UILabel *money;
+@property (nonatomic,strong) UIButton *money;
+
+@property (nonatomic,strong) UIImageView *seperator;
 
 - (void)maskCellFromTop:(CGFloat)margin;
+-(void)makeTextColorForIncrease:(NSString *)increase;
 @end

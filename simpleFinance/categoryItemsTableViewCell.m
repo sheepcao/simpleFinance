@@ -72,7 +72,7 @@
     NSString *srcText = self.category.text;
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:srcText];
 
-    if([CommonUtility myContainsStringFrom:srcText for:@" - "])
+    if([CommonUtility myContainsStringFrom:srcText forSubstring:@" - "])
     {
         NSRange range = [srcText rangeOfString:@" - "];
         NSRange rangeFirstPart,rangeSecondPart;

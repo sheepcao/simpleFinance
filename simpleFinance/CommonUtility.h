@@ -26,7 +26,7 @@
 + (void)tapSound;
 + (void)tapSound:(NSString *)name withType:(NSString *)type;
 + (BOOL)isSystemVersionLessThan7;
-+ (BOOL)myContainsStringFrom:(NSString*)str for:(NSString*)other;
++ (BOOL)myContainsStringFrom:(NSString*)str forSubstring:(NSString*)other;
 -(NSString *)todayDate;
 -(NSString *)tomorrowDate;
 -(NSString *)yesterdayDate;

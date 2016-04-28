@@ -802,4 +802,9 @@
     [self.maintableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
 }
 
+-(void)dealloc
+{
+    [self.maintableView removeObserver:self forKeyPath: @"contentOffset" context:nil];
+}
+
 @end
