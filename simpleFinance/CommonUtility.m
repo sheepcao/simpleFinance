@@ -186,6 +186,55 @@
     
 }
 
+-(NSString *)weekStartDayOf:(NSDate *)date;
+{
+    NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    
+    int dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:date] weekday];// this will give you current day of week
+    
+    [components setDay:([components day] - ((dayofweek) - 2))];// for beginning of the week.
+    
+    NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    dateFormat.calendar = gregorian;
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString= [dateFormat stringFromDate:beginningOfWeek];
+    NSLog(@"StartDate:%@",dateString);
+
+    return dateString;
+    
+}
+-(NSString *)weekEndDayOf:(NSDate *)date;
+{
+    NSCalendar *gregorianEnd = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    
+    NSDateComponents *componentsEnd = [gregorianEnd components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
+    
+    int Enddayofweek = [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:date] weekday];// this will give you current day of week
+    
+    [componentsEnd setDay:([componentsEnd day]+(7-Enddayofweek)+1)];// for end day of the week
+    
+    NSDate *EndOfWeek = [gregorianEnd dateFromComponents:componentsEnd];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    dateFormat.calendar = gregorianEnd;
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateEndPrev = [dateFormat stringFromDate:EndOfWeek];
+    NSLog(@"EndDate:%@",dateEndPrev);
+
+    return dateEndPrev;
+}
+
+-(NSInteger)weekSequence:(NSDate *)date
+{
+    NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    //每周的第一天从星期一开始
+    [gregorian setFirstWeekday:2];
+    NSDateComponents *comps = [gregorian components: NSCalendarUnitWeekOfYear fromDate:date];
+    return comps.weekOfYear ;
+}
+
 + (BOOL)isSystemLangChinese
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

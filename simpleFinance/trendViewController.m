@@ -17,6 +17,9 @@
 @interface trendViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
     NSIndexPath *currentIndexPath;
+    NSString *weekStart;
+    NSString *weekEnd;
+    NSInteger weekSequence;
 }
 @property (nonatomic,strong) NSString *startDate;
 @property (nonatomic,strong) NSString *endDate;
@@ -32,7 +35,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSDate * todayDate = [NSDate date];
+    weekStart = [[CommonUtility sharedCommonUtility] weekStartDayOf:todayDate];
+    weekEnd = [[CommonUtility sharedCommonUtility] weekEndDayOf:todayDate];
+    weekSequence = [[CommonUtility sharedCommonUtility] weekSequence:todayDate];
     
+
+
     [self configTopbar];
     [self configTable];
     [self configLineChartAxis];
@@ -41,20 +50,6 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    CGSize aSize = CGSizeMake(self.mylineChart.chartMarginLeft+15, self.mylineChart.frame.size.height);
-//    
-//    UIGraphicsBeginImageContext(aSize);
-//    [self.mylineChart.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    UIImage *squareImage = UIGraphicsGetImageFromCurrentImageContext();
-//    
-//    UIGraphicsEndImageContext();
-//    
-//    //// Translate origin
-//    
-//    UIImageView *squareImageView = [[UIImageView alloc]initWithImage:squareImage];
-//    [squareImageView setFrame:CGRectMake(0, 0, aSize.width, aSize.height)];
-//    [self.mylineChart addSubview:squareImageView];
-    
 }
 
 
@@ -74,7 +69,7 @@
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"1周",@"2周",@"4周",@"8周",@"全部",nil];
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"1天",@"1周",@"2周",@"4周",@"13周",nil];
     UISegmentedControl *timeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     timeSeg.frame = CGRectMake(SCREEN_WIDTH*0.18, 35, SCREEN_WIDTH*0.64, 30);
     timeSeg.tintColor =  [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f];
@@ -208,31 +203,32 @@
 -(void)segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;
     NSLog(@"Index %ld", (long)Index);
-    NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
+//    NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
+    
+
     switch (Seg.selectedSegmentIndex) {
         case 0:
-            self.endDate = [[CommonUtility sharedCommonUtility] todayDate];
-            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-8];
-            
+            self.endDate = [[CommonUtility sharedCommonUtility] yesterdayDate];
+            self.startDate = [[CommonUtility sharedCommonUtility] yesterdayDate];
             break;
-        case 1:
-            self.endDate = [[CommonUtility sharedCommonUtility] todayDate];
-            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-15];
+        case 1://上周
+            self.endDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-1];
+            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-7];
             break;
-        case 2:
-            self.endDate = [[CommonUtility sharedCommonUtility] todayDate];
-            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-29];
-            
+        case 2://上2周
+            self.endDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-1];
+            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-14];
             break;
-        case 3:
-            self.endDate = [[CommonUtility sharedCommonUtility] todayDate];
-            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-57];
+        case 3://上4周
+            self.endDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-1];
+            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-28];
+        
             break;
-        case 4:
-            self.endDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:today andDaysToAdd:1];
-            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:-57];
+        case 4://上13周
+            self.endDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-1];
+            self.startDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:weekStart andDaysToAdd:-91];
             break;
-            
+    
         default:
             break;
     }
@@ -241,7 +237,7 @@
         [self.dateRangeLabel setText:self.startDate];
     }else
     {
-        NSString *dateRange = [NSString stringWithFormat:@"%@ - %@",self.startDate,[[CommonUtility sharedCommonUtility] yesterdayDate]];
+        NSString *dateRange = [NSString stringWithFormat:@"%@ - %@",self.startDate,self.endDate];
         [self.dateRangeLabel setText:dateRange];
         
     }

@@ -43,4 +43,8 @@
 -(NSDate *)dateFromString:(NSString *)pstrDate;
 - (NSString *)stringFromDate:(NSDate *)date;
 
+-(NSString *)weekEndDayOf:(NSDate *)date;
+-(NSString *)weekStartDayOf:(NSDate *)date;
+-(NSInteger)weekSequence:(NSDate *)date;
+
 @end
