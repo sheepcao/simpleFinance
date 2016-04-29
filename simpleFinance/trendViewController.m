@@ -194,7 +194,6 @@
                     completion: nil];
     
     
-    [self tableView:self.maintableView didSelectRowAtIndexPath:currentIndexPath];
     
 }
 
@@ -210,15 +209,18 @@
         NSLog(@"mainVC/Could not open db.");
         return;
     }
-    for (int i = 0; i<7; i++) {
+    for (int i = 6; i>=0; i--) {
         
         NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:1];
         
         NSString *lastStartDate = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.startDate andDaysToAdd:daysOffsite * i];
         NSString *lastnextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:nextEndDay andDaysToAdd:daysOffsite * i];
         
+        NSString *lastDayDisplay = [[CommonUtility sharedCommonUtility] dateByAddingDays:lastnextEndDay andDaysToAdd:-1];
+
+        
         NSArray *dateStartArray = [lastStartDate componentsSeparatedByString:@"-"];
-        NSArray *dateEndArray = [lastnextEndDay componentsSeparatedByString:@"-"];
+        NSArray *dateEndArray = [lastDayDisplay componentsSeparatedByString:@"-"];
         
         if (dateStartArray.count>2 && dateEndArray.count>2) {
             if (self.mySegmentedArray.selectedSegmentIndex == 0) {
@@ -240,8 +242,6 @@
         if ([resultMoney next]) {
             double totalMoney =  [resultMoney doubleForColumnIndex:0];
             [self.chartDataArray addObject:[NSNumber numberWithDouble:totalMoney]];
-            
-            
         }
     }
     [db close];
@@ -297,7 +297,8 @@
     [self.dateRangeLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/23]];
     
     self.dateRangeLabel.textAlignment = NSTextAlignmentCenter;
-    [self.dateRangeLabel setText:self.startDate];
+    NSString *dateRange = [NSString stringWithFormat:@"%@  至  %@",self.startDate,self.endDate];
+    [self.dateRangeLabel setText:dateRange];
     [self.view addSubview:self.dateRangeLabel];
     
     
@@ -307,7 +308,7 @@
 -(void)configTable
 {
     CGFloat tableY = self.dateRangeLabel.frame.origin.y+self.dateRangeLabel.frame.size.height;
-    self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableY ,SCREEN_WIDTH,SCREEN_HEIGHT- SCREEN_WIDTH*3/5 -tableY - 5) style:UITableViewStylePlain];
+    self.maintableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableY ,SCREEN_WIDTH,SCREEN_HEIGHT- SCREEN_WIDTH*11/20 -tableY - 16) style:UITableViewStylePlain];
     self.maintableView.showsVerticalScrollIndicator = NO;
     self.maintableView.backgroundColor = [UIColor clearColor];
     self.maintableView.delegate = self;
@@ -320,34 +321,35 @@
     [self.view bringSubviewToFront:self.maintableView];
     currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self refreshDataFrom:self.startDate andEndDay:self.endDate];
-    
+    [self tableView:self.maintableView didSelectRowAtIndexPath:currentIndexPath];
+
 }
 
 -(void)configLineChart
 {
-    CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*3/5;
+    CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*11/20;
     
-    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, 700, SCREEN_WIDTH*3/5)];
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, 600, SCREEN_WIDTH*11/20)];
     lineChart.chartMarginLeft = 0;
+    lineChart.chartMarginRight = 60;
+
     lineChart.backgroundColor = [UIColor clearColor];
     lineChart.yLabelColor = [UIColor clearColor];
-    lineChart.xLabelColor = PNLightGrey;
-    
+    lineChart.xLabelColor = PNWhite;
+    lineChart.xLabelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.0f];
 
-    
-    //    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
     [lineChart setXLabels:self.chartDatesArray];
     
-    UIScrollView *chartScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(35, tableY, SCREEN_WIDTH-35, SCREEN_WIDTH*3/5)];
-    self.mychartScroll = chartScroll;
-    chartScroll.contentSize = CGSizeMake(700, chartScroll.frame.size.height);
+    UIScrollView *chartScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(35, tableY, SCREEN_WIDTH-35, SCREEN_WIDTH*11/20)];
+    chartScroll.contentSize = CGSizeMake(600, chartScroll.frame.size.height);
     chartScroll.delegate = self;
     chartScroll.bounces = NO;
     chartScroll.showsHorizontalScrollIndicator = NO;
-    [chartScroll addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
+    
+    [chartScroll setContentOffset:CGPointMake(600-50 - (SCREEN_WIDTH - 35) , 0)];
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 700, SCREEN_WIDTH*3/5 - lineChart.chartMarginBottom);
+    gradientLayer.frame = CGRectMake(0, 0, 600, SCREEN_WIDTH*11/20 - lineChart.chartMarginBottom);
     gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.46].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor, nil];
     
     gradientLayer.startPoint = CGPointMake(0.0f, 1.0f);
@@ -382,25 +384,19 @@
     
     
 }
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    UIScrollView * scrollView = (UIScrollView *)object;
-    
-    if (scrollView.contentOffset.x < -0.00001)
-    {
-        [scrollView setContentOffset:CGPointMake(0, 0)];
-    }
-}
+
 
 -(void)configLineChartAxis
 {
-    CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*3/5;
+    CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*11/20;
     
-    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, tableY, 700, SCREEN_WIDTH*3/5)];
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, tableY, 700, SCREEN_WIDTH*11/20)];
     lineChart.backgroundColor = [UIColor clearColor];
     lineChart.chartMarginTop = 10;
-    lineChart.yLabelColor = PNLightGrey;
+    lineChart.yLabelColor = PNWhite;
     lineChart.xLabelColor = [UIColor clearColor];
+    lineChart.yLabelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.0f];
+
     [lineChart setXLabels:self.chartDatesArray];
     
     
@@ -435,8 +431,6 @@
 -(void)segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;
     NSLog(@"Index %ld", (long)Index);
-    //    NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
-    
     
     switch (Seg.selectedSegmentIndex) {
         case 0:
@@ -474,13 +468,15 @@
         [self.dateRangeLabel setText:self.startDate];
     }else
     {
-        NSString *dateRange = [NSString stringWithFormat:@"%@  到  %@",self.startDate,self.endDate];
+        NSString *dateRange = [NSString stringWithFormat:@"%@  至  %@",self.startDate,self.endDate];
         [self.dateRangeLabel setText:dateRange];
-        
     }
     
+    [self.maintableView setContentOffset:CGPointMake(0,-1)];
+    NSIndexPath *firstIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self tableView:self.maintableView didSelectRowAtIndexPath:firstIndex];
     [self refreshDataFrom:self.startDate andEndDay:self.endDate];
-    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -494,7 +490,7 @@
 #pragma mark Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return SCREEN_WIDTH/9;
+    return SCREEN_WIDTH/10;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -658,9 +654,6 @@
     }
 }
 
--(void)dealloc
-{
-    [self.mychartScroll removeObserver:self forKeyPath:@"contentOffset" context:nil];
-}
+
 
 @end

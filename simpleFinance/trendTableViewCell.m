@@ -98,8 +98,8 @@
         self.seperator.layer.masksToBounds = YES;
         
         
-        self.category = [[UILabel alloc] initWithFrame:CGRectMake(self.seperator.frame.size.width+self.seperator.frame.origin.x+10, 3, (SCREEN_WIDTH-60 - pointRadius - 100), SCREEN_WIDTH/8.5-3*2)];
-        self.money = [[UIButton alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, thisRowHeight/2 -15, 100, 30)];
+        self.category = [[UILabel alloc] initWithFrame:CGRectMake(self.seperator.frame.size.width+self.seperator.frame.origin.x+10, 3, (SCREEN_WIDTH-60 - pointRadius - 80), SCREEN_WIDTH/8.5-3*2)];
+        self.money = [[UIButton alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, thisRowHeight/2 -15, 80, 30)];
         self.category.textAlignment = NSTextAlignmentLeft;
         self.money.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         self.money.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);

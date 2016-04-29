@@ -98,9 +98,17 @@
 
         while (num > 0)
         {
-            PNChartLabel *label = [[PNChartLabel alloc] initWithFrame:CGRectMake(0.0, (NSInteger)(_chartCavanHeight - index * yStepHeight), (NSInteger)_chartMarginBottom, (NSInteger)_yLabelHeight)];
+            PNChartLabel *label = [[PNChartLabel alloc] initWithFrame:CGRectMake(1.0, (NSInteger)(_chartCavanHeight - index * yStepHeight), (NSInteger)_chartMarginBottom+4, (NSInteger)_yLabelHeight)];
             [label setTextAlignment:NSTextAlignmentRight];
-            label.text = [self formatYLabel:_yValueMin + (yStep * index)];
+            NSString *yText = [self formatYLabel:_yValueMin + (yStep * index)];
+            
+            if (yText.length>5) {
+                yText = [NSString stringWithFormat:@"%ldw",[yText integerValue]/10000];
+            }else if (yText.length>4) {
+                yText = [NSString stringWithFormat:@"%ldk",[yText integerValue]/1000];
+            }
+            label.text = yText;
+//            label.text = [self formatYLabel:_yValueMin + (yStep * index)];
             [self setCustomStyleForYLabel:label];
             [self addSubview:label];
             [_yChartLabels addObject:label];
@@ -781,10 +789,10 @@
 
     
     // draw x axis arrow
-    CGContextMoveToPoint(ctx, xAxisWidth - 6, yAxisHeight - 3);
-    CGContextAddLineToPoint(ctx, xAxisWidth, yAxisHeight);
-    CGContextAddLineToPoint(ctx, xAxisWidth - 6, yAxisHeight + 3);
-    CGContextStrokePath(ctx);
+//    CGContextMoveToPoint(ctx, xAxisWidth - 6, yAxisHeight - 3);
+//    CGContextAddLineToPoint(ctx, xAxisWidth, yAxisHeight);
+//    CGContextAddLineToPoint(ctx, xAxisWidth - 6, yAxisHeight + 3);
+//    CGContextStrokePath(ctx);
     
     if (self.showLabel) {
         
@@ -832,10 +840,10 @@
     CGContextStrokePath(ctx);
     
     // draw y axis arrow
-    CGContextMoveToPoint(ctx, _chartMarginBottom + yAxisOffset - 3, 6);
-    CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset, 0);
-    CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset + 3, 6);
-    CGContextStrokePath(ctx);
+//    CGContextMoveToPoint(ctx, _chartMarginBottom + yAxisOffset - 3, 6);
+//    CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset, 0);
+//    CGContextAddLineToPoint(ctx, _chartMarginBottom + yAxisOffset + 3, 6);
+//    CGContextStrokePath(ctx);
 
     if (self.showLabel) {
         
