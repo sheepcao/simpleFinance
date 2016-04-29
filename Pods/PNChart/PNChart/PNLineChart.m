@@ -819,7 +819,6 @@
     
     CGFloat yAxisOffset = 10.f;
     
-    
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     UIGraphicsPushContext(ctx);
     CGContextSetLineWidth(ctx, self.axisWidth);

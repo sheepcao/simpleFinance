@@ -12,6 +12,7 @@
 #import "CommonUtility.h"
 #import "trendTableViewCell.h"
 #import "PNChart.h"
+#import "LGGradientBackgroundView/LGGradientBackgroundView.h"
 
 
 @interface trendViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
@@ -24,6 +25,7 @@
     NSInteger dataType;  // 0---money,1---increase,2---ratio
     NSInteger sectionCount;
 }
+@property (weak, nonatomic) IBOutlet LGGradientBackgroundView *chartEffectView;
 @property (nonatomic,strong) NSString *startDate;
 @property (nonatomic,strong) NSString *endDate;
 @property (nonatomic,strong) UILabel *dateRangeLabel;
@@ -56,12 +58,14 @@
     dataType = 0;
     sectionCount = 0;
     
+
     [self configTopbar];
+    [self configTable];
+
     [self configLineChartAxis];
     [self configLineChart];
-    [self configTable];
-//    [self configLineChartAxis];
-//    [self configLineChart];
+    //    [self configLineChartAxis];
+    //    [self configLineChart];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -88,7 +92,7 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //for total numbers....
     
-    for (int i = 1 ; i>=0; i--) {
+    for (int i = 0 ; i<2; i++) {
         NSMutableArray *moneyTotalsArray = [[NSMutableArray alloc] initWithCapacity:4];
         (i == 1)?[moneyTotalsArray addObject:@"收入"] : [moneyTotalsArray addObject:@"支出"];
         FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", startDate,nextEndDay,[NSNumber numberWithInt:i]];
@@ -127,7 +131,7 @@
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //for category numbers....
     
-    for (int i = 1; i>=0; i--) {
+    for (int i = 0; i<2; i++) {
         
         NSMutableArray *allCategories = [[NSMutableArray alloc] init];
         FMResultSet *rs = [db executeQuery:@"select distinct item_category from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", lastStartDate,nextEndDay,[NSNumber numberWithInt:i]];
@@ -177,6 +181,9 @@
     
     
     [db close];
+    if (!self.maintableView) {
+        return;
+    }
     [UIView transitionWithView: self.maintableView
                       duration: 0.35f
                        options: UIViewAnimationOptionTransitionCrossDissolve
@@ -222,8 +229,14 @@
             }
         }
         
+        FMResultSet *resultMoney;
+        if ([categoryName isEqualToString:@"该时段总金钱"]) {
+            resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", lastStartDate,lastnextEndDay,[NSNumber numberWithInteger:moneyType]];
+        }else
+        {
+            resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ? AND item_category = ? ", lastStartDate,lastnextEndDay,[NSNumber numberWithInteger:moneyType],categoryName];
+        }
         
-        FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ? AND item_category = ? ", lastStartDate,lastnextEndDay,[NSNumber numberWithInteger:moneyType],categoryName];
         if ([resultMoney next]) {
             double totalMoney =  [resultMoney doubleForColumnIndex:0];
             [self.chartDataArray addObject:[NSNumber numberWithDouble:totalMoney]];
@@ -244,8 +257,8 @@
         return [PNLineChartDataItem dataItemWithY:yValue];
     };
     [self.mainChart updateChartData:@[data01]];
-    [self.axisChart updateChartData:@[data01]];
-
+    //    [self.axisChart updateChartData:@[data01]];
+    [self.axisChart prepareYLabelsWithData:@[data01]];
 }
 
 
@@ -288,7 +301,6 @@
     [self.view addSubview:self.dateRangeLabel];
     
     
-    
 }
 
 
@@ -315,24 +327,35 @@
 {
     CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*3/5;
     
-    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, 800, SCREEN_WIDTH*3/5)];
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, 700, SCREEN_WIDTH*3/5)];
     lineChart.chartMarginLeft = 0;
     lineChart.backgroundColor = [UIColor clearColor];
     lineChart.yLabelColor = [UIColor clearColor];
     lineChart.xLabelColor = PNLightGrey;
     
-//    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
+
+    
+    //    [lineChart setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
     [lineChart setXLabels:self.chartDatesArray];
     
-    UIScrollView *chartScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(35, tableY, SCREEN_WIDTH-40, SCREEN_WIDTH*3/5)];
+    UIScrollView *chartScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(35, tableY, SCREEN_WIDTH-35, SCREEN_WIDTH*3/5)];
     self.mychartScroll = chartScroll;
-    chartScroll.contentSize = CGSizeMake(800, chartScroll.frame.size.height);
+    chartScroll.contentSize = CGSizeMake(700, chartScroll.frame.size.height);
     chartScroll.delegate = self;
+    chartScroll.bounces = NO;
     chartScroll.showsHorizontalScrollIndicator = NO;
     [chartScroll addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
     
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, 700, SCREEN_WIDTH*3/5 - lineChart.chartMarginBottom);
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.46].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor, nil];
+    
+    gradientLayer.startPoint = CGPointMake(0.0f, 1.0f);
+    gradientLayer.endPoint = CGPointMake(0.0f, 0.0f);
+    chartScroll.layer.mask = gradientLayer;
+    
+    [chartScroll.layer insertSublayer:gradientLayer atIndex:0];
     // Line Chart No.1
-//    NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332];
     NSArray * data01Array = [NSArray arrayWithArray:self.chartDataArray];
     PNLineChartData *data01 = [PNLineChartData new];
     data01.inflexionPointStyle = PNLineChartPointStyleCircle;
@@ -356,7 +379,7 @@
     [chartScroll addSubview:lineChart];
     [self.view addSubview:chartScroll];
     self.mainChart = lineChart;
-
+    
     
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
@@ -373,7 +396,7 @@
 {
     CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*3/5;
     
-    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, tableY, 800, SCREEN_WIDTH*3/5)];
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, tableY, 700, SCREEN_WIDTH*3/5)];
     lineChart.backgroundColor = [UIColor clearColor];
     lineChart.chartMarginTop = 10;
     lineChart.yLabelColor = PNLightGrey;
@@ -382,7 +405,6 @@
     
     
     // Line Chart No.1
-//    NSArray * data01Array = @[@60.1, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332, @160.1, @126.4, @262.2, @186.2,@111.1,@332];
     NSArray * data01Array = [NSArray arrayWithArray:self.chartDataArray];
     PNLineChartData *data01 = [PNLineChartData new];
     data01.inflexionPointStyle = PNLineChartPointStyleCircle;
@@ -395,6 +417,7 @@
     };
     lineChart.chartData = @[data01];
     lineChart.showCoordinateAxis = NO;
+    lineChart.showLabel = YES;
     lineChart.showAxisY = YES;
     lineChart.axisColor = PNLightGrey;
     lineChart.axisWidth = 1.0f;
@@ -471,7 +494,6 @@
 #pragma mark Table view delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"heightForRowAtIndexPath");
     return SCREEN_WIDTH/9;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -479,14 +501,15 @@
     return SCREEN_WIDTH/16;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"didSelectRowAtIndexPath");
     
+//    UITableViewCell *cellbefore = [tableView cellForRowAtIndexPath:currentIndexPath];
     UITableViewCell *cellbefore = [tableView cellForRowAtIndexPath:currentIndexPath];
     if ([cellbefore isKindOfClass:[trendTableViewCell class]]) {
         trendTableViewCell *itemCell = (trendTableViewCell *)cellbefore;
         [itemCell.category setTextColor:TextColor];
         [itemCell.seperator setHidden:YES];
     }
+    [cellbefore setNeedsDisplay];
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[trendTableViewCell class]]) {
@@ -494,14 +517,19 @@
         [itemCell.category setTextColor:[UIColor colorWithRed:1.0f green:0.65f blue:0.0f alpha:1.0f]];
         [itemCell.seperator setHidden:NO];
         if (indexPath.section == 1) {
-            [self prepareChartDataFor:itemCell.category.text OfType:1];
+            [self prepareChartDataFor:itemCell.category.text OfType:0];
         }else if(indexPath.section == 2)
         {
-            [self prepareChartDataFor:itemCell.category.text OfType:0];
+            [self prepareChartDataFor:itemCell.category.text OfType:1];
+        }else if (indexPath.section == 0)
+        {
+            
+            [self prepareChartDataFor:@"该时段总金钱" OfType:indexPath.row];
+            
         }
     }
     currentIndexPath = indexPath;
-
+    
     
 }
 
@@ -537,10 +565,10 @@
             [dateLabel setText:@"收支总览"];
             break;
         case 1:
-            [dateLabel setText:@"收入明细"];
+            [dateLabel setText:@"支出明细"];
             break;
         case 2:
-            [dateLabel setText:@"支出明细"];
+            [dateLabel setText:@"收入明细"];
             break;
             
         default:
@@ -555,10 +583,10 @@
         return self.totalDataArray.count;
     }else if (section == 1)
     {
-        return self.incomeDataArray.count;
+        return self.expenseDataArray.count;
     }else
     {
-        return self.expenseDataArray.count;
+        return self.incomeDataArray.count;
     }
 }
 
@@ -580,10 +608,10 @@
         dataArray = [NSArray arrayWithArray:self.totalDataArray];
     }else if(indexPath.section == 1)
     {
-        dataArray = [NSArray arrayWithArray:self.incomeDataArray];
+        dataArray = [NSArray arrayWithArray:self.expenseDataArray];
     }else if(indexPath.section == 2)
     {
-        dataArray = [NSArray arrayWithArray:self.expenseDataArray];
+        dataArray = [NSArray arrayWithArray:self.incomeDataArray];
     }
     
     NSArray *oneRowData = [dataArray objectAtIndex:indexPath.row];

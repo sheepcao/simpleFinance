@@ -85,7 +85,7 @@
 
 - (void)updateChartData:(NSArray *)data;
 
-
+-(void)prepareYLabelsWithData:(NSArray *)data;
 /**
  *  returns the Legend View, or nil if no chart data is present. 
  *  The origin of the legend frame is 0,0 but you can set it with setFrame:(CGRect)
