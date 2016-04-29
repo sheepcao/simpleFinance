@@ -15,6 +15,8 @@
 #import "LGGradientBackgroundView/LGGradientBackgroundView.h"
 
 
+#define lineChartWidth  700
+
 @interface trendViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 {
     NSIndexPath *currentIndexPath;
@@ -25,9 +27,9 @@
     NSInteger dataType;  // 0---money,1---increase,2---ratio
     NSInteger sectionCount;
 }
-@property (weak, nonatomic) IBOutlet LGGradientBackgroundView *chartEffectView;
 @property (nonatomic,strong) NSString *startDate;
 @property (nonatomic,strong) NSString *endDate;
+@property (nonatomic,strong)  UILabel *myDataExplain;
 @property (nonatomic,strong) UILabel *dateRangeLabel;
 @property (nonatomic,strong) UISegmentedControl *mySegmentedArray;
 @property (strong, nonatomic)  UITableView *maintableView;
@@ -46,10 +48,15 @@
 @end
 
 @implementation trendViewController
+{
+    dispatch_source_t _timer;
+}
 @synthesize db;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    
     NSDate * todayDate = [NSDate date];
     weekStart = [[CommonUtility sharedCommonUtility] weekStartDayOf:todayDate];
     weekEnd = [[CommonUtility sharedCommonUtility] weekEndDayOf:todayDate];
@@ -64,8 +71,27 @@
 
     [self configLineChartAxis];
     [self configLineChart];
-    //    [self configLineChartAxis];
-    //    [self configLineChart];
+    
+    
+    
+    dispatch_queue_t  queue = dispatch_queue_create("com.firm.app.timer", 0);
+    _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 4ull * NSEC_PER_SEC), 5ull * NSEC_PER_SEC, 1ull * NSEC_PER_SEC);
+    
+    dispatch_source_set_event_handler(_timer, ^{
+        
+        NSLog(@"done on custom background queue");
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"done on main queue");
+            [self dataTypeChanged:nil];
+        });
+    });
+    
+    dispatch_resume(_timer);
+    
+
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -95,13 +121,13 @@
     for (int i = 0 ; i<2; i++) {
         NSMutableArray *moneyTotalsArray = [[NSMutableArray alloc] initWithCapacity:4];
         (i == 1)?[moneyTotalsArray addObject:@"收入"] : [moneyTotalsArray addObject:@"支出"];
-        FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", startDate,nextEndDay,[NSNumber numberWithInt:i]];
+        FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", startDate,nextEndDay,[NSNumber numberWithInt:i]];
         if ([resultMoney next]) {
             double totalIncome =  [resultMoney doubleForColumnIndex:0];
             [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f",totalIncome]];
         }
         
-        FMResultSet *lastResultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", lastStartDate,lastnextEndDay,[NSNumber numberWithInt:i]];
+        FMResultSet *lastResultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", lastStartDate,lastnextEndDay,[NSNumber numberWithInt:i]];
         if ([lastResultMoney next]) {
             double lastTotalIncome =  [lastResultMoney doubleForColumnIndex:0];
             double totalIncome = [moneyTotalsArray[1] doubleValue];
@@ -116,11 +142,13 @@
                 }
             }else
             {
-                [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f",compareIncome]];
                 if (lastTotalIncome <0.001) {
-                    [moneyTotalsArray addObject:@"0%"];
+                    [moneyTotalsArray addObject:[NSString stringWithFormat:@"+%.2f",compareIncome]];
+                    [moneyTotalsArray addObject:@"+0%"];
+
                 }else
                 {
+                    [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f",compareIncome]];
                     [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f%%",compareIncome*100/lastTotalIncome]];
                 }
             }
@@ -134,7 +162,7 @@
     for (int i = 0; i<2; i++) {
         
         NSMutableArray *allCategories = [[NSMutableArray alloc] init];
-        FMResultSet *rs = [db executeQuery:@"select distinct item_category from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", lastStartDate,nextEndDay,[NSNumber numberWithInt:i]];
+        FMResultSet *rs = [db executeQuery:@"select distinct item_category from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", lastStartDate,nextEndDay,[NSNumber numberWithInt:i]];
         while ([rs next]) {
             NSString *categoryName = [rs stringForColumn:@"item_category"];
             [allCategories addObject:categoryName];
@@ -144,13 +172,13 @@
             NSMutableArray *moneyTotalsArray = [[NSMutableArray alloc] initWithCapacity:4];
             [moneyTotalsArray addObject:oneCategory];
             
-            FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ? AND item_category = ? ", startDate,nextEndDay,[NSNumber numberWithInt:i],oneCategory];
+            FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ? AND item_category = ? ", startDate,nextEndDay,[NSNumber numberWithInt:i],oneCategory];
             if ([resultMoney next]) {
                 double totalMoney =  [resultMoney doubleForColumnIndex:0];
                 [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f",totalMoney]];
             }
             
-            FMResultSet *lastResultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?  AND item_category = ? ", lastStartDate,lastnextEndDay,[NSNumber numberWithInt:i],oneCategory];
+            FMResultSet *lastResultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?  AND item_category = ? ", lastStartDate,lastnextEndDay,[NSNumber numberWithInt:i],oneCategory];
             if ([lastResultMoney next]) {
                 double lastTotalIncome =  [lastResultMoney doubleForColumnIndex:0];
                 double totalIncome = [moneyTotalsArray[1] doubleValue];
@@ -209,7 +237,7 @@
         NSLog(@"mainVC/Could not open db.");
         return;
     }
-    for (int i = 6; i>=0; i--) {
+    for (int i = 8; i>=0; i--) {
         
         NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:self.endDate andDaysToAdd:1];
         
@@ -233,10 +261,10 @@
         
         FMResultSet *resultMoney;
         if ([categoryName isEqualToString:@"该时段总金钱"]) {
-            resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", lastStartDate,lastnextEndDay,[NSNumber numberWithInteger:moneyType]];
+            resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", lastStartDate,lastnextEndDay,[NSNumber numberWithInteger:moneyType]];
         }else
         {
-            resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ? AND item_category = ? ", lastStartDate,lastnextEndDay,[NSNumber numberWithInteger:moneyType],categoryName];
+            resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ? AND item_category = ? ", lastStartDate,lastnextEndDay,[NSNumber numberWithInteger:moneyType],categoryName];
         }
         
         if ([resultMoney next]) {
@@ -257,7 +285,6 @@
         return [PNLineChartDataItem dataItemWithY:yValue];
     };
     [self.mainChart updateChartData:@[data01]];
-    //    [self.axisChart updateChartData:@[data01]];
     [self.axisChart prepareYLabelsWithData:@[data01]];
 }
 
@@ -322,17 +349,25 @@
     currentIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self refreshDataFrom:self.startDate andEndDay:self.endDate];
     [self tableView:self.maintableView didSelectRowAtIndexPath:currentIndexPath];
-
+    
+    
+    UILabel *dataExplain = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH -120, tableY, 92, SCREEN_WIDTH/15)];
+    [dataExplain setText:@"金 额"];
+    dataExplain.textAlignment = NSTextAlignmentRight;
+    dataExplain.textColor = [UIColor colorWithRed:253/255.0f green:197/255.0f blue:65/255.0f alpha:1.0f];
+    dataExplain.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:SCREEN_WIDTH/10-18];
+    self.myDataExplain = dataExplain;
+    [self.view addSubview:dataExplain];
+    
 }
 
 -(void)configLineChart
 {
     CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*11/20;
     
-    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, 600, SCREEN_WIDTH*11/20)];
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 0, lineChartWidth, SCREEN_WIDTH*11/20)];
     lineChart.chartMarginLeft = 0;
-    lineChart.chartMarginRight = 60;
-
+    lineChart.chartMarginRight = 0;
     lineChart.backgroundColor = [UIColor clearColor];
     lineChart.yLabelColor = [UIColor clearColor];
     lineChart.xLabelColor = PNWhite;
@@ -341,16 +376,20 @@
     [lineChart setXLabels:self.chartDatesArray];
     
     UIScrollView *chartScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(35, tableY, SCREEN_WIDTH-35, SCREEN_WIDTH*11/20)];
-    chartScroll.contentSize = CGSizeMake(600, chartScroll.frame.size.height);
+    self.mychartScroll = chartScroll;
+
+    chartScroll.contentSize = CGSizeMake(lineChartWidth, chartScroll.frame.size.height);
     chartScroll.delegate = self;
     chartScroll.bounces = NO;
     chartScroll.showsHorizontalScrollIndicator = NO;
     
-    [chartScroll setContentOffset:CGPointMake(600-50 - (SCREEN_WIDTH - 35) , 0)];
+    [UIView animateWithDuration:0.49f delay:0.5f options:UIViewAnimationOptionLayoutSubviews animations:^{
+        [self.mychartScroll setContentOffset:CGPointMake(lineChartWidth -50- (SCREEN_WIDTH - 35) , 0)];
+    } completion:nil];
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = CGRectMake(0, 0, 600, SCREEN_WIDTH*11/20 - lineChart.chartMarginBottom);
-    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.46].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor, nil];
+    gradientLayer.frame = CGRectMake(0, 0, lineChartWidth, SCREEN_WIDTH*11/20 - lineChart.chartMarginBottom);
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.41].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor, nil];
     
     gradientLayer.startPoint = CGPointMake(0.0f, 1.0f);
     gradientLayer.endPoint = CGPointMake(0.0f, 0.0f);
@@ -390,7 +429,7 @@
 {
     CGFloat tableY = SCREEN_HEIGHT - SCREEN_WIDTH*11/20;
     
-    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, tableY, 700, SCREEN_WIDTH*11/20)];
+    PNLineChart * lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, tableY, lineChartWidth, SCREEN_WIDTH*11/20)];
     lineChart.backgroundColor = [UIColor clearColor];
     lineChart.chartMarginTop = 10;
     lineChart.yLabelColor = PNWhite;
@@ -476,6 +515,9 @@
     NSIndexPath *firstIndex = [NSIndexPath indexPathForRow:0 inSection:0];
     [self tableView:self.maintableView didSelectRowAtIndexPath:firstIndex];
     [self refreshDataFrom:self.startDate andEndDay:self.endDate];
+    [UIView animateWithDuration:0.41f delay:0.36f options:UIViewAnimationOptionLayoutSubviews animations:^{
+        [self.mychartScroll setContentOffset:CGPointMake(lineChartWidth -50 - (SCREEN_WIDTH - 35) , 0)];
+    } completion:nil];
 
 }
 
@@ -494,7 +536,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return SCREEN_WIDTH/16;
+    return SCREEN_WIDTH/15;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -553,7 +595,7 @@
     headerView.backgroundColor = [UIColor clearColor];
     UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, headerView.frame.size.height - 18, 160, 18)];
     dateLabel.textAlignment = NSTextAlignmentLeft;
-    dateLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/28];
+    dateLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: SCREEN_WIDTH/10 -18];
     dateLabel.textColor = [UIColor colorWithRed:253/255.0f green:197/255.0f blue:65/255.0f alpha:1.0f];
     [headerView addSubview:dateLabel];
     switch (section) {
@@ -625,6 +667,7 @@
 
 -(void)dataTypeChanged:(UIButton *)sender
 {
+    NSArray *explainArray = @[@"金 额",@"环 比",@"幅 度"];
     dataType ++;
     dataType = dataType%3;
     [UIView transitionWithView: self.maintableView
@@ -635,6 +678,17 @@
          [self.maintableView reloadData];
      }
                     completion: nil];
+    
+    [UIView transitionWithView: self.myDataExplain
+
+                      duration: 0.45f
+                       options: UIViewAnimationOptionTransitionCrossDissolve
+                    animations: ^(void)
+     {
+            [self.myDataExplain setText: explainArray[dataType]];
+     }
+                    completion: nil];
+
     
 }
 

@@ -93,7 +93,7 @@
     NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDate andDaysToAdd:1];
 
     
-    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", startDate,nextEndDay];
+    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", startDate,nextEndDay];
     
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
@@ -102,16 +102,17 @@
         oneItem.itemDescription = [rs stringForColumn:@"item_description"];
         oneItem.itemType = [rs intForColumn:@"item_type"];
         oneItem.createdTime = [rs stringForColumn:@"create_time"];
+        oneItem.targetTime = [rs stringForColumn:@"target_date"];
         oneItem.moneyAmount = [rs doubleForColumn:@"money"];
         [self.timeWindowItems addObject:oneItem];
     }
     //
-    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", startDate,endDate];
+    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", startDate,endDate];
     if ([resultIncome next]) {
         self.sumIncome =  [resultIncome doubleForColumnIndex:0];
     }
     
-    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", startDate,endDate];
+    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", startDate,endDate];
     
     if ([resultExpense next]) {
         self.sumExpense =  [resultExpense doubleForColumnIndex:0];

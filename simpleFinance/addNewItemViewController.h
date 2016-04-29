@@ -24,6 +24,7 @@
 @property (nonatomic,strong) NSString *editingNote;
 @property (nonatomic,strong) NSString *editingCategory;
 @property (nonatomic,strong) NSNumber *editingID;
+@property (nonatomic ,strong) NSString *targetDate;
 
 
 @end

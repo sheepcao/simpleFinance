@@ -16,7 +16,7 @@
 @property (strong , nonatomic) NSString *itemDescription;
 @property  double moneyAmount;
 @property (strong , nonatomic) NSString *createdTime;
-
+@property (strong , nonatomic) NSString *targetTime;
 
 @end
 

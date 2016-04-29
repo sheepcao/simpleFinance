@@ -36,6 +36,8 @@
 
 @property (nonatomic,strong) FMDatabase *db;
 
+
+
 @property (nonatomic,strong) NSMutableArray *incomeCategoryArray;
 @property (nonatomic,strong) NSMutableArray *expenseCategoryArray;
 
@@ -54,7 +56,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
@@ -557,7 +559,7 @@
         }
     }else
     {
-        BOOL sql = [db executeUpdate:@"insert into ITEMINFO (item_category,item_type,item_description,money,create_time) values (?,?,?,?,datetime('now', 'localtime'))" , self.categoryLabel.text, [NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.noteBody.text,[NSNumber numberWithDouble:[self.InputLabel.text doubleValue]]];
+        BOOL sql = [db executeUpdate:@"insert into ITEMINFO (item_category,item_type,item_description,money,target_date,create_time) values (?,?,?,?,?,datetime('now', 'localtime'))" , self.categoryLabel.text, [NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex],self.noteBody.text,[NSNumber numberWithDouble:[self.InputLabel.text doubleValue]],self.targetDate];
         
         if (!sql) {
             NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);

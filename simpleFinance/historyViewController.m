@@ -139,7 +139,7 @@
     NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays: self.recordDate andDaysToAdd:1];
     
     
-    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", thisDay,nextEndDay];
+    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", thisDay,nextEndDay];
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
         
@@ -148,18 +148,19 @@
         oneItem.itemDescription = [rs stringForColumn:@"item_description"];
         oneItem.itemType = [rs intForColumn:@"item_type"];
         oneItem.createdTime = [rs stringForColumn:@"create_time"];
+        oneItem.targetTime = [rs stringForColumn:@"target_date"];
         oneItem.moneyAmount = [rs doubleForColumn:@"money"];
         [self.dayItems addObject:oneItem];
         
     }
     //
-    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", thisDay,nextEndDay];
+    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", thisDay,nextEndDay];
     if ([resultIncome next]) {
         double sumIncome =  [resultIncome doubleForColumnIndex:0];
         [self.summaryVC.monthIncome setText:[NSString stringWithFormat:@"%.0f",sumIncome]];
     }
     
-    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", thisDay,nextEndDay];
+    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", thisDay,nextEndDay];
     
     if ([resultExpense next]) {
         double sumExpense =  [resultExpense doubleForColumnIndex:0];
@@ -271,7 +272,9 @@
 {
     addNewItemViewController* addItemVC = [[addNewItemViewController alloc] init];
     [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
-    
+    NSString *targetDate = [NSString stringWithFormat:@"%@ 10:10:10",self.recordDate];
+    addItemVC.targetDate = targetDate;
+
     return addItemVC;
 }
 

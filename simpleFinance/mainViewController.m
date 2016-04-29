@@ -165,7 +165,7 @@
     NSString *startMonthDay = [[CommonUtility sharedCommonUtility] firstMonthDate];
     NSString *endMonthDay = [[CommonUtility sharedCommonUtility] firstNextMonthDate];
 
-    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", today,tomorrow];
+    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", today,tomorrow];
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
         
@@ -175,18 +175,19 @@
         oneItem.itemDescription = [rs stringForColumn:@"item_description"];
         oneItem.itemType = [rs intForColumn:@"item_type"];
         oneItem.createdTime = [rs stringForColumn:@"create_time"];
+        oneItem.targetTime = [rs stringForColumn:@"target_date"];
         oneItem.moneyAmount = [rs doubleForColumn:@"money"];
         [self.todayItems addObject:oneItem];
         
     }
 //    
-    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", startMonthDay,endMonthDay];
+    FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", startMonthDay,endMonthDay];
     if ([resultIncome next]) {
        double sumIncome =  [resultIncome doubleForColumnIndex:0];
         [self.summaryVC.monthIncome setText:[NSString stringWithFormat:@"%.0f",sumIncome]];
     }
     
-    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", startMonthDay,endMonthDay];
+    FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", startMonthDay,endMonthDay];
     
     if ([resultExpense next]) {
         double sumExpense =  [resultExpense doubleForColumnIndex:0];
@@ -369,6 +370,16 @@
 {
     addNewItemViewController* addItemVC = [[addNewItemViewController alloc] init];
     [addItemVC setTransitioningDelegate:[RZTransitionsManager shared]];
+    
+    NSDate *targetDay = [NSDate date];
+    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+    [dateFormatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    dateFormatter1.calendar = cal;
+    
+    NSString *targetDate = [dateFormatter1 stringFromDate:targetDay];
+    addItemVC.targetDate = targetDate;
 
     return addItemVC;
 }

@@ -103,10 +103,10 @@
         return;
     }
 
-    FMResultSet *rs = [db executeQuery:@"select DISTINCT create_time from ITEMINFO"];
+    FMResultSet *rs = [db executeQuery:@"select DISTINCT target_date from ITEMINFO"];
     while ([rs next]) {
         
-        NSString *dateString = [rs stringForColumn:@"create_time"];
+        NSString *dateString = [rs stringForColumn:@"target_date"];
         NSArray *timeParts = [dateString componentsSeparatedByString:@" "];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         NSCalendar *cal = [[NSCalendar alloc]
@@ -181,26 +181,7 @@
         return;
     }
     
-    
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-////    NSString *dateString = [dateFormatter stringFromDate:today];
-//    NSString *selectString = [dateFormatter stringFromDate:date];
-//
-//    if ([dateString isEqualToString:selectString]) {
-//        [self.navigationController popViewControllerAnimated:YES];
-//        return;
-//    }
-//    
-//    for (NSDate *eventDate in self.eventDateArray) {
-//        if ([date isEqualToDate:eventDate])
-//        {
-//            historyViewController *historyVC = [[historyViewController alloc] initWithNibName:@"historyViewController" bundle:nil];
-//            historyVC.recordDate = selectString;
-//            [self.navigationController pushViewController:historyVC animated:YES];
-//            return;
-//        }
-//    }
+
 
 }
 

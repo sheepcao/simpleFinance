@@ -76,7 +76,7 @@
     NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDate andDaysToAdd:1];
     
     
-    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where item_category = ? AND item_type = ? AND strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", self.categoryName,[NSNumber numberWithInteger:self.categoryType],startDate,nextEndDay];
+    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where item_category = ? AND item_type = ? AND strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", self.categoryName,[NSNumber numberWithInteger:self.categoryType],startDate,nextEndDay];
     
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
@@ -85,6 +85,7 @@
         oneItem.itemDescription = [rs stringForColumn:@"item_description"];
         oneItem.itemType = [rs intForColumn:@"item_type"];
         oneItem.createdTime = [rs stringForColumn:@"create_time"];
+        oneItem.targetTime = [rs stringForColumn:@"target_date"];
         oneItem.moneyAmount = [rs doubleForColumn:@"money"];
         [allItems addObject:oneItem];
     }
@@ -121,14 +122,14 @@
     
     //
     double catgoryMoney = 0.0f;
-    FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_category = ? AND item_type = ?", startDate,nextEndDay,self.categoryName,[NSNumber numberWithInteger:self.categoryType]];
+    FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_category = ? AND item_type = ?", startDate,nextEndDay,self.categoryName,[NSNumber numberWithInteger:self.categoryType]];
     if ([resultMoney next]) {
         catgoryMoney =  [resultMoney doubleForColumnIndex:0];
         [self.moneyLabel setText:[NSString stringWithFormat:@"%.2f",catgoryMoney]];
         
     }
     
-    FMResultSet *resultRatio = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", startDate,nextEndDay,[NSNumber numberWithInteger:self.categoryType]];
+    FMResultSet *resultRatio = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", startDate,nextEndDay,[NSNumber numberWithInteger:self.categoryType]];
     if ([resultRatio next]) {
         double sumMoney =  [resultRatio doubleForColumnIndex:0];
         if (sumMoney>0.0001) {
@@ -139,7 +140,7 @@
         }
     }
     
-    FMResultSet *resultCount = [db executeQuery:@"select count(*) from ITEMINFO where strftime('%s', create_time) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_category = ? AND item_type = ?", startDate,nextEndDay,self.categoryName,[NSNumber numberWithInteger:self.categoryType]];
+    FMResultSet *resultCount = [db executeQuery:@"select count(*) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_category = ? AND item_type = ?", startDate,nextEndDay,self.categoryName,[NSNumber numberWithInteger:self.categoryType]];
     
     if ([resultCount next]) {
         int moneyCount =  [resultCount intForColumnIndex:0];
