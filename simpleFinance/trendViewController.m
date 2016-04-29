@@ -55,7 +55,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     
     NSDate * todayDate = [NSDate date];
     weekStart = [[CommonUtility sharedCommonUtility] weekStartDayOf:todayDate];
@@ -65,18 +65,18 @@
     dataType = 0;
     sectionCount = 0;
     
-
+    
     [self configTopbar];
     [self configTable];
-
+    
     [self configLineChartAxis];
     [self configLineChart];
     
     
     
-    dispatch_queue_t  queue = dispatch_queue_create("com.firm.app.timer", 0);
+    dispatch_queue_t  queue = dispatch_queue_create("com.sheepcao.app.timer", 0);
     _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 4ull * NSEC_PER_SEC), 5ull * NSEC_PER_SEC, 1ull * NSEC_PER_SEC);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 7ull * NSEC_PER_SEC), 8ull * NSEC_PER_SEC, 1ull * NSEC_PER_SEC);
     
     dispatch_source_set_event_handler(_timer, ^{
         
@@ -91,7 +91,7 @@
     
     dispatch_resume(_timer);
     
-
+    
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -145,11 +145,15 @@
                 if (lastTotalIncome <0.001) {
                     [moneyTotalsArray addObject:[NSString stringWithFormat:@"+%.2f",compareIncome]];
                     [moneyTotalsArray addObject:@"+0%"];
-
+                    
                 }else
                 {
                     [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f",compareIncome]];
-                    [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f%%",compareIncome*100/lastTotalIncome]];
+                    NSString *ratio = [NSString stringWithFormat:@"%.2f%%",compareIncome*100/lastTotalIncome];
+                    if ([CommonUtility myContainsStringFrom:ratio forSubstring:@"100.00%"]) {
+                        ratio = @"-100%";
+                    }
+                    [moneyTotalsArray addObject:ratio];
                 }
             }
         }
@@ -193,12 +197,17 @@
                     }
                 }else
                 {
-                    [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f",compareIncome]];
                     if (lastTotalIncome <0.001) {
-                        [moneyTotalsArray addObject:@"0%"];
+                        [moneyTotalsArray addObject:[NSString stringWithFormat:@"+%.2f",compareIncome]];
+                        [moneyTotalsArray addObject:@"+0%"];
                     }else
                     {
-                        [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f%%",compareIncome*100/lastTotalIncome]];
+                        [moneyTotalsArray addObject:[NSString stringWithFormat:@"%.2f",compareIncome]];
+                        NSString *ratio = [NSString stringWithFormat:@"%.2f%%",compareIncome*100/lastTotalIncome];
+                        if ([CommonUtility myContainsStringFrom:ratio forSubstring:@"100.00%"]) {
+                            ratio = @"-100%";
+                        }
+                        [moneyTotalsArray addObject:ratio];
                     }
                 }
             }
@@ -245,7 +254,7 @@
         NSString *lastnextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:nextEndDay andDaysToAdd:daysOffsite * i];
         
         NSString *lastDayDisplay = [[CommonUtility sharedCommonUtility] dateByAddingDays:lastnextEndDay andDaysToAdd:-1];
-
+        
         
         NSArray *dateStartArray = [lastStartDate componentsSeparatedByString:@"-"];
         NSArray *dateEndArray = [lastDayDisplay componentsSeparatedByString:@"-"];
@@ -372,12 +381,12 @@
     lineChart.yLabelColor = [UIColor clearColor];
     lineChart.xLabelColor = PNWhite;
     lineChart.xLabelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.0f];
-
+    
     [lineChart setXLabels:self.chartDatesArray];
     
     UIScrollView *chartScroll = [[UIScrollView alloc] initWithFrame:CGRectMake(35, tableY, SCREEN_WIDTH-35, SCREEN_WIDTH*11/20)];
     self.mychartScroll = chartScroll;
-
+    
     chartScroll.contentSize = CGSizeMake(lineChartWidth, chartScroll.frame.size.height);
     chartScroll.delegate = self;
     chartScroll.bounces = NO;
@@ -389,7 +398,7 @@
     
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, lineChartWidth, SCREEN_WIDTH*11/20 - lineChart.chartMarginBottom);
-    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.41].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.0].CGColor, nil];
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.41].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.012].CGColor, nil];
     
     gradientLayer.startPoint = CGPointMake(0.0f, 1.0f);
     gradientLayer.endPoint = CGPointMake(0.0f, 0.0f);
@@ -435,7 +444,7 @@
     lineChart.yLabelColor = PNWhite;
     lineChart.xLabelColor = [UIColor clearColor];
     lineChart.yLabelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.0f];
-
+    
     [lineChart setXLabels:self.chartDatesArray];
     
     
@@ -518,7 +527,7 @@
     [UIView animateWithDuration:0.41f delay:0.36f options:UIViewAnimationOptionLayoutSubviews animations:^{
         [self.mychartScroll setContentOffset:CGPointMake(lineChartWidth -50 - (SCREEN_WIDTH - 35) , 0)];
     } completion:nil];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -540,7 +549,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    UITableViewCell *cellbefore = [tableView cellForRowAtIndexPath:currentIndexPath];
+    //    UITableViewCell *cellbefore = [tableView cellForRowAtIndexPath:currentIndexPath];
     UITableViewCell *cellbefore = [tableView cellForRowAtIndexPath:currentIndexPath];
     if ([cellbefore isKindOfClass:[trendTableViewCell class]]) {
         trendTableViewCell *itemCell = (trendTableViewCell *)cellbefore;
@@ -657,6 +666,7 @@
     if (oneRowData.count>3) {
         [cell.category setText:oneRowData[0]];
         NSString *money = [NSString stringWithFormat:@"%@",oneRowData[dataType + 1]];
+        
         money = [money componentsSeparatedByString:@".00"][0];
         [cell.money setTitle:money forState:UIControlStateNormal];
         [cell makeTextColorForIncrease:oneRowData[3]];
@@ -680,15 +690,15 @@
                     completion: nil];
     
     [UIView transitionWithView: self.myDataExplain
-
+     
                       duration: 0.45f
                        options: UIViewAnimationOptionTransitionCrossDissolve
                     animations: ^(void)
      {
-            [self.myDataExplain setText: explainArray[dataType]];
+         [self.myDataExplain setText: explainArray[dataType]];
      }
                     completion: nil];
-
+    
     
 }
 

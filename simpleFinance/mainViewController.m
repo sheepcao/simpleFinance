@@ -33,8 +33,6 @@
     NSIndexPath *pieChartIndexPath;
     BOOL isSwitchingChart;
     BOOL isShowOutcomeChart;
-
-
 }
 
 @property (nonatomic,strong) FMDatabase *db;
@@ -77,6 +75,7 @@
     
     self.titleTextLabel.alpha = 1.0f;
     self.moneyBookText.alpha = 0.0f;
+
     
     self.navigationController.navigationBarHidden = YES;
     self.luckyText.alpha = 1.0f;
@@ -123,7 +122,7 @@
         
     }else if (self.maintableView.contentOffset.y > -0.0001 && self.maintableView.contentOffset.y - moneyLuckSpace < 0.000001)
     {
-        self.moneyBookText.alpha = self.maintableView.contentOffset.y/moneyLuckSpace;
+        self.moneyBookText.alpha = (self.maintableView.contentOffset.y - moneyLuckSpace*2/5)/(moneyLuckSpace*3/5);
         self.titleTextLabel.alpha = 0.0f;
         self.luckyText.alpha = 0.0f;
         
@@ -679,12 +678,12 @@
             if (oneItem.itemType == 0)
             {
                 money = [NSString stringWithFormat:@"%.2f",(0 - oneItem.moneyAmount)] ;
-                [cell.money setTextColor:[UIColor colorWithRed:72/255.0f green:210/255.0f blue:86/255.0f alpha:1.0f]];
+                [cell.money setTextColor:[UIColor colorWithRed:72/255.0f green:210/255.0f blue:86/255.0f alpha:0.92f]];
 
             }else
             {
                 money =[NSString stringWithFormat:@"+%.2f",(oneItem.moneyAmount)] ;
-                [cell.money setTextColor:[UIColor colorWithRed:211/255.0f green:65/255.0f blue:43/255.0f alpha:1.0f]];
+                [cell.money setTextColor:[UIColor colorWithRed:211/255.0f green:65/255.0f blue:43/255.0f alpha:0.92f]];
 
             }
             

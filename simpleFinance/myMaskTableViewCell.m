@@ -30,7 +30,7 @@
         
         
         
-        self.money = [[roundFrameLabel alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 7, (SCREEN_WIDTH-6-20-pointRadius*2)*2/5, rowHeight-6*2)];
+        self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 7, (SCREEN_WIDTH-6-20-pointRadius*2)*2/5, rowHeight-6*2)];
         self.category.textAlignment = NSTextAlignmentLeft;
         self.title.textAlignment = NSTextAlignmentLeft;
         self.money.textAlignment = NSTextAlignmentRight;

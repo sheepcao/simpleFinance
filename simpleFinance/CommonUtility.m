@@ -357,7 +357,7 @@
         double color_G = [rs doubleForColumn:@"color_G"];
         double color_B = [rs doubleForColumn:@"color_B"];
         
-        color = [UIColor colorWithRed:color_R/255.0f green:color_G/255.0f blue:color_B/255.0f alpha:1.0f ];
+        color = [UIColor colorWithRed:color_R/255.0f green:color_G/255.0f blue:color_B/255.0f alpha:0.85f ];
     }
     [db close];
     

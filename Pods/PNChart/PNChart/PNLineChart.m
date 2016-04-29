@@ -103,9 +103,9 @@
             NSString *yText = [self formatYLabel:_yValueMin + (yStep * index)];
             
             if (yText.length>5) {
-                yText = [NSString stringWithFormat:@"%ldw",[yText integerValue]/10000];
+                yText = [NSString stringWithFormat:@"%ldw",(long)([yText integerValue]/10000)];
             }else if (yText.length>4) {
-                yText = [NSString stringWithFormat:@"%ldk",[yText integerValue]/1000];
+                yText = [NSString stringWithFormat:@"%ldk",(long)([yText integerValue]/1000)];
             }
             label.text = yText;
 //            label.text = [self formatYLabel:_yValueMin + (yStep * index)];

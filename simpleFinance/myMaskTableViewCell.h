@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "roundFrameLabel.h"
 
 @interface myMaskTableViewCell : UITableViewCell
 {
@@ -17,7 +16,7 @@
 
 @property (nonatomic,strong) UILabel *category;
 @property (nonatomic,strong) UILabel *title;
-@property (nonatomic,strong) roundFrameLabel *money;
+@property (nonatomic,strong) UILabel *money;
 @property (nonatomic,strong) UIView *seperator;
 
 
