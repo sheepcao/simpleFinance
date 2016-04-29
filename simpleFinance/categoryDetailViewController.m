@@ -94,7 +94,7 @@
     
     for (itemObj *item in allItems) {
 
-        NSArray *timeParts = [item.createdTime componentsSeparatedByString:@" "];
+        NSArray *timeParts = [item.targetTime componentsSeparatedByString:@" "];
         NSString *dateString = timeParts[0];
         
         NSArray *itemsOneDay = [itemsDic objectForKey:dateString];
@@ -438,7 +438,7 @@
     if(itemsOfDay.count>0)
     {
         itemObj *oneItem = itemsOfDay[0];
-        NSArray *timeParts = [oneItem.createdTime componentsSeparatedByString:@" "];
+        NSArray *timeParts = [oneItem.targetTime componentsSeparatedByString:@" "];
         NSString *dateString = timeParts[0];
         [dateLabel setText:dateString];
     }
