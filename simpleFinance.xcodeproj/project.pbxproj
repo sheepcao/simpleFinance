@@ -69,6 +69,8 @@
 		A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */; };
 		A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */; };
 		A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */; };
+		A4ECE27C1CD62FC0000FF10D /* categoryManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ECE27A1CD62FC0000FF10D /* categoryManagementViewController.m */; };
+		A4ECE27D1CD62FC0000FF10D /* categoryManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE27B1CD62FC0000FF10D /* categoryManagementViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -174,6 +176,9 @@
 		A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemDetailViewController.xib; sourceTree = "<group>"; };
 		A4E938E21CCB5E8A00D5DA77 /* itemDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemDetailTableViewCell.h; sourceTree = "<group>"; };
 		A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemDetailTableViewCell.m; sourceTree = "<group>"; };
+		A4ECE2791CD62FC0000FF10D /* categoryManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryManagementViewController.h; sourceTree = "<group>"; };
+		A4ECE27A1CD62FC0000FF10D /* categoryManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryManagementViewController.m; sourceTree = "<group>"; };
+		A4ECE27B1CD62FC0000FF10D /* categoryManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryManagementViewController.xib; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -274,6 +279,9 @@
 				A425B2D31CD086440008BFE2 /* trendViewController.h */,
 				A425B2D41CD086440008BFE2 /* trendViewController.m */,
 				A425B2D51CD086440008BFE2 /* trendViewController.xib */,
+				A4ECE2791CD62FC0000FF10D /* categoryManagementViewController.h */,
+				A4ECE27A1CD62FC0000FF10D /* categoryManagementViewController.m */,
+				A4ECE27B1CD62FC0000FF10D /* categoryManagementViewController.xib */,
 				A425B2CB1CCF63130008BFE2 /* itemsVC */,
 				A425B2CC1CCF631F0008BFE2 /* pieVC */,
 				A425B2D21CD085F00008BFE2 /* historyVC */,
@@ -480,6 +488,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4ECE27D1CD62FC0000FF10D /* categoryManagementViewController.xib in Resources */,
 				A4CC246B1CBE8EC3007A94F1 /* delete1.png in Resources */,
 				A4CC246D1CBE8EC3007A94F1 /* minus1.png in Resources */,
 				A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */,
@@ -569,6 +578,7 @@
 				A4CC24871CC4E964007A94F1 /* itemObj.m in Sources */,
 				A42D1C911CB60AC900C208A0 /* mainViewController.m in Sources */,
 				A490C1861CB7A887006EEEF1 /* MFSideMenuShadow.m in Sources */,
+				A4ECE27C1CD62FC0000FF10D /* categoryManagementViewController.m in Sources */,
 				A4CC24761CC0B361007A94F1 /* categoryButton.m in Sources */,
 				A4E4A2F81CC9BE6000E36AFE /* FlatDatePicker.m in Sources */,
 				A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */,

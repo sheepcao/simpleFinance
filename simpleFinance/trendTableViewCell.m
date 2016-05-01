@@ -37,12 +37,12 @@
         UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                      @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
                                                        UIFontDescriptorNameAttribute:@"AvenirNext-Medium",
-                                                       UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/10-14]
+                                                       UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/19]
                                                        }];
         UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                              @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                                UIFontDescriptorNameAttribute:@"AvenirNext-Regular",
-                                                                UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/10-16]
+                                                              @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
+                                                                UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                                UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/21.5]
                                                                 }];
         [self.money.titleLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
         [self.money.titleLabel adjustsFontSizeToFitWidth];

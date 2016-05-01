@@ -29,7 +29,7 @@
     {
         today =self.historyDate;
     }
-    [self weekDayStr:today];
+//    [self weekDayStr:today];
 
     
     NSArray *dateParts = [today componentsSeparatedByString:@"-"];
@@ -58,7 +58,7 @@
         [self.timeUnitLabel setText:@"月"];
         [self.yearLabel setText:year];
         [self.monthLabel setText:[NSString stringWithFormat:@"%ld",(long)[month integerValue]]];
-        [self.dateLabel setText:today];
+        [self.dateLabel setText:[self weekDayStr:today]];
         [self.dateLabel setHidden:NO];
         [self.calendarButton setHidden:NO];
         [self.expenseTitle setText:@"月支出"];

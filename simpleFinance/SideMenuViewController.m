@@ -9,18 +9,23 @@
 #import "SideMenuViewController.h"
 #import "global.h"
 #import "MFSideMenu.h"
+#import "trendViewController.h"
+#import "categoryManagementViewController.h"
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
-
+@property (nonatomic, strong) NSArray *menuArray;
 @end
 
 @implementation SideMenuViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT-6*80)/2, SCREEN_WIDTH*2/3, 6*80)];
+    self.menuArray = @[@"同 步 | 备 份",@"分类管理",@"流水明细",@"历史走势",@"显示模式",@"设置"];
+    
+    UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT-6*(SCREEN_WIDTH/5.5))*2/3, SCREEN_WIDTH*2/3, 6*(SCREEN_WIDTH/5.5))];
     menuTable.delegate = self;
     menuTable.dataSource = self;
     menuTable.scrollEnabled = NO;
@@ -37,7 +42,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return SCREEN_WIDTH/5.5;
 
 }
 
@@ -50,7 +55,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return self.menuArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -60,11 +65,19 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Item %d", indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.menuArray[indexPath.row]];
     cell.textLabel.textColor = TextColor;
+    UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                          @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
+                                                            UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                            UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/20]
+                                                            }];
+    [cell.textLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0.0f]];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
     return cell;
 }
 
@@ -73,11 +86,28 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    
+    if (indexPath.row ==1) {
+        categoryManagementViewController *trendVC = [[categoryManagementViewController alloc] initWithNibName:@"categoryManagementViewController" bundle:nil];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        [temp addObject:trendVC];
+        navigationController.viewControllers = temp;
+    }else if(indexPath.row ==2)
+    {
+        
+    }else if (indexPath.row == 3) {
+        trendViewController *trendVC = [[trendViewController alloc] initWithNibName:@"trendViewController" bundle:nil];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        [temp addObject:trendVC];
+        navigationController.viewControllers = temp;
+    }
     
     [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+
+    
 }
 
 @end

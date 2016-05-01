@@ -364,7 +364,7 @@
     [dataExplain setText:@"金 额"];
     dataExplain.textAlignment = NSTextAlignmentRight;
     dataExplain.textColor = [UIColor colorWithRed:253/255.0f green:197/255.0f blue:65/255.0f alpha:1.0f];
-    dataExplain.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:SCREEN_WIDTH/10-18];
+    dataExplain.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:SCREEN_WIDTH/21];
     self.myDataExplain = dataExplain;
     [self.view addSubview:dataExplain];
     
@@ -604,7 +604,7 @@
     headerView.backgroundColor = [UIColor clearColor];
     UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, headerView.frame.size.height - 18, 160, 18)];
     dateLabel.textAlignment = NSTextAlignmentLeft;
-    dateLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: SCREEN_WIDTH/10 -18];
+    dateLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size: SCREEN_WIDTH/24];
     dateLabel.textColor = [UIColor colorWithRed:253/255.0f green:197/255.0f blue:65/255.0f alpha:1.0f];
     [headerView addSubview:dateLabel];
     switch (section) {
