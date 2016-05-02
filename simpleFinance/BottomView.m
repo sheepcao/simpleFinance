@@ -20,7 +20,7 @@
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     
     // Draw them with a 2.0 stroke width so they are a bit more visible.
-    CGContextSetLineWidth(context, 1.25f);
+    CGContextSetLineWidth(context, 0.85f);
     
     CGContextMoveToPoint(context, 0.0f, 0.0f); //start at this point
     

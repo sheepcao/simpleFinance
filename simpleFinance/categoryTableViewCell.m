@@ -79,10 +79,42 @@
         categoryLabel.categoryColor = [UIColor colorWithRed:oneCategory.color_R/255.0f green:oneCategory.color_G/255.0f blue:oneCategory.color_B/255.0f alpha:1.0f];
         categoryLabel.layer.borderWidth = 0.8f;
         [categoryLabel setTitle:oneCategory.categoryName forState:UIControlStateNormal];
+        
+        //for delete button
+        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(categoryLabel.frame.origin.x-5, categoryLabel.frame.origin.y-5, 10, 10)];
+        [deleteBtn setImage:[UIImage imageNamed:@"switchChart.png"] forState:UIControlStateNormal];
+        deleteBtn.tag = 10 + 1 + i;
+        [deleteBtn addTarget:self.categoryDelegate action:@selector(categoryDeleteTap:) forControlEvents:UIControlEventTouchUpInside];
+        [deleteBtn setHidden:YES];
+        [self.contentView addSubview:deleteBtn];
+        [self.contentView bringSubviewToFront:deleteBtn];
+        
     }
 
 }
 
+-(void)showDeleteButton
+{
+    for (int i = 0; i<4; i++) {
+        UIButton *deleteBtn = [(UIButton *)self viewWithTag:(10 + 1 + i)];
+
+        if (deleteBtn) {
+            [deleteBtn setHidden:NO];
+        }
+    }
+
+}
+
+-(void)removeDeleteButton
+{
+    for (int i = 0; i<4; i++) {
+        UIButton *deleteBtn = [(UIButton *)self viewWithTag:(10 + 1 + i)];
+        
+        if (deleteBtn) {
+            [deleteBtn setHidden:YES];
+        }
+    }
+}
 
 
 
