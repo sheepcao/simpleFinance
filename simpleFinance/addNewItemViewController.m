@@ -36,8 +36,6 @@
 
 @property (nonatomic,strong) FMDatabase *db;
 
-
-
 @property (nonatomic,strong) NSMutableArray *incomeCategoryArray;
 @property (nonatomic,strong) NSMutableArray *expenseCategoryArray;
 

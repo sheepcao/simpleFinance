@@ -69,6 +69,10 @@
         categoryLabel.categoryColor = TextColor;
         categoryLabel.layer.borderWidth = 0.0f;
         [categoryLabel setTitle:@"" forState:UIControlStateNormal];
+        
+        UIButton *categoryDelete = (UIButton *)[self viewWithTag:(i+1 + 10)];
+        [categoryDelete removeFromSuperview];
+        
     }
     
     for (int i = 0; i<cateArray.count; i++) {

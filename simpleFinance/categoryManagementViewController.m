@@ -14,7 +14,7 @@
 #import "categoryObject.h"
 #import "categoryTableViewCell.h"
 
-@interface categoryManagementViewController ()<UITableViewDataSource,UITableViewDelegate,categoryTapDelegate>
+@interface categoryManagementViewController ()<UITableViewDataSource,UITableViewDelegate,categoryTapDelegate,UITextFieldDelegate>
 {
     CGFloat bottomHeight;
     BOOL willShowDeleteBtn;
@@ -24,6 +24,10 @@
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) NSMutableArray *incomeCategoryArray;
 @property (nonatomic,strong) NSMutableArray *expenseCategoryArray;
+@property (nonatomic,strong) UITextField *inputField;
+@property (nonatomic,strong) UIView *inputView;
+
+
 @end
 
 @implementation categoryManagementViewController
@@ -33,12 +37,17 @@
     [super viewDidLoad];
     
     willShowDeleteBtn = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
     
     [self prepareCategoryData];
     
     [self configTopbar];
     [self configBottomView];
     [self configCategoryPad];
+    [self configInputField];
 }
 
 -(void)prepareCategoryData
@@ -136,6 +145,7 @@
     addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     [deleteButton addTarget:self action:@selector(deleteItem:) forControlEvents:UIControlEventTouchUpInside];
+    [addNewButton addTarget:self action:@selector(addItem:) forControlEvents:UIControlEventTouchUpInside];
     
     [bottomView addSubview:deleteButton];
     [bottomView addSubview:addNewButton];
@@ -163,6 +173,42 @@
     categoryTable.delaysContentTouches = YES;
     self.categoryTableView = categoryTable;
     [self.view addSubview:categoryTable];
+}
+
+-(void)configInputField
+{
+    UIView *inputCategoryView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_WIDTH/6)];
+    self.inputView = inputCategoryView;
+    inputCategoryView.backgroundColor = [UIColor clearColor];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,5, 50, inputCategoryView.frame.size.height-12)];
+    [titleLabel setText:@"类 别 :"];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+    titleLabel.textColor = [UIColor whiteColor];
+    self.inputField = [[UITextField alloc] initWithFrame:CGRectMake(titleLabel.frame.origin.x + titleLabel.frame.size.width , 6, inputCategoryView.frame.size.width-(titleLabel.frame.origin.x + titleLabel.frame.size.width) - 60, inputCategoryView.frame.size.height-12)];
+    //    self.inputField.placeholder = @"限4字以内";
+    self.inputField.returnKeyType = UIReturnKeyDone;
+    self.inputField.delegate = self;
+    self.inputField.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.9];
+    self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    self.inputField.textColor = TextColor;
+    self.inputField.attributedPlaceholder =
+    [[NSAttributedString alloc] initWithString:@"请输入(限4字以内)"
+                                    attributes:@{
+                                                 NSForegroundColorAttributeName: [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.9],
+                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:13.5f]
+                                                 }
+     ];
+    
+    [self.view addSubview:inputCategoryView];
+    [inputCategoryView addSubview:titleLabel];
+    [inputCategoryView addSubview:self.inputField];
+    
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.inputView.frame.size.width-60, (self.inputView.frame.size.height -40)/2, 40, 40)];
+    [doneButton setTitle:@"OK" forState:UIControlStateNormal];
+    [doneButton addTarget:self action:@selector(addNewCategory) forControlEvents:UIControlEventTouchUpInside];
+    
+    [inputCategoryView addSubview:doneButton];
+    
 }
 
 
@@ -235,8 +281,65 @@
 -(void)categoryDeleteTap:(UIButton *)sender
 {
     NSLog(@"delete..........");
-}
+    UIButton *categoryButton;
+    UIView *parentView = [sender.superview viewWithTag:(sender.tag - 10)]
+    
+    ;
+    if ([parentView isKindOfClass:[UIButton class]]) {
+        categoryButton = (UIButton *)parentView;
+    }
+    NSLog(@"categoryButton.text:%@",categoryButton.titleLabel.text);
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"永久删除该类别?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"是的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        db = [[CommonUtility sharedCommonUtility] db];
+        if (![db open]) {
+            NSLog(@"mainVC/Could not open db.");
+            return;
+        }
+        
+        BOOL sql = [db executeUpdate:@"update CATEGORYINFO set is_deleted = 1 where category_name=? and category_type = ?",categoryButton.titleLabel.text,[NSNumber numberWithInteger:self.moneyTypeSeg.selectedSegmentIndex]];
+        if (!sql) {
+            NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }else
+        {
 
+            categoryObject *categoryDeleted;
+            if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
+                for (categoryObject *oneCategory in self.expenseCategoryArray) {
+                    if( [oneCategory.categoryName isEqualToString:categoryButton.currentTitle])
+                    {
+                        categoryDeleted = oneCategory;
+                        break;
+                    }
+                }
+                [self.expenseCategoryArray removeObject:categoryDeleted];
+            }else
+            {
+                for (categoryObject *oneCategory in self.incomeCategoryArray) {
+                    if( [categoryDeleted.categoryName isEqualToString:categoryButton.titleLabel.text])
+                    {
+                        categoryDeleted = oneCategory;
+                        break;
+                    }
+                }
+                [self.incomeCategoryArray addObject:categoryDeleted];
+            }
+            [self.categoryTableView reloadData];
+        }
+        [db close];
+    }];
+    
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"不" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:yesAction];
+    [alert addAction:noAction];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+}
+-(void)categoryTap:(UIButton *)sender
+{
+    NSLog(@"do nothing");
+}
 
 -(void)closeVC
 {
@@ -249,18 +352,17 @@
         [self hideDelete:sender];
     }else
     {
-
+        
         [self showDelete:sender];
     }
     
 }
-
 -(void)showDelete:(UIButton *)sender
 {
     [sender setTitle:@"取消" forState:UIControlStateNormal];
     willShowDeleteBtn = YES;
     [self.categoryTableView reloadData];
-
+    
 }
 -(void)hideDelete:(UIButton *)sender
 {
@@ -269,6 +371,93 @@
     [self.categoryTableView reloadData];
     
 }
+
+-(void)addItem:(UIButton *)sender
+{
+    NSLog(@"add Item....");
+    
+    
+    [self.inputField becomeFirstResponder];
+    
+}
+-(void)addNewCategory
+{
+    // to fix.....category OBJ
+    NSString *newCategory = self.inputField.text;
+//    NSInteger randomColor = arc4random()%255;
+    
+    categoryObject *oneCategory = [[categoryObject alloc] init];
+    
+    oneCategory.categoryName = newCategory;
+    oneCategory.color_R  = arc4random()%255;
+    oneCategory.color_G = arc4random()%255;
+    oneCategory.color_B = arc4random()%255;
+    
+    if (![db open]) {
+        NSLog(@"Could not open db.");
+        return;
+    }
+    
+    FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where is_deleted = 0 AND category_name = ? AND category_type = ?",[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex]];
+    if ([rs next]) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"您输入的类别已经存在" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        [db close];
+        return;
+    }
+
+    
+    BOOL sql = [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values (?,?,?,?,?)" ,[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex],[NSNumber numberWithDouble:oneCategory.color_R],[NSNumber numberWithDouble:oneCategory.color_G],[NSNumber numberWithDouble:oneCategory.color_B]];
+    
+    if (!sql) {
+        NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+    }else
+    {
+        if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
+            [self.expenseCategoryArray addObject:oneCategory];
+        }else
+        {
+            [self.incomeCategoryArray addObject:oneCategory];
+        }
+        self.inputField.text = @"";
+        [UIView animateWithDuration:0.25f animations:^{
+            [self.inputView setFrame:CGRectMake(0, SCREEN_HEIGHT, self.inputView.frame.size.width, self.inputView.frame.size.height)];
+        }];
+        [self.view layoutIfNeeded];
+        [self.inputField resignFirstResponder];
+        
+        [self.categoryTableView reloadData];
+    }
+    
+    [db close];
+}
+
+-(void)keyboardWasShown:(NSNotification*)notification
+{
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    [UIView animateWithDuration:0.25f animations:^{
+        [self.inputView setFrame:CGRectMake(0,SCREEN_HEIGHT - keyboardSize.height - self.inputView.frame.size.height, self.inputView.frame.size.width, self.inputView.frame.size.height)];
+    }];
+    
+    [self.view layoutIfNeeded];
+}
+
+#pragma mark UITextField delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [UIView animateWithDuration:0.25f animations:^{
+        [self.inputView setFrame:CGRectMake(0, SCREEN_HEIGHT, self.inputView.frame.size.width, self.inputView.frame.size.height)];
+    }];
+    [self.view layoutIfNeeded];
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
 -(void)segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;
     NSLog(@"Index %ld", (long)Index);

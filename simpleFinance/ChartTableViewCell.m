@@ -36,7 +36,7 @@
     self.pieChart.displayAnimated = YES;
     self.pieChart.shouldHighlightSectorOnTouch = NO;
     self.pieChart.userInteractionEnabled = NO;
-    self.pieChart.labelPercentageCutoff = 0.1;
+    self.pieChart.labelPercentageCutoff = 0.05;
     self.pieChart.duration = 0.65f;
     [self addSubview:self.pieChart];
     
