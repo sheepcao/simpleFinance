@@ -719,5 +719,13 @@
 }
 
 
+#pragma baseVC overwrite
+- (void)configUIAppearance{
+    NSLog(@"main config ui ");
+    UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [backImage setImage:[UIImage imageNamed:@"夕.jpg"]];
+    [self.view addSubview:backImage];
+    [self.view sendSubviewToBack:backImage];
+}
 
 @end

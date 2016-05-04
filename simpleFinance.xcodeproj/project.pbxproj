@@ -75,6 +75,10 @@
 		A4ECE2861CDA2997000FF10D /* monthListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE2841CDA2997000FF10D /* monthListViewController.xib */; };
 		A4ECE28A1CDA422B000FF10D /* baseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ECE2881CDA422B000FF10D /* baseViewController.m */; };
 		A4ECE28B1CDA422B000FF10D /* baseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE2891CDA422B000FF10D /* baseViewController.xib */; };
+		A4ECE2921CDA4D5D000FF10D /* 午.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE28E1CDA4D5D000FF10D /* 午.jpg */; };
+		A4ECE2931CDA4D5D000FF10D /* 夕.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE28F1CDA4D5D000FF10D /* 夕.jpg */; };
+		A4ECE29F1CDA50E8000FF10D /* 早.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE29E1CDA50E8000FF10D /* 早.jpg */; };
+		A4ECE2A91CDA545D000FF10D /* 夜.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE2A81CDA545D000FF10D /* 夜.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -189,6 +193,10 @@
 		A4ECE2871CDA422B000FF10D /* baseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseViewController.h; sourceTree = "<group>"; };
 		A4ECE2881CDA422B000FF10D /* baseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = baseViewController.m; sourceTree = "<group>"; };
 		A4ECE2891CDA422B000FF10D /* baseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = baseViewController.xib; sourceTree = "<group>"; };
+		A4ECE28E1CDA4D5D000FF10D /* 午.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "午.jpg"; sourceTree = "<group>"; };
+		A4ECE28F1CDA4D5D000FF10D /* 夕.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "夕.jpg"; sourceTree = "<group>"; };
+		A4ECE29E1CDA50E8000FF10D /* 早.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "早.jpg"; sourceTree = "<group>"; };
+		A4ECE2A81CDA545D000FF10D /* 夜.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "夜.jpg"; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -311,6 +319,10 @@
 		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A4ECE28E1CDA4D5D000FF10D /* 午.jpg */,
+				A4ECE2A81CDA545D000FF10D /* 夜.jpg */,
+				A4ECE28F1CDA4D5D000FF10D /* 夕.jpg */,
+				A4ECE29E1CDA50E8000FF10D /* 早.jpg */,
 				A4CC247E1CC4AFE1007A94F1 /* calendar.png */,
 				A4CC24801CC4AFF8007A94F1 /* calendar1.png */,
 				A4CC24671CBE8EC3007A94F1 /* delete1.png */,
@@ -512,8 +524,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4ECE2921CDA4D5D000FF10D /* 午.jpg in Resources */,
 				A4ECE27D1CD62FC0000FF10D /* categoryManagementViewController.xib in Resources */,
 				A4CC246B1CBE8EC3007A94F1 /* delete1.png in Resources */,
+				A4ECE2931CDA4D5D000FF10D /* 夕.jpg in Resources */,
 				A4CC246D1CBE8EC3007A94F1 /* minus1.png in Resources */,
 				A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */,
 				A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */,
@@ -521,12 +535,14 @@
 				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
 				A4ECE2861CDA2997000FF10D /* monthListViewController.xib in Resources */,
 				A4CC246E1CBE8EC3007A94F1 /* plus1.png in Resources */,
+				A4ECE2A91CDA545D000FF10D /* 夜.jpg in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
 				A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */,
 				A4CC247F1CC4AFE1007A94F1 /* calendar.png in Resources */,
 				A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */,
 				A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */,
 				A425B2D71CD086440008BFE2 /* trendViewController.xib in Resources */,
+				A4ECE29F1CDA50E8000FF10D /* 早.jpg in Resources */,
 				A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */,
 				A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,

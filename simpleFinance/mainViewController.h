@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "LGGradientBackgroundView/LGGradientBackgroundView.h"
+#import "baseViewController.h"
 
-@interface mainViewController : UIViewController
+@interface mainViewController : baseViewController
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moneyBookText;
 

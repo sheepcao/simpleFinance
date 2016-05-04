@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "baseViewController.h"
 
 @protocol reloadDataDelegate <NSObject>
 
@@ -14,7 +15,7 @@
 @end
 
 
-@interface addNewItemViewController : UIViewController
+@interface addNewItemViewController : baseViewController
 
 @property (nonatomic,weak)  id <reloadDataDelegate> refreshDelegate;
 

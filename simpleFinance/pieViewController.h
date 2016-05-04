@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "baseViewController.h"
 
-@interface pieViewController : UIViewController
+@interface pieViewController : baseViewController
 
 @end

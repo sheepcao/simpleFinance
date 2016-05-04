@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface baseViewController : UIViewController
-
+- (void)configUIAppearance;
 @end

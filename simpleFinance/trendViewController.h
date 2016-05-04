@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface trendViewController : UIViewController
+#import "baseViewController.h"
+@interface trendViewController : baseViewController
 
 @end
