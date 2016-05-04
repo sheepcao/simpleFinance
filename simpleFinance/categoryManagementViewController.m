@@ -13,6 +13,7 @@
 #import "CommonUtility.h"
 #import "categoryObject.h"
 #import "categoryTableViewCell.h"
+#import "MBProgressHUD.h"
 
 @interface categoryManagementViewController ()<UITableViewDataSource,UITableViewDelegate,categoryTapDelegate,UITextFieldDelegate>
 {
@@ -26,7 +27,7 @@
 @property (nonatomic,strong) NSMutableArray *expenseCategoryArray;
 @property (nonatomic,strong) UITextField *inputField;
 @property (nonatomic,strong) UIView *inputView;
-
+@property (nonatomic,strong)UILabel *alertMessage;
 
 @end
 
@@ -41,6 +42,10 @@
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
+    
+    
+
+
     
     [self prepareCategoryData];
     
@@ -382,6 +387,22 @@
 }
 -(void)addNewCategory
 {
+
+    CGFloat width =  [self.inputField.text sizeWithAttributes:@{NSFontAttributeName:self.inputField.font}].width;
+    NSLog(@"%f",width);
+    if (width>74)
+    {
+
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"您输入的类名过长";
+        [hud hide:YES afterDelay:1.5];
+        
+        return;
+    }
+    
     // to fix.....category OBJ
     NSString *newCategory = self.inputField.text;
 //    NSInteger randomColor = arc4random()%255;
@@ -433,6 +454,11 @@
     }
     
     [db close];
+}
+
+-(void)dismissAlertMessage:(UIAlertController *)alert
+{
+    [alert dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)keyboardWasShown:(NSNotification*)notification
