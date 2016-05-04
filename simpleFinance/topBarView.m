@@ -28,6 +28,7 @@
         title.backgroundColor = [UIColor clearColor];
         self.titleLabel = title;
         [self addSubview:title];
+        
     }
     return self;
 }

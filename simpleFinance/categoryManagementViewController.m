@@ -27,8 +27,8 @@
 @property (nonatomic,strong) NSMutableArray *expenseCategoryArray;
 @property (nonatomic,strong) UITextField *inputField;
 @property (nonatomic,strong) UIView *inputView;
-@property (nonatomic,strong)UILabel *alertMessage;
-
+@property (nonatomic,strong) UIView *mySortView;
+@property (nonatomic,strong) UIButton *myDeleteButton;
 @end
 
 @implementation categoryManagementViewController
@@ -42,31 +42,71 @@
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
     
+    [self.view addGestureRecognizer:tap];
     
-
-
+    NSString*sortType = [[NSUserDefaults standardUserDefaults] objectForKey:@"sortType"];
+    if (sortType) {
+        [self prepareCategoryDataBy:sortType];
+    }else
+    {
+        [self prepareCategoryDataBy:@"category_id"];
+    }
     
-    [self prepareCategoryData];
-    
-    [self configTopbar];
     [self configBottomView];
     [self configCategoryPad];
     [self configInputField];
+    [self configSortView];
+    [self configTopbar];
+
+}
+-(void)dismissKeyboard {
+    [self hideSortView];
+    [self textFieldShouldReturn:self.inputField];
 }
 
--(void)prepareCategoryData
+-(void)prepareCategoryDataBy:(NSString *)key
 {
-    self.expenseCategoryArray = [[NSMutableArray alloc] init];
-    self.incomeCategoryArray = [[NSMutableArray alloc] init];
+    if(self.expenseCategoryArray)
+    {
+        [self.expenseCategoryArray removeAllObjects];
+    }else
+    {
+        self.expenseCategoryArray = [[NSMutableArray alloc] init];
+
+    }
+    if(self.incomeCategoryArray)
+    {
+        [self.incomeCategoryArray removeAllObjects];
+    }else
+    {
+        self.incomeCategoryArray = [[NSMutableArray alloc] init];
+        
+    }
+    
     
     db = [[CommonUtility sharedCommonUtility] db];
     if (![db open]) {
         NSLog(@"addNewItem/Could not open db.");
         return;
     }
+    NSString *sqlCommand;
+    if ([key isEqualToString:@"category_id"]) {
+        sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id"];
+
+    }else if([key isEqualToString:@"recently create"])
+    {
+        sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id desc"];
+    }else
+    {
+        sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id"];
+
+    }
     
-    FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where is_deleted = 0"];
+    FMResultSet *rs = [db executeQuery:sqlCommand];
     while ([rs next]) {
         categoryObject *oneCategory = [[categoryObject alloc] init];
         
@@ -82,7 +122,43 @@
             [self.incomeCategoryArray addObject:oneCategory];
         }
     }
-    [db close];
+  
+    
+    if ([key isEqualToString:@"usage"])
+    {
+        FMResultSet *rs = [db executeQuery:@"SELECT count(*),item_category FROM ITEMINFO where item_type = 0 GROUP BY item_category ORDER BY count(*) DESC"];
+        int i = 0;
+        while ([rs next]) {
+            NSString *cateName = [rs stringForColumn:@"item_category"];
+                for (categoryObject *oneCate in self.expenseCategoryArray) {
+                    if ([oneCate.categoryName isEqualToString:cateName]) {
+                        categoryObject *oneCateTemp = oneCate;
+                        [self.expenseCategoryArray removeObject:oneCate];
+                        [self.expenseCategoryArray insertObject:oneCateTemp atIndex:i];
+                        i++;
+                        break;
+                    }
+  
+                }
+        }
+        
+            FMResultSet *rs2 = [db executeQuery:@"SELECT count(*),item_category FROM ITEMINFO where item_type = 1 GROUP BY item_category ORDER BY count(*) DESC"];
+            int j = 0;
+            while ([rs2 next]) {
+                NSString *cateName = [rs2 stringForColumn:@"item_category"];
+                for (categoryObject *oneCate in self.incomeCategoryArray) {
+                    if ([oneCate.categoryName isEqualToString:cateName]) {
+                        [self.incomeCategoryArray removeObject:oneCate];
+                        [self.incomeCategoryArray insertObject:oneCate atIndex:j];
+                        j++;
+                        break;
+                    }
+                    
+                }
+            }
+    }
+    
+      [db close];
     
 }
 
@@ -96,6 +172,8 @@
 {
     topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight)];
     topbar.backgroundColor = [UIColor clearColor];
+
+
     [self.view addSubview:topbar];
     
     UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
@@ -107,14 +185,14 @@
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
     
-    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 27, 60, 40)];
-    deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
-    deleteButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [deleteButton setTitle:@"排序" forState:UIControlStateNormal];
-    [deleteButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
-    [deleteButton addTarget:self action:@selector(deleteItem:) forControlEvents:UIControlEventTouchUpInside];
-    deleteButton.backgroundColor = [UIColor clearColor];
-    [topbar addSubview:deleteButton];
+    UIButton *sortButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 27, 60, 40)];
+    sortButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    sortButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [sortButton setTitle:@"排序" forState:UIControlStateNormal];
+    [sortButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [sortButton addTarget:self action:@selector(showSortView) forControlEvents:UIControlEventTouchUpInside];
+    sortButton.backgroundColor = [UIColor clearColor];
+    [topbar addSubview:sortButton];
     
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
@@ -124,6 +202,86 @@
     [self.moneyTypeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
     [topbar addSubview:self.moneyTypeSeg];
     
+}
+-(void)configSortView
+{
+    UIView *sortView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, topRowHeight, SCREEN_WIDTH/3+10, 180)];
+    sortView.layer.cornerRadius = 8;
+    sortView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.9 alpha:1.0];
+    [self.view addSubview:sortView];
+    self.mySortView = sortView;
+    NSArray *buttonTitle = @[@"系统推荐",@"最新添加",@"使用最多"];
+    
+    
+    for (int i = 0; i<3; i++) {
+        UIButton *sortBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0 + i*sortView.frame.size.height/3, sortView.frame.size.width-10, sortView.frame.size.height/3)];
+        sortBtn.backgroundColor = [UIColor clearColor];
+        [sortBtn setTitle:buttonTitle[i] forState:UIControlStateNormal];
+        sortBtn.titleLabel.font =[UIFont fontWithName:@"HelveticaNeue" size:13.0f];
+        sortBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 40);
+        [sortBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        sortBtn.tag = i+1;
+        [sortBtn addTarget:self action:@selector(sortTypeChange:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIImageView *selectedImage = [[UIImageView alloc] initWithFrame:CGRectMake(sortBtn.frame.size.width-40, sortBtn.frame.size.height/2 - 20 + i*sortView.frame.size.height/3, 40, 40)];
+        selectedImage.tag = i+1+10;
+        NSArray *sortKeys = @[@"category_id",@"recently create",@"usage"];
+        NSString*sortType = [[NSUserDefaults standardUserDefaults] objectForKey:@"sortType"];
+
+
+            if  ([sortKeys[i] isEqualToString:sortType])
+            {
+                [selectedImage setImage:[UIImage imageNamed:@"plus1.png"]];
+            }else
+            {
+                [selectedImage setImage:[UIImage imageNamed:@"delete1.png"]];
+
+            }
+        
+        [sortView addSubview:sortBtn];
+        [sortView addSubview:selectedImage];
+    }
+    
+}
+-(void)sortTypeChange:(UIButton *)sender
+{
+    NSArray *sortKeys = @[@"category_id",@"recently create",@"usage"];
+    
+    for (int i = 0; i<3; i++) {
+        UIImageView *selected =(UIImageView *) [self.mySortView viewWithTag:(i+1+10)];
+        [selected setImage:[UIImage imageNamed:@"delete1.png"]];
+    }
+    UIImageView *selected =(UIImageView *) [self.mySortView viewWithTag:(sender.tag + 10)];
+    [selected setImage:[UIImage imageNamed:@"plus1.png"]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:sortKeys[sender.tag -1] forKey:@"sortType"];
+
+    [self prepareCategoryDataBy:sortKeys[sender.tag -1]];
+    [self.categoryTableView reloadData];
+    [self hideSortView];
+    
+    
+}
+-(void)showSortView
+{
+    [self hideDelete:self.myDeleteButton];
+
+    if (self.mySortView.frame.origin.x>SCREEN_WIDTH-1)
+    {
+        [UIView animateWithDuration:0.31f animations:^{
+            [self.mySortView setFrame:CGRectMake(SCREEN_WIDTH - self.mySortView.frame.size.width + 10, topRowHeight, self.mySortView.frame.size.width, self.mySortView.frame.size.height)];
+        }];
+    }else
+    {
+        [self hideSortView];
+    }
+
+}
+-(void)hideSortView
+{
+    [UIView animateWithDuration:0.31f animations:^{
+        [self.mySortView setFrame:CGRectMake(SCREEN_WIDTH, topRowHeight, self.mySortView.frame.size.width, self.mySortView.frame.size.height)];
+    }];
 }
 
 -(void)configBottomView
@@ -141,6 +299,7 @@
     [self.view addSubview:bottomView];
     
     UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2-1, bottomHeight)];
+    self.myDeleteButton = deleteButton;
     UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, bottomHeight)];
     [deleteButton setTitle:@"删减" forState:UIControlStateNormal];
     [addNewButton setTitle:@"添加" forState:UIControlStateNormal];
@@ -352,6 +511,8 @@
 }
 -(void)deleteItem:(UIButton *)sender
 {
+    [self hideSortView];
+
     NSLog(@"show delete button");
     if (willShowDeleteBtn) {
         [self hideDelete:sender];
@@ -380,14 +541,16 @@
 -(void)addItem:(UIButton *)sender
 {
     NSLog(@"add Item....");
-    
+    [self clearScreen];
+
     
     [self.inputField becomeFirstResponder];
     
 }
 -(void)addNewCategory
 {
-
+    [self clearScreen];
+    
     CGFloat width =  [self.inputField.text sizeWithAttributes:@{NSFontAttributeName:self.inputField.font}].width;
     NSLog(@"%f",width);
     if (width>74)
@@ -487,7 +650,14 @@
 -(void)segmentAction:(UISegmentedControl *)Seg{
     NSInteger Index = Seg.selectedSegmentIndex;
     NSLog(@"Index %ld", (long)Index);
+    [self clearScreen];
+    [self.categoryTableView reloadData];
     
-    
+}
+
+-(void)clearScreen
+{
+    [self hideDelete:self.myDeleteButton];
+    [self hideSortView];
 }
 @end

@@ -85,7 +85,7 @@
         [categoryLabel setTitle:oneCategory.categoryName forState:UIControlStateNormal];
         
         //for delete button
-        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(categoryLabel.frame.origin.x-5, categoryLabel.frame.origin.y-5, 10, 10)];
+        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(categoryLabel.frame.origin.x-5, categoryLabel.frame.origin.y-5, 20, 20)];
         [deleteBtn setImage:[UIImage imageNamed:@"switchChart.png"] forState:UIControlStateNormal];
         deleteBtn.tag = 10 + 1 + i;
         [deleteBtn addTarget:self.categoryDelegate action:@selector(categoryDeleteTap:) forControlEvents:UIControlEventTouchUpInside];

@@ -77,6 +77,12 @@
 
 -(void)initDB
 {
+    NSString*sortType = [[NSUserDefaults standardUserDefaults] objectForKey:@"sortType"];
+    if (!sortType)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"category_id" forKey:@"sortType"];
+    }
+    
     FMDatabase *db = [[CommonUtility sharedCommonUtility] db];
     
     if (![db open]) {
