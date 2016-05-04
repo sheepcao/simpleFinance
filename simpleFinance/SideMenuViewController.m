@@ -11,6 +11,7 @@
 #import "MFSideMenu.h"
 #import "trendViewController.h"
 #import "categoryManagementViewController.h"
+#import "mainViewController.h"
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;
@@ -92,8 +93,12 @@
         NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
         [temp addObject:trendVC];
         navigationController.viewControllers = temp;
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+
     }else if(indexPath.row ==2)
     {
+
+        
         
     }else if (indexPath.row == 3) {
         trendViewController *trendVC = [[trendViewController alloc] initWithNibName:@"trendViewController" bundle:nil];
@@ -101,9 +106,19 @@
         NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
         [temp addObject:trendVC];
         navigationController.viewControllers = temp;
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+
+    }else if(indexPath.row ==4)
+    {
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        mainViewController *mainVC = (mainViewController *) [temp lastObject];
+        [mainVC showingModel];
+        
+        
     }
     
-    [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
 

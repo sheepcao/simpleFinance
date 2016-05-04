@@ -38,6 +38,7 @@
 
 @property (nonatomic,strong) NSMutableArray *incomeCategoryArray;
 @property (nonatomic,strong) NSMutableArray *expenseCategoryArray;
+@property (nonatomic,strong) NSString*sortType;
 
 @property BOOL doingPlus;
 @property BOOL doingMinus;
@@ -60,7 +61,13 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
-    [self prepareCategoryData];
+    self.sortType = [[NSUserDefaults standardUserDefaults] objectForKey:@"sortType"];
+    if (self.sortType) {
+        [self prepareCategoryDataBy:self.sortType];
+    }else
+    {
+        [self prepareCategoryDataBy:@"category_id"];
+    }
     
     self.initialState = YES;
     [self configTopbar];
@@ -78,10 +85,24 @@
     [super viewWillAppear:animated];
 }
 
--(void)prepareCategoryData
+-(void)prepareCategoryDataBy:(NSString *)key
 {
-    self.expenseCategoryArray = [[NSMutableArray alloc] init];
-    self.incomeCategoryArray = [[NSMutableArray alloc] init];
+    if(self.expenseCategoryArray)
+    {
+        [self.expenseCategoryArray removeAllObjects];
+    }else
+    {
+        self.expenseCategoryArray = [[NSMutableArray alloc] init];
+        
+    }
+    if(self.incomeCategoryArray)
+    {
+        [self.incomeCategoryArray removeAllObjects];
+    }else
+    {
+        self.incomeCategoryArray = [[NSMutableArray alloc] init];
+        
+    }
     
     db = [[CommonUtility sharedCommonUtility] db];
     if (![db open]) {
@@ -89,7 +110,20 @@
         return;
     }
     
-    FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where is_deleted = 0"];
+    NSString *sqlCommand;
+    if ([key isEqualToString:@"category_id"]) {
+        sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id"];
+        
+    }else if([key isEqualToString:@"recently create"])
+    {
+        sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id desc"];
+    }else
+    {
+        sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id"];
+        
+    }
+    
+    FMResultSet *rs = [db executeQuery:sqlCommand];
     while ([rs next]) {
         categoryObject *oneCategory = [[categoryObject alloc] init];
         
@@ -105,8 +139,41 @@
             [self.incomeCategoryArray addObject:oneCategory];
         }
     }
-    [db close];
+    if ([key isEqualToString:@"usage"])
+    {
+        FMResultSet *rs = [db executeQuery:@"SELECT count(*),item_category FROM ITEMINFO where item_type = 0 GROUP BY item_category ORDER BY count(*) DESC"];
+        int i = 0;
+        while ([rs next]) {
+            NSString *cateName = [rs stringForColumn:@"item_category"];
+            for (categoryObject *oneCate in self.expenseCategoryArray) {
+                if ([oneCate.categoryName isEqualToString:cateName]) {
+                    categoryObject *oneCateTemp = oneCate;
+                    [self.expenseCategoryArray removeObject:oneCate];
+                    [self.expenseCategoryArray insertObject:oneCateTemp atIndex:i];
+                    i++;
+                    break;
+                }
+                
+            }
+        }
+        
+        FMResultSet *rs2 = [db executeQuery:@"SELECT count(*),item_category FROM ITEMINFO where item_type = 1 GROUP BY item_category ORDER BY count(*) DESC"];
+        int j = 0;
+        while ([rs2 next]) {
+            NSString *cateName = [rs2 stringForColumn:@"item_category"];
+            for (categoryObject *oneCate in self.incomeCategoryArray) {
+                if ([oneCate.categoryName isEqualToString:cateName]) {
+                    [self.incomeCategoryArray removeObject:oneCate];
+                    [self.incomeCategoryArray insertObject:oneCate atIndex:j];
+                    j++;
+                    break;
+                }
+                
+            }
+        }
+    }
     
+    [db close];
 }
 
 -(void)configTopbar
@@ -151,7 +218,7 @@
     NSInteger Index = Seg.selectedSegmentIndex;
     NSLog(@"Index %ld", (long)Index);
     self.initialState =YES;
-    [self prepareCategoryData];
+//    [self prepareCategoryDataBy:self.sortType];
     [self.categoryTableView reloadData];
     
 }

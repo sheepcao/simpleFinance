@@ -19,6 +19,6 @@
 @property (strong, nonatomic)  UITableView *maintableView;
 @property (strong, nonatomic) IBOutlet LGGradientBackgroundView *gradientView;
 - (IBAction)skinChange:(id)sender;
-
+-(void)showingModel;
 @end
 

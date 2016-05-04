@@ -71,6 +71,10 @@
 		A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */; };
 		A4ECE27C1CD62FC0000FF10D /* categoryManagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ECE27A1CD62FC0000FF10D /* categoryManagementViewController.m */; };
 		A4ECE27D1CD62FC0000FF10D /* categoryManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE27B1CD62FC0000FF10D /* categoryManagementViewController.xib */; };
+		A4ECE2851CDA2997000FF10D /* monthListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ECE2831CDA2997000FF10D /* monthListViewController.m */; };
+		A4ECE2861CDA2997000FF10D /* monthListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE2841CDA2997000FF10D /* monthListViewController.xib */; };
+		A4ECE28A1CDA422B000FF10D /* baseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4ECE2881CDA422B000FF10D /* baseViewController.m */; };
+		A4ECE28B1CDA422B000FF10D /* baseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4ECE2891CDA422B000FF10D /* baseViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -179,6 +183,12 @@
 		A4ECE2791CD62FC0000FF10D /* categoryManagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryManagementViewController.h; sourceTree = "<group>"; };
 		A4ECE27A1CD62FC0000FF10D /* categoryManagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryManagementViewController.m; sourceTree = "<group>"; };
 		A4ECE27B1CD62FC0000FF10D /* categoryManagementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryManagementViewController.xib; sourceTree = "<group>"; };
+		A4ECE2821CDA2997000FF10D /* monthListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = monthListViewController.h; sourceTree = "<group>"; };
+		A4ECE2831CDA2997000FF10D /* monthListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = monthListViewController.m; sourceTree = "<group>"; };
+		A4ECE2841CDA2997000FF10D /* monthListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = monthListViewController.xib; sourceTree = "<group>"; };
+		A4ECE2871CDA422B000FF10D /* baseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseViewController.h; sourceTree = "<group>"; };
+		A4ECE2881CDA422B000FF10D /* baseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = baseViewController.m; sourceTree = "<group>"; };
+		A4ECE2891CDA422B000FF10D /* baseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = baseViewController.xib; sourceTree = "<group>"; };
 		E41CF51331599613F1E16C7C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F224C2FC2319CE9430562FC7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -276,12 +286,13 @@
 				A490C1911CB7B1B3006EEEF1 /* SideMenuViewController.xib */,
 				A42D1C8F1CB60AC900C208A0 /* mainViewController.h */,
 				A42D1C901CB60AC900C208A0 /* mainViewController.m */,
-				A425B2D31CD086440008BFE2 /* trendViewController.h */,
-				A425B2D41CD086440008BFE2 /* trendViewController.m */,
-				A425B2D51CD086440008BFE2 /* trendViewController.xib */,
-				A4ECE2791CD62FC0000FF10D /* categoryManagementViewController.h */,
-				A4ECE27A1CD62FC0000FF10D /* categoryManagementViewController.m */,
-				A4ECE27B1CD62FC0000FF10D /* categoryManagementViewController.xib */,
+				A4ECE2871CDA422B000FF10D /* baseViewController.h */,
+				A4ECE2881CDA422B000FF10D /* baseViewController.m */,
+				A4ECE2891CDA422B000FF10D /* baseViewController.xib */,
+				A4ECE2821CDA2997000FF10D /* monthListViewController.h */,
+				A4ECE2831CDA2997000FF10D /* monthListViewController.m */,
+				A4ECE2841CDA2997000FF10D /* monthListViewController.xib */,
+				A4ECE2811CDA2959000FF10D /* categoryVC */,
 				A425B2CB1CCF63130008BFE2 /* itemsVC */,
 				A425B2CC1CCF631F0008BFE2 /* pieVC */,
 				A425B2D21CD085F00008BFE2 /* historyVC */,
@@ -419,6 +430,19 @@
 			path = FlatDatePicker;
 			sourceTree = "<group>";
 		};
+		A4ECE2811CDA2959000FF10D /* categoryVC */ = {
+			isa = PBXGroup;
+			children = (
+				A425B2D31CD086440008BFE2 /* trendViewController.h */,
+				A425B2D41CD086440008BFE2 /* trendViewController.m */,
+				A425B2D51CD086440008BFE2 /* trendViewController.xib */,
+				A4ECE2791CD62FC0000FF10D /* categoryManagementViewController.h */,
+				A4ECE27A1CD62FC0000FF10D /* categoryManagementViewController.m */,
+				A4ECE27B1CD62FC0000FF10D /* categoryManagementViewController.xib */,
+			);
+			name = categoryVC;
+			sourceTree = "<group>";
+		};
 		F005D24909418A1E6F61B3D8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +519,7 @@
 				A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
 				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
+				A4ECE2861CDA2997000FF10D /* monthListViewController.xib in Resources */,
 				A4CC246E1CBE8EC3007A94F1 /* plus1.png in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
 				A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */,
@@ -506,6 +531,7 @@
 				A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
 				A4CC247B1CC0D7DE007A94F1 /* calendarViewController.xib in Resources */,
+				A4ECE28B1CDA422B000FF10D /* baseViewController.xib in Resources */,
 				A4CC24811CC4AFF8007A94F1 /* calendar1.png in Resources */,
 				A425B2D11CCF72400008BFE2 /* historyViewController.xib in Resources */,
 				A4CC246C1CBE8EC3007A94F1 /* equal1.png in Resources */,
@@ -572,6 +598,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */,
+				A4ECE28A1CDA422B000FF10D /* baseViewController.m in Sources */,
 				A490C1921CB7B1B3006EEEF1 /* SideMenuViewController.m in Sources */,
 				A490C1761CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m in Sources */,
 				A4CC244F1CBDDE29007A94F1 /* topBarView.m in Sources */,
@@ -589,6 +616,7 @@
 				A4CC24841CC4CDDD007A94F1 /* CommonUtility.m in Sources */,
 				A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */,
 				A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */,
+				A4ECE2851CDA2997000FF10D /* monthListViewController.m in Sources */,
 				A4CC24731CC084F2007A94F1 /* categoryTableViewCell.m in Sources */,
 				A425B2CA1CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m in Sources */,
 				A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */,

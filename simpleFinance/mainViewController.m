@@ -812,6 +812,73 @@
     [self.maintableView reloadRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
 }
 
+-(void)showingModel
+{
+    NSLog(@"showing.....");
+    UIView *dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    dimView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.7];
+    [self.view addSubview:dimView];
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT*3/4, SCREEN_WIDTH, SCREEN_HEIGHT/4)];
+    contentView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.9 alpha:0.9f];
+    [dimView addSubview:contentView];
+
+    
+    UILabel *autoChangeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, contentView.frame.size.height*2/5)];
+    [autoChangeTitle setText:@"自动调整"];
+    autoChangeTitle.textAlignment = NSTextAlignmentCenter;
+    [contentView addSubview:autoChangeTitle];
+    
+    UISwitch *enableAutoSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(contentView.frame.size.width-110, autoChangeTitle.frame.size.height/2 -20, 80, 40)];
+    [enableAutoSwitch setCenter:CGPointMake(contentView.frame.size.width-70, autoChangeTitle.center.y)];
+    [contentView addSubview:enableAutoSwitch];
+    
+    UILabel *modelTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, contentView.frame.size.height*2/5, 80, contentView.frame.size.height*3/5)];
+    [modelTitle setText:@"显示模式"];
+    modelTitle.textAlignment = NSTextAlignmentCenter;
+    [contentView addSubview:modelTitle];
+    
+    
+    UIView *midline = [[UIView alloc] initWithFrame:CGRectMake(0, contentView.frame.size.height*2/5, contentView.frame.size.width, 0.65f)];
+    midline.backgroundColor = [UIColor darkGrayColor];
+    [contentView addSubview:midline];
+    
+    NSArray *timeTitle = @[@"早",@"午",@"夕",@"夜"];
+    for (int i = 4; i>0; i--) {
+        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width - 60 - (4-i) *(40+12), contentView.frame.size.height*2/5 + modelTitle.frame.size.height/2 - 20, 40, 40)];
+        [timeButton setTitle:timeTitle[i - 1] forState:UIControlStateNormal];
+        timeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+        [timeButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        timeButton.tag = i;
+        [timeButton addTarget:self action:@selector(timeSelect:) forControlEvents:UIControlEventTouchUpInside];
+        [contentView addSubview:timeButton];
+        
+        UIView *selectedBar = [[UIView alloc] initWithFrame:CGRectMake(0, timeButton.frame.size.height-3, timeButton.frame.size.width, 3)];
+        selectedBar.backgroundColor = [UIColor colorWithRed:247/255.0f green:81/255.0f blue:94/255.0f alpha:0.9];
+        selectedBar.tag = 10;
+        [timeButton addSubview:selectedBar];
+        [selectedBar setHidden:YES];
+        
+    }
+}
+-(void)timeSelect:(UIButton *)sender
+{
+    for (int i =4 ; i>0; i--) {
+        UIView *superView = sender.superview;
+        UIButton *button = (UIButton *)[superView viewWithTag:i];
+        [button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+        UIView *selectBar = (UIView *)[button viewWithTag:10];
+        [selectBar setHidden:YES];
+        
+    }
+
+    [sender setTitleColor:[UIColor colorWithRed:247/255.0f green:81/255.0f blue:94/255.0f alpha:0.9]forState:UIControlStateNormal];
+    sender.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.0f];
+    UIView *selectBar = (UIView *)[sender viewWithTag:10];
+    [selectBar setHidden:NO];
+}
+
 -(void)dealloc
 {
     [self.maintableView removeObserver:self forKeyPath: @"contentOffset" context:nil];
