@@ -9,28 +9,26 @@
 #import "monthListViewController.h"
 #import "topBarView.h"
 #import "global.h"
+#import "RATreeView.h"
+#import "RADataObject.h"
+#import "RATableViewCell.h"
+#import "dayRATableViewCell.h"
+#import "itemRATableViewCell.h"
 
-@interface monthListViewController ()
+@interface monthListViewController ()<RATreeViewDelegate, RATreeViewDataSource>
 
-//@property(nonatomic,strong)  JKExpandTableView * expandTableView;
-@property(nonatomic,strong) NSMutableArray * dataModelArray;
+@property(nonatomic,strong)  RATreeView * treeView;
+@property(nonatomic,strong) NSArray * data;
 @property (nonatomic,strong) topBarView *topBar;
 
 @end
 
 @implementation monthListViewController
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        [self initializeSampleDataModel];
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadData];
+
     // Do any additional setup after loading the view from its nib.
     [self configTopbar];
     [self configTable];
@@ -68,15 +66,19 @@
 
 -(void)configTable
 {
-//
-//    self.expandTableView = [[JKExpandTableView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height + 5,SCREEN_WIDTH, (SCREEN_HEIGHT- self.topBar.frame.size.height - 5))];
-//    self.expandTableView.showsVerticalScrollIndicator = NO;
-//    self.expandTableView.scrollEnabled = NO;
-//    self.expandTableView.backgroundColor = [UIColor clearColor];
-//    self.expandTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-//    [self.expandTableView setDataSourceDelegate:self];
-//    [self.expandTableView setTableViewDelegate:self];
-//    [self.view addSubview:self.expandTableView];
+    self.treeView = [[RATreeView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height+5, SCREEN_WIDTH, SCREEN_HEIGHT - (self.topBar.frame.size.height+5))];
+    self.treeView.backgroundColor = [UIColor clearColor];
+    self.treeView.delegate = self;
+    self.treeView.dataSource = self;
+    self.treeView.separatorStyle = RATreeViewCellSeparatorStyleNone;
+    
+    [self.treeView reloadData];
+    [self.view addSubview:self.treeView];
+      [self.treeView registerNib:[UINib nibWithNibName:NSStringFromClass([RATableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([RATableViewCell class])];
+    [self.treeView registerNib:[UINib nibWithNibName:NSStringFromClass([dayRATableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([dayRATableViewCell class])];
+    [self.treeView registerNib:[UINib nibWithNibName:NSStringFromClass([itemRATableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([itemRATableViewCell class])];
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,93 +86,137 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - JKExpandTableViewDelegate
-- (void) initializeSampleDataModel {
-    self.dataModelArray = [[NSMutableArray alloc] initWithCapacity:3];
+
+#pragma mark TreeView Delegate methods
+
+- (CGFloat)treeView:(RATreeView *)treeView heightForRowForItem:(id)item
+{
+    NSInteger level = [self.treeView levelForCellForItem:item];
+    if (level  == 0) {
+        return 70;
+    }else if(level == 1)
+    {
+        return 48;
+    }
+    return 40;
+}
+
+
+- (void)treeView:(RATreeView *)treeView willExpandRowForItem:(id)item
+{
+    RATableViewCell *cell = (RATableViewCell *)[treeView cellForItem:item];
+    RADataObject *dataObject = item;
+    NSInteger numberOfChildren = [dataObject.children count];
+    if (numberOfChildren > 0) {
+        [cell goExpendAnimated:YES];
+    }
+    NSLog(@"expand");
+}
+
+- (void)treeView:(RATreeView *)treeView willCollapseRowForItem:(id)item
+{
+    RATableViewCell *cell = (RATableViewCell *)[treeView cellForItem:item];
+    RADataObject *dataObject = item;
+    NSInteger numberOfChildren = [dataObject.children count];
+    if (numberOfChildren > 0) {
+        [cell goCollapseAnimated:YES];
+    }    NSLog(@"collapse");
+
+}
+
+
+#pragma mark TreeView Data Source
+
+- (UITableViewCell *)treeView:(RATreeView *)treeView cellForItem:(id)item
+{
+    RADataObject *dataObject = item;
     
-    NSMutableArray *parent0 = [NSMutableArray arrayWithObjects:
-                               [NSNumber numberWithBool:YES],
-                               [NSNumber numberWithBool:NO],
-                               [NSNumber numberWithBool:NO],
-                               nil];
-    NSMutableArray *parent1 = [NSMutableArray arrayWithObjects:
-                               [NSNumber numberWithBool:NO],
-                               [NSNumber numberWithBool:NO],
-                               [NSNumber numberWithBool:NO],
-                               nil];
-    NSMutableArray *parent2 = [NSMutableArray arrayWithObjects:
-                               [NSNumber numberWithBool:NO],
-                               [NSNumber numberWithBool:YES],
-                               nil];
-    NSMutableArray *parent3 = [NSMutableArray arrayWithObjects:
-                               [NSNumber numberWithBool:NO],
-                               [NSNumber numberWithBool:YES],
-                               [NSNumber numberWithBool:NO],
-                               nil];
-    [self.dataModelArray addObject:parent0];
-    [self.dataModelArray addObject:parent1];
-    [self.dataModelArray addObject:parent2];
-    [self.dataModelArray addObject:parent3];
+    NSInteger level = [self.treeView levelForCellForItem:item];
+    NSInteger numberOfChildren = [dataObject.children count];
+    NSString *detailText = [NSString localizedStringWithFormat:@"Number of children %@", [@(numberOfChildren) stringValue]];
+    BOOL expanded = [self.treeView isCellForItemExpanded:item];
+    UITableViewCell * cell1;
+    if (level == 0) {
+        RATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([RATableViewCell class])];
+        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded];
+        cell1 = cell;
+    }else if(level == 1)
+    {
+        dayRATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([dayRATableViewCell class])];
+        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded];
+        cell1 = cell;
+    }else if (level == 2)
+    {
+        itemRATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([itemRATableViewCell class])];
+        [cell setupWithCategory:@"吃喝" andDescription:@"老铺烤鸭" andMoney:233 andType:0];
+        cell1 = cell;
+    }
+
+    cell1.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+
+    
+    return cell1;
 }
 
-#pragma mark - JKExpandTableViewDelegate
-
-- (BOOL) shouldSupportMultipleSelectableChildrenAtParentIndex:(NSInteger) parentIndex {
-    return NO;
-}
-- (void) tableView:(UITableView *)tableView didSelectCellAtChildIndex:(NSInteger) childIndex withInParentCellIndex:(NSInteger) parentIndex {
-    [[self.dataModelArray objectAtIndex:parentIndex] setObject:[NSNumber numberWithBool:YES] atIndex:childIndex];
-    NSLog(@"data array: %@", self.dataModelArray);
-}
-
-- (void) tableView:(UITableView *)tableView didDeselectCellAtChildIndex:(NSInteger) childIndex withInParentCellIndex:(NSInteger) parentIndex {
-    [[self.dataModelArray objectAtIndex:parentIndex] setObject:[NSNumber numberWithBool:NO] atIndex:childIndex];
-    NSLog(@"data array: %@", self.dataModelArray);
+- (NSInteger)treeView:(RATreeView *)treeView numberOfChildrenOfItem:(id)item
+{
+    if (item == nil) {
+        return [self.data count];
+    }
+    
+    RADataObject *data = item;
+    return [data.children count];
 }
 
- - (UIColor *) foregroundColor {
- return [UIColor clearColor];
- }
- 
- - (UIColor *) backgroundColor {
- return [UIColor clearColor];
- }
-
-- (UIFont *) fontForParents {
-    return [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
+- (id)treeView:(RATreeView *)treeView child:(NSInteger)index ofItem:(id)item
+{
+    RADataObject *data = item;
+    if (item == nil) {
+        return [self.data objectAtIndex:index];
+    }
+    
+    return data.children[index];
 }
 
-- (UIFont *) fontForChildren {
-    return [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+
+
+- (void)loadData
+{
+    RADataObject *phone1 = [RADataObject dataObjectWithName:@"Phone 1" children:nil];
+    RADataObject *phone2 = [RADataObject dataObjectWithName:@"Phone 2" children:nil];
+    RADataObject *phone3 = [RADataObject dataObjectWithName:@"Phone 3" children:nil];
+    RADataObject *phone4 = [RADataObject dataObjectWithName:@"Phone 4" children:nil];
+    
+    RADataObject *phone = [RADataObject dataObjectWithName:@"Phones"
+                                                  children:[NSArray arrayWithObjects:phone1, phone2, phone3, phone4, nil]];
+    
+    RADataObject *notebook1 = [RADataObject dataObjectWithName:@"Notebook 1" children:nil];
+    RADataObject *notebook2 = [RADataObject dataObjectWithName:@"Notebook 2" children:nil];
+    
+    RADataObject *computer1 = [RADataObject dataObjectWithName:@"Computer 1"
+                                                      children:[NSArray arrayWithObjects:notebook1, notebook2, nil]];
+    RADataObject *computer2 = [RADataObject dataObjectWithName:@"Computer 2" children:nil];
+    RADataObject *computer3 = [RADataObject dataObjectWithName:@"Computer 3" children:nil];
+    
+    RADataObject *computer = [RADataObject dataObjectWithName:@"Computers"
+                                                     children:[NSArray arrayWithObjects:computer1, computer2, computer3, nil]];
+    RADataObject *car = [RADataObject dataObjectWithName:@"Cars" children:nil];
+    RADataObject *bike = [RADataObject dataObjectWithName:@"Bikes" children:nil];
+    RADataObject *house = [RADataObject dataObjectWithName:@"Houses" children:nil];
+    RADataObject *flats = [RADataObject dataObjectWithName:@"Flats" children:nil];
+    RADataObject *motorbike = [RADataObject dataObjectWithName:@"Motorbikes" children:nil];
+    RADataObject *drinks = [RADataObject dataObjectWithName:@"Drinks" children:nil];
+    RADataObject *food = [RADataObject dataObjectWithName:@"Food" children:nil];
+    RADataObject *sweets = [RADataObject dataObjectWithName:@"Sweets" children:nil];
+    RADataObject *watches = [RADataObject dataObjectWithName:@"Watches" children:nil];
+    RADataObject *walls = [RADataObject dataObjectWithName:@"Walls" children:nil];
+    
+    self.data = [NSArray arrayWithObjects:phone, computer, car, bike, house, flats, motorbike, drinks, food, sweets, watches, walls, nil];
+    
 }
 
-#pragma mark - JKExpandTableViewDataSource
-- (NSInteger) numberOfParentCells {
-    NSLog(@"count-----------------:%d",[self.dataModelArray count]);
-    return [self.dataModelArray count];
-}
 
-- (NSInteger) numberOfChildCellsUnderParentIndex:(NSInteger) parentIndex {
-    NSMutableArray *childArray = [self.dataModelArray objectAtIndex:parentIndex];
-    return [childArray count];
-}
-
-- (NSString *) labelForParentCellAtIndex:(NSInteger) parentIndex {
-    return [NSString stringWithFormat:@"parent %ld", (long)parentIndex];
-}
-
-- (NSString *) labelForCellAtChildIndex:(NSInteger) childIndex withinParentCellIndex:(NSInteger) parentIndex {
-    return [NSString stringWithFormat:@"child %ld of parent %ld", (long)childIndex, (long)parentIndex];
-}
-
-- (BOOL) shouldDisplaySelectedStateForCellAtChildIndex:(NSInteger) childIndex withinParentCellIndex:(NSInteger) parentIndex {
-    NSMutableArray *childArray = [self.dataModelArray objectAtIndex:parentIndex];
-    return [[childArray objectAtIndex:childIndex] boolValue];
-}
-
-- (UIImage *) iconForParentCellAtIndex:(NSInteger) parentIndex {
-    return [UIImage imageNamed:@"arrow-icon"];
-}
 
 
 @end
