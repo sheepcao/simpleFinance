@@ -85,7 +85,7 @@
     
     UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 22, 100, 40)];
     [titileLabel setText:@"历史存账"];
-    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:17.0f];
+    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
     titileLabel.textAlignment = NSTextAlignmentCenter;
     [titileLabel setTextColor:[UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]];
     [topbar addSubview:titileLabel];

@@ -12,6 +12,7 @@
 #import "trendViewController.h"
 #import "categoryManagementViewController.h"
 #import "mainViewController.h"
+#import "monthListViewController.h"
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;
@@ -25,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.menuArray = @[@"同 步 | 备 份",@"分类管理",@"流水明细",@"历史走势",@"显示模式",@"设置"];
+    self.menuArray = @[@"同 步 | 备 份",@"分类管理",@"帐目流水",@"历史走势",@"显示模式",@"设置"];
     
     UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT-6*(SCREEN_WIDTH/5.5))*2/3, SCREEN_WIDTH*2/3, 6*(SCREEN_WIDTH/5.5))];
     menuTable.delegate = self;
@@ -139,8 +140,12 @@
 
     }else if(indexPath.row ==2)
     {
-
-        
+        monthListViewController *monthListVC = [[monthListViewController alloc] initWithNibName:@"monthListViewController" bundle:nil];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        [temp addObject:monthListVC];
+        navigationController.viewControllers = temp;
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
         
     }else if (indexPath.row == 3) {
         trendViewController *trendVC = [[trendViewController alloc] initWithNibName:@"trendViewController" bundle:nil];

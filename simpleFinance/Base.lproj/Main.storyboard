@@ -35,7 +35,7 @@
                                             <constraint firstAttribute="height" constant="33" id="6Mv-XQ-gnP"/>
                                             <constraint firstAttribute="width" constant="225" id="ApP-sK-Nta"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="19"/>
                                         <color key="textColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -45,7 +45,7 @@
                                             <constraint firstAttribute="width" constant="225" id="3yn-2N-VfS"/>
                                             <constraint firstAttribute="height" constant="33" id="fU2-zS-cqM"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="SourceHanSansCN-Normal" family="Source Han Sans CN" pointSize="19"/>
                                         <color key="textColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>

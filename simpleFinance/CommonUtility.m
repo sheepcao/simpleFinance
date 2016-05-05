@@ -192,7 +192,7 @@
     
     NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     
-    int dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:date] weekday];// this will give you current day of week
+    NSInteger dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:date] weekday];// this will give you current day of week
     
     [components setDay:([components day] - ((dayofweek) - 2))];// for beginning of the week.
     
@@ -212,7 +212,7 @@
     
     NSDateComponents *componentsEnd = [gregorianEnd components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     
-    int Enddayofweek = [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:date] weekday];// this will give you current day of week
+    NSInteger Enddayofweek = [[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:date] weekday];// this will give you current day of week
     
     [componentsEnd setDay:([componentsEnd day]+(7-Enddayofweek)+1)];// for end day of the week
     
