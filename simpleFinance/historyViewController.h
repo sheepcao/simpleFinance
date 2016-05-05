@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "LGGradientBackgroundView/LGGradientBackgroundView.h"
-@interface historyViewController : UIViewController
+#import "baseViewController.h"
+@interface historyViewController : baseViewController
+
 @property(nonatomic,strong) NSString *recordDate;
 @property (strong, nonatomic) IBOutlet LGGradientBackgroundView *gradientView;
 @end

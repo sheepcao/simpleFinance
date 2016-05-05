@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight+8)];
+    topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight+11)];
     topbar.backgroundColor = [UIColor clearColor];
     [topbar.titleLabel  setText:@"帐目日历"];
     [self.view addSubview:topbar];
@@ -53,7 +53,9 @@
     calendar.appearance.eventColor = [UIColor redColor];
     calendar.appearance.headerTitleColor = TextColor;
     calendar.appearance.weekdayTextColor = TextColor;
-    calendar.appearance.titleDefaultColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.24 alpha:1.0];
+    calendar.appearance.titleDefaultColor = [UIColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1.0];
+    calendar.appearance.titlePlaceholderColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.24 alpha:0.9];
+
 //    calendar.appearance.selectionColor = [UIColor colorWithRed:223/255.0f green:162/255.0f blue:57/255.0f alpha:1.0f];
     calendar.appearance.selectionColor = [UIColor clearColor];
     calendar.appearance.titleSelectionColor = calendar.appearance.titleDefaultColor;

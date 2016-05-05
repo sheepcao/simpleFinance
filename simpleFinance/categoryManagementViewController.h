@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface categoryManagementViewController : UIViewController
+#import "baseViewController.h"
+@interface categoryManagementViewController : baseViewController
 
 @end

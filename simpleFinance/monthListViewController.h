@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface monthListViewController : UIViewController
+#import "baseViewController.h"
+@interface monthListViewController : baseViewController
 
 @end

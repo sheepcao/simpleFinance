@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface categoryDetailViewController : UIViewController
+#import "baseViewController.h"
+@interface categoryDetailViewController : baseViewController
 
 @property (nonatomic, strong) NSString *categoryName;
 @property (nonatomic, strong) NSString *startDate;

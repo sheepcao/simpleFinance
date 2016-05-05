@@ -20,7 +20,7 @@
         UIFontDescriptor *titleFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                  @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
                                                    UIFontDescriptorNameAttribute:@"HelveticaNeue",
-                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: (int)(SCREEN_WIDTH/16)]
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 20.0f]
                                                    }];
         title.font = [UIFont fontWithDescriptor:titleFontDescriptor size:0.0f];
         title.textAlignment = NSTextAlignmentCenter;

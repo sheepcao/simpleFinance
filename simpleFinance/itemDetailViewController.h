@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "baseViewController.h"
 
-
-@interface itemDetailViewController : UIViewController
+@interface itemDetailViewController : baseViewController
 
 @property (nonatomic,strong) NSNumber *currentItemID;
 @property (nonatomic,strong) NSString *money;
