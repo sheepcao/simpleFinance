@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *expandImage;
 
 
-- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded;
+- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense;
 - (void)goExpendAnimated:(BOOL)animated;
 - (void)goCollapseAnimated:(BOOL)animated;
 @end

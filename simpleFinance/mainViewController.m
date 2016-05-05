@@ -21,6 +21,7 @@
 #import "itemObj.h"
 #import "itemDetailViewController.h"
 #import "trendViewController.h"
+#import "AppDelegate.h"
 
 
 
@@ -933,6 +934,37 @@
     {
         [[NSUserDefaults standardUserDefaults] setObject:@"off" forKey:AUTOSWITCH];
     }
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate judgeTimeFrame];
+    
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    NSArray *timeTitle = @[@"早",@"午",@"夕",@"夜"];
+    UIView *contentView = [self.myDimView viewWithTag:100];
+    
+    //还原未选状态
+    for (int i =4 ; i>0; i--) {
+        UIView *superView = sender.superview;
+        UIButton *button = (UIButton *)[superView viewWithTag:i];
+        [button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+        UIView *selectBar = (UIView *)[button viewWithTag:10];
+        [selectBar setHidden:YES];
+        
+    }
+//选择一个模式
+    for (int i = 0 ; i < 4; i++) {
+        if ([showModel isEqualToString:timeTitle[i]])
+        {
+            UIButton *button = (UIButton *)[contentView viewWithTag:i+1];
+            
+            [button setTitleColor:[UIColor colorWithRed:247/255.0f green:81/255.0f blue:94/255.0f alpha:0.9]forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.0f];
+            UIView *selectBar = (UIView *)[button viewWithTag:10];
+            [selectBar setHidden:NO];
+            break;
+        }
+    }
+
 }
 
 -(void)dismissKeyboard

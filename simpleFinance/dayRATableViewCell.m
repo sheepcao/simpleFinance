@@ -27,10 +27,12 @@
 }
 
 
-- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded
+- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense
 {
     self.customTitleLabel.text = title;
-    
+    self.expenseLabel.text = [NSString stringWithFormat:@"支出:%@",expense];
+    self.incomeLabel.text =  [NSString stringWithFormat:@"收入:%@",income];;
+
     self.backgroundColor = [UIColor clearColor];
     
     if (isExpanded) {

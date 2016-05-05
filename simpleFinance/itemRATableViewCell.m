@@ -21,7 +21,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setupWithCategory:(NSString *)category andDescription:(NSString *)description andMoney:(CGFloat)amount andType:(NSInteger)type
+- (void)setupWithCategory:(NSString *)category andDescription:(NSString *)description andIncome:(NSString *)income andExpense:(NSString *)expense
 {
     if (!description || [description isEqualToString:@""]) {
         self.categoryLabel.text = category;
@@ -71,14 +71,14 @@
     
     NSString *money = @"";
 
-    if (type == 0)
+    if ([income doubleValue] <0.001)
     {
-        money = [NSString stringWithFormat:@"%.2f",(0 - amount)] ;
+        money = [NSString stringWithFormat:@"%.2f",(0 - [expense doubleValue])] ;
         [self.moneyLabel setTextColor:[UIColor colorWithRed:72/255.0f green:210/255.0f blue:86/255.0f alpha:1.0f]];
         
     }else
     {
-        money =[NSString stringWithFormat:@"+%.2f",(amount)] ;
+        money =[NSString stringWithFormat:@"+%.2f",([income doubleValue])] ;
         [self.moneyLabel setTextColor:[UIColor colorWithRed:211/255.0f green:65/255.0f blue:43/255.0f alpha:1.0f]];
     }
 

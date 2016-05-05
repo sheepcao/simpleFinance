@@ -22,7 +22,7 @@
                             <constraint firstAttribute="height" constant="20" id="AOi-s1-Mqh"/>
                             <constraint firstAttribute="width" constant="95" id="opM-ug-YYe"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                         <variation key="default">
@@ -32,14 +32,14 @@
                         </variation>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus1.png" translatesAutoresizingMaskIntoConstraints="NO" id="kks-KC-AnK">
-                        <rect key="frame" x="20" y="9" width="30" height="30"/>
+                        <rect key="frame" x="28" y="4" width="40" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="dJ2-78-2y0"/>
-                            <constraint firstAttribute="height" constant="30" id="lWQ-yJ-jwq"/>
+                            <constraint firstAttribute="width" constant="40" id="dJ2-78-2y0"/>
+                            <constraint firstAttribute="height" constant="40" id="lWQ-yJ-jwq"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1m6-ve-Q91">
-                        <rect key="frame" x="56" y="6" width="44" height="35.5"/>
+                        <rect key="frame" x="74" y="6" width="44" height="35.5"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="71" id="Ews-yA-Gum"/>
                             <constraint firstAttribute="height" constant="35.5" id="Lsy-sM-Dte"/>
@@ -56,7 +56,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支出：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="V9R-xR-6Ot">
                         <rect key="frame" x="213" y="14" width="95" height="20"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -69,7 +69,7 @@
                     <constraint firstItem="V9R-xR-6Ot" firstAttribute="centerY" secondItem="9Ye-w3-d0X" secondAttribute="centerY" id="99x-Yz-YCe"/>
                     <constraint firstItem="1m6-ve-Q91" firstAttribute="centerY" secondItem="kks-KC-AnK" secondAttribute="centerY" id="9dT-Xk-zdm"/>
                     <constraint firstAttribute="trailingMargin" secondItem="9Ye-w3-d0X" secondAttribute="trailing" id="LFm-IX-rwB"/>
-                    <constraint firstItem="kks-KC-AnK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="LaF-4G-B53"/>
+                    <constraint firstItem="kks-KC-AnK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="LaF-4G-B53"/>
                     <constraint firstItem="kks-KC-AnK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Lof-sk-TP9"/>
                     <constraint firstItem="V9R-xR-6Ot" firstAttribute="height" secondItem="9Ye-w3-d0X" secondAttribute="height" id="RLn-F4-3wx"/>
                     <constraint firstItem="kks-KC-AnK" firstAttribute="leading" secondItem="9Ye-w3-d0X" secondAttribute="trailing" constant="8" id="fEe-Qz-d9t"/>

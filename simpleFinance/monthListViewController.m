@@ -109,25 +109,48 @@
 
 - (void)treeView:(RATreeView *)treeView willExpandRowForItem:(id)item
 {
-    RATableViewCell *cell = (RATableViewCell *)[treeView cellForItem:item];
+    NSInteger level = [self.treeView levelForCellForItem:item];
     RADataObject *dataObject = item;
     NSInteger numberOfChildren = [dataObject.children count];
-    if (numberOfChildren > 0) {
-        [cell goExpendAnimated:YES];
+    
+    if (level == 0) {
+        RATableViewCell *cell = (RATableViewCell *)[treeView cellForItem:item];
+        if (numberOfChildren > 0) {
+            [cell goExpendAnimated:YES];
+        }
+    }else if(level == 1)
+    {
+        dayRATableViewCell *cell = (dayRATableViewCell *)[treeView cellForItem:item];
+        if (numberOfChildren > 0) {
+            [cell goExpendAnimated:YES];
+        }
+    }else
+    {
+        
     }
+
+
     NSLog(@"expand");
 }
 
 - (void)treeView:(RATreeView *)treeView willCollapseRowForItem:(id)item
 {
-    RATableViewCell *cell = (RATableViewCell *)[treeView cellForItem:item];
+    NSInteger level = [self.treeView levelForCellForItem:item];
     RADataObject *dataObject = item;
     NSInteger numberOfChildren = [dataObject.children count];
-    if (numberOfChildren > 0) {
-        [cell goCollapseAnimated:YES];
-    }    NSLog(@"collapse");
     
-}
+    if (level == 0) {
+        RATableViewCell *cell = (RATableViewCell *)[treeView cellForItem:item];
+        if (numberOfChildren > 0) {
+            [cell goCollapseAnimated:YES];
+        }
+    }else if(level == 1)
+    {
+        dayRATableViewCell *cell = (dayRATableViewCell *)[treeView cellForItem:item];
+        if (numberOfChildren > 0) {
+            [cell goCollapseAnimated:YES];
+        }
+    }}
 
 
 #pragma mark TreeView Data Source
@@ -147,12 +170,12 @@
     }else if(level == 1)
     {
         dayRATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([dayRATableViewCell class])];
-        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded];
+        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.income andExpense:dataObject.expense];
         cell1 = cell;
     }else if (level == 2)
     {
         itemRATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([itemRATableViewCell class])];
-        [cell setupWithCategory:@"吃喝" andDescription:@"老铺烤鸭" andMoney:233 andType:0];
+        [cell setupWithCategory:dataObject.name andDescription:dataObject.dataDescription andIncome:dataObject.income andExpense:dataObject.expense];
         cell1 = cell;
     }
     
@@ -346,7 +369,7 @@
             sumExpense =  [resultExpense doubleForColumnIndex:0];
         }
         
-        RADataObject *dailyData = [RADataObject dataObjectWithName:dayOnly andIncome:sumIncome andExpense:sumExpense andDescription:@"" children:[self.monthlyDataDict objectForKey:oneDayItems]];
+        RADataObject *dailyData = [RADataObject dataObjectWithName:dayOnly andIncome:sumIncome andExpense:sumExpense andDescription:@"" children:oneDayItems];
         
         [monthlyDataArray addObject:dailyData];
     }
