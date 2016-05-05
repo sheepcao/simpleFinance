@@ -15,6 +15,7 @@
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;
+@property(nonatomic,strong) UIImageView *myBackImage;
 @end
 
 @implementation SideMenuViewController
@@ -34,11 +35,52 @@
     menuTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:menuTable];
     
+    [self configUIAppearance];
+    [self registerThemeChangedNotification];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)registerThemeChangedNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleThemeChangedNotification:)
+                                                 name:ThemeChanged
+                                               object:nil];
+}
+
+- (void)handleThemeChangedNotification:(NSNotification*)notification{
+    
+    [self configUIAppearance];
+}
+
+- (void)configUIAppearance{
+    NSLog(@"sidebar config ui ");
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    NSString *backName;
+    
+    if (!showModel) {
+        backName = @"早.jpg";
+    }else
+    {
+        backName  = [NSString stringWithFormat:@"%@.jpg",showModel];
+    }
+    
+    if (!self.myBackImage)
+    {
+        self.myBackImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*2/3, SCREEN_HEIGHT)];
+        [self.myBackImage setImage:[UIImage imageNamed:backName]];
+        [self.view addSubview:self.myBackImage];
+        [self.view sendSubviewToBack:self.myBackImage];
+        [self.view setNeedsDisplay];
+    }else
+    {
+        [self.myBackImage setImage:[UIImage imageNamed:backName]];
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

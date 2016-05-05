@@ -38,7 +38,7 @@
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) summeryViewController *summaryVC;
 @property (nonatomic,strong) NSMutableArray *todayItems;
-
+@property (nonatomic,strong) UIView *myDimView;
 @property double sumIncome;
 @property double sumExpense;
 
@@ -51,6 +51,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"main view....");
     
     if (IS_IPHONE_6P) {
         bottomHeight = 65;
@@ -75,7 +76,7 @@
     
     self.titleTextLabel.alpha = 1.0f;
     self.moneyBookText.alpha = 0.0f;
-
+    
     
     self.navigationController.navigationBarHidden = YES;
     self.luckyText.alpha = 1.0f;
@@ -92,8 +93,8 @@
     isSwitchingChart = NO;
     isShowOutcomeChart = YES;
     
-    [self.gradientView addSubview:self.maintableView];
-    [self.gradientView bringSubviewToFront:self.maintableView];
+    [self.view addSubview:self.maintableView];
+    [self.view bringSubviewToFront:self.maintableView];
     
     
     moneyLuckSpace = self.moneyLuckView.frame.size.height + self.moneyLuckView.frame.origin.y - topBarHeight;
@@ -151,7 +152,7 @@
 -(void)prepareData
 {
     self.todayItems = [[NSMutableArray alloc] init];
-
+    
     db = [[CommonUtility sharedCommonUtility] db];
     if (![db open]) {
         NSLog(@"mainVC/Could not open db.");
@@ -159,11 +160,11 @@
     }
     
     NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
-//    NSString *yestoday = [[CommonUtility sharedCommonUtility] yesterdayDate];
+    //    NSString *yestoday = [[CommonUtility sharedCommonUtility] yesterdayDate];
     NSString *tomorrow = [[CommonUtility sharedCommonUtility] tomorrowDate];
     NSString *startMonthDay = [[CommonUtility sharedCommonUtility] firstMonthDate];
     NSString *endMonthDay = [[CommonUtility sharedCommonUtility] firstNextMonthDate];
-
+    
     FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", today,tomorrow];
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
@@ -179,10 +180,10 @@
         [self.todayItems addObject:oneItem];
         
     }
-//    
+    //
     FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", startMonthDay,endMonthDay];
     if ([resultIncome next]) {
-       double sumIncome =  [resultIncome doubleForColumnIndex:0];
+        double sumIncome =  [resultIncome doubleForColumnIndex:0];
         [self.summaryVC.monthIncome setText:[NSString stringWithFormat:@"%.0f",sumIncome]];
     }
     
@@ -196,14 +197,14 @@
     [self.summaryVC.monthSurplus setText:[NSString stringWithFormat:@"%ld",(long)surplus]];
     
     [db close];
-
+    
 }
 
 -(NSMutableArray *)makePieData:(BOOL)isIncome
 {
     self.sumIncome = 0.0f;
     self.sumExpense = 0.0f;
-
+    
     NSMutableArray *itemsArray = [[NSMutableArray alloc] init];
     NSMutableDictionary *itemDic = [[NSMutableDictionary alloc] init];
     
@@ -211,7 +212,7 @@
         for (itemObj *item in self.todayItems) {
             double moneyNow = 0.0;
             if (item.itemType == 1) {
-               NSNumber *oneCategoryMoney = [itemDic objectForKey:item.itemCategory];
+                NSNumber *oneCategoryMoney = [itemDic objectForKey:item.itemCategory];
                 if (oneCategoryMoney) {
                     moneyNow = [oneCategoryMoney doubleValue] + item.moneyAmount;
                 }else
@@ -219,7 +220,7 @@
                     moneyNow = item.moneyAmount;
                 }
                 [itemDic setObject:[NSNumber numberWithDouble:moneyNow] forKey:item.itemCategory];
-
+                
                 
                 self.sumIncome = self.sumIncome + item.moneyAmount;
             }
@@ -229,8 +230,8 @@
             [itemsArray addObject:[PNPieChartDataItem dataItemWithValue:[moneyEachCategory doubleValue] color:[[CommonUtility sharedCommonUtility] categoryColor:keyCategory]
                                                             description:keyCategory]];
         }
-
-
+        
+        
     }else
     {
         for (itemObj *item in self.todayItems) {
@@ -244,7 +245,7 @@
                     moneyNow = item.moneyAmount;
                 }
                 [itemDic setObject:[NSNumber numberWithDouble:moneyNow] forKey:item.itemCategory];
-
+                
                 self.sumExpense = self.sumExpense + item.moneyAmount;
             }
         }
@@ -254,7 +255,7 @@
                                                             description:keyCategory]];
         }
     }
-     return itemsArray;
+    return itemsArray;
 }
 
 -(void)configLuckyText
@@ -296,19 +297,19 @@
     self.luckyText.shadowOffset =  CGSizeMake(0, 0.5);
     
     
-//    
-//            for(NSString *fontfamilyname in [UIFont familyNames])
-//            {
-//                NSLog(@"family:'%@'",fontfamilyname);
-//                for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
-//                {
-//                    NSLog(@"\tfont:'%@'",fontName);
-//                }
-//                NSLog(@"-------------");
-//            }
-//            NSLog(@"========%d Fonts",[UIFont familyNames].count);
-//    
-//    
+    //
+    //            for(NSString *fontfamilyname in [UIFont familyNames])
+    //            {
+    //                NSLog(@"family:'%@'",fontfamilyname);
+    //                for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
+    //                {
+    //                    NSLog(@"\tfont:'%@'",fontName);
+    //                }
+    //                NSLog(@"-------------");
+    //            }
+    //            NSLog(@"========%d Fonts",[UIFont familyNames].count);
+    //
+    //
 }
 
 -(void)configBottomBar
@@ -317,7 +318,7 @@
     bottomView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:bottomView];
     
-
+    
     // add new item button----------------------------------------------------
     RoundedButton *addMoneyButton = [[RoundedButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-bottomHeight/2, -9, bottomHeight, bottomHeight)];
     [addMoneyButton setTitle:@"＋" forState:UIControlStateNormal];
@@ -329,7 +330,7 @@
     [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragExit];
     [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragOutside];
     [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchUpOutside];
-
+    
     [bottomView addSubview:addMoneyButton];
     
     UIButton *pieButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 10, bottomHeight-20, bottomHeight-20)];
@@ -337,19 +338,19 @@
     [pieButton setTitle:@"饼" forState:UIControlStateNormal];
     [pieButton addTarget:self action:@selector(popPieView) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:pieButton];
-
+    
     UIButton *TrendButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - (bottomHeight-20), 10, bottomHeight-20, bottomHeight-20)];
     [TrendButton setBackgroundColor:[UIColor clearColor]];
     [TrendButton setTitle:@"条" forState:UIControlStateNormal];
     [TrendButton addTarget:self action:@selector(popTrendView) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:TrendButton];
-
+    
 }
 
 -(void)tapDownAddNewButton:(RoundedButton *)sender
 {
     [sender selectedStyle];
-
+    
 }
 -(void)tapUpAddNewButton:(RoundedButton *)sender
 {
@@ -360,9 +361,9 @@
     if (sender) {
         [sender notSelectedStyle];
     }
-
+    
     [self presentViewController:[self nextAddNewItemViewController] animated:YES completion:nil];
-
+    
 }
 
 - (UIViewController *)nextAddNewItemViewController
@@ -379,15 +380,15 @@
     
     NSString *targetDate = [dateFormatter1 stringFromDate:targetDay];
     addItemVC.targetDate = targetDate;
-
+    
     return addItemVC;
 }
 
 -(void)popPieView
 {
-//    [self presentViewController:[self nextPieViewController] animated:YES completion:nil];
+    //    [self presentViewController:[self nextPieViewController] animated:YES completion:nil];
     [self.navigationController pushViewController:[self nextPieViewController] animated:YES];
-
+    
 }
 - (UIViewController *)nextPieViewController
 {
@@ -401,7 +402,7 @@
 {
     trendViewController *trendVC = [[trendViewController alloc] initWithNibName:@"trendViewController" bundle:nil];
     [self.navigationController pushViewController:trendVC animated:YES];
-
+    
 }
 
 - (void)viewWillLayoutSubviews {
@@ -452,7 +453,7 @@
             [self popAddNewView:nil];
         }
     }
-
+    
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
@@ -467,7 +468,7 @@
         NSString *itemTime = @"";
         NSNumber *itemID = @(-1);
         int itemType = -1;
-
+        
         if (indexPath.row >= self.todayItems.count) {
             return;
         }else
@@ -497,13 +498,13 @@
         itemDetailVC.money = money;
         itemDetailVC.itemDescription = description;
         itemDetailVC.itemCreatedTime = itemTime;
-
+        
         [self.navigationController pushViewController:itemDetailVC animated:YES];
     }
     
     [self tableView:tableView didDeselectRowAtIndexPath:indexPath];
     
-   
+    
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -532,7 +533,7 @@
         return nil;
     }else if (section == 1)
     {
-
+        
         return self.summaryVC.view;
     }else
         return nil;
@@ -571,7 +572,7 @@
     
     else if(indexPath.section == 1 && indexPath.row == self.todayItems.count)
     {
-     
+        
         NSLog(@"row:%ld",(long)indexPath.row);
         
         if (self.todayItems.count == 0)
@@ -586,7 +587,7 @@
                 cell.backgroundColor = [UIColor clearColor];
                 
                 NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"本日尚无帐目记录"];
-
+                
                 UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                              @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
                                                                UIFontDescriptorNameAttribute:@"AvenirNext-Thin",
@@ -601,12 +602,12 @@
                 [cell.textLabel setAttributedText:attributedText];
                 cell.textLabel.textAlignment = NSTextAlignmentCenter;
             }
-
+            
             return cell;
         }
         pieChartIndexPath = indexPath;
         NSString *CellPieIdentifier = @"CellBottom";
-
+        
         ChartTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellPieIdentifier];
         if (cell == nil) {
             cell = [[ChartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellPieIdentifier];
@@ -615,7 +616,7 @@
             [cell drawPie];
             [cell.centerButton addTarget:self action:@selector(switchMoneyChart:) forControlEvents:UIControlEventTouchUpInside];
         }
-      
+        
         if (isSwitchingChart) {
             NSArray *items;
             cell.pieChart.displayAnimated = YES;
@@ -627,9 +628,9 @@
                 items = [self makePieData:NO];
                 isShowOutcomeChart = YES;
                 [cell switchCenterButtonToOutcome:YES ByMoney:[NSString stringWithFormat:@"%.1f",self.sumExpense]];
-
+                
             }
-
+            
             [cell updatePieWith:items];
             isSwitchingChart = NO;
         }else
@@ -639,7 +640,7 @@
             if (isShowOutcomeChart) {
                 items = [self makePieData:NO];
                 [cell switchCenterButtonToOutcome:YES ByMoney:[NSString stringWithFormat:@"%.1f",self.sumExpense]];
-        
+                
             }else{
                 items = [self makePieData:YES];
                 [cell switchCenterButtonToOutcome:NO ByMoney:[NSString stringWithFormat:@"%.1f",self.sumIncome]];
@@ -666,8 +667,8 @@
         NSString *category = @"";
         NSString *description = @"";
         NSString *money = @"";
-
-
+        
+        
         
         
         if(self.todayItems.count>indexPath.row)
@@ -679,12 +680,12 @@
             {
                 money = [NSString stringWithFormat:@"%.2f",(0 - oneItem.moneyAmount)] ;
                 [cell.money setTextColor:[UIColor colorWithRed:72/255.0f green:210/255.0f blue:86/255.0f alpha:0.92f]];
-
+                
             }else
             {
                 money =[NSString stringWithFormat:@"+%.2f",(oneItem.moneyAmount)] ;
                 [cell.money setTextColor:[UIColor colorWithRed:211/255.0f green:65/255.0f blue:43/255.0f alpha:0.92f]];
-
+                
             }
             
             if (![description isEqualToString:@""]) {
@@ -703,7 +704,7 @@
     {// 补全table content 的实际长度，以便可以滑上去
         NSString *CellIdentifier = @"Cell";
         NSLog(@"row:%ld",(long)indexPath.row);
-
+        
         myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[myMaskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
@@ -760,26 +761,26 @@
 
 
 
-- (IBAction)skinChange:(UIButton *)sender {
-    NSLog(@"skinChange");
-    if (sender.tag == 1) {
-        self.gradientView.inputColor0 = [UIColor darkGrayColor];
-        self.gradientView.inputColor1 = [UIColor blackColor];
-        [sender setTitle:@"白" forState:UIControlStateNormal];
-        [self.gradientView setNeedsDisplay];
-        sender.tag = 10;
-        
-    }else
-    {
-        self.gradientView.inputColor0 = [UIColor colorWithRed:89/255.0f green:175/255.0f blue:185/255.0f alpha:1.0f];
-        self.gradientView.inputColor1 = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:195/255.0f alpha:1.0f];
-        [sender setTitle:@"夜" forState:UIControlStateNormal];
-        sender.tag = 1;
-        
-        [self.gradientView setNeedsDisplay];
-    }
-    
-}
+//- (IBAction)skinChange:(UIButton *)sender {
+//    NSLog(@"skinChange");
+//    if (sender.tag == 1) {
+//        self.gradientView.inputColor0 = [UIColor darkGrayColor];
+//        self.gradientView.inputColor1 = [UIColor blackColor];
+//        [sender setTitle:@"白" forState:UIControlStateNormal];
+//        [self.gradientView setNeedsDisplay];
+//        sender.tag = 10;
+//
+//    }else
+//    {
+//        self.gradientView.inputColor0 = [UIColor colorWithRed:89/255.0f green:175/255.0f blue:185/255.0f alpha:1.0f];
+//        self.gradientView.inputColor1 = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:195/255.0f alpha:1.0f];
+//        [sender setTitle:@"夜" forState:UIControlStateNormal];
+//        sender.tag = 1;
+//
+//        [self.gradientView setNeedsDisplay];
+//    }
+//
+//}
 
 - (IBAction)menuTapped:(id)sender {
     [self.menuContainerViewController toggleRightSideMenuCompletion:^{
@@ -818,20 +819,43 @@
     UIView *dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     dimView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.7];
     [self.view addSubview:dimView];
+    self.myDimView = dimView;
     
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT*3/4, SCREEN_WIDTH, SCREEN_HEIGHT/4)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [dimView addGestureRecognizer:tap];
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT/4)];
+    contentView.tag = 100;
     contentView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.9 alpha:0.9f];
     [dimView addSubview:contentView];
-
+    [UIView animateWithDuration:0.32f delay:0.15f options:UIViewAnimationOptionLayoutSubviews animations:^{
+        if (contentView) {
+            [contentView setFrame:CGRectMake(contentView.frame.origin.x, SCREEN_HEIGHT*3/4, contentView.frame.size.width, contentView.frame.size.height)];
+        }
+    } completion:nil ];
     
+
     UILabel *autoChangeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, contentView.frame.size.height*2/5)];
     [autoChangeTitle setText:@"自动调整"];
     autoChangeTitle.textAlignment = NSTextAlignmentCenter;
     [contentView addSubview:autoChangeTitle];
     
     UISwitch *enableAutoSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(contentView.frame.size.width-110, autoChangeTitle.frame.size.height/2 -20, 80, 40)];
+    enableAutoSwitch.tintColor = [UIColor colorWithRed:0.39 green:0.39 blue:0.42 alpha:0.88];
     [enableAutoSwitch setCenter:CGPointMake(contentView.frame.size.width-70, autoChangeTitle.center.y)];
     [contentView addSubview:enableAutoSwitch];
+    NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
+    if ([autoSwitchString isEqualToString:@"on"])
+    {
+        enableAutoSwitch.on = YES;
+    }else
+    {
+        enableAutoSwitch.on = NO;
+    }
+    [enableAutoSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     
     UILabel *modelTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, contentView.frame.size.height*2/5, 80, contentView.frame.size.height*3/5)];
     [modelTitle setText:@"显示模式"];
@@ -845,7 +869,7 @@
     
     NSArray *timeTitle = @[@"早",@"午",@"夕",@"夜"];
     for (int i = 4; i>0; i--) {
-        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width - 60 - (4-i) *(40+12), contentView.frame.size.height*2/5 + modelTitle.frame.size.height/2 - 20, 40, 40)];
+        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width - 55 - (4-i) *(40+10), contentView.frame.size.height*2/5 + modelTitle.frame.size.height/2 - 20, 40, 40)];
         [timeButton setTitle:timeTitle[i - 1] forState:UIControlStateNormal];
         timeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
         [timeButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
@@ -858,8 +882,23 @@
         selectedBar.tag = 10;
         [timeButton addSubview:selectedBar];
         [selectedBar setHidden:YES];
-        
     }
+    
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    for (int i = 0 ; i < 4; i++) {
+        if ([showModel isEqualToString:timeTitle[i]])
+        {
+            UIButton *button = (UIButton *)[contentView viewWithTag:i+1];
+            
+            [button setTitleColor:[UIColor colorWithRed:247/255.0f green:81/255.0f blue:94/255.0f alpha:0.9]forState:UIControlStateNormal];
+            button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.0f];
+            UIView *selectBar = (UIView *)[button viewWithTag:10];
+            [selectBar setHidden:NO];
+            break;
+        }
+    }
+
+
 }
 -(void)timeSelect:(UIButton *)sender
 {
@@ -872,11 +911,40 @@
         [selectBar setHidden:YES];
         
     }
-
+    
     [sender setTitleColor:[UIColor colorWithRed:247/255.0f green:81/255.0f blue:94/255.0f alpha:0.9]forState:UIControlStateNormal];
     sender.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:19.0f];
     UIView *selectBar = (UIView *)[sender viewWithTag:10];
     [selectBar setHidden:NO];
+    
+    NSArray *timeTitle = @[@"早",@"午",@"夕",@"夜"];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:timeTitle[sender.tag - 1] forKey:MODEL];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ThemeChanged  object:nil];
+    
+    
+}
+
+-(void)switchAction:(UISwitch *)sender
+{
+    if (sender.on) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"on" forKey:AUTOSWITCH];
+    }else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"off" forKey:AUTOSWITCH];
+    }
+}
+
+-(void)dismissKeyboard
+{
+    UIView *contentView = [self.myDimView viewWithTag:100];
+    [UIView animateWithDuration:0.32f animations:^{
+        if (contentView) {
+            [contentView setFrame:CGRectMake(contentView.frame.origin.x, SCREEN_HEIGHT, contentView.frame.size.width, contentView.frame.size.height)];
+        }
+    } completion:^(BOOL isfinished){
+        [self.myDimView removeFromSuperview];
+    }];
 }
 
 -(void)dealloc
@@ -885,11 +953,11 @@
 }
 
 #pragma baseVC overwrite
-- (void)configUIAppearance{
-    NSLog(@"main config ui ");
-    UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [backImage setImage:[UIImage imageNamed:@"早.jpg"]];
-    [self.view addSubview:backImage];
-    [self.view sendSubviewToBack:backImage];
-}
+//- (void)configUIAppearance{
+//    NSLog(@"main config ui ");
+//    UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    [backImage setImage:[UIImage imageNamed:@"早.jpg"]];
+//    [self.view addSubview:backImage];
+//    [self.view sendSubviewToBack:backImage];
+//}
 @end

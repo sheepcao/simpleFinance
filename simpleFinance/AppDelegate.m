@@ -36,6 +36,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
+    if (!autoSwitchString) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"on" forKey:AUTOSWITCH];
+    }
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     SideMenuViewController *rightMenuViewController = [[SideMenuViewController alloc] init];
     MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
@@ -43,8 +49,10 @@
                                                     leftMenuViewController:nil
                                                     rightMenuViewController:rightMenuViewController];
     self.window.rootViewController = container;
-    
+
     [self initDB];
+    [self judgeTimeFrame];
+
     [self.window makeKeyAndVisible];
     
     
@@ -64,6 +72,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [self judgeTimeFrame];
+
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -122,6 +132,34 @@
         }
     }
     [db close];
+}
+
+-(void)judgeTimeFrame
+{
+    NSString *autoSwitchString = [[NSUserDefaults standardUserDefaults] objectForKey:AUTOSWITCH];
+    if (![autoSwitchString isEqualToString:@"on"])
+    {
+        return;
+    }
+    
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *date = [NSDate date];
+    NSInteger hour = [cal component:NSCalendarUnitHour fromDate:date];
+
+    if (hour>6 &&hour<11) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"早" forKey:MODEL];
+    }else if(hour>=11 &&hour<14)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"午" forKey:MODEL];
+    }else if(hour>=14 &&hour<=19)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"夕" forKey:MODEL];
+    }else
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"夜" forKey:MODEL];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:ThemeChanged  object:nil];
 
     
 }

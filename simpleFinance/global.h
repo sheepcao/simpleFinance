@@ -52,5 +52,8 @@
 
 #define ALLAPP_URL @"itms://itunes.apple.com/us/artist/cao-guangxu/id844914783"
 
+#define MODEL @"model"
+#define AUTOSWITCH @"autoSwitch"
+#define ThemeChanged  @"modelNotification"
 
 #endif /* global_h */
