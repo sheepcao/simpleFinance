@@ -29,13 +29,32 @@
   if (self) {
     self.children = [NSArray arrayWithArray:children];
     self.name = name;
+
   }
   return self;
+}
+- (id)initWithName:(NSString *)name andIncome:(double)income andExpense:(double)expense andDescription:(NSString *)descrip  children:(NSArray *)children
+{
+    self = [super init];
+    if (self) {
+        self.children = [NSArray arrayWithArray:children];
+        self.name = name;
+        self.income = [NSString stringWithFormat:@"%.2f",income];
+        self.expense = [NSString stringWithFormat:@"%.2f",expense];
+        self.dataDescription = descrip;
+
+    }
+    return self;
 }
 
 + (id)dataObjectWithName:(NSString *)name children:(NSArray *)children
 {
   return [[self alloc] initWithName:name children:children];
+}
+
++ (id)dataObjectWithName:(NSString *)name andIncome:(double)income andExpense:(double)expense  andDescription:(NSString *)descrip children:(NSArray *)children
+{
+    return [[self alloc] initWithName:name andIncome:income andExpense:expense andDescription:descrip children:children];
 }
 
 - (void)addChild:(id)child

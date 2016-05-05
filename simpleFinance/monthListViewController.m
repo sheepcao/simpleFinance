@@ -14,25 +14,30 @@
 #import "RATableViewCell.h"
 #import "dayRATableViewCell.h"
 #import "itemRATableViewCell.h"
+#import "CommonUtility.h"
+#import "itemObj.h"
 
 @interface monthListViewController ()<RATreeViewDelegate, RATreeViewDataSource>
 
 @property(nonatomic,strong)  RATreeView * treeView;
 @property(nonatomic,strong) NSArray * data;
 @property (nonatomic,strong) topBarView *topBar;
+@property (nonatomic,strong) FMDatabase *db;
+@property (nonatomic,strong) NSMutableDictionary *monthlyDataDict;
 
 @end
 
 @implementation monthListViewController
+@synthesize db;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadData];
-
+    [self prepareDB];
+    
     // Do any additional setup after loading the view from its nib.
     [self configTopbar];
     [self configTable];
-
+    
 }
 
 -(void)configTopbar
@@ -74,11 +79,11 @@
     
     [self.treeView reloadData];
     [self.view addSubview:self.treeView];
-      [self.treeView registerNib:[UINib nibWithNibName:NSStringFromClass([RATableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([RATableViewCell class])];
+    [self.treeView registerNib:[UINib nibWithNibName:NSStringFromClass([RATableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([RATableViewCell class])];
     [self.treeView registerNib:[UINib nibWithNibName:NSStringFromClass([dayRATableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([dayRATableViewCell class])];
     [self.treeView registerNib:[UINib nibWithNibName:NSStringFromClass([itemRATableViewCell class]) bundle:nil] forCellReuseIdentifier:NSStringFromClass([itemRATableViewCell class])];
-
-
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,7 +126,7 @@
     if (numberOfChildren > 0) {
         [cell goCollapseAnimated:YES];
     }    NSLog(@"collapse");
-
+    
 }
 
 
@@ -133,12 +138,11 @@
     
     NSInteger level = [self.treeView levelForCellForItem:item];
     NSInteger numberOfChildren = [dataObject.children count];
-    NSString *detailText = [NSString localizedStringWithFormat:@"Number of children %@", [@(numberOfChildren) stringValue]];
     BOOL expanded = [self.treeView isCellForItemExpanded:item];
     UITableViewCell * cell1;
     if (level == 0) {
         RATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([RATableViewCell class])];
-        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded];
+        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.income andExpense:dataObject.expense];
         cell1 = cell;
     }else if(level == 1)
     {
@@ -151,10 +155,10 @@
         [cell setupWithCategory:@"吃喝" andDescription:@"老铺烤鸭" andMoney:233 andType:0];
         cell1 = cell;
     }
-
+    
     cell1.selectionStyle = UITableViewCellSelectionStyleNone;
     
-
+    
     
     return cell1;
 }
@@ -216,6 +220,152 @@
     
 }
 
+-(void)prepareDB
+{
+    self.monthlyDataDict = [[NSMutableDictionary alloc] init];
+    
+    db = [[CommonUtility sharedCommonUtility] db];
+    if (![db open]) {
+        NSLog(@"mainVC/Could not open db.");
+        return;
+    }
+    NSString *minDate = @"2016-05-01";
+    NSString *maxDate = @"2016-08-01";
+    
+    FMResultSet *rs = [db executeQuery:@"select target_date from ITEMINFO order by target_date LIMIT 1"];
+    while ([rs next]) {
+        minDate = [rs stringForColumn:@"target_date"];
+    }
+    FMResultSet *rs2 = [db executeQuery:@"select target_date from ITEMINFO order by target_date desc LIMIT 1"];
+    while ([rs2 next]) {
+        maxDate = [rs2 stringForColumn:@"target_date"];
+    }
+    
+    NSArray *minArray = [minDate componentsSeparatedByString:@"-"];
+    NSString *minYear = minArray[0];
+    NSString *minMonth = minArray[1];
+    
+    NSArray *maxArray = [maxDate componentsSeparatedByString:@"-"];
+    NSString *maxYear = maxArray[0];
+    NSString *maxMonth = maxArray[1];
+    
+    NSInteger totalMonth = ([maxYear integerValue] - [minYear integerValue]) *12 + ([maxMonth integerValue] - [minMonth integerValue]) + 1;
+    
+    NSMutableArray *allMonth = [[NSMutableArray alloc] init];
+
+    for (int i = 0; i<totalMonth; i ++) {
+        
+        NSMutableArray *monthArray = [[NSMutableArray alloc] init];
+        
+        NSInteger startYear = ([minMonth integerValue] + i - 1) /12 +[minYear integerValue];
+        NSInteger startMonth = ([minMonth integerValue] + i ) %12;
+        if (startMonth == 0) {
+            startMonth = 12;
+        }
+        
+        NSInteger endYear = ([minMonth integerValue] +( i+1) - 1) /12 +[minYear integerValue];
+        NSInteger endMonth = ([minMonth integerValue] + (i + 1) ) %12;
+        if (endMonth == 0) {
+            endMonth = 12;
+        }
+        
+        
+        NSString *start = [NSString stringWithFormat:@"%ld-%02ld-01",(long)startYear,(long)startMonth];
+        NSString *end = [NSString stringWithFormat:@"%ld-%02ld-01",(long)endYear,(long)endMonth];
+        
+        FMResultSet *rs = [db executeQuery:@"select distinct target_date from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", start,end];
+        while ([rs next]) {
+            NSString *dateString = [rs stringForColumn:@"target_date"];
+            NSArray *timeParts = [dateString componentsSeparatedByString:@" "];
+            NSString *dateOnly = timeParts[0];
+            
+            if(![monthArray containsObject:dateOnly])
+            {
+                [monthArray addObject:dateOnly];
+            }
+        }
+        
+        NSString *monthName = [NSString stringWithFormat:@"%ld-%02ld",(long)startYear,(long)startMonth];
+        RADataObject *monthData = [self dailyDataFrom:monthName withArray:monthArray duringStart:start andEnd:end];
+        [allMonth addObject:monthData];
+    }
+    [db close];
+    self.data = [NSArray arrayWithArray:allMonth];
+}
+
+-( RADataObject *)dailyDataFrom:(NSString *)monthName  withArray:(NSArray *)monthlyArray duringStart:(NSString *)startDate andEnd:(NSString *)endDate
+{
+    NSMutableArray *monthlyDataArray = [[NSMutableArray alloc] init];
+    
+    for (NSString *date in monthlyArray) {
+        NSMutableArray *oneDayItems = [[NSMutableArray alloc] init];
+        NSString *nextDay = [[CommonUtility sharedCommonUtility] dateByAddingDays: date andDaysToAdd:1];
+        
+        FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", date,nextDay];
+        while ([rs next]) {
+            itemObj *oneItem = [[itemObj alloc] init];
+            
+            oneItem.itemID = [NSNumber numberWithInt: [rs intForColumn:@"item_id"]];
+            
+            oneItem.itemCategory  = [rs stringForColumn:@"item_category"];
+            oneItem.itemDescription = [rs stringForColumn:@"item_description"];
+            oneItem.itemType = [rs intForColumn:@"item_type"];
+            oneItem.createdTime = [rs stringForColumn:@"create_time"];
+            oneItem.targetTime = [rs stringForColumn:@"target_date"];
+            oneItem.moneyAmount = [rs doubleForColumn:@"money"];
+            double income = -0.1;
+            double expense = -0.1;
+            if (oneItem.itemType == 0) {
+                expense = oneItem.moneyAmount;
+            }else
+            {
+                income = oneItem.moneyAmount;
+            }
+            
+            RADataObject *itemData = [RADataObject dataObjectWithName: oneItem.itemCategory andIncome:income  andExpense:expense andDescription:oneItem.itemDescription children:nil];
+            
+            [oneDayItems addObject:itemData];
+        }
+        NSString *dayOnly = @"01";
+        NSArray *dayOnlyArray = [date componentsSeparatedByString:@"-"];
+        if (dayOnlyArray.count>2) {
+            dayOnly = dayOnlyArray[2];
+        }
+        
+        double sumIncome = 0.00f;
+        double sumExpense = 0.00f;
+        
+        FMResultSet *resultIncome = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", date,nextDay];
+        if ([resultIncome next]) {
+            sumIncome =  [resultIncome doubleForColumnIndex:0];
+        }
+        
+        FMResultSet *resultExpense = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", date,nextDay];
+        
+        if ([resultExpense next]) {
+            sumExpense =  [resultExpense doubleForColumnIndex:0];
+        }
+        
+        RADataObject *dailyData = [RADataObject dataObjectWithName:dayOnly andIncome:sumIncome andExpense:sumExpense andDescription:@"" children:[self.monthlyDataDict objectForKey:oneDayItems]];
+        
+        [monthlyDataArray addObject:dailyData];
+    }
+    
+    double monthIncome = 0.00f;
+    double monthExpense = 0.00f;
+    FMResultSet *resultIncomeMonth = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 1", startDate,endDate];
+    if ([resultIncomeMonth next]) {
+        monthIncome =  [resultIncomeMonth doubleForColumnIndex:0];
+    }
+    FMResultSet *resultExpenseMonth = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = 0", startDate,endDate];
+    if ([resultExpenseMonth next]) {
+        monthExpense =  [resultExpenseMonth doubleForColumnIndex:0];
+    }
+
+    RADataObject *monthlyData = [RADataObject dataObjectWithName:monthName andIncome:monthIncome andExpense:monthExpense andDescription:@"" children:monthlyDataArray];
+    
+    return monthlyData;
+}
 
 
 

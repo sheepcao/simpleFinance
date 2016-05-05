@@ -24,10 +24,14 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSArray *children;
+@property (strong, nonatomic) NSString *income;
+@property (strong, nonatomic) NSString *expense;
+@property (strong, nonatomic) NSString *dataDescription;
 
 - (id)initWithName:(NSString *)name children:(NSArray *)array;
 
 + (id)dataObjectWithName:(NSString *)name children:(NSArray *)children;
++ (id)dataObjectWithName:(NSString *)name andIncome:(double)income andExpense:(double)expense  andDescription:(NSString *)descrip children:(NSArray *)children;
 
 - (void)addChild:(id)child;
 - (void)removeChild:(id)child;

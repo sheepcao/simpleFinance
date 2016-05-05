@@ -25,7 +25,7 @@
 @property (nonatomic, copy) void (^additionButtonTapAction)(id sender);
 @property (nonatomic) BOOL additionButtonHidden;
 
-- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded;
+- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense;
 - (void)goExpendAnimated:(BOOL)animated;
 - (void)goCollapseAnimated:(BOOL)animated;
 
