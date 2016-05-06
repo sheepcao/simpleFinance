@@ -22,11 +22,10 @@
 #import "itemDetailViewController.h"
 #import "trendViewController.h"
 #import "AppDelegate.h"
+#import "constellationView.h"
+#import "pickerLabel.h"
 
-
-
-
-@interface mainViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+@interface mainViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate>
 {
     CGFloat moneyLuckSpace;
     CGFloat bottomHeight;
@@ -34,12 +33,16 @@
     NSIndexPath *pieChartIndexPath;
     BOOL isSwitchingChart;
     BOOL isShowOutcomeChart;
+    NSArray *constellationList;
+    NSString *constellationSelected;
+
 }
 
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) summeryViewController *summaryVC;
 @property (nonatomic,strong) NSMutableArray *todayItems;
 @property (nonatomic,strong) UIView *myDimView;
+@property (nonatomic,strong)  constellationView *myConstellView;
 @property double sumIncome;
 @property double sumExpense;
 
@@ -61,6 +64,8 @@
         bottomHeight = bottomBar;
     }
     
+    constellationList = [[NSArray alloc]initWithObjects:@"白羊座     3.21-4.19",@"金牛座     4.20-5.20",@"双子座     5.21-6.21",@"巨蟹座     6.22-7.22",@"狮子座     7.23-8.22",@"处女座     8.23-9.22",@"天秤座     9.23-10.23",@"天蝎座     10.24-11.22",@"射手座     11.23-12.21",@"摩羯座     12.22-1.19",@"水瓶座     1.20-2.18",@"双鱼座     2.19-3.20",nil];
+    constellationSelected = constellationList[0];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(menuStateEventOccurred:)
@@ -261,57 +266,125 @@
 
 -(void)configLuckyText
 {
-    
-    
-    if (IS_IPHONE_5_OR_LESS) {
-        fontSize = 12.5f;
-    }else if(IS_IPHONE_6)
-    {
-        fontSize = 14.0f;
-    }else
-    {
-        fontSize = 15.5f;
+    NSString *Constellation = [[NSUserDefaults standardUserDefaults] objectForKey:@"Constellation"];
+    if (!Constellation) {
+        [self.luckyText makeText:@"设置星座，随时掌握财运 >"];
+        return;
     }
     
+    [self.luckyText makeText:[[CommonUtility sharedCommonUtility] fetchConstellation:@"天蝎座"]];
     
-    UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
-                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize]
-                                                   }];
+
     
-    CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(12 * (CGFloat)M_PI / 180), 1, 0, 0);
-    attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
-    self.luckyText.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
+//    if (IS_IPHONE_5_OR_LESS) {
+//        fontSize = 12.5f;
+//    }else if(IS_IPHONE_6)
+//    {
+//        fontSize = 14.0f;
+//    }else
+//    {
+//        fontSize = 15.5f;
+//    }
+//    
+//    
+//    UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+//                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
+//                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+//                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize]
+//                                                   }];
+//    
+//    CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(12 * (CGFloat)M_PI / 180), 1, 0, 0);
+//    attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
+//    self.luckyText.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
+//    
+//    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:@"\t理财敏感度高，适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘。"];
+//    
+//    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+//    [style setLineSpacing:attributeFontDescriptor.pointSize *0.43];
+//    [attrString addAttribute:NSParagraphStyleAttributeName
+//                       value:style
+//                       range:NSMakeRange(0, attrString.length)];
+//    self.luckyText.attributedText = attrString;
+//    self.luckyText.numberOfLines = 6;
+//    self.luckyText.alpha = 1.0f;
+//    self.luckyText.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.45];
+//    self.luckyText.shadowOffset =  CGSizeMake(0, 0.5);
     
-    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:@"\t理财敏感度高，适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘。"];
-    
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    [style setLineSpacing:attributeFontDescriptor.pointSize *0.43];
-    [attrString addAttribute:NSParagraphStyleAttributeName
-                       value:style
-                       range:NSMakeRange(0, attrString.length)];
-    self.luckyText.attributedText = attrString;
-    self.luckyText.numberOfLines = 6;
-    self.luckyText.alpha = 1.0f;
-    self.luckyText.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.45];
-    self.luckyText.shadowOffset =  CGSizeMake(0, 0.5);
-    
-    
-    //
-    //            for(NSString *fontfamilyname in [UIFont familyNames])
-    //            {
-    //                NSLog(@"family:'%@'",fontfamilyname);
-    //                for(NSString *fontName in [UIFont fontNamesForFamilyName:fontfamilyname])
-    //                {
-    //                    NSLog(@"\tfont:'%@'",fontName);
-    //                }
-    //                NSLog(@"-------------");
-    //            }
-    //            NSLog(@"========%d Fonts",[UIFont familyNames].count);
-    //
-    //
 }
+
+- (IBAction)configConstellation:(id)sender {
+    
+    constellationView *constellView = [[constellationView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    constellView.constellPicker.delegate = self;
+    constellView.constellPicker.dataSource = self;
+    constellView.constellDelegate = self;
+    [constellView addGesture];
+    [constellView.constellPicker selectRow:12*1000 inComponent:0 animated:NO];
+    self.myConstellView = constellView;
+    [self.view addSubview:constellView];
+    
+}
+
+-(void)constellationChoose
+{
+    [[NSUserDefaults standardUserDefaults] setObject:constellationSelected forKey:@"Constellation"];
+    NSString *constellationOnly = [constellationSelected componentsSeparatedByString:@" "][0];
+
+    [self.luckyText makeText:[[CommonUtility sharedCommonUtility] fetchConstellation:constellationOnly]];
+    
+    if ([self.luckyText.text isEqualToString:@"设置星座，随时掌握财运 >"]) {
+        [UIView animateWithDuration:0.35f animations:^(void){
+            [self.maintableView setContentOffset:CGPointMake(0, moneyLuckSpace)];
+        }];
+    }
+        [self.myConstellView removeDimView];
+
+}
+-(void)cancelConstellation
+{
+    [self.myConstellView removeDimView];
+}
+
+#pragma mark picker delegate
+// pickerView 列数
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(nullable UIView *)view
+{
+    pickerLabel *picker = [[pickerLabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - 60, 38)];
+    [picker makeText:[constellationList objectAtIndex:(row%[constellationList count])]];
+    return picker;
+}
+
+
+
+// pickerView 每列个数
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [constellationList count] + 1000000;
+}
+
+// 每列宽度
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+
+    return SCREEN_WIDTH-60;
+}
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component
+{
+    return 38;
+}
+// 返回选中的行
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+        constellationSelected = [constellationList objectAtIndex:(row%[constellationList count])];
+}
+
+//返回当前行的内容,此处是将数组中数值添加到滚动的那个显示栏上
+-(NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+        return [constellationList objectAtIndex:(row%[constellationList count])];
+}
+
 
 -(void)configBottomBar
 {
@@ -446,7 +519,11 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"didSelectRowAtIndexPath");
+    NSLog(@"didSelectRowAtIndexPath:%ld",(long)indexPath.section);
+    
+    if (indexPath.section == 0) {
+        [self configConstellation:nil];
+    }
     
     if (indexPath.section == 1) {
         if (self.todayItems.count == 0)
@@ -547,12 +624,15 @@
         return 1;
     }else if(section == 1)
     {
+         if (self.todayItems.count == 0) {
+             return ((self.maintableView.frame.size.height-summaryViewHeight - 60)/rowHeight)+1;
+         }
+        
         return self.todayItems.count<((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)?((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)+1:self.todayItems.count + 1;
     }else
         return self.todayItems.count;
     
 }
-
 
 
 
@@ -822,11 +902,15 @@
     [self.view addSubview:dimView];
     self.myDimView = dimView;
     
+    UIView *gestureView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT*3/4)];
+    gestureView.backgroundColor = [UIColor clearColor];
+    [dimView addSubview:gestureView];
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     
-    [dimView addGestureRecognizer:tap];
+    [gestureView addGestureRecognizer:tap];
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT/4)];
     contentView.tag = 100;
@@ -901,6 +985,8 @@
 
 
 }
+
+
 -(void)timeSelect:(UIButton *)sender
 {
     for (int i =4 ; i>0; i--) {
@@ -985,11 +1071,5 @@
 }
 
 #pragma baseVC overwrite
-//- (void)configUIAppearance{
-//    NSLog(@"main config ui ");
-//    UIImageView *backImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    [backImage setImage:[UIImage imageNamed:@"早.jpg"]];
-//    [self.view addSubview:backImage];
-//    [self.view sendSubviewToBack:backImage];
-//}
+
 @end

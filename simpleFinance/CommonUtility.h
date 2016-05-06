@@ -47,4 +47,6 @@
 -(NSString *)weekStartDayOf:(NSDate *)date;
 -(NSInteger)weekSequence:(NSDate *)date;
 
+
+-(NSString *)fetchConstellation:(NSString *)constellation;
 @end

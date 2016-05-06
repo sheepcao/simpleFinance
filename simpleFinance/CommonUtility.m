@@ -365,4 +365,14 @@
 }
 
 
+#pragma mark constellation info
+
+-(NSString *)fetchConstellation:(NSString *)constellation
+{
+    return @"设置星座，随时掌握财运 >";
+//    return @"和家人的财务状况紧紧捆绑在一起。另外，近期会有好消息，你将重新获得一批好资源。";
+
+}
+
+
 @end

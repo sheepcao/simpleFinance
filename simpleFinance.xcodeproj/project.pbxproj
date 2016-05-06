@@ -47,6 +47,9 @@
 		A45752751CDB42130013EFBF /* dayRATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45752731CDB42130013EFBF /* dayRATableViewCell.xib */; };
 		A45752791CDB4FA40013EFBF /* itemRATableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A45752771CDB4FA40013EFBF /* itemRATableViewCell.m */; };
 		A457527A1CDB4FA40013EFBF /* itemRATableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A45752781CDB4FA40013EFBF /* itemRATableViewCell.xib */; };
+		A45752851CDC3A8F0013EFBF /* constellationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A45752841CDC3A8F0013EFBF /* constellationView.m */; };
+		A45752881CDC60D70013EFBF /* pickerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A45752871CDC60D70013EFBF /* pickerLabel.m */; };
+		A4637AA81CDC6FE000BC86AC /* LuckyLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4637AA71CDC6FE000BC86AC /* LuckyLabel.m */; };
 		A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A481F9C01CB769960003100F /* myMaskTableViewCell.m */; };
 		A490C1761CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C1751CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.m */; };
 		A490C1841CB7A887006EEEF1 /* FabonacciNum.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C1791CB7A887006EEEF1 /* FabonacciNum.m */; };
@@ -177,6 +180,12 @@
 		A45752761CDB4FA40013EFBF /* itemRATableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemRATableViewCell.h; sourceTree = "<group>"; };
 		A45752771CDB4FA40013EFBF /* itemRATableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemRATableViewCell.m; sourceTree = "<group>"; };
 		A45752781CDB4FA40013EFBF /* itemRATableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemRATableViewCell.xib; sourceTree = "<group>"; };
+		A45752831CDC3A8F0013EFBF /* constellationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constellationView.h; sourceTree = "<group>"; };
+		A45752841CDC3A8F0013EFBF /* constellationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = constellationView.m; sourceTree = "<group>"; };
+		A45752861CDC60D70013EFBF /* pickerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pickerLabel.h; sourceTree = "<group>"; };
+		A45752871CDC60D70013EFBF /* pickerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pickerLabel.m; sourceTree = "<group>"; };
+		A4637AA61CDC6FE000BC86AC /* LuckyLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LuckyLabel.h; sourceTree = "<group>"; };
+		A4637AA71CDC6FE000BC86AC /* LuckyLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LuckyLabel.m; sourceTree = "<group>"; };
 		A481F9BF1CB769960003100F /* myMaskTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myMaskTableViewCell.h; sourceTree = "<group>"; };
 		A481F9C01CB769960003100F /* myMaskTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myMaskTableViewCell.m; sourceTree = "<group>"; };
 		A490C1741CB7A3D8006EEEF1 /* UILabel+UILabel_UILabelDynamicHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+UILabel_UILabelDynamicHeight.h"; sourceTree = "<group>"; };
@@ -544,6 +553,12 @@
 				A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */,
 				A425B2C51CCE234F0008BFE2 /* dateShowView.h */,
 				A425B2C61CCE234F0008BFE2 /* dateShowView.m */,
+				A45752831CDC3A8F0013EFBF /* constellationView.h */,
+				A45752841CDC3A8F0013EFBF /* constellationView.m */,
+				A45752861CDC60D70013EFBF /* pickerLabel.h */,
+				A45752871CDC60D70013EFBF /* pickerLabel.m */,
+				A4637AA61CDC6FE000BC86AC /* LuckyLabel.h */,
+				A4637AA71CDC6FE000BC86AC /* LuckyLabel.m */,
 			);
 			name = customView;
 			sourceTree = "<group>";
@@ -764,12 +779,15 @@
 				A4ECE27C1CD62FC0000FF10D /* categoryManagementViewController.m in Sources */,
 				A4CC24761CC0B361007A94F1 /* categoryButton.m in Sources */,
 				A457526A1CDB35350013EFBF /* RATreeView+Enums.m in Sources */,
+				A45752851CDC3A8F0013EFBF /* constellationView.m in Sources */,
 				A4E4A2F81CC9BE6000E36AFE /* FlatDatePicker.m in Sources */,
 				A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */,
 				A457526B1CDB35350013EFBF /* RATreeView+Private.m in Sources */,
 				A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */,
 				A45752671CDB35350013EFBF /* RATreeNodeController.m in Sources */,
 				A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */,
+				A4637AA81CDC6FE000BC86AC /* LuckyLabel.m in Sources */,
+				A45752881CDC60D70013EFBF /* pickerLabel.m in Sources */,
 				A45752651CDB35350013EFBF /* RATreeNode.m in Sources */,
 				A425B2D61CD086440008BFE2 /* trendViewController.m in Sources */,
 				A425B2DA1CD0C1440008BFE2 /* trendTableViewCell.m in Sources */,
