@@ -95,6 +95,7 @@
     self.maintableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.maintableView.canCancelContentTouches = YES;
     self.maintableView.delaysContentTouches = YES;
+    self.maintableView.bounces = NO;
     
     isSwitchingChart = NO;
     isShowOutcomeChart = YES;
@@ -494,16 +495,14 @@
 {
     if (indexPath.section == 0) {
         return moneyLuckSpace;
-    }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count)
-    {
+    }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count){
         if (self.todayItems.count == 0) {
-            return 60;
+            return rowHeight;
         }else
         {
             return PieHeight;
         }
-    }
-    else
+    }else
         return rowHeight;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -625,7 +624,7 @@
     }else if(section == 1)
     {
          if (self.todayItems.count == 0) {
-             return ((self.maintableView.frame.size.height-summaryViewHeight - 60)/rowHeight)+1;
+             return ((self.maintableView.frame.size.height-summaryViewHeight )/rowHeight)+1;
          }
         
         return self.todayItems.count<((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)?((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)+1:self.todayItems.count + 1;
@@ -640,9 +639,9 @@
     if (indexPath.section == 0) {
         NSString *CellIdentifier = @"Cell";
         
-        myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-            cell = [[myMaskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
         }
@@ -798,6 +797,7 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+
     for (UITableViewCell *cell in self.maintableView.visibleCells) {
         if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
             myMaskTableViewCell *oneCell = (myMaskTableViewCell *)cell;

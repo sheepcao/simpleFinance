@@ -356,7 +356,6 @@
 			isa = PBXGroup;
 			children = (
 				A4CC24261CBCC82E007A94F1 /* 3rd-party */,
-				A42D1CAF1CB65EA000C208A0 /* global.h */,
 				A4CC24881CC4E968007A94F1 /* modal */,
 				A4CC243F1CBCE2C5007A94F1 /* customView */,
 				A42D1C8C1CB60AC900C208A0 /* AppDelegate.h */,
@@ -566,6 +565,7 @@
 		A4CC24881CC4E968007A94F1 /* modal */ = {
 			isa = PBXGroup;
 			children = (
+				A42D1CAF1CB65EA000C208A0 /* global.h */,
 				A4ECE32A1CDB2C3A000FF10D /* RADataObject.h */,
 				A4ECE32B1CDB2C3A000FF10D /* RADataObject.m */,
 				A4CC248C1CC61BC5007A94F1 /* categoryObject.h */,

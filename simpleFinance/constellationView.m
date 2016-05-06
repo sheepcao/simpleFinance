@@ -31,7 +31,7 @@
         contentView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.9 alpha:0.9f];
         [self addSubview:contentView];
         
-        [UIView animateWithDuration:0.22f delay:0.01f options:UIViewAnimationOptionLayoutSubviews animations:^{
+        [UIView animateWithDuration:0.22f delay:0.0f options:UIViewAnimationOptionLayoutSubviews animations:^{
             if (contentView) {
                 [contentView setFrame:CGRectMake(contentView.frame.origin.x, SCREEN_HEIGHT - 230, contentView.frame.size.width, contentView.frame.size.height)];
             }
