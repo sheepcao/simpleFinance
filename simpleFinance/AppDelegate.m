@@ -54,8 +54,6 @@
     [self judgeTimeFrame];
 
     [self.window makeKeyAndVisible];
-    
-    
 
     return YES;
 }

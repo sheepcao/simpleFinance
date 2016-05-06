@@ -495,6 +495,7 @@
 {
     if (indexPath.section == 0) {
         return moneyLuckSpace;
+        return 0;
     }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count){
         if (self.todayItems.count == 0) {
             return rowHeight;

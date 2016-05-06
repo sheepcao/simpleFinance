@@ -235,6 +235,33 @@
     return comps.weekOfYear ;
 }
 
+
+-(NSDate *)dateFromChinese:(NSString *)dateCN
+{
+    NSDateFormatter *df1 = [[NSDateFormatter alloc] init];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    df1.calendar = cal;
+    [df1 setDateFormat:@"yyyy年MM月dd日"];
+    NSDate *dtPostDate = [df1 dateFromString:dateCN];
+    NSLog(@"date:``````````````````%@",dtPostDate);
+    return dtPostDate;
+}
+
+-(NSString *)chineseForNow
+{
+    NSDate *date = [NSDate date];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    dateFormatter.calendar = cal;
+    [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+    NSString *destDateString = [dateFormatter stringFromDate:date];
+    NSLog(@"dateString-----------------%@",destDateString);
+    return destDateString;
+}
+
 + (BOOL)isSystemLangChinese
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
