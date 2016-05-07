@@ -54,6 +54,13 @@
     [self judgeTimeFrame];
 
     [self.window makeKeyAndVisible];
+    
+    if ([CommonUtility isSystemLangChinese]) {
+        [self loadLuckInfoFromServer];
+    }else
+    {
+        NSLog(@"不是中文");
+    }
 
     return YES;
 }
@@ -99,7 +106,7 @@
     }
     NSString *createItemTable = @"CREATE TABLE IF NOT EXISTS ITEMINFO (item_id INTEGER PRIMARY KEY AUTOINCREMENT,item_category TEXT,item_type INTEGER,item_description TEXT,money DECIMAL (15,2),target_date Date,create_time Date)";
     NSString *createCategoryTable = @"CREATE TABLE IF NOT EXISTS CATEGORYINFO (category_id INTEGER PRIMARY KEY AUTOINCREMENT,category_name TEXT,category_type INTEGER,color_R Double,color_G Double,color_B Double, is_deleted INTEGER DEFAULT 0)";
-    NSString *createLuckTable = @"CREATE TABLE IF NOT EXISTS LUCKINFO (luck_id INTEGER PRIMARY KEY AUTOINCREMENT,week_sequence INTEGER,luck_Cn TEXT,luck_En TEXT)";
+    NSString *createLuckTable = @"CREATE TABLE IF NOT EXISTS MONEYLUCK (luck_id INTEGER PRIMARY KEY AUTOINCREMENT,week_sequence INTEGER,luck_Cn TEXT,luck_En TEXT,start_date TEXT,content TEXT, constellation TEXT)";
 
     
     [db executeUpdate:createItemTable];
@@ -160,6 +167,45 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:ThemeChanged  object:nil];
 
     
+}
+
+-(void)loadLuckInfoFromServer
+{
+    NSDate *dateNow = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:dateNow];
+    NSInteger dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:dateNow] weekday];
+    
+    [components setDay:([components day] - ((dayofweek) - 1))];// for beginning of the week.
+    
+    NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    dateFormat.calendar = gregorian;
+    [dateFormat setDateFormat:@"yyyy年MM月dd日"];
+    NSString *dateString= [dateFormat stringFromDate:beginningOfWeek];
+    
+    
+    NSDictionary *parameters = @{@"tag": @"fetch_luckinfo",@"start_date":dateString};
+    
+    [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:constellationService params:parameters success:^(NSDictionary *success){
+        NSArray *nameArray = [success objectForKey:@"name"];
+        NSArray *contentArray = [success objectForKey:@"content"];
+        NSString *startDate = [success objectForKey:@"start_date"][0];
+        NSString *week = [success objectForKey:@"week"][0];
+        
+        NSLog(@"%@",startDate);
+        NSLog(@"%@",nameArray[0]);
+        NSLog(@"%@",contentArray[0]);
+        NSLog(@"%@",week);
+
+
+
+
+        
+    } failure:^(NSError * failure){
+        NSLog(@"%@",failure);
+    }];
+
 }
 
 @end

@@ -123,6 +123,19 @@ class DB_Functions {
         return $appkey;
 
     }
+    
+    public function fetchConstellation($start_date) {
+        $result = mysql_query("SELECT * FROM luckInfo WHERE start_date = '$start_date'") or die(mysql_error());
+        // check for result
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
+//            $result = mysql_fetch_array($result);
+            return $result;
+        }else {
+            // signature not found
+            return false;
+        }
+    }
 
     /**
      * Get product info

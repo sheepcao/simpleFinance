@@ -9,6 +9,8 @@
 
 #import "CommonUtility.h"
 #import "itemObj.h"
+#import "UIImageView+AFNetworking.h"
+#import "AFHTTPSessionManager.h"
 
 @implementation CommonUtility
 
@@ -267,14 +269,21 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
     NSString *currentLang = [languages objectAtIndex:0];
-    
-    if([currentLang compare:@"zh-Hans" options:NSCaseInsensitiveSearch]==NSOrderedSame || [currentLang compare:@"zh-Hant" options:NSCaseInsensitiveSearch]==NSOrderedSame)
+    if([self myContainsStringFrom:currentLang forSubstring:@"zh-"])
     {
         return YES;
     }else
     {
         return NO;
     }
+    
+//    if([currentLang compare:@"zh-Hans" options:NSCaseInsensitiveSearch]==NSOrderedSame || [currentLang compare:@"zh-Hant" options:NSCaseInsensitiveSearch]==NSOrderedSame)
+//    {
+//        return YES;
+//    }else
+//    {
+//        return NO;
+//    }
 }
 
 +(void)tapSound
@@ -389,6 +398,24 @@
     [db close];
     
     return color;
+}
+
+- (void)httpGetUrlNoToken:(NSString *)url
+                   params:(NSDictionary *)paramsDict
+                  success:(void (^)(NSDictionary *))success
+                  failure:(void (^)(NSError *))failure
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = 12.0f;
+    manager.responseSerializer.acceptableContentTypes =[NSSet setWithObject:@"application/json"];
+    [manager.requestSerializer  setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+
+
+    [manager POST:url parameters:paramsDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+    }];
 }
 
 

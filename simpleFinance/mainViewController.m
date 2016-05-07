@@ -110,7 +110,14 @@
     }
     NSLog(@"moneyLuckSpace---:%f",moneyLuckSpace);
     
-    [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
+    if ([CommonUtility isSystemLangChinese]) {
+        [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
+    }else
+    {
+        self.moneyBookText.alpha = 1.0f;
+        self.titleTextLabel.alpha =0.0f;
+        self.luckyText.alpha = 0.0f;
+    }
     
     [self configBottomBar];
     
@@ -149,11 +156,12 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self.maintableView setContentOffset:CGPointMake(0, 0)];
+
     [super viewWillAppear:animated];
     [self prepareData];
     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
     [self.maintableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-    [self.maintableView setContentOffset:CGPointMake(0, 0)];
 }
 
 -(void)prepareData
@@ -167,11 +175,9 @@
     }
     
     NSString *today = [[CommonUtility sharedCommonUtility] todayDate];
-    //    NSString *yestoday = [[CommonUtility sharedCommonUtility] yesterdayDate];
     NSString *tomorrow = [[CommonUtility sharedCommonUtility] tomorrowDate];
     NSString *startMonthDay = [[CommonUtility sharedCommonUtility] firstMonthDate];
     NSString *endMonthDay = [[CommonUtility sharedCommonUtility] firstNextMonthDate];
-    
     FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", today,tomorrow];
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
@@ -276,41 +282,6 @@
     [self.luckyText makeText:[[CommonUtility sharedCommonUtility] fetchConstellation:@"天蝎座"]];
     
 
-    
-//    if (IS_IPHONE_5_OR_LESS) {
-//        fontSize = 12.5f;
-//    }else if(IS_IPHONE_6)
-//    {
-//        fontSize = 14.0f;
-//    }else
-//    {
-//        fontSize = 15.5f;
-//    }
-//    
-//    
-//    UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-//                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-//                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
-//                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize]
-//                                                   }];
-//    
-//    CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(12 * (CGFloat)M_PI / 180), 1, 0, 0);
-//    attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
-//    self.luckyText.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
-//    
-//    NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] initWithString:@"\t理财敏感度高，适合做长远布局，尤其是不用辛苦上班就可以有收益这类的被动收入，如房租、股权分红等等值得挖掘。"];
-//    
-//    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-//    [style setLineSpacing:attributeFontDescriptor.pointSize *0.43];
-//    [attrString addAttribute:NSParagraphStyleAttributeName
-//                       value:style
-//                       range:NSMakeRange(0, attrString.length)];
-//    self.luckyText.attributedText = attrString;
-//    self.luckyText.numberOfLines = 6;
-//    self.luckyText.alpha = 1.0f;
-//    self.luckyText.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.45];
-//    self.luckyText.shadowOffset =  CGSizeMake(0, 0.5);
-    
 }
 
 - (IBAction)configConstellation:(id)sender {
@@ -461,7 +432,6 @@
 
 -(void)popPieView
 {
-    //    [self presentViewController:[self nextPieViewController] animated:YES completion:nil];
     [self.navigationController pushViewController:[self nextPieViewController] animated:YES];
     
 }
@@ -494,7 +464,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return moneyLuckSpace;
+        if ([CommonUtility isSystemLangChinese]) {
+            return moneyLuckSpace;
+        }
         return 0;
     }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count){
         if (self.todayItems.count == 0) {
@@ -817,7 +789,9 @@
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView// called when scroll view grinds to a halt
 {
-    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+
+//    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
         [UIView animateWithDuration:0.35f animations:^(void){
             [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
         }];
@@ -826,7 +800,9 @@
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+
+//    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
         
         if (!decelerate) {
             [UIView animateWithDuration:0.35f animations:^(void){
@@ -838,10 +814,6 @@
     }else
         return;
 }
-
-
-
-
 
 //- (IBAction)skinChange:(UIButton *)sender {
 //    NSLog(@"skinChange");

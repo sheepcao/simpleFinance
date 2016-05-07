@@ -48,5 +48,10 @@
 -(NSInteger)weekSequence:(NSDate *)date;
 
 
+- (void)httpGetUrlNoToken:(NSString *)url
+                   params:(NSDictionary *)paramsDict
+                  success:(void(^)(NSDictionary *))success
+                  failure:(void(^)(NSError *))failure;
+
 -(NSString *)fetchConstellation:(NSString *)constellation;
 @end
