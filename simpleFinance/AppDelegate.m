@@ -13,11 +13,11 @@
 #import "CommonUtility.h"
 
 @interface AppDelegate ()
-
+@property (nonatomic,strong) FMDatabase *db;
 @end
 
 @implementation AppDelegate
-//@synthesize db;
+@synthesize db;
 
 
 - (mainViewController *)demoController {
@@ -49,11 +49,9 @@
                                                     leftMenuViewController:nil
                                                     rightMenuViewController:rightMenuViewController];
     self.window.rootViewController = container;
-
+    
     [self initDB];
     [self judgeTimeFrame];
-
-    [self.window makeKeyAndVisible];
     
     if ([CommonUtility isSystemLangChinese]) {
         [self loadLuckInfoFromServer];
@@ -61,7 +59,11 @@
     {
         NSLog(@"不是中文");
     }
+    
+    [self.window makeKeyAndVisible];
+    
 
+    
     return YES;
 }
 
@@ -78,7 +80,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [self judgeTimeFrame];
-
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -98,7 +100,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"category_id" forKey:@"sortType"];
     }
     
-    FMDatabase *db = [[CommonUtility sharedCommonUtility] db];
+     db = [[CommonUtility sharedCommonUtility] db];
     
     if (![db open]) {
         NSLog(@"Could not open db.");
@@ -107,7 +109,7 @@
     NSString *createItemTable = @"CREATE TABLE IF NOT EXISTS ITEMINFO (item_id INTEGER PRIMARY KEY AUTOINCREMENT,item_category TEXT,item_type INTEGER,item_description TEXT,money DECIMAL (15,2),target_date Date,create_time Date)";
     NSString *createCategoryTable = @"CREATE TABLE IF NOT EXISTS CATEGORYINFO (category_id INTEGER PRIMARY KEY AUTOINCREMENT,category_name TEXT,category_type INTEGER,color_R Double,color_G Double,color_B Double, is_deleted INTEGER DEFAULT 0)";
     NSString *createLuckTable = @"CREATE TABLE IF NOT EXISTS MONEYLUCK (luck_id INTEGER PRIMARY KEY AUTOINCREMENT,week_sequence INTEGER,luck_Cn TEXT,luck_En TEXT,start_date TEXT,content TEXT, constellation TEXT)";
-
+    
     
     [db executeUpdate:createItemTable];
     [db executeUpdate:createCategoryTable];
@@ -130,7 +132,7 @@
         [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('奖金',1,95,115,218)"];
         [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('外快',1,142,162,29)"];
         [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('红包',1,68,120,119)"];
-
+        
         
         if (!sql) {
             NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
@@ -151,7 +153,7 @@
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [NSDate date];
     NSInteger hour = [cal component:NSCalendarUnitHour fromDate:date];
-
+    
     if (hour>6 &&hour<11) {
         [[NSUserDefaults standardUserDefaults] setObject:@"早" forKey:MODEL];
     }else if(hour>=11 &&hour<14)
@@ -165,7 +167,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:@"夜" forKey:MODEL];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:ThemeChanged  object:nil];
-
+    
     
 }
 
@@ -184,28 +186,62 @@
     [dateFormat setDateFormat:@"yyyy年MM月dd日"];
     NSString *dateString= [dateFormat stringFromDate:beginningOfWeek];
     
+    if (![db open]) {
+        NSLog(@"Could not open db.");
+        return;
+    }
     
-    NSDictionary *parameters = @{@"tag": @"fetch_luckinfo",@"start_date":dateString};
+    NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where start_date = '%@'",dateString];
     
-    [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:constellationService params:parameters success:^(NSDictionary *success){
-        NSArray *nameArray = [success objectForKey:@"name"];
-        NSArray *contentArray = [success objectForKey:@"content"];
-        NSString *startDate = [success objectForKey:@"start_date"][0];
-        NSString *week = [success objectForKey:@"week"][0];
+    FMResultSet *rs = [db executeQuery:selectLuckExist];
+    if ([rs next]) {
+//        NSString *luckString = [rs stringForColumn:@"content"];
+//        [[NSUserDefaults standardUserDefaults] setObject:luckString forKey:@"luckString"];
+        [db close];
+    }else
+    {
+        [db close];
         
-        NSLog(@"%@",startDate);
-        NSLog(@"%@",nameArray[0]);
-        NSLog(@"%@",contentArray[0]);
-        NSLog(@"%@",week);
-
-
-
-
+        NSDictionary *parameters = @{@"tag": @"fetch_luckinfo",@"start_date":dateString};
         
-    } failure:^(NSError * failure){
-        NSLog(@"%@",failure);
-    }];
+        [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:constellationService params:parameters success:^(NSDictionary *success){
+            
+            if ([success objectForKey:@"success"] == 0) {
+                return ;
+            }
+            
+            NSArray *nameArray = [success objectForKey:@"name"];
+            NSArray *contentArray = [success objectForKey:@"content"];
+            NSString *startDate = [success objectForKey:@"start_date"][0];
+            NSString *week = [success objectForKey:@"week"][0];
+            
+            NSLog(@"%@",startDate);
+            NSLog(@"%@",nameArray[0]);
+            NSLog(@"%@",contentArray[0]);
+            NSLog(@"%@",week);
+            NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where start_date = '%@'",dateString];
+            if (![db open]) {
+                NSLog(@"Could not open db.");
+                return;
+            }
+            FMResultSet *rs = [db executeQuery:selectLuckExist];
+            if ([rs next]) {
+                [db close];
+                return ;
+            }
 
+            for (int i = 0; i<nameArray.count; i++) {
+                BOOL sql = [db executeUpdate:@"insert into MONEYLUCK (constellation,content,start_date,week_sequence) values (?,?,?,?)",nameArray[i],contentArray[i],startDate,week];
+                if (!sql) {
+                    NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+                }
+            }
+            [db close];
+            
+        } failure:^(NSError * failure){
+            NSLog(@"%@",failure);
+        }];
+    }
 }
 
 @end

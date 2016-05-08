@@ -11,6 +11,8 @@
 #import "itemObj.h"
 #import "UIImageView+AFNetworking.h"
 #import "AFHTTPSessionManager.h"
+#import "MBProgressHUD.h"
+
 
 @implementation CommonUtility
 
@@ -50,7 +52,7 @@
 
 -(NSString *)firstMonthDate
 {
-//    NSCalendar *cal = [NSCalendar currentCalendar];
+    //    NSCalendar *cal = [NSCalendar currentCalendar];
     NSCalendar *cal = [[NSCalendar alloc]
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     
@@ -58,14 +60,14 @@
     
     NSDateComponents * currentDateComponents = [cal components: kCFCalendarUnitYear | NSCalendarUnitMonth fromDate: date];
     NSDate * startOfMonth = [cal dateFromComponents: currentDateComponents];
-//    NSDate * endOfLastMonth = [startOfMonth dateByAddingTimeInterval: -1]; // One second before the start of this month
-
+    //    NSDate * endOfLastMonth = [startOfMonth dateByAddingTimeInterval: -1]; // One second before the start of this month
+    
     return    [self stringFromDate:startOfMonth];
 }
 
 -(NSString *)lastMonthDate
 {
-//    NSCalendar *cal = [NSCalendar currentCalendar];
+    //    NSCalendar *cal = [NSCalendar currentCalendar];
     NSCalendar *cal = [[NSCalendar alloc]
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate * plusOneMonthDate = [self dateByAddingMonths: 1];
@@ -76,13 +78,13 @@
 }
 -(NSString *)firstNextMonthDate
 {
-//    NSCalendar *cal = [NSCalendar currentCalendar];
+    //    NSCalendar *cal = [NSCalendar currentCalendar];
     NSCalendar *cal = [[NSCalendar alloc]
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate * plusOneMonthDate = [self dateByAddingMonths: 1];
     NSDateComponents * plusOneMonthDateComponents = [cal components: kCFCalendarUnitYear | NSCalendarUnitMonth fromDate: plusOneMonthDate];
     NSDate * endOfMonth = [cal dateFromComponents: plusOneMonthDateComponents]; // next month
-
+    
     return [self stringFromDate:endOfMonth];
 }
 //-(NSString *)oneDayBeforeDate:(NSString *)date
@@ -97,15 +99,15 @@
 //    NSDate *srcDate = [self dateFromString:date];
 //    NSDate * oneDayBefor = [srcDate dateByAddingTimeInterval: -1]; // One second before the start of this month
 //    return [self stringFromDate:oneDayBefor];
-//    
+//
 //}
 - (NSDate *) dateByAddingMonths: (NSInteger) monthsToAdd
 {
-//    NSCalendar * calendar = [NSCalendar currentCalendar];
+    //    NSCalendar * calendar = [NSCalendar currentCalendar];
     NSCalendar *calendar = [[NSCalendar alloc]
-                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                            initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [NSDate date];
-
+    
     NSDateComponents * months = [[NSDateComponents alloc] init];
     [months setMonth: monthsToAdd];
     
@@ -113,7 +115,7 @@
 }
 - (NSString *) dateByAddingDays: (NSString *)srcDate andDaysToAdd:(NSInteger) daysToAdd
 {
-//    NSCalendar * calendar = [NSCalendar currentCalendar];
+    //    NSCalendar * calendar = [NSCalendar currentCalendar];
     NSCalendar *calendar = [[NSCalendar alloc]
                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *day = [self dateFromString:srcDate];
@@ -125,7 +127,7 @@
 }
 -(NSString *)todayDate
 {
-//    NSCalendar *cal = [NSCalendar currentCalendar];
+    //    NSCalendar *cal = [NSCalendar currentCalendar];
     NSCalendar *cal = [[NSCalendar alloc]
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [NSDate date];
@@ -138,7 +140,7 @@
 
 -(NSString *)tomorrowDate
 {
-//    NSCalendar *cal = [NSCalendar currentCalendar];
+    //    NSCalendar *cal = [NSCalendar currentCalendar];
     NSCalendar *cal = [[NSCalendar alloc]
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [NSDate date];
@@ -152,7 +154,7 @@
 }
 -(NSString *)yesterdayDate
 {
-//    NSCalendar *cal = [NSCalendar currentCalendar];
+    //    NSCalendar *cal = [NSCalendar currentCalendar];
     NSCalendar *cal = [[NSCalendar alloc]
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [NSDate date];
@@ -204,7 +206,7 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateString= [dateFormat stringFromDate:beginningOfWeek];
     NSLog(@"StartDate:%@",dateString);
-
+    
     return dateString;
     
 }
@@ -224,7 +226,7 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSString *dateEndPrev = [dateFormat stringFromDate:EndOfWeek];
     NSLog(@"EndDate:%@",dateEndPrev);
-
+    
     return dateEndPrev;
 }
 
@@ -277,13 +279,13 @@
         return NO;
     }
     
-//    if([currentLang compare:@"zh-Hans" options:NSCaseInsensitiveSearch]==NSOrderedSame || [currentLang compare:@"zh-Hant" options:NSCaseInsensitiveSearch]==NSOrderedSame)
-//    {
-//        return YES;
-//    }else
-//    {
-//        return NO;
-//    }
+    //    if([currentLang compare:@"zh-Hans" options:NSCaseInsensitiveSearch]==NSOrderedSame || [currentLang compare:@"zh-Hant" options:NSCaseInsensitiveSearch]==NSOrderedSame)
+    //    {
+    //        return YES;
+    //    }else
+    //    {
+    //        return NO;
+    //    }
 }
 
 +(void)tapSound
@@ -388,7 +390,7 @@
     
     FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where category_name = ?",categoryName];
     while ([rs next]) {
-
+        
         double color_R  = [rs doubleForColumn:@"color_R"];
         double color_G = [rs doubleForColumn:@"color_G"];
         double color_B = [rs doubleForColumn:@"color_B"];
@@ -409,8 +411,8 @@
     manager.requestSerializer.timeoutInterval = 12.0f;
     manager.responseSerializer.acceptableContentTypes =[NSSet setWithObject:@"application/json"];
     [manager.requestSerializer  setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-
-
+    
+    
     [manager POST:url parameters:paramsDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
         success(responseObject);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -421,11 +423,104 @@
 
 #pragma mark constellation info
 
--(NSString *)fetchConstellation:(NSString *)constellation
+-(void)fetchConstellation:(NSString *)constellation ForView:(LuckyLabel *)textLabel
 {
-    return @"设置星座，随时掌握财运 >";
-//    return @"和家人的财务状况紧紧捆绑在一起。另外，近期会有好消息，你将重新获得一批好资源。";
+    
+    
+    NSDate *dateNow = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc]  initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [gregorian components:NSCalendarUnitWeekday | NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:dateNow];
+    NSInteger dayofweek = [[gregorian components:NSCalendarUnitWeekday fromDate:dateNow] weekday];
+    
+    [components setDay:([components day] - ((dayofweek) - 1))];// for beginning of the week.
+    
+    NSDate *beginningOfWeek = [gregorian dateFromComponents:components];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    dateFormat.calendar = gregorian;
+    [dateFormat setDateFormat:@"yyyy年MM月dd日"];
+    NSString *dateString= [dateFormat stringFromDate:beginningOfWeek];
+    
+    if (![db open]) {
+        NSLog(@"Could not open db.");
+        [textLabel makeText:@"设置星座，随时掌握财运 >"];
+        return ;
+    }
+    
+    NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where start_date = '%@' and constellation = '%@'",dateString,constellation];
+    
+    FMResultSet *rs = [db executeQuery:selectLuckExist];
+    if ([rs next]) {
+        NSString *luckString = [rs stringForColumn:@"content"];
+        [textLabel makeText:[NSString stringWithFormat:@"%@财运 :\n\t%@",constellation,luckString]];
+        [db close];
+    }else
+    {
+        [db close];
 
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:textLabel animated:YES];
+        
+        hud.mode = MBProgressHUDModeIndeterminate;
+        hud.dimBackground = YES;
+        
+        NSDictionary *parameters = @{@"tag": @"fetch_luckinfo",@"start_date":dateString};
+        
+        [self httpGetUrlNoToken:constellationService params:parameters success:^(NSDictionary *success){
+            
+            if ([success objectForKey:@"success"] == 0) {
+                [textLabel makeText:@"设置星座，随时掌握财运 >"];
+            }
+            
+            NSArray *nameArray = [success objectForKey:@"name"];
+            NSArray *contentArray = [success objectForKey:@"content"];
+            NSString *startDate = [success objectForKey:@"start_date"][0];
+            NSString *week = [success objectForKey:@"week"][0];
+            
+            NSLog(@"%@",startDate);
+            NSLog(@"%@",nameArray[0]);
+            NSLog(@"%@",contentArray[0]);
+            NSLog(@"%@",week);
+            if (![db open]) {
+                NSLog(@"Could not open db.");
+                [textLabel makeText:@"设置星座，随时掌握财运 >"];
+                return ;
+            }
+            for (int i = 0; i<nameArray.count; i++) {
+                BOOL sql = [db executeUpdate:@"insert into MONEYLUCK (constellation,content,start_date,week_sequence) values (?,?,?,?)",nameArray[i],contentArray[i],startDate,week];
+                if (!sql) {
+                    NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+                }
+            }
+            
+            NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where start_date = '%@' and constellation = '%@'",dateString,constellation];
+            FMResultSet *rs = [db executeQuery:selectLuckExist];
+            if ([rs next]) {
+                NSString *luckString = [rs stringForColumn:@"content"];
+                [db close];
+                [textLabel makeText:[NSString stringWithFormat:@"%@财运 :\n\t%@",constellation,luckString]];
+            }
+            
+            [hud hide:YES];
+            
+        } failure:^(NSError * failure){
+            NSLog(@"%@",failure);
+            
+            NSString *selectLuckLast = [NSString stringWithFormat:@"select * from MONEYLUCK where constellation = '%@' order by start_date desc LIMIT 1",constellation];
+            FMResultSet *rs = [db executeQuery:selectLuckLast];
+            if ([rs next]) {
+                NSString *luckString = [rs stringForColumn:@"content"];
+                [textLabel makeText:[NSString stringWithFormat:@"%@财运 :\n\t%@",constellation,luckString]];
+            }else
+            {
+                [textLabel makeText:[NSString stringWithFormat:@"%@财运 :\n \t网络似乎不太给力 =.=!",constellation]];
+            }
+
+            [db close];
+            [hud hide:YES];
+
+        }];
+        
+    }
+    
 }
 
 

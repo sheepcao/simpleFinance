@@ -11,6 +11,8 @@
 @interface LuckyLabel ()
 {
     CGFloat fontSize;
+    CGFloat lineSpace;
+
 }
 @end
 @implementation LuckyLabel
@@ -34,13 +36,16 @@
 {
     
     if (IS_IPHONE_5_OR_LESS) {
-        fontSize = 12.5f;
+        fontSize = 11.0f;
+        lineSpace = 0.3f;
     }else if(IS_IPHONE_6)
     {
         fontSize = 13.0f;
+        lineSpace = 0.43;
     }else
     {
         fontSize = 14.5f;
+        lineSpace = 0.43;
     }
     
     

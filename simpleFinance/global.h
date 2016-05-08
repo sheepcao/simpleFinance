@@ -58,6 +58,7 @@
 #define MODEL @"model"
 #define AUTOSWITCH @"autoSwitch"
 #define ThemeChanged  @"modelNotification"
+#define LuckChanged  @"luckNotification"
 
 
 #endif /* global_h */

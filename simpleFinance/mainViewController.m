@@ -105,8 +105,18 @@
     
     
     moneyLuckSpace = self.moneyLuckView.frame.size.height + self.moneyLuckView.frame.origin.y - topBarHeight;
-    if (IS_IPHONE_5_OR_LESS) {
-        moneyLuckSpace = moneyLuckSpace-40;
+    if (IS_IPHONE_5) {
+        moneyLuckSpace = moneyLuckSpace-58;
+    }else if (IS_IPHONE_4_OR_LESS)
+    {
+        moneyLuckSpace = moneyLuckSpace-76;
+    }else if(IS_IPHONE_6P)
+    {
+        moneyLuckSpace = moneyLuckSpace-20;
+    }else
+    {
+        moneyLuckSpace = moneyLuckSpace-38;
+
     }
     NSLog(@"moneyLuckSpace---:%f",moneyLuckSpace);
     
@@ -131,8 +141,8 @@
 {
     if (self.maintableView.contentOffset.y > -0.0001 && self.maintableView.contentOffset.y - moneyLuckSpace*2/5 < 0.000001) {
         
-        self.luckyText.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace*2/5);
-        self.titleTextLabel.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace*2/5);
+        self.luckyText.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace*1/3);
+        self.titleTextLabel.alpha = 1.0 - self.maintableView.contentOffset.y/(moneyLuckSpace*1/3);
         self.moneyBookText.alpha = 0.0f;
         
     }else if (self.maintableView.contentOffset.y > -0.0001 && self.maintableView.contentOffset.y - moneyLuckSpace < 0.000001)
@@ -273,13 +283,17 @@
 
 -(void)configLuckyText
 {
+    
     NSString *Constellation = [[NSUserDefaults standardUserDefaults] objectForKey:@"Constellation"];
+    NSLog(@"~~~!!!!!~~~~~constellation:%@",Constellation);
     if (!Constellation) {
         [self.luckyText makeText:@"设置星座，随时掌握财运 >"];
         return;
     }
     
-    [self.luckyText makeText:[[CommonUtility sharedCommonUtility] fetchConstellation:@"天蝎座"]];
+    if ([CommonUtility isSystemLangChinese]) {
+        [[CommonUtility sharedCommonUtility] fetchConstellation:Constellation ForView:self.luckyText];
+    }
     
 
 }
@@ -299,10 +313,12 @@
 
 -(void)constellationChoose
 {
-    [[NSUserDefaults standardUserDefaults] setObject:constellationSelected forKey:@"Constellation"];
     NSString *constellationOnly = [constellationSelected componentsSeparatedByString:@" "][0];
 
-    [self.luckyText makeText:[[CommonUtility sharedCommonUtility] fetchConstellation:constellationOnly]];
+    [[NSUserDefaults standardUserDefaults] setObject:constellationOnly forKey:@"Constellation"];
+    if ([CommonUtility isSystemLangChinese]) {
+        [[CommonUtility sharedCommonUtility] fetchConstellation:constellationOnly ForView:self.luckyText];
+    }
     
     if ([self.luckyText.text isEqualToString:@"设置星座，随时掌握财运 >"]) {
         [UIView animateWithDuration:0.35f animations:^(void){
@@ -597,7 +613,10 @@
     }else if(section == 1)
     {
          if (self.todayItems.count == 0) {
-             return ((self.maintableView.frame.size.height-summaryViewHeight )/rowHeight)+1;
+             if (IS_IPHONE_6P || IS_IPHONE_4_OR_LESS) {
+                 return ((self.maintableView.frame.size.height-summaryViewHeight )/rowHeight);
+             }else
+                 return ((self.maintableView.frame.size.height-summaryViewHeight )/rowHeight)+1;
          }
         
         return self.todayItems.count<((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)?((self.maintableView.frame.size.height-summaryViewHeight - PieHeight)/rowHeight)+1:self.todayItems.count + 1;

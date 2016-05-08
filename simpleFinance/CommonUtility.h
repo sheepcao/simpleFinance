@@ -11,6 +11,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 #import "global.h"
+#import "LuckyLabel.h"
 
 @interface CommonUtility : NSObject
 {
@@ -53,5 +54,6 @@
                   success:(void(^)(NSDictionary *))success
                   failure:(void(^)(NSError *))failure;
 
--(NSString *)fetchConstellation:(NSString *)constellation;
+-(void)fetchConstellation:(NSString *)constellation ForView:(LuckyLabel *)textLabel;
+
 @end
