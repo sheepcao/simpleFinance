@@ -11,18 +11,17 @@
 
 @implementation categoryButton
 
--(void)keySelectedStyle
+-(void)categorySelectedColor:(UIColor *)color
 {
     self.layer.borderWidth = 1.2f;
-    self.layer.borderColor = symbolColor.CGColor;
+    self.layer.borderColor = color.CGColor;
     
 }
 
--(void)keyNotSelectedStyle
+-(void)categoryNormalColor
 {
     self.layer.borderWidth = 0.7f;
     self.layer.borderColor = TextColor.CGColor;
-    
 }
 
 /*

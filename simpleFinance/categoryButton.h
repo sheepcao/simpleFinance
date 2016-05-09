@@ -11,6 +11,6 @@
 @interface categoryButton : UIButton
 @property (nonatomic,strong) UIColor *categoryColor;
 
--(void)keySelectedStyle;
--(void)keyNotSelectedStyle;
+-(void)categorySelectedColor:(UIColor *)color;
+-(void)categoryNormalColor;
 @end

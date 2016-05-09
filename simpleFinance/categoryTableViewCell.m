@@ -84,6 +84,9 @@
         categoryLabel.layer.borderWidth = 0.8f;
         [categoryLabel setTitle:oneCategory.categoryName forState:UIControlStateNormal];
         
+        //clear color when reload data
+        [categoryLabel categoryNormalColor];
+        
         //for delete button
         UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(categoryLabel.frame.origin.x-5, categoryLabel.frame.origin.y-5, 20, 20)];
         [deleteBtn setImage:[UIImage imageNamed:@"switchChart.png"] forState:UIControlStateNormal];

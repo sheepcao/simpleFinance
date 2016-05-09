@@ -296,7 +296,7 @@
         NSString *start = [NSString stringWithFormat:@"%ld-%02ld-01",(long)startYear,(long)startMonth];
         NSString *end = [NSString stringWithFormat:@"%ld-%02ld-01",(long)endYear,(long)endMonth];
         
-        FMResultSet *rs = [db executeQuery:@"select distinct target_date from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", start,end];
+        FMResultSet *rs = [db executeQuery:@"select distinct target_date from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) order by target_date desc", start,end];
         while ([rs next]) {
             NSString *dateString = [rs stringForColumn:@"target_date"];
             NSArray *timeParts = [dateString componentsSeparatedByString:@" "];
@@ -313,7 +313,12 @@
         [allMonth addObject:monthData];
     }
     [db close];
-    self.data = [NSArray arrayWithArray:allMonth];
+    NSMutableArray *tempMonthArray = [[NSMutableArray alloc] init];
+
+    for (int i = (int)allMonth.count-1 ; i>=0 ;i--) {
+        [tempMonthArray addObject:allMonth[i]];
+    }
+    self.data = [NSArray arrayWithArray:tempMonthArray];
 }
 
 -( RADataObject *)dailyDataFrom:(NSString *)monthName  withArray:(NSArray *)monthlyArray duringStart:(NSString *)startDate andEnd:(NSString *)endDate
@@ -324,7 +329,7 @@
         NSMutableArray *oneDayItems = [[NSMutableArray alloc] init];
         NSString *nextDay = [[CommonUtility sharedCommonUtility] dateByAddingDays: date andDaysToAdd:1];
         
-        FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", date,nextDay];
+        FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) order by target_date desc", date,nextDay];
         while ([rs next]) {
             itemObj *oneItem = [[itemObj alloc] init];
             

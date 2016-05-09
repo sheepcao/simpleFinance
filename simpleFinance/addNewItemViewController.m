@@ -20,6 +20,9 @@
 
 
 @interface addNewItemViewController ()<UITableViewDataSource,UITableViewDelegate,categoryTapDelegate>
+{
+    categoryButton *lastCateBtn;
+}
 @property (nonatomic ,strong) UILabel *InputLabel;
 @property (nonatomic ,strong) UILabel *categoryLabel;
 @property (nonatomic ,strong) UISegmentedControl *moneyTypeSeg;
@@ -373,6 +376,8 @@
     }
 }
 
+
+
 -(void)keyTapped:(numberPadButton *)sender
 {
     //    NSLog(@"%@",sender.symbolText);
@@ -718,10 +723,20 @@
 
 -(void)categoryTap:(categoryButton *)sender
 {
+    
     [self.categoryLabel setText:sender.titleLabel.text];
     self.categoryLabel.layer.borderColor = sender.categoryColor.CGColor;
-    
-    //    [sender keySelectedStyle];
+    if (!lastCateBtn)
+    {
+        lastCateBtn = sender;
+    }else
+    {
+        [lastCateBtn categoryNormalColor];
+        lastCateBtn = sender;
+
+    }
+
+    [sender categorySelectedColor:sender.categoryColor];
 }
 
 

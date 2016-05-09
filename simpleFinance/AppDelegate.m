@@ -109,11 +109,14 @@
     NSString *createItemTable = @"CREATE TABLE IF NOT EXISTS ITEMINFO (item_id INTEGER PRIMARY KEY AUTOINCREMENT,item_category TEXT,item_type INTEGER,item_description TEXT,money DECIMAL (15,2),target_date Date,create_time Date)";
     NSString *createCategoryTable = @"CREATE TABLE IF NOT EXISTS CATEGORYINFO (category_id INTEGER PRIMARY KEY AUTOINCREMENT,category_name TEXT,category_type INTEGER,color_R Double,color_G Double,color_B Double, is_deleted INTEGER DEFAULT 0)";
     NSString *createLuckTable = @"CREATE TABLE IF NOT EXISTS MONEYLUCK (luck_id INTEGER PRIMARY KEY AUTOINCREMENT,week_sequence INTEGER,luck_Cn TEXT,luck_En TEXT,start_date TEXT,content TEXT, constellation TEXT)";
-    
+    NSString *createColorTable = @"CREATE TABLE IF NOT EXISTS COLORINFO (color_id INTEGER PRIMARY KEY AUTOINCREMENT,color_R Double,color_G Double,color_B Double, used_count INTEGER)";
+
     
     [db executeUpdate:createItemTable];
     [db executeUpdate:createCategoryTable];
     [db executeUpdate:createLuckTable];
+    [db executeUpdate:createColorTable];
+
     
     int categoryCount;
     NSString *selectCategoryCount = @"select count (*) from CATEGORYINFO";
@@ -122,22 +125,19 @@
         categoryCount = [rs intForColumnIndex:0];
     }
     if (categoryCount == 0) {
-        BOOL sql = [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('日常',0,71,53,58)"];
-        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('旅游',0,251,15,45)"];
-        [db executeUpdate:@" insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('水电费',0,253,177,85)"];
-        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('阅读',0,250,47,82)"];
-        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('医疗',0,255,250,105)"];
-        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('交通',0,59,237,124)"];
-        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('工资',1,71,53,205)"];
-        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('奖金',1,95,115,218)"];
-        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('外快',1,142,162,29)"];
-        [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('红包',1,68,120,119)"];
-        
-        
-        if (!sql) {
-            NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-        }
+        [self insertDefaultCategoryToDB:db];
     }
+    
+    int colorCount;
+    NSString *selectColorCount = @"select count (*) from COLORINFO";
+    FMResultSet *rsColor = [db executeQuery:selectColorCount];
+    if ([rsColor next]) {
+        colorCount = [rsColor intForColumnIndex:0];
+    }
+    if (colorCount == 0) {
+        [self insertDefaultColorToDB:db];
+    }
+
     [db close];
 }
 
@@ -215,10 +215,12 @@
             NSString *startDate = [success objectForKey:@"start_date"][0];
             NSString *week = [success objectForKey:@"week"][0];
             
+            
             NSLog(@"%@",startDate);
-            NSLog(@"%@",nameArray[0]);
-            NSLog(@"%@",contentArray[0]);
-            NSLog(@"%@",week);
+//            DLogObject(nameArray);
+//            NSLog(@"%@",nameArray[0]);
+//            NSLog(@"%@",contentArray[0]);
+//            NSLog(@"%@",week);
             NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where start_date = '%@'",dateString];
             if (![db open]) {
                 NSLog(@"Could not open db.");
@@ -242,6 +244,40 @@
             NSLog(@"%@",failure);
         }];
     }
+}
+
+-(void)insertDefaultCategoryToDB:(FMDatabase *)database
+{
+    BOOL sql = [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('日常',0,71,53,58)"];
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('旅游',0,251,15,45)"];
+    [database executeUpdate:@" insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('水电费',0,253,177,85)"];
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('阅读',0,250,47,82)"];
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('医疗',0,255,250,105)"];
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('交通',0,59,237,124)"];
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('工资',1,71,53,205)"];
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('奖金',1,95,115,218)"];
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('外快',1,142,162,29)"];
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('红包',1,68,120,119)"];
+    
+    if (!sql) {
+        NSLog(@"CATEGORY ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
+    }
+    
+}
+
+-(void)insertDefaultColorToDB:(FMDatabase *)database
+{
+    BOOL sql = [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (122,50,121,0)"];
+    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (212,150,71,0)"];
+    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (222,53,11,0)"];
+    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (162,150,171,0)"];
+    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (192,31,171,0)"];
+    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (232,230,101,0)"];
+    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (50,200,181,0)"];
+        if (!sql) {
+        NSLog(@"COLOR ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
+    }
+    
 }
 
 @end

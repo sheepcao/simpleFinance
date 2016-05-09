@@ -61,7 +61,7 @@
     [self configInputField];
     [self configSortView];
     [self configTopbar];
-
+    
 }
 -(void)dismissKeyboard {
     [self hideSortView];
@@ -76,7 +76,7 @@
     }else
     {
         self.expenseCategoryArray = [[NSMutableArray alloc] init];
-
+        
     }
     if(self.incomeCategoryArray)
     {
@@ -96,14 +96,14 @@
     NSString *sqlCommand;
     if ([key isEqualToString:@"category_id"]) {
         sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id"];
-
+        
     }else if([key isEqualToString:@"recently create"])
     {
         sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id desc"];
     }else
     {
         sqlCommand = [NSString stringWithFormat:@"select * from CATEGORYINFO where is_deleted = 0 order by category_id"];
-
+        
     }
     
     FMResultSet *rs = [db executeQuery:sqlCommand];
@@ -122,7 +122,7 @@
             [self.incomeCategoryArray addObject:oneCategory];
         }
     }
-  
+    
     
     if ([key isEqualToString:@"usage"])
     {
@@ -130,35 +130,35 @@
         int i = 0;
         while ([rs next]) {
             NSString *cateName = [rs stringForColumn:@"item_category"];
-                for (categoryObject *oneCate in self.expenseCategoryArray) {
-                    if ([oneCate.categoryName isEqualToString:cateName]) {
-                        categoryObject *oneCateTemp = oneCate;
-                        [self.expenseCategoryArray removeObject:oneCate];
-                        [self.expenseCategoryArray insertObject:oneCateTemp atIndex:i];
-                        i++;
-                        break;
-                    }
-  
+            for (categoryObject *oneCate in self.expenseCategoryArray) {
+                if ([oneCate.categoryName isEqualToString:cateName]) {
+                    categoryObject *oneCateTemp = oneCate;
+                    [self.expenseCategoryArray removeObject:oneCate];
+                    [self.expenseCategoryArray insertObject:oneCateTemp atIndex:i];
+                    i++;
+                    break;
                 }
+                
+            }
         }
         
-            FMResultSet *rs2 = [db executeQuery:@"SELECT count(*),item_category FROM ITEMINFO where item_type = 1 GROUP BY item_category ORDER BY count(*) DESC"];
-            int j = 0;
-            while ([rs2 next]) {
-                NSString *cateName = [rs2 stringForColumn:@"item_category"];
-                for (categoryObject *oneCate in self.incomeCategoryArray) {
-                    if ([oneCate.categoryName isEqualToString:cateName]) {
-                        [self.incomeCategoryArray removeObject:oneCate];
-                        [self.incomeCategoryArray insertObject:oneCate atIndex:j];
-                        j++;
-                        break;
-                    }
-                    
+        FMResultSet *rs2 = [db executeQuery:@"SELECT count(*),item_category FROM ITEMINFO where item_type = 1 GROUP BY item_category ORDER BY count(*) DESC"];
+        int j = 0;
+        while ([rs2 next]) {
+            NSString *cateName = [rs2 stringForColumn:@"item_category"];
+            for (categoryObject *oneCate in self.incomeCategoryArray) {
+                if ([oneCate.categoryName isEqualToString:cateName]) {
+                    [self.incomeCategoryArray removeObject:oneCate];
+                    [self.incomeCategoryArray insertObject:oneCate atIndex:j];
+                    j++;
+                    break;
                 }
+                
             }
+        }
     }
     
-      [db close];
+    [db close];
     
 }
 
@@ -172,8 +172,8 @@
 {
     topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight)];
     topbar.backgroundColor = [UIColor clearColor];
-
-
+    
+    
     [self.view addSubview:topbar];
     
     UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
@@ -227,16 +227,16 @@
         selectedImage.tag = i+1+10;
         NSArray *sortKeys = @[@"category_id",@"recently create",@"usage"];
         NSString*sortType = [[NSUserDefaults standardUserDefaults] objectForKey:@"sortType"];
-
-
-            if  ([sortKeys[i] isEqualToString:sortType])
-            {
-                [selectedImage setImage:[UIImage imageNamed:@"plus1.png"]];
-            }else
-            {
-                [selectedImage setImage:[UIImage imageNamed:@"delete1.png"]];
-
-            }
+        
+        
+        if  ([sortKeys[i] isEqualToString:sortType])
+        {
+            [selectedImage setImage:[UIImage imageNamed:@"plus1.png"]];
+        }else
+        {
+            [selectedImage setImage:[UIImage imageNamed:@"delete1.png"]];
+            
+        }
         
         [sortView addSubview:sortBtn];
         [sortView addSubview:selectedImage];
@@ -255,7 +255,7 @@
     [selected setImage:[UIImage imageNamed:@"plus1.png"]];
     
     [[NSUserDefaults standardUserDefaults] setObject:sortKeys[sender.tag -1] forKey:@"sortType"];
-
+    
     [self prepareCategoryDataBy:sortKeys[sender.tag -1]];
     [self.categoryTableView reloadData];
     [self hideSortView];
@@ -265,7 +265,7 @@
 -(void)showSortView
 {
     [self hideDelete:self.myDeleteButton];
-
+    
     if (self.mySortView.frame.origin.x>SCREEN_WIDTH-1)
     {
         [UIView animateWithDuration:0.31f animations:^{
@@ -275,7 +275,7 @@
     {
         [self hideSortView];
     }
-
+    
 }
 -(void)hideSortView
 {
@@ -466,7 +466,7 @@
             NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
         {
-
+            
             categoryObject *categoryDeleted;
             if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
                 for (categoryObject *oneCategory in self.expenseCategoryArray) {
@@ -512,7 +512,7 @@
 -(void)deleteItem:(UIButton *)sender
 {
     [self hideSortView];
-
+    
     NSLog(@"show delete button");
     if (willShowDeleteBtn) {
         [self hideDelete:sender];
@@ -542,7 +542,7 @@
 {
     NSLog(@"add Item....");
     [self clearScreen];
-
+    
     
     [self.inputField becomeFirstResponder];
     
@@ -555,7 +555,7 @@
     NSLog(@"%f",width);
     if (width>74)
     {
-
+        
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
@@ -568,14 +568,8 @@
     
     // to fix.....category OBJ
     NSString *newCategory = self.inputField.text;
-//    NSInteger randomColor = arc4random()%255;
+    //    NSInteger randomColor = arc4random()%255;
     
-    categoryObject *oneCategory = [[categoryObject alloc] init];
-    
-    oneCategory.categoryName = newCategory;
-    oneCategory.color_R  = arc4random()%255;
-    oneCategory.color_G = arc4random()%255;
-    oneCategory.color_B = arc4random()%255;
     
     if (![db open]) {
         NSLog(@"Could not open db.");
@@ -592,30 +586,49 @@
         [db close];
         return;
     }
+    
+
 
     
-    BOOL sql = [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values (?,?,?,?,?)" ,[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex],[NSNumber numberWithDouble:oneCategory.color_R],[NSNumber numberWithDouble:oneCategory.color_G],[NSNumber numberWithDouble:oneCategory.color_B]];
-    
-    if (!sql) {
-        NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
-    }else
-    {
-        if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
-            [self.expenseCategoryArray addObject:oneCategory];
+    FMResultSet *rsColor = [db executeQuery:@"select * from COLORINFO order by used_count LIMIT 1"];
+    if ([rsColor next]) {
+        double colorR = [rsColor doubleForColumn:@"color_R"];
+        double colorG = [rsColor doubleForColumn:@"color_G"];
+        double colorB = [rsColor doubleForColumn:@"color_B"];
+        NSNumber * colorRed = [NSNumber numberWithDouble:colorR];
+        NSNumber *colorGreen = [NSNumber numberWithDouble:colorG];
+        NSNumber *colorBlue = [NSNumber numberWithDouble:colorB];
+        
+        
+        
+        BOOL sql = [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values (?,?,?,?,?)" ,[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex],colorRed,colorGreen,colorBlue];
+        
+        categoryObject *oneCategory = [[categoryObject alloc] init];
+        
+        oneCategory.categoryName = newCategory;
+        oneCategory.color_R  = colorR;
+        oneCategory.color_G = colorG;
+        oneCategory.color_B = colorB;
+        if (!sql) {
+            NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
         {
-            [self.incomeCategoryArray addObject:oneCategory];
+            if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
+                [self.expenseCategoryArray addObject:oneCategory];
+            }else
+            {
+                [self.incomeCategoryArray addObject:oneCategory];
+            }
+            self.inputField.text = @"";
+            [UIView animateWithDuration:0.25f animations:^{
+                [self.inputView setFrame:CGRectMake(0, SCREEN_HEIGHT, self.inputView.frame.size.width, self.inputView.frame.size.height)];
+            }];
+            [self.view layoutIfNeeded];
+            [self.inputField resignFirstResponder];
+            
+            [self.categoryTableView reloadData];
         }
-        self.inputField.text = @"";
-        [UIView animateWithDuration:0.25f animations:^{
-            [self.inputView setFrame:CGRectMake(0, SCREEN_HEIGHT, self.inputView.frame.size.width, self.inputView.frame.size.height)];
-        }];
-        [self.view layoutIfNeeded];
-        [self.inputField resignFirstResponder];
-        
-        [self.categoryTableView reloadData];
     }
-    
     [db close];
 }
 

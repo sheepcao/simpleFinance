@@ -9,7 +9,7 @@
 #import "SideMenuViewController.h"
 #import "global.h"
 #import "MFSideMenu.h"
-#import "trendViewController.h"
+#import "calendarViewController.h"
 #import "categoryManagementViewController.h"
 #import "mainViewController.h"
 #import "monthListViewController.h"
@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.menuArray = @[@"同 步 | 备 份",@"分类管理",@"帐目流水",@"历史走势",@"显示模式",@"设置"];
+    self.menuArray = @[@"同 步 | 备 份",@"分类管理",@"帐目流水",@"帐目日历",@"显示模式",@"设置"];
     
     UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT-6*(SCREEN_WIDTH/5.5))*2/3, SCREEN_WIDTH*2/3, 6*(SCREEN_WIDTH/5.5))];
     menuTable.delegate = self;
@@ -148,7 +148,7 @@
         [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
         
     }else if (indexPath.row == 3) {
-        trendViewController *trendVC = [[trendViewController alloc] initWithNibName:@"trendViewController" bundle:nil];
+        calendarViewController *trendVC = [[calendarViewController alloc] initWithNibName:@"calendarViewController" bundle:nil];
         UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
         NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
         [temp addObject:trendVC];

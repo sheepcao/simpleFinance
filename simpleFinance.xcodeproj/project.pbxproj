@@ -10,6 +10,7 @@
 		4C80CCC20DA48D790E992198 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F224C2FC2319CE9430562FC7 /* libPods.a */; };
 		A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A405513A1CC72C0F00306EB0 /* pieViewController.m */; };
 		A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A405513B1CC72C0F00306EB0 /* pieViewController.xib */; };
+		A40F6BE41CE035200010A0CE /* DLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BE31CE035200010A0CE /* DLog.m */; };
 		A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */; };
 		A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */; };
 		A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C61CCE234F0008BFE2 /* dateShowView.m */; };
@@ -114,6 +115,9 @@
 		A40551391CC72C0F00306EB0 /* pieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pieViewController.h; sourceTree = "<group>"; };
 		A405513A1CC72C0F00306EB0 /* pieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pieViewController.m; sourceTree = "<group>"; };
 		A405513B1CC72C0F00306EB0 /* pieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = pieViewController.xib; sourceTree = "<group>"; };
+		A40F6BE21CE035200010A0CE /* DLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLog.h; sourceTree = "<group>"; };
+		A40F6BE31CE035200010A0CE /* DLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLog.m; sourceTree = "<group>"; };
+		A40F6BE51CE0356C0010A0CE /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A425B2C01CCE04710008BFE2 /* categoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryDetailViewController.h; sourceTree = "<group>"; };
 		A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryDetailViewController.m; sourceTree = "<group>"; };
 		A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryDetailViewController.xib; sourceTree = "<group>"; };
@@ -304,6 +308,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A40F6BE11CE035200010A0CE /* DLog */ = {
+			isa = PBXGroup;
+			children = (
+				A40F6BE21CE035200010A0CE /* DLog.h */,
+				A40F6BE31CE035200010A0CE /* DLog.m */,
+			);
+			path = DLog;
+			sourceTree = "<group>";
+		};
 		A425B2CB1CCF63130008BFE2 /* itemsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +427,7 @@
 				A4CC24431CBCE82F007A94F1 /* switchChart.png */,
 				A490C1991CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf */,
 				A42D1C8A1CB60AC900C208A0 /* main.m */,
+				A40F6BE51CE0356C0010A0CE /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -547,6 +561,7 @@
 		A4CC24261CBCC82E007A94F1 /* 3rd-party */ = {
 			isa = PBXGroup;
 			children = (
+				A40F6BE11CE035200010A0CE /* DLog */,
 				A4637AA91CDDCFEF00BC86AC /* AFNetworkHelp */,
 				A457523F1CDB35350013EFBF /* RATreeView */,
 				A4E4A2ED1CC9BE6000E36AFE /* FlatDatePicker */,
@@ -787,6 +802,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A40F6BE41CE035200010A0CE /* DLog.m in Sources */,
 				A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */,
 				A45752661CDB35350013EFBF /* RATreeNodeCollectionController.m in Sources */,
 				A4ECE28A1CDA422B000FF10D /* baseViewController.m in Sources */,
@@ -902,6 +918,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -943,6 +961,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -961,6 +981,8 @@
 			baseConfigurationReference = 95182323EA3C67EA86ECFF0D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = simpleFinance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -999,6 +1021,8 @@
 			baseConfigurationReference = E41CF51331599613F1E16C7C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = simpleFinance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
