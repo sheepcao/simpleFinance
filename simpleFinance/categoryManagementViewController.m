@@ -550,7 +550,8 @@
 -(void)addNewCategory
 {
     [self clearScreen];
-    
+    NSString *newCategory = self.inputField.text;
+
     CGFloat width =  [self.inputField.text sizeWithAttributes:@{NSFontAttributeName:self.inputField.font}].width;
     NSLog(@"%f",width);
     if (width>74)
@@ -564,10 +565,18 @@
         [hud hide:YES afterDelay:1.5];
         
         return;
+    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"+新分类"] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
+    {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"非法输入";
+        [hud hide:YES afterDelay:1.2];
+        return;
     }
     
     // to fix.....category OBJ
-    NSString *newCategory = self.inputField.text;
     //    NSInteger randomColor = arc4random()%255;
     
     
@@ -579,7 +588,6 @@
     FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where is_deleted = 0 AND category_name = ? AND category_type = ?",[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex]];
     if ([rs next]) {
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"您输入的类别已经存在" preferredStyle:UIAlertControllerStyleAlert];
-        
         UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:okAction];
         [self presentViewController:alert animated:YES completion:nil];
@@ -592,9 +600,13 @@
     
     FMResultSet *rsColor = [db executeQuery:@"select * from COLORINFO order by used_count LIMIT 1"];
     if ([rsColor next]) {
+        int colorID = [rsColor intForColumn:@"color_id"];
+        int usedCount = [rsColor doubleForColumn:@"used_count"];
+
         double colorR = [rsColor doubleForColumn:@"color_R"];
         double colorG = [rsColor doubleForColumn:@"color_G"];
         double colorB = [rsColor doubleForColumn:@"color_B"];
+        
         NSNumber * colorRed = [NSNumber numberWithDouble:colorR];
         NSNumber *colorGreen = [NSNumber numberWithDouble:colorG];
         NSNumber *colorBlue = [NSNumber numberWithDouble:colorB];
@@ -613,6 +625,8 @@
             NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
         }else
         {
+             [db executeUpdate:@"update  COLORINFO set used_count = ? where color_id = ?" ,[NSNumber numberWithInt:usedCount+1],[NSNumber numberWithInt:colorID]];
+            
             if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
                 [self.expenseCategoryArray addObject:oneCategory];
             }else

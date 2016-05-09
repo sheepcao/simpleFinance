@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/addNewItemViewController.m"
-            timestampString = "484463803.244252"
+            timestampString = "484468371.579235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "521"
-            endingLineNumber = "521"
+            startingLineNumber = "576"
+            endingLineNumber = "576"
             landmarkName = "-keyTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,59 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/addNewItemViewController.m"
-            timestampString = "484463803.244252"
+            timestampString = "484468371.579235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "583"
-            endingLineNumber = "583"
-            landmarkName = "-keyboardWasShown:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[addNewItemViewController keyboardWasShown:]"
-                  moduleName = "simpleFinance"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/addNewItemViewController.m"
-                  timestampString = "482319179.873681"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "404"
-                  endingLineNumber = "404"
-                  offsetFromSymbolStart = "258">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__45-[addNewItemViewController keyboardWasShown:]_block_invoke"
-                  moduleName = "simpleFinance"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/addNewItemViewController.m"
-                  timestampString = "482319179.873926"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "404"
-                  endingLineNumber = "404"
-                  offsetFromSymbolStart = "30">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "simpleFinance/addNewItemViewController.m"
-            timestampString = "484463803.244252"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
+            startingLineNumber = "435"
+            endingLineNumber = "435"
             landmarkName = "-keyTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/addNewItemViewController.m"
-            timestampString = "484463803.244252"
+            timestampString = "484468371.579235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "570"
-            endingLineNumber = "570"
+            startingLineNumber = "626"
+            endingLineNumber = "626"
             landmarkName = "-keyTapped:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1019,11 +971,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/addNewItemViewController.m"
-            timestampString = "484463803.244252"
+            timestampString = "484468371.579235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
+            startingLineNumber = "684"
+            endingLineNumber = "684"
             landmarkName = "-saveItem:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1115,11 +1067,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/categoryTableViewCell.m"
-            timestampString = "484457073.278389"
+            timestampString = "484465797.369892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "-showDeleteButton"
             landmarkType = "5">
          </BreakpointContent>
@@ -1131,11 +1083,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/categoryManagementViewController.m"
-            timestampString = "484454522.553978"
+            timestampString = "484467717.408038"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
+            startingLineNumber = "655"
+            endingLineNumber = "655"
             landmarkName = "-keyboardWasShown:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1451,7 +1403,7 @@
                   moduleName = "simpleFinance"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/dayRATableViewCell.m"
-                  timestampString = "484463421.620519"
+                  timestampString = "484467152.707634"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "53"
@@ -1466,7 +1418,7 @@
                   moduleName = "simpleFinance"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/dayRATableViewCell.m"
-                  timestampString = "484463421.620892"
+                  timestampString = "484467152.70777"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "53"
@@ -1499,7 +1451,7 @@
                   moduleName = "simpleFinance"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/dayRATableViewCell.m"
-                  timestampString = "484463421.622054"
+                  timestampString = "484467152.709104"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
@@ -1514,7 +1466,7 @@
                   moduleName = "simpleFinance"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/dayRATableViewCell.m"
-                  timestampString = "484463421.622273"
+                  timestampString = "484467152.70927"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
@@ -1675,11 +1627,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/addNewItemViewController.m"
-            timestampString = "484463803.244252"
+            timestampString = "484468371.579235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "723"
-            endingLineNumber = "723"
+            startingLineNumber = "790"
+            endingLineNumber = "790"
             landmarkName = "-categoryTap:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1691,11 +1643,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/addNewItemViewController.m"
-            timestampString = "484463803.244252"
+            timestampString = "484468371.579235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "711"
-            endingLineNumber = "711"
+            startingLineNumber = "777"
+            endingLineNumber = "777"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1712,6 +1664,22 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78"
+            landmarkName = "-contentWithCategories:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "simpleFinance/categoryTableViewCell.m"
+            timestampString = "484465243.363017"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "-contentWithCategories:"
             landmarkType = "5">
          </BreakpointContent>

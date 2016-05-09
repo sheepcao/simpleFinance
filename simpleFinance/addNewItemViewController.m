@@ -15,13 +15,16 @@
 #import "categoryTableViewCell.h"
 #import "CommonUtility.h"
 #import "categoryObject.h"
+#import "MBProgressHUD.h"
 
 
 
 
-@interface addNewItemViewController ()<UITableViewDataSource,UITableViewDelegate,categoryTapDelegate>
+@interface addNewItemViewController ()<UITableViewDataSource,UITableViewDelegate,categoryTapDelegate,UITextFieldDelegate>
 {
     categoryButton *lastCateBtn;
+    BOOL isInputingNote;
+    BOOL isAddingCategory;
 }
 @property (nonatomic ,strong) UILabel *InputLabel;
 @property (nonatomic ,strong) UILabel *categoryLabel;
@@ -42,6 +45,8 @@
 @property (nonatomic,strong) NSMutableArray *incomeCategoryArray;
 @property (nonatomic,strong) NSMutableArray *expenseCategoryArray;
 @property (nonatomic,strong) NSString*sortType;
+@property (nonatomic,strong) UITextField *inputField;
+@property (nonatomic,strong) UIView *inputView;
 
 @property BOOL doingPlus;
 @property BOOL doingMinus;
@@ -57,7 +62,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    isInputingNote = NO;;
+    isAddingCategory = NO;;
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
@@ -78,6 +84,7 @@
     [self configNumberPad];
     [self configCategoryPad];
     [self configNoteView];
+    [self configInputField];
     
     // for editing item.
     [self configEditingItem];
@@ -175,6 +182,18 @@
             }
         }
     }
+    
+    categoryObject *oneCategory = [[categoryObject alloc] init];
+    
+    oneCategory.categoryName = @"+新分类";
+    oneCategory.color_R  =245;
+    oneCategory.color_G =245;
+    oneCategory.color_B = 245;
+    
+    [self.incomeCategoryArray addObject:oneCategory];
+    [self.expenseCategoryArray addObject:oneCategory];
+
+    
     
     [db close];
 }
@@ -376,6 +395,40 @@
     }
 }
 
+-(void)configInputField
+{
+    UIView *inputCategoryView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_WIDTH/6.5)];
+    self.inputView = inputCategoryView;
+    inputCategoryView.backgroundColor = [UIColor colorWithRed:173/255.0f  green:181/255.0f blue:190/255.0f alpha:1.0f];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,5, 50, inputCategoryView.frame.size.height-12)];
+    [titleLabel setText:@"类 别 :"];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+    titleLabel.textColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.18 alpha:0.95f];
+    self.inputField = [[UITextField alloc] initWithFrame:CGRectMake(titleLabel.frame.origin.x + titleLabel.frame.size.width , 6, inputCategoryView.frame.size.width-(titleLabel.frame.origin.x + titleLabel.frame.size.width) - 60, inputCategoryView.frame.size.height-12)];
+    self.inputField.returnKeyType = UIReturnKeyDone;
+    self.inputField.delegate = self;
+    self.inputField.tintColor = [UIColor colorWithRed:0.43 green:0.43 blue:0.43 alpha:0.88];
+    self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    self.inputField.textColor = TextColor;
+    self.inputField.attributedPlaceholder =
+    [[NSAttributedString alloc] initWithString:@"  请输入(限4字以内)"
+                                    attributes:@{
+                                                 NSForegroundColorAttributeName: [UIColor colorWithRed:0.43 green:0.43 blue:0.43 alpha:0.88],
+                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:13.5f]
+                                                 }
+     ];
+    
+    [self.view addSubview:inputCategoryView];
+    [inputCategoryView addSubview:titleLabel];
+    [inputCategoryView addSubview:self.inputField];
+    
+    UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.inputView.frame.size.width-60, (self.inputView.frame.size.height -40)/2, 40, 40)];
+    [doneButton setTitle:@"OK" forState:UIControlStateNormal];
+    [doneButton addTarget:self action:@selector(addNewCategory) forControlEvents:UIControlEventTouchUpInside];
+    
+    [inputCategoryView addSubview:doneButton];
+    
+}
 
 
 -(void)keyTapped:(numberPadButton *)sender
@@ -570,6 +623,8 @@
         
         if (sender.tag == 13) // note button
         {
+            isInputingNote = YES;
+            isAddingCategory = NO;
             [self.noteBody becomeFirstResponder];
             
         }
@@ -582,11 +637,18 @@
 {
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
-    [UIView animateWithDuration:0.25f animations:^{
-        [self.noteView setFrame:CGRectMake(0, self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height, self.noteView.frame.size.width, SCREEN_HEIGHT-keyboardSize.height-(self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height))];
-        [self updateNotePad];
-    }];
-    
+    if (isInputingNote) {
+        [UIView animateWithDuration:0.25f animations:^{
+            [self.noteView setFrame:CGRectMake(0, self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height, self.noteView.frame.size.width, SCREEN_HEIGHT-keyboardSize.height-(self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height))];
+            [self updateNotePad];
+        }];
+    }else if (isAddingCategory)
+    {
+        [UIView animateWithDuration:0.25f animations:^{
+            [self.inputView setFrame:CGRectMake(0,SCREEN_HEIGHT - keyboardSize.height - self.inputView.frame.size.height, self.inputView.frame.size.width, self.inputView.frame.size.height)];
+        }];
+    }
+ 
     [self.view layoutIfNeeded];
 }
 
@@ -597,8 +659,10 @@
     }];
     [self.view layoutIfNeeded];
     
-    
+
     [self.noteBody resignFirstResponder];
+    isInputingNote = NO;
+    isAddingCategory = NO;
 }
 
 -(void)closeVC
@@ -723,6 +787,13 @@
 
 -(void)categoryTap:(categoryButton *)sender
 {
+    if ([sender.titleLabel.text isEqualToString:@"+新分类"])
+    {
+        isInputingNote = NO;
+        isAddingCategory = YES;
+        [self.inputField becomeFirstResponder];
+        return;
+    }
     
     [self.categoryLabel setText:sender.titleLabel.text];
     self.categoryLabel.layer.borderColor = sender.categoryColor.CGColor;
@@ -740,6 +811,106 @@
 }
 
 
+-(void)addNewCategory
+{
+    NSString *newCategory = self.inputField.text;
+    
+    CGFloat width =  [self.inputField.text sizeWithAttributes:@{NSFontAttributeName:self.inputField.font}].width;
+    NSLog(@"%f",width);
+    if (width>74)
+    {
+        
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"您输入的类名过长";
+        [hud hide:YES afterDelay:1.5];
+        
+        return;
+    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"+新分类"] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
+    {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"非法输入";
+        [hud hide:YES afterDelay:1.2];
+        return;
+    }
+    
+    // to fix.....category OBJ
+    //    NSInteger randomColor = arc4random()%255;
+    
+    
+    if (![db open]) {
+        NSLog(@"Could not open db.");
+        return;
+    }
+    
+    FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where is_deleted = 0 AND category_name = ? AND category_type = ?",[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex]];
+    if ([rs next]) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"您输入的类别已经存在" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:okAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        [db close];
+        return;
+    }
+    
+    
+    
+    
+    FMResultSet *rsColor = [db executeQuery:@"select * from COLORINFO order by used_count LIMIT 1"];
+    if ([rsColor next]) {
+        int colorID = [rsColor intForColumn:@"color_id"];
+        int usedCount = [rsColor doubleForColumn:@"used_count"];
+        
+        double colorR = [rsColor doubleForColumn:@"color_R"];
+        double colorG = [rsColor doubleForColumn:@"color_G"];
+        double colorB = [rsColor doubleForColumn:@"color_B"];
+        
+        NSNumber * colorRed = [NSNumber numberWithDouble:colorR];
+        NSNumber *colorGreen = [NSNumber numberWithDouble:colorG];
+        NSNumber *colorBlue = [NSNumber numberWithDouble:colorB];
+        
+        
+        
+        BOOL sql = [db executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values (?,?,?,?,?)" ,[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex],colorRed,colorGreen,colorBlue];
+        
+        categoryObject *oneCategory = [[categoryObject alloc] init];
+        
+        oneCategory.categoryName = newCategory;
+        oneCategory.color_R  = colorR;
+        oneCategory.color_G = colorG;
+        oneCategory.color_B = colorB;
+        if (!sql) {
+            NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
+        }else
+        {
+            [db executeUpdate:@"update  COLORINFO set used_count = ? where color_id = ?" ,[NSNumber numberWithInt:usedCount+1],[NSNumber numberWithInt:colorID]];
+            
+            if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
+                [self.expenseCategoryArray insertObject:oneCategory atIndex:self.expenseCategoryArray.count-1];
+            }else
+            {
+                [self.incomeCategoryArray insertObject:oneCategory atIndex:self.incomeCategoryArray.count-1];
+            }
+            self.inputField.text = @"";
+            [UIView animateWithDuration:0.25f animations:^{
+                [self.inputView setFrame:CGRectMake(0, SCREEN_HEIGHT, self.inputView.frame.size.width, self.inputView.frame.size.height)];
+            }];
+            [self.view layoutIfNeeded];
+            [self.inputField resignFirstResponder];
+            
+            [self.categoryTableView reloadData];
+        }
+    }
+    [db close];
+}
+
+
+
 #pragma mark prepare for edit item
 -(void)configEditingItem
 {
@@ -754,6 +925,17 @@
     }
 }
 
+
+#pragma mark UITextField delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [UIView animateWithDuration:0.25f animations:^{
+        [self.inputView setFrame:CGRectMake(0, SCREEN_HEIGHT, self.inputView.frame.size.width, self.inputView.frame.size.height)];
+    }];
+    [self.view layoutIfNeeded];
+    [textField resignFirstResponder];
+    return YES;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
