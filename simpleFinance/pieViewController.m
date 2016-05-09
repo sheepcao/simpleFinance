@@ -16,7 +16,7 @@
 #import "dateSelectView.h"
 #import "categoryDetailViewController.h"
 
-@interface pieViewController ()<UITableViewDataSource,UITableViewDelegate,FlatDatePickerDelegate>
+@interface pieViewController ()<UITableViewDataSource,UITableViewDelegate,FlatDatePickerDelegate,PNChartDelegate>
 {
     BOOL isInitial;
 }
@@ -271,11 +271,12 @@
     [self.pieChart strokeChart];
     self.pieChart.displayAnimated = YES;
     self.pieChart.shouldHighlightSectorOnTouch = NO;
-    self.pieChart.userInteractionEnabled = NO;
+    self.pieChart.userInteractionEnabled = YES;
     self.pieChart.labelPercentageCutoff = 0.08;
     self.pieChart.duration = 0.65f;
     self.pieChart.hideValues = NO;
     self.pieChart.hasLegend = YES;
+    self.pieChart.delegate = self;
     [pieView addSubview:self.pieChart];
     
     self.centerLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.pieChart.innerCircleRadius*2, self.pieChart.innerCircleRadius*2)];
@@ -539,6 +540,11 @@
     
 }
 
+#pragma mark PIE delegate
+- (void)userClickedOnPieIndexItem:(NSInteger)pieIndex
+{
+    [self tableView:self.detailTable didSelectRowAtIndexPath:   [NSIndexPath indexPathForRow:pieIndex inSection:0]];
+}
 
 
 @end
