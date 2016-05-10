@@ -12,6 +12,8 @@
 #import "CommonUtility.h"
 #import "MBProgressHUD.h"
 
+#import "backupViewController.h"
+
 
 @interface loginViewController ()<UITextFieldDelegate>
 @property (nonatomic,strong) UIView *contentView;
@@ -119,6 +121,8 @@
     [loginButton setTitle:@"登  录" forState:UIControlStateNormal];
     [content addSubview:loginButton];
     
+    [loginButton addTarget:self action:@selector(userLogin) forControlEvents:UIControlEventTouchUpInside];
+    
     [[CommonUtility sharedCommonUtility] shimmerRegisterButton:loginButton];
     
     UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 65, loginButton.frame.origin.y + loginButton.frame.size.height + 25, 130, 30)];
@@ -195,7 +199,7 @@
             hud.animationType = MBProgressHUDAnimationZoom;
             hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
             hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"请输入正确的邮箱地址";
+            hud.labelText = @"请输入正确的邮箱格式";
             [hud hide:YES afterDelay:1.5];
             [self.userField becomeFirstResponder];
         }
@@ -203,6 +207,58 @@
     return NO;
 }
 
+
+-(void)userLogin
+{
+    if ([[self.userField.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""] ) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"请输入您的邮箱";
+        [hud hide:YES afterDelay:1.5];
+        [self.userField becomeFirstResponder];
+        return;
+    }
+    
+    if ([[self.pswdField.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""] ) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"请输入密码";
+        [hud hide:YES afterDelay:1.5];
+        [self.userField becomeFirstResponder];
+        return;
+    }
+    
+    NSDictionary *parameters = @{@"tag": @"login",@"name":self.userField.text,@"password":self.pswdField.text};
+    [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:backupService params:parameters success:^(NSDictionary *success){
+//        
+//        NSString *name = [success objectForKey:@"username"];
+//        NSString *backupDevice = [success objectForKey:@"backup_device"];
+//        NSString *backupDay = [success objectForKey:@"backup_day"];
+//        NSString *created = [success objectForKey:@"created"];
+        
+        backupViewController *backupVC = [[backupViewController alloc] initWithNibName:@"backupViewController" bundle:nil];
+        NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
+        [viewControllers removeObject:viewControllers.lastObject];
+        [viewControllers addObject:backupVC];
+        [self.navigationController setViewControllers:viewControllers animated:YES];
+        
+        NSLog(@"%@",success);
+
+    } failure:^(NSError * failure){
+        NSLog(@"%@",failure);
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"邮箱地址或密码错误";
+        [hud hide:YES afterDelay:1.5];
+    }];
+
+}
 
 
 

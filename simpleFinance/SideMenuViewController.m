@@ -14,6 +14,7 @@
 #import "mainViewController.h"
 #import "monthListViewController.h"
 #import "loginViewController.h"
+#import "backupViewController.h"
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;

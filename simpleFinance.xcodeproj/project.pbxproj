@@ -16,6 +16,8 @@
 		A40F6BEE1CE179EF0010A0CE /* loginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BED1CE179EF0010A0CE /* loginViewController.xib */; };
 		A40F6BF11CE17CB40010A0CE /* gradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BF01CE17CB40010A0CE /* gradientButton.m */; };
 		A40F6BF31CE187000010A0CE /* glow.png in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BF21CE187000010A0CE /* glow.png */; };
+		A40F6BF71CE1CEC70010A0CE /* backupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BF51CE1CEC70010A0CE /* backupViewController.m */; };
+		A40F6BF81CE1CEC70010A0CE /* backupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BF61CE1CEC70010A0CE /* backupViewController.xib */; };
 		A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */; };
 		A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */; };
 		A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C61CCE234F0008BFE2 /* dateShowView.m */; };
@@ -130,6 +132,9 @@
 		A40F6BEF1CE17CB40010A0CE /* gradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gradientButton.h; sourceTree = "<group>"; };
 		A40F6BF01CE17CB40010A0CE /* gradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gradientButton.m; sourceTree = "<group>"; };
 		A40F6BF21CE187000010A0CE /* glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glow.png; sourceTree = "<group>"; };
+		A40F6BF41CE1CEC70010A0CE /* backupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backupViewController.h; sourceTree = "<group>"; };
+		A40F6BF51CE1CEC70010A0CE /* backupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = backupViewController.m; sourceTree = "<group>"; };
+		A40F6BF61CE1CEC70010A0CE /* backupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = backupViewController.xib; sourceTree = "<group>"; };
 		A425B2C01CCE04710008BFE2 /* categoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryDetailViewController.h; sourceTree = "<group>"; };
 		A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryDetailViewController.m; sourceTree = "<group>"; };
 		A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryDetailViewController.xib; sourceTree = "<group>"; };
@@ -335,6 +340,9 @@
 				A40F6BE81CE07D880010A0CE /* loginViewController.h */,
 				A40F6BE91CE07D880010A0CE /* loginViewController.m */,
 				A40F6BED1CE179EF0010A0CE /* loginViewController.xib */,
+				A40F6BF41CE1CEC70010A0CE /* backupViewController.h */,
+				A40F6BF51CE1CEC70010A0CE /* backupViewController.m */,
+				A40F6BF61CE1CEC70010A0CE /* backupViewController.xib */,
 			);
 			name = backupVC;
 			sourceTree = "<group>";
@@ -736,6 +744,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A40F6BF81CE1CEC70010A0CE /* backupViewController.xib in Resources */,
 				A4ECE2921CDA4D5D000FF10D /* 午.jpg in Resources */,
 				A4ECE27D1CD62FC0000FF10D /* categoryManagementViewController.xib in Resources */,
 				A4CC246B1CBE8EC3007A94F1 /* delete1.png in Resources */,
@@ -838,6 +847,7 @@
 				A4ECE28A1CDA422B000FF10D /* baseViewController.m in Sources */,
 				A40F6BEA1CE07D880010A0CE /* loginViewController.m in Sources */,
 				A457526E1CDB35350013EFBF /* RATreeView+TableViewDelegate.m in Sources */,
+				A40F6BF71CE1CEC70010A0CE /* backupViewController.m in Sources */,
 				A45752681CDB35350013EFBF /* RATreeNodeItem+Private.m in Sources */,
 				A457526F1CDB35350013EFBF /* RATreeView.m in Sources */,
 				A490C1921CB7B1B3006EEEF1 /* SideMenuViewController.m in Sources */,
