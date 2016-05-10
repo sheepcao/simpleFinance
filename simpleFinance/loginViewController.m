@@ -77,14 +77,14 @@
     [[NSAttributedString alloc] initWithString:@"邮箱"
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
-                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:20.0f]
+                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/19]
                                                  }
      ];
     usernameField.textAlignment = NSTextAlignmentCenter;
     usernameField.returnKeyType = UIReturnKeyDone;
     usernameField.delegate = self;
     usernameField.tintColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.9];
-    usernameField.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f];
+    usernameField.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/21];
     usernameField.textColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.9];
     [usernameField.layer setCornerRadius:usernameField.frame.size.height/2];
     [usernameField setBackgroundColor:[UIColor whiteColor]];
@@ -99,14 +99,14 @@
     [[NSAttributedString alloc] initWithString:@"密码"
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
-                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:20.0f]
+                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/19]
                                                  }
      ];
     passwordField.textAlignment = NSTextAlignmentCenter;
     passwordField.returnKeyType = UIReturnKeyDone;
     passwordField.delegate = self;
     passwordField.tintColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.9];
-    passwordField.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f];
+    passwordField.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/21];
     passwordField.textColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.9];
     [passwordField.layer setCornerRadius:passwordField.frame.size.height/2];
     [passwordField setBackgroundColor:[UIColor whiteColor]];
@@ -128,7 +128,7 @@
     UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 65, loginButton.frame.origin.y + loginButton.frame.size.height + 25, 130, 30)];
     [registerButton setBackgroundColor:[UIColor clearColor]];
     [registerButton setTitle:@"创建新的用户" forState:UIControlStateNormal];
-    registerButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:17.5f];
+    registerButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:15.5f];
     [registerButton setTitleColor:TextColor forState:UIControlStateNormal];
     [content addSubview:registerButton];
     
@@ -236,11 +236,15 @@
     [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:backupService params:parameters success:^(NSDictionary *success){
 //        
 //        NSString *name = [success objectForKey:@"username"];
-//        NSString *backupDevice = [success objectForKey:@"backup_device"];
-//        NSString *backupDay = [success objectForKey:@"backup_day"];
-//        NSString *created = [success objectForKey:@"created"];
+        NSString *backupDevice = [success objectForKey:@"backup_device"];
+        NSString *backupDay = [success objectForKey:@"backup_day"];
+        NSString *created = [success objectForKey:@"created"];
         
         backupViewController *backupVC = [[backupViewController alloc] initWithNibName:@"backupViewController" bundle:nil];
+        backupVC.backupDevice = backupDevice;
+        backupVC.backupDay = backupDay;
+        backupVC.created = created;
+    
         NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
         [viewControllers removeObject:viewControllers.lastObject];
         [viewControllers addObject:backupVC];

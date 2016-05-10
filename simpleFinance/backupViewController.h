@@ -9,5 +9,8 @@
 #import "baseViewController.h"
 
 @interface backupViewController : baseViewController
+@property (nonatomic,strong) NSString *backupDevice;
+@property (nonatomic,strong) NSString *backupDay;
+@property (nonatomic,strong) NSString *created ;
 
 @end

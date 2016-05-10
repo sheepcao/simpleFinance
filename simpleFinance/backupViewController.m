@@ -62,6 +62,16 @@
     
 }
 
+-(void)changeAccount
+{
+    loginViewController *backupVC = [[loginViewController alloc] initWithNibName:@"loginViewController" bundle:nil];
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
+    [viewControllers removeObject:viewControllers.lastObject];
+    [viewControllers addObject:backupVC];
+    [self.navigationController setViewControllers:viewControllers animated:YES];
+
+}
+
 -(void)closeVC
 {
 
