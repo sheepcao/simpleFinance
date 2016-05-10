@@ -55,5 +55,6 @@
                   failure:(void(^)(NSError *))failure;
 
 -(void)fetchConstellation:(NSString *)constellation ForView:(LuckyLabel *)textLabel;
-
+-(void)shimmerRegisterButton:(UIView *)registerButtonView ;
+- (BOOL) validateEmail: (NSString *) candidate ;
 @end

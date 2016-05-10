@@ -11,6 +11,11 @@
 		A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A405513A1CC72C0F00306EB0 /* pieViewController.m */; };
 		A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A405513B1CC72C0F00306EB0 /* pieViewController.xib */; };
 		A40F6BE41CE035200010A0CE /* DLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BE31CE035200010A0CE /* DLog.m */; };
+		A40F6BEA1CE07D880010A0CE /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BE91CE07D880010A0CE /* loginViewController.m */; };
+		A40F6BEC1CE1767A0010A0CE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BEB1CE1767A0010A0CE /* logo.png */; };
+		A40F6BEE1CE179EF0010A0CE /* loginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BED1CE179EF0010A0CE /* loginViewController.xib */; };
+		A40F6BF11CE17CB40010A0CE /* gradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BF01CE17CB40010A0CE /* gradientButton.m */; };
+		A40F6BF31CE187000010A0CE /* glow.png in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BF21CE187000010A0CE /* glow.png */; };
 		A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */; };
 		A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */; };
 		A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C61CCE234F0008BFE2 /* dateShowView.m */; };
@@ -118,6 +123,13 @@
 		A40F6BE21CE035200010A0CE /* DLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLog.h; sourceTree = "<group>"; };
 		A40F6BE31CE035200010A0CE /* DLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLog.m; sourceTree = "<group>"; };
 		A40F6BE51CE0356C0010A0CE /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		A40F6BE81CE07D880010A0CE /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
+		A40F6BE91CE07D880010A0CE /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
+		A40F6BEB1CE1767A0010A0CE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		A40F6BED1CE179EF0010A0CE /* loginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = loginViewController.xib; sourceTree = "<group>"; };
+		A40F6BEF1CE17CB40010A0CE /* gradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gradientButton.h; sourceTree = "<group>"; };
+		A40F6BF01CE17CB40010A0CE /* gradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gradientButton.m; sourceTree = "<group>"; };
+		A40F6BF21CE187000010A0CE /* glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glow.png; sourceTree = "<group>"; };
 		A425B2C01CCE04710008BFE2 /* categoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryDetailViewController.h; sourceTree = "<group>"; };
 		A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryDetailViewController.m; sourceTree = "<group>"; };
 		A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryDetailViewController.xib; sourceTree = "<group>"; };
@@ -317,6 +329,16 @@
 			path = DLog;
 			sourceTree = "<group>";
 		};
+		A40F6BE71CE07D410010A0CE /* backupVC */ = {
+			isa = PBXGroup;
+			children = (
+				A40F6BE81CE07D880010A0CE /* loginViewController.h */,
+				A40F6BE91CE07D880010A0CE /* loginViewController.m */,
+				A40F6BED1CE179EF0010A0CE /* loginViewController.xib */,
+			);
+			name = backupVC;
+			sourceTree = "<group>";
+		};
 		A425B2CB1CCF63130008BFE2 /* itemsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +368,9 @@
 		A425B2D21CD085F00008BFE2 /* historyVC */ = {
 			isa = PBXGroup;
 			children = (
+				A4ECE2821CDA2997000FF10D /* monthListViewController.h */,
+				A4ECE2831CDA2997000FF10D /* monthListViewController.m */,
+				A4ECE2841CDA2997000FF10D /* monthListViewController.xib */,
 				A4CC24771CC0D7DE007A94F1 /* calendarViewController.h */,
 				A4CC24781CC0D7DE007A94F1 /* calendarViewController.m */,
 				A4CC24791CC0D7DE007A94F1 /* calendarViewController.xib */,
@@ -392,9 +417,7 @@
 				A4ECE2871CDA422B000FF10D /* baseViewController.h */,
 				A4ECE2881CDA422B000FF10D /* baseViewController.m */,
 				A4ECE2891CDA422B000FF10D /* baseViewController.xib */,
-				A4ECE2821CDA2997000FF10D /* monthListViewController.h */,
-				A4ECE2831CDA2997000FF10D /* monthListViewController.m */,
-				A4ECE2841CDA2997000FF10D /* monthListViewController.xib */,
+				A40F6BE71CE07D410010A0CE /* backupVC */,
 				A4ECE2811CDA2959000FF10D /* categoryVC */,
 				A425B2CB1CCF63130008BFE2 /* itemsVC */,
 				A425B2CC1CCF631F0008BFE2 /* pieVC */,
@@ -414,6 +437,8 @@
 		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A40F6BF21CE187000010A0CE /* glow.png */,
+				A40F6BEB1CE1767A0010A0CE /* logo.png */,
 				A4ECE28E1CDA4D5D000FF10D /* 午.jpg */,
 				A4ECE2A81CDA545D000FF10D /* 夜.jpg */,
 				A4ECE28F1CDA4D5D000FF10D /* 夕.jpg */,
@@ -596,6 +621,8 @@
 				A45752871CDC60D70013EFBF /* pickerLabel.m */,
 				A4637AA61CDC6FE000BC86AC /* LuckyLabel.h */,
 				A4637AA71CDC6FE000BC86AC /* LuckyLabel.m */,
+				A40F6BEF1CE17CB40010A0CE /* gradientButton.h */,
+				A40F6BF01CE17CB40010A0CE /* gradientButton.m */,
 			);
 			name = customView;
 			sourceTree = "<group>";
@@ -718,6 +745,7 @@
 				A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
 				A457527A1CDB4FA40013EFBF /* itemRATableViewCell.xib in Resources */,
+				A40F6BF31CE187000010A0CE /* glow.png in Resources */,
 				A45752701CDB35350013EFBF /* Info.plist in Resources */,
 				A45752751CDB42130013EFBF /* dayRATableViewCell.xib in Resources */,
 				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
@@ -736,12 +764,14 @@
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
 				A4CC247B1CC0D7DE007A94F1 /* calendarViewController.xib in Resources */,
 				A4ECE28B1CDA422B000FF10D /* baseViewController.xib in Resources */,
+				A40F6BEC1CE1767A0010A0CE /* logo.png in Resources */,
 				A4CC24811CC4AFF8007A94F1 /* calendar1.png in Resources */,
 				A425B2D11CCF72400008BFE2 /* historyViewController.xib in Resources */,
 				A4ECE3311CDB3064000FF10D /* RATableViewCell.xib in Resources */,
 				A4CC246C1CBE8EC3007A94F1 /* equal1.png in Resources */,
 				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
 				A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */,
+				A40F6BEE1CE179EF0010A0CE /* loginViewController.xib in Resources */,
 				A4E4A2F51CC9BE6000E36AFE /* FlatDatePicker-Icon-Check@2x.png in Resources */,
 				A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */,
 			);
@@ -806,6 +836,7 @@
 				A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */,
 				A45752661CDB35350013EFBF /* RATreeNodeCollectionController.m in Sources */,
 				A4ECE28A1CDA422B000FF10D /* baseViewController.m in Sources */,
+				A40F6BEA1CE07D880010A0CE /* loginViewController.m in Sources */,
 				A457526E1CDB35350013EFBF /* RATreeView+TableViewDelegate.m in Sources */,
 				A45752681CDB35350013EFBF /* RATreeNodeItem+Private.m in Sources */,
 				A457526F1CDB35350013EFBF /* RATreeView.m in Sources */,
@@ -867,6 +898,7 @@
 				A490C1891CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				A4ECE3301CDB3064000FF10D /* RATableViewCell.m in Sources */,
 				A490C1841CB7A887006EEEF1 /* FabonacciNum.m in Sources */,
+				A40F6BF11CE17CB40010A0CE /* gradientButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

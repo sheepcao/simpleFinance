@@ -13,6 +13,7 @@
 #import "categoryManagementViewController.h"
 #import "mainViewController.h"
 #import "monthListViewController.h"
+#import "loginViewController.h"
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;
@@ -130,7 +131,15 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row ==1) {
+    if (indexPath.row ==0) {
+        loginViewController *loginVC = [[loginViewController alloc] initWithNibName:@"loginViewController" bundle:nil];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        [temp addObject:loginVC];
+        navigationController.viewControllers = temp;
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
+        
+    }else if (indexPath.row ==1) {
         categoryManagementViewController *trendVC = [[categoryManagementViewController alloc] initWithNibName:@"categoryManagementViewController" bundle:nil];
         UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
         NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];

@@ -524,4 +524,43 @@
 }
 
 
+-(void)shimmerRegisterButton:(UIView *)registerButtonView {
+    registerButtonView.userInteractionEnabled=YES;
+    UIImageView *sheenImageView = (UIImageView *)[registerButtonView viewWithTag:11];
+    if (!sheenImageView) {
+         sheenImageView= [[UIImageView alloc] initWithFrame:CGRectMake(-15, 0, 86, registerButtonView.frame.size.height)];
+        [sheenImageView setImage:[UIImage imageNamed:@"glow.png"]];
+        sheenImageView.tag = 11;
+        [sheenImageView setAlpha:0.0];
+        [registerButtonView addSubview:sheenImageView];
+        [registerButtonView setNeedsDisplay];
+    }else
+    {
+       [sheenImageView setFrame:CGRectMake(-86, 0, 86, registerButtonView.frame.size.height)];
+    }
+    
+    [UIView animateWithDuration:1.0 delay:2.0 options:UIViewAnimationOptionCurveLinear animations:^{
+        [sheenImageView setAlpha:1.0];
+        [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86,registerButtonView.frame.size.height)];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86, registerButtonView.frame.size.height)];
+            [sheenImageView setAlpha:0.0];
+        } completion:^(BOOL finished){
+            [self shimmerRegisterButton:registerButtonView];
+        }];
+    }];
+    
+}
+
+- (BOOL) validateEmail: (NSString *) candidate {
+    if ([[candidate stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
+    {
+        return YES;
+    }
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    return [emailTest evaluateWithObject:candidate];
+}
 @end
