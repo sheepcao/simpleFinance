@@ -11,7 +11,7 @@
 #import "gradientButton.h"
 #import "CommonUtility.h"
 #import "MBProgressHUD.h"
-
+#import "registerViewController.h"
 #import "backupViewController.h"
 
 
@@ -131,6 +131,7 @@
     [registerButton setTitle:@"创建新的用户" forState:UIControlStateNormal];
     registerButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:15.5f];
     [registerButton setTitleColor:TextColor forState:UIControlStateNormal];
+    [registerButton addTarget:self action:@selector(goRegister) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:registerButton];
     
     UIView *leftGradient = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/14, registerButton.frame.origin.y + registerButton.frame.size.height/2-1, SCREEN_WIDTH/2 - SCREEN_WIDTH/14 - registerButton.frame.size.width/2, 2)];
@@ -264,6 +265,12 @@
         [hud hide:YES afterDelay:1.5];
     }];
 
+}
+
+-(void)goRegister
+{
+    registerViewController *registVC = [[registerViewController alloc] initWithNibName:@"registerViewController" bundle:nil];
+    [self.navigationController pushViewController:registVC animated:YES];
 }
 
 -(void)dealloc
