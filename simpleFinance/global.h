@@ -55,6 +55,7 @@
 
 #define constellationService @"http://cgx.nwpu.info/simpleBuService/constellation.php"
 #define backupService @"http://localhost/~ericcao/simpleBuService/uploads.php"
+#define backupPath @"http://localhost/~ericcao/simpleBuService/upload/"
 
 #define MODEL @"model"
 #define AUTOSWITCH @"autoSwitch"

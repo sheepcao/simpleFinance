@@ -19,6 +19,7 @@
 @property (nonatomic,strong) UIView *contentView;
 @property (nonatomic,strong) UITextField *userField;
 @property (nonatomic,strong) UITextField *pswdField;
+@property (nonatomic,strong) gradientButton *myLoginBtn;
 
 @end
 
@@ -116,11 +117,11 @@
     passwordField.secureTextEntry = YES;
     self.pswdField = passwordField;
     
-    gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, passwordField.frame.origin.y + passwordField.frame.size.height + 25, SCREEN_WIDTH*3/4, SCREEN_WIDTH/7.5)];
+     gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, passwordField.frame.origin.y + passwordField.frame.size.height + 25, SCREEN_WIDTH*3/4, SCREEN_WIDTH/7.5)];
     loginButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:23.0f];
     [loginButton setTitle:@"登  录" forState:UIControlStateNormal];
     [content addSubview:loginButton];
-    
+    self.myLoginBtn = loginButton;
     [loginButton addTarget:self action:@selector(userLogin) forControlEvents:UIControlEventTouchUpInside];
     
     [[CommonUtility sharedCommonUtility] shimmerRegisterButton:loginButton];
@@ -238,14 +239,14 @@
         NSString *name = [success objectForKey:@"username"];
         NSString *backupDevice = [success objectForKey:@"backup_device"];
         NSString *backupDay = [success objectForKey:@"backup_day"];
-        NSString *created = [success objectForKey:@"created"];
         
         backupViewController *backupVC = [[backupViewController alloc] initWithNibName:@"backupViewController" bundle:nil];
         backupVC.username = name;
         backupVC.backupDevice = backupDevice;
         backupVC.backupDay = backupDay;
-        backupVC.created = created;
-    
+        
+//        loginViewController *test = [loginViewController alloc] initWithNibName:@"loginViewController" bundle:nil
+
         NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
         [viewControllers removeObject:viewControllers.lastObject];
         [viewControllers addObject:backupVC];
@@ -265,6 +266,12 @@
 
 }
 
+-(void)dealloc
+{
+    NSLog(@"login dealloc!!!");
+
+
+}
 
 
 @end

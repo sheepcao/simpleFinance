@@ -22,6 +22,7 @@
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
 @property (nonatomic,strong) NSString *dbPath;
+@property (nonatomic,strong) NSString *docsPath;
 
 + (CommonUtility *)sharedCommonUtility;
 + (BOOL)isSystemLangChinese;
@@ -57,6 +58,6 @@
                   failure:(void(^)(NSError *))failure;
 
 -(void)fetchConstellation:(NSString *)constellation ForView:(LuckyLabel *)textLabel;
--(void)shimmerRegisterButton:(UIView *)registerButtonView ;
+-(void)shimmerRegisterButton:(UIView *)registerButtonView;
 - (BOOL) validateEmail: (NSString *) candidate ;
 @end

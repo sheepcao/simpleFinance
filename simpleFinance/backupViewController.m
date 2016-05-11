@@ -89,29 +89,30 @@
 
 -(void)configLastBackupView
 {
-    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT/2 - 160, SCREEN_WIDTH, 160)];
+    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height + (SCREEN_HEIGHT - 480) /2, SCREEN_WIDTH, 200)];
     self.lastBackupView = content;
     
-    UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 80, 0, 160, 30)];
-    lastTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0f];
+    UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 120, 0, 240, 20)];
+    lastTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
     lastTitleLabel.textAlignment = NSTextAlignmentCenter;
     [lastTitleLabel setText:@"上次备份时间及设备"];
     [lastTitleLabel setTextColor: TextColor];
     lastTitleLabel.backgroundColor = [UIColor clearColor];
     [content addSubview:lastTitleLabel];
     
-    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-0.5, lastTitleLabel.frame.origin.y+lastTitleLabel.frame.size.height +10, 0.5, 105)];
+    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-0.5, lastTitleLabel.frame.origin.y+lastTitleLabel.frame.size.height +20, 0.5, 140)];
     midLine.backgroundColor = [UIColor whiteColor];
     [content addSubview:midLine];
     
-    UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(20, 159, SCREEN_WIDTH-40 , 0.5)];
+    UIView *bottomLine = [[UIView alloc] initWithFrame:CGRectMake(20, content.frame.size.height - 1, SCREEN_WIDTH-40 , 0.5)];
     bottomLine.backgroundColor = [UIColor whiteColor];
     [content addSubview:bottomLine];
     
-    UILabel *yearAndMonth = [[UILabel alloc] initWithFrame:CGRectMake(20, 35, SCREEN_WIDTH/2 - 40, 20)];
+    UILabel *yearAndMonth = [[UILabel alloc] initWithFrame:CGRectMake(20, 60, SCREEN_WIDTH/2 - 40, 20)];
     yearAndMonth.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0f];
     yearAndMonth.textAlignment = NSTextAlignmentCenter;
     [yearAndMonth setText:@"None-None"];
+    
     [yearAndMonth setTextColor:  TextColor];
     yearAndMonth.backgroundColor = [UIColor clearColor];
     yearAndMonth.tag = 1;
@@ -137,7 +138,7 @@
     
     
     
-    UILabel *deviceLabel = [[UILabel alloc] initWithFrame:CGRectMake(midLine.frame.origin.x +20, 55, SCREEN_WIDTH/2 - 40, 80)];
+    UILabel *deviceLabel = [[UILabel alloc] initWithFrame:CGRectMake(midLine.frame.origin.x +20, 70, SCREEN_WIDTH/2 - 40, 80)];
     deviceLabel.adjustsFontSizeToFitWidth = YES;
     deviceLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f];
     deviceLabel.textAlignment = NSTextAlignmentCenter;
@@ -149,15 +150,17 @@
     
 
     [self.view addSubview:content];
+    
+    [self updateBackupInfoWithDate:self.backupDay andDevice:self.backupDevice];
 }
 
 -(void)configOperaView
 {
     UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT/2, SCREEN_WIDTH, SCREEN_HEIGHT/2)];
     
-    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-0.5, 30, 0.5, SCREEN_HEIGHT/2-60)];
-    midLine.backgroundColor = [UIColor whiteColor];
-    [content addSubview:midLine];
+//    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-0.5, 30, 0.5, SCREEN_HEIGHT/2-60)];
+//    midLine.backgroundColor = [UIColor whiteColor];
+//    [content addSubview:midLine];
     
     UIButton *uploadButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/2 - 120)/2,  content.frame.size.height/2 - 60, 120, 120)];
     [uploadButton setTitle:@"备份至云端" forState:UIControlStateNormal];
@@ -198,6 +201,7 @@
     [deviceLabel setText:deviceName];
 
 }
+
 
 -(void)uploadData
 {
@@ -275,9 +279,122 @@
         [alert addAction:yesAction];
         [self presentViewController:alert animated:YES completion:nil];
     }];
+}
+
+-(void)downloadData
+{
+    if ( !self.backupDay || [self.backupDay isKindOfClass:[NSNull class]] )
+    {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"您还未进行过备份，无法同步到本地。",nil) preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确认",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:yesAction];
+        [self presentViewController:alert animated:YES completion:nil];
+
+     
+    }else
+    {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"云端备份数据将覆盖本机当前数据，确认继续?",nil)  preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确认",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self downloadURLFromServer];
+        }];
+        [alert addAction:yesAction];
+        [self presentViewController:alert animated:YES completion:nil];
+
+    }
+}
+
+-(void)downloadURLFromServer
+{
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"正在同步到本地...";
+    hud.dimBackground = YES;
+    hud.tag = 456;
+    NSDictionary *parameters = @{@"tag": @"download",@"name":self.username};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    [manager.requestSerializer setTimeoutInterval:120];  //Time out after 25 seconds
     
     
+    [manager POST:backupService parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        
+        NSMutableArray *fullURLArray = [[NSMutableArray alloc] init];
+        NSArray * URLArray = [responseObject objectForKey:@"files"];
+        for (int i = 0; i <URLArray.count; i++) {
+            NSString *oneURL = [NSString stringWithFormat:@"%@%@",backupPath,[responseObject objectForKey:@"files"][i]];
+            [fullURLArray addObject:oneURL];
+        }
+        
+        NSLog(@"URL URLArray: %@", fullURLArray);
+        
+        [self downloadFromURLs:fullURLArray];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error.localizedDescription);
+        NSLog(@"JSON ERROR: %@",  operation.responseString);
+        
+        hud.mode = MBProgressHUDModeText;
+        
+        hud.labelText = NSLocalizedString(@"同步失败，请稍后重试",nil);
+        
+        [hud hide:YES afterDelay:1.5];
+        
+        
+    }];
+}
+
+-(void)downloadFromURLs:(NSMutableArray *)urlArray
+{
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
+    [self downloadMulti:urlArray withManager:manager];
+    
+}
+-(void)downloadMulti:(NSMutableArray *)urlArray withManager:(AFURLSessionManager *)manager
+{
+    
+    if (urlArray.count == 0) {
+        MBProgressHUD *hud = (MBProgressHUD *)[self.view viewWithTag:456];
+        if(hud)
+        {
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = NSLocalizedString(@"成功同步到本机",nil);
+            [hud hide:YES afterDelay:1.2];
+
+        }
+        return;
+    }else
+    {
+        NSError *error;
+        NSString *dirString = [[CommonUtility sharedCommonUtility] docsPath];
+
+        NSData *dbFile = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:urlArray[0]]];
+        
+        NSString *fileName = [urlArray[0] componentsSeparatedByString:@"_"].lastObject;
+        
+        NSString *destPath = [NSString stringWithFormat:@"%@/%@",dirString,fileName];
+        
+        NSFileManager *fileManager =[NSFileManager defaultManager];
+        if([fileManager fileExistsAtPath:destPath] == YES)
+        {
+            
+            [[NSFileManager defaultManager] removeItemAtPath:destPath error:&error];
+            NSLog(@"Error description-%@ \n", [error localizedDescription]);
+            NSLog(@"Error reason-%@", [error localizedFailureReason]);
+            
+        }
+
+        BOOL success = [dbFile writeToFile:destPath options:NSDataWritingAtomic error:&error];
+        
+        NSLog(@"destPath:%@ and success：%d for error:%@",destPath ,success,error);
+        [urlArray removeObjectAtIndex:0];
+        [self downloadMulti:urlArray withManager:manager];
+    }
 }
 
 @end

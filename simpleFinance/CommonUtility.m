@@ -43,9 +43,14 @@
 
 -(NSString *)dbPath
 {
-    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *docsPath = [self docsPath];
     NSString *dbPath = [docsPath stringByAppendingPathComponent:@"JianBu.db"];
     return dbPath;
+}
+-(NSString *)docsPath
+{
+    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    return docsPath;
 }
 
 
@@ -554,7 +559,7 @@
 }
 
 
--(void)shimmerRegisterButton:(UIView *)registerButtonView {
+-(void)shimmerRegisterButton:(UIView *)registerButtonView{
     registerButtonView.userInteractionEnabled=YES;
     UIImageView *sheenImageView = (UIImageView *)[registerButtonView viewWithTag:11];
     if (!sheenImageView) {
@@ -569,17 +574,28 @@
        [sheenImageView setFrame:CGRectMake(-86, 0, 86, registerButtonView.frame.size.height)];
     }
     
-    [UIView animateWithDuration:1.0 delay:2.0 options:UIViewAnimationOptionCurveLinear animations:^{
-        [sheenImageView setAlpha:1.0];
-        [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86,registerButtonView.frame.size.height)];
+    [UIView animateKeyframesWithDuration:1.0 delay:2.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear |UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
+        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
+            [sheenImageView setAlpha:1.0];
+            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86,registerButtonView.frame.size.height)];
+        }];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
             [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86, registerButtonView.frame.size.height)];
             [sheenImageView setAlpha:0.0];
-        } completion:^(BOOL finished){
-            [self shimmerRegisterButton:registerButtonView];
-        }];
+        } completion:nil];
     }];
+    
+//    [UIView animateWithDuration:1.0 delay:2.0 options:UIViewAnimationOptionCurveLinear animations:^{
+//        [sheenImageView setAlpha:1.0];
+//        [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86,registerButtonView.frame.size.height)];
+//    } completion:^(BOOL finished) {
+//        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
+//            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86, registerButtonView.frame.size.height)];
+//            [sheenImageView setAlpha:0.0];
+//        } completion:^(BOOL finished){
+//        }];
+//    }];
     
 }
 
