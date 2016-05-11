@@ -33,12 +33,19 @@
 {
     self = [super init];
     if (self) {
-        NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-        NSString *dbPath = [docsPath stringByAppendingPathComponent:@"JianBu.db"];
+//        NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+        NSString *dbPath = [self dbPath];
         NSLog(@"dbPath:%@",dbPath);
         db = [FMDatabase databaseWithPath:dbPath];
     }
     return self;
+}
+
+-(NSString *)dbPath
+{
+    NSString *docsPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSString *dbPath = [docsPath stringByAppendingPathComponent:@"JianBu.db"];
+    return dbPath;
 }
 
 
@@ -138,6 +145,18 @@
     return [self stringFromDate:today];
 }
 
+-(NSString *)timeNow
+{
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *date = [NSDate date];
+    NSDateComponents *comps = [cal components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitMinute | NSCalendarUnitHour |NSCalendarUnitSecond)
+                                     fromDate:date];
+    
+    NSDate *now = [cal dateFromComponents:comps];
+    return [self stringFromTime:now];
+}
+
 -(NSString *)tomorrowDate
 {
     //    NSCalendar *cal = [NSCalendar currentCalendar];
@@ -187,7 +206,18 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *destDateString = [dateFormatter stringFromDate:date];
     return destDateString;
+}
+
+- (NSString *)stringFromTime:(NSDate *)time{
     
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSCalendar *cal = [[NSCalendar alloc]
+                       initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    dateFormatter.calendar = cal;
+    //zzz表示时区，zzz可以删除，这样返回的日期字符将不包含时区信息。
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *destDateString = [dateFormatter stringFromDate:time];
+    return destDateString;
 }
 
 -(NSString *)weekStartDayOf:(NSDate *)date;

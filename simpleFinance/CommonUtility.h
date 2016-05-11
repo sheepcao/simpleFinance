@@ -21,6 +21,7 @@
 @property (nonatomic, strong) AVAudioPlayer *myAudioPlayer;
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) NSDateFormatter *dateFormatter;
+@property (nonatomic,strong) NSString *dbPath;
 
 + (CommonUtility *)sharedCommonUtility;
 + (BOOL)isSystemLangChinese;
@@ -28,6 +29,7 @@
 + (void)tapSound:(NSString *)name withType:(NSString *)type;
 + (BOOL)isSystemVersionLessThan7;
 + (BOOL)myContainsStringFrom:(NSString*)str forSubstring:(NSString*)other;
+-(NSString *)timeNow;
 -(NSString *)todayDate;
 -(NSString *)tomorrowDate;
 -(NSString *)yesterdayDate;

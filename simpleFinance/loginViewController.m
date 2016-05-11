@@ -235,12 +235,13 @@
     NSDictionary *parameters = @{@"tag": @"login",@"name":self.userField.text,@"password":self.pswdField.text};
     [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:backupService params:parameters success:^(NSDictionary *success){
 //        
-//        NSString *name = [success objectForKey:@"username"];
+        NSString *name = [success objectForKey:@"username"];
         NSString *backupDevice = [success objectForKey:@"backup_device"];
         NSString *backupDay = [success objectForKey:@"backup_day"];
         NSString *created = [success objectForKey:@"created"];
         
         backupViewController *backupVC = [[backupViewController alloc] initWithNibName:@"backupViewController" bundle:nil];
+        backupVC.username = name;
         backupVC.backupDevice = backupDevice;
         backupVC.backupDay = backupDay;
         backupVC.created = created;

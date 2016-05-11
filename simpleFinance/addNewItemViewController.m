@@ -813,7 +813,7 @@
 
 -(void)addNewCategory
 {
-    NSString *newCategory = self.inputField.text;
+    NSString *newCategory = [self.inputField.text stringByReplacingOccurrencesOfString:@" " withString:@""] ;
     
     CGFloat width =  [self.inputField.text sizeWithAttributes:@{NSFontAttributeName:self.inputField.font}].width;
     NSLog(@"%f",width);
