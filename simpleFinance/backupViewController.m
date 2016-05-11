@@ -28,8 +28,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     [self configTopbar];
+    [self configFirstBackupView];
     [self configLastBackupView];
+    
+    if ( !self.backupDay || [self.backupDay isKindOfClass:[NSNull class]] ) {
+        [self.lastBackupView setHidden:YES];
+        [self.firstBackupView setHidden:NO];
+    }else
+    {
+        [self updateBackupInfoWithDate:self.backupDay andDevice:self.backupDevice];
+        [self.lastBackupView setHidden:NO];
+        [self.firstBackupView setHidden:YES];
+
+    }
     [self configOperaView];
 }
 
@@ -90,6 +103,23 @@
 -(void)configLastBackupView
 {
     UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height + (SCREEN_HEIGHT - 480) /2, SCREEN_WIDTH, 200)];
+    self.firstBackupView = content;
+    
+    UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 120, 5, 240, 150)];
+    lastTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:50.0f];
+    lastTitleLabel.textAlignment = NSTextAlignmentCenter;
+    [lastTitleLabel setText:@"首次备份"];
+    [lastTitleLabel setTextColor: TextColor];
+    lastTitleLabel.backgroundColor = [UIColor clearColor];
+    
+    [content addSubview:lastTitleLabel];
+    [self.view addSubview:content];
+    
+}
+
+-(void)configFirstBackupView
+{
+    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height + (SCREEN_HEIGHT - 480) /2, SCREEN_WIDTH, 200)];
     self.lastBackupView = content;
     
     UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 120, 0, 240, 20)];
@@ -99,6 +129,8 @@
     [lastTitleLabel setTextColor: TextColor];
     lastTitleLabel.backgroundColor = [UIColor clearColor];
     [content addSubview:lastTitleLabel];
+    
+
     
     UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-0.5, lastTitleLabel.frame.origin.y+lastTitleLabel.frame.size.height +20, 0.5, 140)];
     midLine.backgroundColor = [UIColor whiteColor];
@@ -151,7 +183,6 @@
 
     [self.view addSubview:content];
     
-    [self updateBackupInfoWithDate:self.backupDay andDevice:self.backupDevice];
 }
 
 -(void)configOperaView
@@ -262,7 +293,9 @@
         NSString *backupDevice = [responseObject objectForKey:@"backup_device"];
         
         [self updateBackupInfoWithDate:backupDay andDevice:backupDevice];
-
+        [self.lastBackupView setHidden:NO];
+        [self.firstBackupView setHidden:YES];
+        
         hud.mode = MBProgressHUDModeText;
         hud.labelText = @"备份成功";
         [hud hide:YES afterDelay:1.5];
