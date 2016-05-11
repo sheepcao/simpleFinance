@@ -268,7 +268,7 @@
 
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.mode = MBProgressHUDModeIndeterminate;
     hud.labelText = @"正在备份...";
     hud.dimBackground = YES;
     
@@ -399,6 +399,7 @@
             hud.labelText = NSLocalizedString(@"成功同步到本机",nil);
             [hud hide:YES afterDelay:1.2];
 
+            [self performSelector:@selector(closeVC) withObject:nil afterDelay:1.5];
         }
         return;
     }else
@@ -429,5 +430,6 @@
         [self downloadMulti:urlArray withManager:manager];
     }
 }
+
 
 @end

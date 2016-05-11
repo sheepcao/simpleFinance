@@ -158,6 +158,118 @@ class DB_Functions {
             }
         }
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    /**
+     * Storing new user
+     * returns user details
+     */
+    public function storeUser($name,$password) {
+        
+        $result = mysql_query("INSERT INTO userinfo(unique_id, password,created_at) VALUES('$name', '$password', NOW())");
+        // check for successful store
+        if ($result) {
+            // get user details
+            $result = mysql_query("SELECT * FROM userinfo WHERE unique_id = \"$name\"");
+            // return user details
+            return mysql_fetch_array($result);
+        } else {
+            return false;
+        }
+    }
+    public function changePassword($name, $password)
+    {
+        $result = mysql_query("update userinfo set password = '$password' WHERE unique_id = '$name'") or die(mysql_error());
+        if ($result)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+    
+    /**
+     * Check user is existed or not
+     */
+    public function isUserExisted($name) {
+        $result = mysql_query("SELECT * from userinfo WHERE unique_id = '$name'");
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
+            // user existed
+            return true;
+        } else {
+            // user not existed
+            return false;
+        }
+    }
+    /**
+     * Get user by email and password
+     */
+    public function getUserByNameAndPassword($name, $password) {
+        $result = mysql_query("SELECT * FROM userinfo u left join backupinfo b on backup_user = u.unique_id WHERE unique_id = '$name'") or die(mysql_error());
+        // check for result
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
+            $result = mysql_fetch_array($result);
+            $passwordInDB = $result['password'];
+            
+            // check for password equality
+            if ($passwordInDB == $password) {
+                // user authentication details are correct
+                return $result;
+            }else
+            {
+                return false;
+            }
+        } else {
+            // user not found
+            return false;
+        }
+    }
+    
+    public function updateBackup($name,$device,$backupTime) {
+        
+        $select = mysql_query("SELECT * FROM backupinfo where backup_user = '$name'") or die(mysql_error());
+        $no_of_rows = mysql_num_rows($select);
+        if ($no_of_rows > 0) {
+            //  existed
+            
+            $result = mysql_query("update backupinfo set backup_device = '$device',backup_day = '$backupTime' where backup_user = '$name'");
+            // check for successful store
+            if ($result) {
+                // get user details
+                $result = mysql_query("SELECT * FROM backupinfo where backup_user = '$name'") or die(mysql_error());
+                // return user details
+                return mysql_fetch_array($result);
+            } else {
+                return false;
+            }
+            
+            
+        } else {
+            //  not existed
+            $result = mysql_query("INSERT INTO backupinfo(backup_user,backup_device, backup_day) VALUES('$name','$device','$backupTime')");
+            // check for successful store
+            if ($result) {
+                // get user details
+                $result = mysql_query("SELECT * FROM backupinfo where backup_user = '$name'") or die(mysql_error());
+                // return user details
+                return mysql_fetch_array($result);
+            } else {
+                return false;
+            }
+            
+        }
+        
+        
+    }
+
+
+    
+    
 }
 
 ?>

@@ -54,6 +54,13 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[CommonUtility sharedCommonUtility] shimmerRegisterButton:self.myLoginBtn];
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -94,6 +101,10 @@
     [content addSubview:usernameField];
     self.userField = usernameField;
 
+    NSString *defaultUser = [[NSUserDefaults standardUserDefaults] objectForKey:DEFAULT_USER];
+    if (defaultUser) {
+        [usernameField setText:defaultUser];
+    }
     
     UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, usernameField.frame.origin.y + usernameField.frame.size.height + 20, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
     passwordField.attributedPlaceholder =
@@ -124,7 +135,6 @@
     self.myLoginBtn = loginButton;
     [loginButton addTarget:self action:@selector(userLogin) forControlEvents:UIControlEventTouchUpInside];
     
-    [[CommonUtility sharedCommonUtility] shimmerRegisterButton:loginButton];
     
     UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 65, loginButton.frame.origin.y + loginButton.frame.size.height + 25, 130, 30)];
     [registerButton setBackgroundColor:[UIColor clearColor]];
@@ -212,6 +222,8 @@
 
 -(void)userLogin
 {
+
+    
     if ([[self.userField.text stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""] ) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.animationType = MBProgressHUDAnimationZoom;
@@ -234,9 +246,21 @@
         return;
     }
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    
+    hud.dimBackground = YES;
+    hud.animationType = MBProgressHUDAnimationZoom;
+    hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+
+
     NSDictionary *parameters = @{@"tag": @"login",@"name":self.userField.text,@"password":self.pswdField.text};
     [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:backupService params:parameters success:^(NSDictionary *success){
-//        
+//
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"注册成功",nil);
+        [hud hide:YES afterDelay:2.0];
+
         NSString *name = [success objectForKey:@"username"];
         NSString *backupDevice = [success objectForKey:@"backup_device"];
         NSString *backupDay = [success objectForKey:@"backup_day"];
@@ -246,10 +270,12 @@
         backupVC.backupDevice = backupDevice;
         backupVC.backupDay = backupDay;
         
-//        loginViewController *test = [loginViewController alloc] initWithNibName:@"loginViewController" bundle:nil
+        [[NSUserDefaults standardUserDefaults] setObject:name forKey:DEFAULT_USER];
 
         NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
-        [viewControllers removeObject:viewControllers.lastObject];
+        if ([viewControllers.lastObject isKindOfClass:[loginViewController class]]) {
+            [viewControllers removeObject:viewControllers.lastObject];
+        }
         [viewControllers addObject:backupVC];
         [self.navigationController setViewControllers:viewControllers animated:YES];
         
@@ -257,9 +283,6 @@
 
     } failure:^(NSError * failure){
         NSLog(@"%@",failure);
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        hud.animationType = MBProgressHUDAnimationZoom;
-        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
         hud.labelText = @"邮箱地址或密码错误";
         [hud hide:YES afterDelay:1.5];

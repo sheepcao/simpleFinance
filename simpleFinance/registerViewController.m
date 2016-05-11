@@ -7,6 +7,7 @@
 //
 
 #import "registerViewController.h"
+#import "loginViewController.h"
 #import "global.h"
 #import "gradientButton.h"
 #import "CommonUtility.h"
@@ -89,14 +90,14 @@
     [content addSubview:usernameField];
     self.userField = usernameField;
     
-    UILabel *hintLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 100 , usernameField.frame.origin.y + usernameField.frame.size.height + 2, 200, 20)];
+    UILabel *hintLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 80 , usernameField.frame.origin.y + usernameField.frame.size.height + 2, 160, 20)];
     hintLabel.textAlignment = NSTextAlignmentCenter;
-    hintLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:12.0f];
+    hintLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.5f];
     hintLabel.textColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:0.9];
     [hintLabel setText:@"*重要 : 用于登录及密码找回"];
     [content addSubview:hintLabel];
     
-    UIView *leftGradient = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/10, hintLabel.frame.origin.y + hintLabel.frame.size.height/2-1, SCREEN_WIDTH/2 - SCREEN_WIDTH/10 - hintLabel.frame.size.width/2, 2)];
+    UIView *leftGradient = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/9, hintLabel.frame.origin.y + hintLabel.frame.size.height/2-1, SCREEN_WIDTH/2 - SCREEN_WIDTH/9 - hintLabel.frame.size.width/2, 2)];
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = leftGradient.bounds;
     gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:0.96 alpha:0.0f].CGColor, (id)[UIColor colorWithWhite:0.96 alpha:1.0f].CGColor, nil];
@@ -150,9 +151,8 @@
     [loginButton addTarget:self action:@selector(userRegister) forControlEvents:UIControlEventTouchUpInside];
     
     [[CommonUtility sharedCommonUtility] shimmerRegisterButton:loginButton];
-
     
-   }
+}
 
 -(void)keyboardWasShown:(NSNotification*)notification
 {
@@ -194,6 +194,57 @@
     return NO;
 }
 
+-(void)userRegister
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.dimBackground = YES;
+    [hud hide:YES afterDelay:2.0];
 
+    NSDictionary *parameters = @{@"tag": @"register",@"name":self.userField.text,@"password":self.pswdField.text};
+    
+    [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:backupService params:parameters success:^(NSDictionary *success){
+        //
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = NSLocalizedString(@"注册成功",nil);
+        
+        NSString *name = [success objectForKey:@"username"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:name forKey:DEFAULT_USER];
+        
+        [self performSelector:@selector(goBackupFor:) withObject:name afterDelay:0.21];
 
+        NSLog(@"%@",success);
+        
+    } failure:^(NSError * failure){
+        NSLog(@"%@",failure);
+        hud.mode = MBProgressHUDModeText;
+        [hud hide:YES afterDelay:2.0];
+        
+        NSString *error = [NSString stringWithFormat:@"Error: ***** %@", failure];
+        if ([CommonUtility myContainsStringFrom:error forSubstring:@"416"]) {
+            hud.labelText = NSLocalizedString(@"您输入的用户名已存在，换一个吧",nil);
+        }else
+        {
+            hud.labelText = NSLocalizedString(@"注册失败，请重试",nil);
+        }
+    }];
+}
+
+-(void)goBackupFor:(NSString *)name
+{
+    backupViewController *backupVC = [[backupViewController alloc] initWithNibName:@"backupViewController" bundle:nil];
+    backupVC.username = name;
+    
+    NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[self.navigationController viewControllers]];
+    if ([viewControllers.lastObject isKindOfClass:[registerViewController class]]) {
+        [viewControllers removeObject:viewControllers.lastObject];
+    }
+    if ([viewControllers.lastObject isKindOfClass:[loginViewController class]]) {
+        [viewControllers removeObject:viewControllers.lastObject];
+    }
+    [viewControllers addObject:backupVC];
+    [self.navigationController setViewControllers:viewControllers animated:YES];
+    
+}
 @end

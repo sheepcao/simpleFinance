@@ -571,32 +571,23 @@
         [registerButtonView setNeedsDisplay];
     }else
     {
-       [sheenImageView setFrame:CGRectMake(-86, 0, 86, registerButtonView.frame.size.height)];
+       [sheenImageView setFrame:CGRectMake(-15, 0, 86, registerButtonView.frame.size.height)];
     }
     
-    [UIView animateKeyframesWithDuration:1.0 delay:2.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear |UIViewKeyframeAnimationOptionAutoreverse | UIViewKeyframeAnimationOptionRepeat animations:^{
-        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.5 animations:^{
+    [UIView animateKeyframesWithDuration:3.5 delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear  | UIViewKeyframeAnimationOptionRepeat animations:^{
+        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.02 animations:^{
             [sheenImageView setAlpha:1.0];
+        }];
+        [UIView addKeyframeWithRelativeStartTime:0.02 relativeDuration:0.25 animations:^{
+            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86,registerButtonView.frame.size.height)];
+        }];
+        [UIView addKeyframeWithRelativeStartTime:0.25 relativeDuration:0.27 animations:^{
+            [sheenImageView setAlpha:0.0];
             [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86,registerButtonView.frame.size.height)];
         }];
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86, registerButtonView.frame.size.height)];
-            [sheenImageView setAlpha:0.0];
-        } completion:nil];
+
     }];
-    
-//    [UIView animateWithDuration:1.0 delay:2.0 options:UIViewAnimationOptionCurveLinear animations:^{
-//        [sheenImageView setAlpha:1.0];
-//        [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86,registerButtonView.frame.size.height)];
-//    } completion:^(BOOL finished) {
-//        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-//            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86, registerButtonView.frame.size.height)];
-//            [sheenImageView setAlpha:0.0];
-//        } completion:^(BOOL finished){
-//        }];
-//    }];
-    
 }
 
 - (BOOL) validateEmail: (NSString *) candidate {
