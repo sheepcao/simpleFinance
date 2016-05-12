@@ -399,7 +399,7 @@
             hud.labelText = NSLocalizedString(@"成功同步到本机",nil);
             [hud hide:YES afterDelay:1.2];
 
-            [self performSelector:@selector(closeVC) withObject:nil afterDelay:1.5];
+            [self performSelector:@selector(closeVC ) withObject:nil afterDelay:1.5];
         }
         return;
     }else

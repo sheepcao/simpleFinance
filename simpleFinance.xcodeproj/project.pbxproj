@@ -20,6 +20,18 @@
 		A40F6BF81CE1CEC70010A0CE /* backupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BF61CE1CEC70010A0CE /* backupViewController.xib */; };
 		A40F6BFC1CE338BB0010A0CE /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BFA1CE338BA0010A0CE /* registerViewController.m */; };
 		A40F6BFD1CE338BB0010A0CE /* registerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BFB1CE338BB0010A0CE /* registerViewController.xib */; };
+		A40F6C011CE456EC0010A0CE /* aboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BFF1CE456EC0010A0CE /* aboutViewController.m */; };
+		A40F6C021CE456EC0010A0CE /* aboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6C001CE456EC0010A0CE /* aboutViewController.xib */; };
+		A40F6C071CE460380010A0CE /* shareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C051CE460380010A0CE /* shareViewController.m */; };
+		A40F6C081CE460380010A0CE /* shareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6C061CE460380010A0CE /* shareViewController.xib */; };
+		A40F6C0E1CE4619A0010A0CE /* UIControl+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C0B1CE4619A0010A0CE /* UIControl+Blocks.m */; };
+		A40F6C0F1CE4619A0010A0CE /* XHShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C0D1CE4619A0010A0CE /* XHShareView.m */; };
+		A40F6C1E1CE461A00010A0CE /* OpenShare+Alipay.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C121CE461A00010A0CE /* OpenShare+Alipay.m */; };
+		A40F6C1F1CE461A00010A0CE /* OpenShare+QQ.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C141CE461A00010A0CE /* OpenShare+QQ.m */; };
+		A40F6C201CE461A00010A0CE /* OpenShare+Renren.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C161CE461A00010A0CE /* OpenShare+Renren.m */; };
+		A40F6C211CE461A00010A0CE /* OpenShare+Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C181CE461A00010A0CE /* OpenShare+Weibo.m */; };
+		A40F6C221CE461A00010A0CE /* OpenShare+Weixin.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C1A1CE461A00010A0CE /* OpenShare+Weixin.m */; };
+		A40F6C231CE461A00010A0CE /* OpenShare.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C1C1CE461A00010A0CE /* OpenShare.m */; };
 		A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */; };
 		A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */; };
 		A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C61CCE234F0008BFE2 /* dateShowView.m */; };
@@ -140,6 +152,29 @@
 		A40F6BF91CE338BA0010A0CE /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = registerViewController.h; sourceTree = "<group>"; };
 		A40F6BFA1CE338BA0010A0CE /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = registerViewController.m; sourceTree = "<group>"; };
 		A40F6BFB1CE338BB0010A0CE /* registerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = registerViewController.xib; sourceTree = "<group>"; };
+		A40F6BFE1CE456EC0010A0CE /* aboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aboutViewController.h; sourceTree = "<group>"; };
+		A40F6BFF1CE456EC0010A0CE /* aboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aboutViewController.m; sourceTree = "<group>"; };
+		A40F6C001CE456EC0010A0CE /* aboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = aboutViewController.xib; sourceTree = "<group>"; };
+		A40F6C041CE460380010A0CE /* shareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = shareViewController.h; sourceTree = "<group>"; };
+		A40F6C051CE460380010A0CE /* shareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = shareViewController.m; sourceTree = "<group>"; };
+		A40F6C061CE460380010A0CE /* shareViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = shareViewController.xib; sourceTree = "<group>"; };
+		A40F6C0A1CE4619A0010A0CE /* UIControl+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIControl+Blocks.h"; sourceTree = "<group>"; };
+		A40F6C0B1CE4619A0010A0CE /* UIControl+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIControl+Blocks.m"; sourceTree = "<group>"; };
+		A40F6C0C1CE4619A0010A0CE /* XHShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHShareView.h; sourceTree = "<group>"; };
+		A40F6C0D1CE4619A0010A0CE /* XHShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHShareView.m; sourceTree = "<group>"; };
+		A40F6C111CE461A00010A0CE /* OpenShare+Alipay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+Alipay.h"; sourceTree = "<group>"; };
+		A40F6C121CE461A00010A0CE /* OpenShare+Alipay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+Alipay.m"; sourceTree = "<group>"; };
+		A40F6C131CE461A00010A0CE /* OpenShare+QQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+QQ.h"; sourceTree = "<group>"; };
+		A40F6C141CE461A00010A0CE /* OpenShare+QQ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+QQ.m"; sourceTree = "<group>"; };
+		A40F6C151CE461A00010A0CE /* OpenShare+Renren.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+Renren.h"; sourceTree = "<group>"; };
+		A40F6C161CE461A00010A0CE /* OpenShare+Renren.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+Renren.m"; sourceTree = "<group>"; };
+		A40F6C171CE461A00010A0CE /* OpenShare+Weibo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+Weibo.h"; sourceTree = "<group>"; };
+		A40F6C181CE461A00010A0CE /* OpenShare+Weibo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+Weibo.m"; sourceTree = "<group>"; };
+		A40F6C191CE461A00010A0CE /* OpenShare+Weixin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OpenShare+Weixin.h"; sourceTree = "<group>"; };
+		A40F6C1A1CE461A00010A0CE /* OpenShare+Weixin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OpenShare+Weixin.m"; sourceTree = "<group>"; };
+		A40F6C1B1CE461A00010A0CE /* OpenShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenShare.h; sourceTree = "<group>"; };
+		A40F6C1C1CE461A00010A0CE /* OpenShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenShare.m; sourceTree = "<group>"; };
+		A40F6C1D1CE461A00010A0CE /* OpenShareHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenShareHeader.h; sourceTree = "<group>"; };
 		A425B2C01CCE04710008BFE2 /* categoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryDetailViewController.h; sourceTree = "<group>"; };
 		A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryDetailViewController.m; sourceTree = "<group>"; };
 		A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryDetailViewController.xib; sourceTree = "<group>"; };
@@ -355,6 +390,50 @@
 			name = backupVC;
 			sourceTree = "<group>";
 		};
+		A40F6C031CE457040010A0CE /* about */ = {
+			isa = PBXGroup;
+			children = (
+				A40F6BFE1CE456EC0010A0CE /* aboutViewController.h */,
+				A40F6BFF1CE456EC0010A0CE /* aboutViewController.m */,
+				A40F6C001CE456EC0010A0CE /* aboutViewController.xib */,
+				A40F6C041CE460380010A0CE /* shareViewController.h */,
+				A40F6C051CE460380010A0CE /* shareViewController.m */,
+				A40F6C061CE460380010A0CE /* shareViewController.xib */,
+			);
+			name = about;
+			sourceTree = "<group>";
+		};
+		A40F6C091CE4619A0010A0CE /* XHShare */ = {
+			isa = PBXGroup;
+			children = (
+				A40F6C0A1CE4619A0010A0CE /* UIControl+Blocks.h */,
+				A40F6C0B1CE4619A0010A0CE /* UIControl+Blocks.m */,
+				A40F6C0C1CE4619A0010A0CE /* XHShareView.h */,
+				A40F6C0D1CE4619A0010A0CE /* XHShareView.m */,
+			);
+			path = XHShare;
+			sourceTree = "<group>";
+		};
+		A40F6C101CE461A00010A0CE /* openshare */ = {
+			isa = PBXGroup;
+			children = (
+				A40F6C111CE461A00010A0CE /* OpenShare+Alipay.h */,
+				A40F6C121CE461A00010A0CE /* OpenShare+Alipay.m */,
+				A40F6C131CE461A00010A0CE /* OpenShare+QQ.h */,
+				A40F6C141CE461A00010A0CE /* OpenShare+QQ.m */,
+				A40F6C151CE461A00010A0CE /* OpenShare+Renren.h */,
+				A40F6C161CE461A00010A0CE /* OpenShare+Renren.m */,
+				A40F6C171CE461A00010A0CE /* OpenShare+Weibo.h */,
+				A40F6C181CE461A00010A0CE /* OpenShare+Weibo.m */,
+				A40F6C191CE461A00010A0CE /* OpenShare+Weixin.h */,
+				A40F6C1A1CE461A00010A0CE /* OpenShare+Weixin.m */,
+				A40F6C1B1CE461A00010A0CE /* OpenShare.h */,
+				A40F6C1C1CE461A00010A0CE /* OpenShare.m */,
+				A40F6C1D1CE461A00010A0CE /* OpenShareHeader.h */,
+			);
+			path = openshare;
+			sourceTree = "<group>";
+		};
 		A425B2CB1CCF63130008BFE2 /* itemsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,6 +512,7 @@
 				A4ECE2871CDA422B000FF10D /* baseViewController.h */,
 				A4ECE2881CDA422B000FF10D /* baseViewController.m */,
 				A4ECE2891CDA422B000FF10D /* baseViewController.xib */,
+				A40F6C031CE457040010A0CE /* about */,
 				A40F6BE71CE07D410010A0CE /* backupVC */,
 				A4ECE2811CDA2959000FF10D /* categoryVC */,
 				A425B2CB1CCF63130008BFE2 /* itemsVC */,
@@ -602,6 +682,8 @@
 		A4CC24261CBCC82E007A94F1 /* 3rd-party */ = {
 			isa = PBXGroup;
 			children = (
+				A40F6C101CE461A00010A0CE /* openshare */,
+				A40F6C091CE4619A0010A0CE /* XHShare */,
 				A40F6BE11CE035200010A0CE /* DLog */,
 				A4637AA91CDDCFEF00BC86AC /* AFNetworkHelp */,
 				A457523F1CDB35350013EFBF /* RATreeView */,
@@ -757,6 +839,8 @@
 				A4ECE27D1CD62FC0000FF10D /* categoryManagementViewController.xib in Resources */,
 				A4CC246B1CBE8EC3007A94F1 /* delete1.png in Resources */,
 				A4ECE2931CDA4D5D000FF10D /* 夕.jpg in Resources */,
+				A40F6C021CE456EC0010A0CE /* aboutViewController.xib in Resources */,
+				A40F6C081CE460380010A0CE /* shareViewController.xib in Resources */,
 				A4CC246D1CBE8EC3007A94F1 /* minus1.png in Resources */,
 				A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */,
 				A40F6BFD1CE338BB0010A0CE /* registerViewController.xib in Resources */,
@@ -857,6 +941,8 @@
 				A40F6BEA1CE07D880010A0CE /* loginViewController.m in Sources */,
 				A457526E1CDB35350013EFBF /* RATreeView+TableViewDelegate.m in Sources */,
 				A40F6BF71CE1CEC70010A0CE /* backupViewController.m in Sources */,
+				A40F6C201CE461A00010A0CE /* OpenShare+Renren.m in Sources */,
+				A40F6C231CE461A00010A0CE /* OpenShare.m in Sources */,
 				A45752681CDB35350013EFBF /* RATreeNodeItem+Private.m in Sources */,
 				A457526F1CDB35350013EFBF /* RATreeView.m in Sources */,
 				A490C1921CB7B1B3006EEEF1 /* SideMenuViewController.m in Sources */,
@@ -868,12 +954,15 @@
 				A4ECE27C1CD62FC0000FF10D /* categoryManagementViewController.m in Sources */,
 				A4CC24761CC0B361007A94F1 /* categoryButton.m in Sources */,
 				A457526A1CDB35350013EFBF /* RATreeView+Enums.m in Sources */,
+				A40F6C221CE461A00010A0CE /* OpenShare+Weixin.m in Sources */,
 				A45752851CDC3A8F0013EFBF /* constellationView.m in Sources */,
 				A4E4A2F81CC9BE6000E36AFE /* FlatDatePicker.m in Sources */,
 				A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */,
+				A40F6C0E1CE4619A0010A0CE /* UIControl+Blocks.m in Sources */,
 				A457526B1CDB35350013EFBF /* RATreeView+Private.m in Sources */,
 				A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */,
 				A45752671CDB35350013EFBF /* RATreeNodeController.m in Sources */,
+				A40F6C0F1CE4619A0010A0CE /* XHShareView.m in Sources */,
 				A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */,
 				A4637AA81CDC6FE000BC86AC /* LuckyLabel.m in Sources */,
 				A45752881CDC60D70013EFBF /* pickerLabel.m in Sources */,
@@ -890,13 +979,17 @@
 				A4CC24731CC084F2007A94F1 /* categoryTableViewCell.m in Sources */,
 				A45752631CDB35350013EFBF /* RABatchChanges.m in Sources */,
 				A457526C1CDB35350013EFBF /* RATreeView+RATreeNodeCollectionControllerDataSource.m in Sources */,
+				A40F6C211CE461A00010A0CE /* OpenShare+Weibo.m in Sources */,
 				A425B2CA1CCF0B0E0008BFE2 /* categoryItemsTableViewCell.m in Sources */,
+				A40F6C1E1CE461A00010A0CE /* OpenShare+Alipay.m in Sources */,
 				A4ECE32C1CDB2C3A000FF10D /* RADataObject.m in Sources */,
 				A405513C1CC72C0F00306EB0 /* pieViewController.m in Sources */,
+				A40F6C071CE460380010A0CE /* shareViewController.m in Sources */,
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
 				A4E4A2EC1CC8B60B00E36AFE /* dateSelectView.m in Sources */,
 				A45752641CDB35350013EFBF /* RATableView.m in Sources */,
 				A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */,
+				A40F6C1F1CE461A00010A0CE /* OpenShare+QQ.m in Sources */,
 				A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */,
 				A4CC248E1CC61BC5007A94F1 /* categoryObject.m in Sources */,
 				A481F9C11CB769960003100F /* myMaskTableViewCell.m in Sources */,
@@ -908,6 +1001,7 @@
 				A4CC24521CBE239B007A94F1 /* numberPadButton.m in Sources */,
 				A4CC247A1CC0D7DE007A94F1 /* calendarViewController.m in Sources */,
 				A4CC244B1CBCFEA4007A94F1 /* addNewItemViewController.m in Sources */,
+				A40F6C011CE456EC0010A0CE /* aboutViewController.m in Sources */,
 				A4637AB11CDDD00100BC86AC /* AFHTTPRequestOperationManager.m in Sources */,
 				A45752621CDB35350013EFBF /* RABatchChangeEntity.m in Sources */,
 				A42D1CAD1CB657C300C208A0 /* summeryViewController.m in Sources */,

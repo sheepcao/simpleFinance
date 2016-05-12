@@ -11,6 +11,7 @@
 #import "SideMenuViewController.h"
 #import "MFSideMenuContainerViewController.h"
 #import "CommonUtility.h"
+#import "OpenShareHeader.h"
 
 @interface AppDelegate ()
 @property (nonatomic,strong) FMDatabase *db;
@@ -52,6 +53,7 @@
     
     [self initDB];
     [self judgeTimeFrame];
+    [self configShare];
     
     if ([CommonUtility isSystemLangChinese]) {
         [self loadLuckInfoFromServer];
@@ -67,6 +69,13 @@
     return YES;
 }
 
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    //第二步：添加回调
+    if ([OpenShare handleOpenURL:url]) {
+        return YES;
+    }
+    return YES;
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -280,4 +289,10 @@
     
 }
 
+-(void)configShare
+{
+    [OpenShare connectQQWithAppId:@"1104406509"];
+    [OpenShare connectWeiboWithAppKey:@"3086417886"];
+    [OpenShare connectWeixinWithAppId:@"wx060aa2d39d56bf11"];
+}
 @end

@@ -516,7 +516,9 @@
     if (indexPath.section == 1) {
         if (self.todayItems.count == 0)
         {
-            [self popAddNewView:nil];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self popAddNewView:nil];
+            });
         }
     }
     

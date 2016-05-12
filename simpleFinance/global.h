@@ -64,5 +64,6 @@
 #define ThemeChanged  @"modelNotification"
 #define LuckChanged  @"luckNotification"
 
+#define VERSIONNUMBER   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 
 #endif /* global_h */

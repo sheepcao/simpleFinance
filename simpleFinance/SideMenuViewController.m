@@ -15,6 +15,7 @@
 #import "monthListViewController.h"
 #import "loginViewController.h"
 #import "backupViewController.h"
+#import "aboutViewController.h"
 
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;
@@ -28,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.menuArray = @[@"同 步 | 备 份",@"分类管理",@"帐目流水",@"帐目日历",@"显示模式",@"设置"];
+    self.menuArray = @[@"同 步 | 备 份",@"分类管理",@"帐目流水",@"帐目日历",@"显示模式",@"关于简簿"];
     
     UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT-6*(SCREEN_WIDTH/5.5))*2/3, SCREEN_WIDTH*2/3, 6*(SCREEN_WIDTH/5.5))];
     menuTable.delegate = self;
@@ -173,8 +174,15 @@
         NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
         mainViewController *mainVC = (mainViewController *) [temp lastObject];
         [mainVC showingModel];
-        
-        
+
+    }else if(indexPath.row ==5)
+    {
+        aboutViewController *trendVC = [[aboutViewController alloc] initWithNibName:@"aboutViewController" bundle:nil];
+        UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:navigationController.viewControllers];
+        [temp addObject:trendVC];
+        navigationController.viewControllers = temp;
+        [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
