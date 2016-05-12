@@ -11,8 +11,11 @@
 #import "CommonUtility.h"
 #import "topBarView.h"
 #import "shareViewController.h"
+#import <MessageUI/MessageUI.h>
+#import "MBProgressHUD.h"
 
-@interface aboutViewController ()<UITableViewDataSource,UITableViewDelegate>
+
+@interface aboutViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
 @property (nonatomic,strong) UITableView *settingTable;
 @property (nonatomic,strong) topBarView *topBar;
 @property (nonatomic,strong) NSArray *rowList;
@@ -140,6 +143,108 @@
         shareViewController *shareVC = [[shareViewController alloc] initWithNibName:@"shareViewController" bundle:nil];
         [self presentViewController:shareVC animated:YES completion:nil];
         });
+    }else if(indexPath.row == 1)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+
+            [self emailTapped];
+        });
+    }else if(indexPath.row == 2)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
     }
 }
+
+-(void)emailTapped
+{
+    
+    
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    [picker.view setFrame:CGRectMake(0,20 , 320, self.view.frame.size.height-20)];
+    picker.mailComposeDelegate = self;
+    
+    
+    
+    // Set up recipients
+    NSArray *toRecipients = [NSArray arrayWithObject:@"sheepcao1986@163.com"];
+    
+    
+    [picker setToRecipients:toRecipients];
+    
+    NSString *emailBody= @"";
+    [picker setSubject:@"意见反馈-简簿"];
+    emailBody = @"感谢您使用简簿，请留下您的宝贵意见，我们将与您取得联系!";
+    
+    
+    [picker setMessageBody:emailBody isHTML:NO];
+    [self presentViewController:picker animated:YES completion:nil];
+}
+- (void)alertWithTitle: (NSString *)_title_ msg: (NSString *)msg
+
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.animationType = MBProgressHUDAnimationZoom;
+    hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = msg;
+    [hud hide:YES afterDelay:1.25];
+
+}
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+
+{
+    
+    NSString *title = @"发送状态";
+    
+    NSString *msg;
+    
+    switch (result)
+    
+    {
+            
+        case MFMailComposeResultCancelled:
+            
+            msg = @"Mail canceled";//@"邮件发送取消";
+            
+            break;
+            
+        case MFMailComposeResultSaved:
+            
+            msg = @"邮件保存成功";//@"邮件保存成功";
+            
+            [self alertWithTitle:title msg:msg];
+            
+            break;
+            
+        case MFMailComposeResultSent:
+            
+            msg = @"邮件发送成功";//@"邮件发送成功";
+            
+            [self alertWithTitle:title msg:msg];
+            
+            break;
+            
+        case MFMailComposeResultFailed:
+            
+            msg = @"邮件发送失败";//@"邮件发送失败";
+            
+            [self alertWithTitle:title msg:msg];
+            
+            break;
+            
+        default:
+            
+            msg = @"邮件尚未发送";
+            
+            [self alertWithTitle:title msg:msg];
+            
+            break;
+            
+    }
+    
+    [self  dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+
 @end
