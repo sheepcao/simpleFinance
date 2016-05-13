@@ -125,17 +125,17 @@
 
     UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, usernameField.frame.origin.y + usernameField.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
     passwordField.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:@"设置密码"
+    [[NSAttributedString alloc] initWithString:@"设置密码(大小写字母或数字,6-20位)"
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
-                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/19]
+                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/29]
                                                  }
      ];
     passwordField.textAlignment = NSTextAlignmentCenter;
     passwordField.returnKeyType = UIReturnKeyDone;
     passwordField.delegate = self;
     passwordField.tintColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.9];
-    passwordField.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/21];
+//    passwordField.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/21];
     passwordField.textColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.9];
     [passwordField.layer setCornerRadius:passwordField.frame.size.height/2];
     [passwordField setBackgroundColor:[UIColor whiteColor]];
@@ -196,6 +196,13 @@
     }];
     [textField resignFirstResponder];
     
+    [self validateInfo];
+    
+    return NO;
+}
+
+-(BOOL)validateInfo
+{
     BOOL isValidEmail = [[CommonUtility sharedCommonUtility] validateEmail:self.userField.text];
     if (!isValidEmail) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -203,15 +210,33 @@
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
         hud.labelText = @"请输入正确的邮箱格式";
-        [hud hide:YES afterDelay:1.5];
+        [hud hide:YES afterDelay:2.0];
         [self.userField becomeFirstResponder];
+        return  NO;
     }
     
-    return NO;
+    BOOL isValidPswd = [[CommonUtility sharedCommonUtility] validatePassword:self.pswdField.text];
+    if (!isValidPswd) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"密码格式不正确";
+        hud.detailsLabelText = @"密码长度6-20位并由大小写字母和数字组成";
+        [hud hide:YES afterDelay:2.0];
+        [self.pswdField becomeFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 -(void)userRegister
 {
+    if (![self validateInfo]) {
+        return;
+    }
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.dimBackground = YES;

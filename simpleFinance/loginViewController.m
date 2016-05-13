@@ -112,7 +112,7 @@
     [[NSAttributedString alloc] initWithString:@"密码"
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
-                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/19]
+                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/20]
                                                  }
      ];
     passwordField.textAlignment = NSTextAlignmentCenter;
@@ -212,20 +212,40 @@
     }];
     [textField resignFirstResponder];
 
-       BOOL isValidEmail = [[CommonUtility sharedCommonUtility] validateEmail:self.userField.text];
-        if (!isValidEmail) {
-            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            hud.animationType = MBProgressHUDAnimationZoom;
-            hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
-            hud.mode = MBProgressHUDModeText;
-            hud.labelText = @"请输入正确的邮箱格式";
-            [hud hide:YES afterDelay:1.5];
-            [self.userField becomeFirstResponder];
-        }
+    [self validateInfo];
 
     return NO;
 }
 
+-(BOOL)validateInfo
+{
+    BOOL isValidEmail = [[CommonUtility sharedCommonUtility] validateEmail:self.userField.text];
+    if (!isValidEmail) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"请输入正确的邮箱格式";
+        [hud hide:YES afterDelay:2.0];
+        [self.userField becomeFirstResponder];
+        return  NO;
+    }
+    
+    BOOL isValidPswd = [[CommonUtility sharedCommonUtility] validatePassword:self.pswdField.text];
+    if (!isValidPswd) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.animationType = MBProgressHUDAnimationZoom;
+        hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"密码格式不正确";
+        hud.detailsLabelText = @"密码长度6-20位并由大小写字母和数字组成";
+        [hud hide:YES afterDelay:2.0];
+        [self.pswdField becomeFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
 
 -(void)userLogin
 {
@@ -252,6 +272,11 @@
         [self.userField becomeFirstResponder];
         return;
     }
+    
+    if (![self validateInfo]) {
+        return;
+    }
+
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;

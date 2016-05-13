@@ -621,4 +621,15 @@
     
     return [emailTest evaluateWithObject:candidate];
 }
+
+- (BOOL) validatePassword: (NSString *) candidate {
+    if ([candidate isEqualToString:@""])
+    {
+        return YES;
+    }
+    NSString *emailRegex = @"^[0-9A-Za-z]{6,20}$";
+    NSPredicate *passwordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    return [passwordTest evaluateWithObject:candidate];
+}
 @end

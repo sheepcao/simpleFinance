@@ -65,4 +65,6 @@
 -(void)fetchConstellation:(NSString *)constellation ForView:(LuckyLabel *)textLabel;
 -(void)shimmerRegisterButton:(UIView *)registerButtonView;
 - (BOOL) validateEmail: (NSString *) candidate ;
+- (BOOL) validatePassword: (NSString *) candidate ;
+
 @end
