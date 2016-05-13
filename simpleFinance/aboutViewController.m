@@ -13,6 +13,7 @@
 #import "shareViewController.h"
 #import <MessageUI/MessageUI.h>
 #import "MBProgressHUD.h"
+#import "TermUseViewController.h"
 
 
 @interface aboutViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
@@ -74,8 +75,9 @@
     [self.view addSubview:logoView];
     
     UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - logoView.frame.size.width/2, logoView.frame.size.height + logoView.frame.origin.y + 5, logoView.frame.size.width, 20)];
-    [versionLabel setText:VERSIONNUMBER];
+    [versionLabel setText:[NSString stringWithFormat:@"Version:%@",VERSIONNUMBER]];
     versionLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:13.0f];
+    versionLabel.adjustsFontSizeToFitWidth = YES;
     versionLabel.textAlignment = NSTextAlignmentCenter;
     [versionLabel setTextColor:TextColor];
     [self.view addSubview:versionLabel];
@@ -95,7 +97,7 @@
 #pragma mark table delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return ((int)(SCREEN_WIDTH/8.5));
+    return ((int)(SCREEN_WIDTH/8));
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -152,6 +154,11 @@
     }else if(indexPath.row == 2)
     {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
+
+    }else if (indexPath.row == 3)
+    {
+        TermUseViewController *termsVC = [[TermUseViewController alloc] initWithNibName:@"TermUseViewController" bundle:nil];
+        [self.navigationController pushViewController:termsVC animated:YES];
     }
 }
 

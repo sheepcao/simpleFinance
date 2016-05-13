@@ -32,6 +32,8 @@
 		A40F6C211CE461A00010A0CE /* OpenShare+Weibo.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C181CE461A00010A0CE /* OpenShare+Weibo.m */; };
 		A40F6C221CE461A00010A0CE /* OpenShare+Weixin.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C1A1CE461A00010A0CE /* OpenShare+Weixin.m */; };
 		A40F6C231CE461A00010A0CE /* OpenShare.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C1C1CE461A00010A0CE /* OpenShare.m */; };
+		A40F6C271CE57B4A0010A0CE /* TermUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C251CE57B4A0010A0CE /* TermUseViewController.m */; };
+		A40F6C281CE57B4A0010A0CE /* TermUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6C261CE57B4A0010A0CE /* TermUseViewController.xib */; };
 		A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */; };
 		A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */; };
 		A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C61CCE234F0008BFE2 /* dateShowView.m */; };
@@ -175,6 +177,9 @@
 		A40F6C1B1CE461A00010A0CE /* OpenShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenShare.h; sourceTree = "<group>"; };
 		A40F6C1C1CE461A00010A0CE /* OpenShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenShare.m; sourceTree = "<group>"; };
 		A40F6C1D1CE461A00010A0CE /* OpenShareHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenShareHeader.h; sourceTree = "<group>"; };
+		A40F6C241CE57B4A0010A0CE /* TermUseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TermUseViewController.h; sourceTree = "<group>"; };
+		A40F6C251CE57B4A0010A0CE /* TermUseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermUseViewController.m; sourceTree = "<group>"; };
+		A40F6C261CE57B4A0010A0CE /* TermUseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermUseViewController.xib; sourceTree = "<group>"; };
 		A425B2C01CCE04710008BFE2 /* categoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryDetailViewController.h; sourceTree = "<group>"; };
 		A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryDetailViewController.m; sourceTree = "<group>"; };
 		A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryDetailViewController.xib; sourceTree = "<group>"; };
@@ -399,6 +404,9 @@
 				A40F6C041CE460380010A0CE /* shareViewController.h */,
 				A40F6C051CE460380010A0CE /* shareViewController.m */,
 				A40F6C061CE460380010A0CE /* shareViewController.xib */,
+				A40F6C241CE57B4A0010A0CE /* TermUseViewController.h */,
+				A40F6C251CE57B4A0010A0CE /* TermUseViewController.m */,
+				A40F6C261CE57B4A0010A0CE /* TermUseViewController.xib */,
 			);
 			name = about;
 			sourceTree = "<group>";
@@ -835,6 +843,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A40F6BF81CE1CEC70010A0CE /* backupViewController.xib in Resources */,
+				A40F6C281CE57B4A0010A0CE /* TermUseViewController.xib in Resources */,
 				A4ECE2921CDA4D5D000FF10D /* 午.jpg in Resources */,
 				A4ECE27D1CD62FC0000FF10D /* categoryManagementViewController.xib in Resources */,
 				A4CC246B1CBE8EC3007A94F1 /* delete1.png in Resources */,
@@ -988,6 +997,7 @@
 				A42D1CA31CB6365A00C208A0 /* LGGradientBackgroundView.m in Sources */,
 				A4E4A2EC1CC8B60B00E36AFE /* dateSelectView.m in Sources */,
 				A45752641CDB35350013EFBF /* RATableView.m in Sources */,
+				A40F6C271CE57B4A0010A0CE /* TermUseViewController.m in Sources */,
 				A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */,
 				A40F6C1F1CE461A00010A0CE /* OpenShare+QQ.m in Sources */,
 				A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */,

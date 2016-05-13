@@ -129,7 +129,7 @@
     message.image = [UIImage imageNamed:@"logo"];
     // 缩略图
     message.thumbnail = [UIImage imageNamed:@"switchChart.png"];
-    message.desc = [NSString stringWithFormat:@"简单一点，财务状况一目了然。"];
+    message.desc = [NSString stringWithFormat:@"简单一点,一目了然。\n财务详情，了然于心"];
     message.link=@"http://www.baidu.com";
     return message;
 }
@@ -191,7 +191,7 @@
         MFMessageComposeViewController * controller = [[MFMessageComposeViewController alloc]init]; //autorelease];
         // 短信的接收人
         controller.recipients = nil;//[NSArray arrayWithObject:@""]
-        controller.body = @"简簿－简明财务,跃然于簿\n简单一点，财务状况一目了然。\n简簿App下载地址:www.baidu.com";
+        controller.body = @"简簿－简明财务,跃然于簿\n简单一点,一目了然。\n财务详情，了然于心\n简簿App下载地址:www.baidu.com";
         controller.messageComposeDelegate = self;
         [self presentViewController:controller animated:YES completion:nil];
     }else{
