@@ -124,12 +124,27 @@ class DB_Functions {
 
     }
     
+
+    
     public function fetchConstellation($start_date) {
         $result = mysql_query("SELECT * FROM luckInfo WHERE start_date = '$start_date'") or die(mysql_error());
         // check for result
         $no_of_rows = mysql_num_rows($result);
         if ($no_of_rows > 0) {
 //            $result = mysql_fetch_array($result);
+            return $result;
+        }else {
+            
+           $allConstellation = $this->latestConstellation();
+            return $allConstellation;
+        }
+    }
+    public function latestConstellation() {
+        $result = mysql_query("SELECT * FROM luckInfo order by start_date desc LIMIT 12") or die(mysql_error());
+        // check for result
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
+            //            $result = mysql_fetch_array($result);
             return $result;
         }else {
             // signature not found
@@ -226,6 +241,20 @@ class DB_Functions {
             }
         } else {
             // user not found
+            return false;
+        }
+    }
+    
+    public function getPassword($name)
+    {
+        $result = mysql_query("SELECT * FROM userinfo WHERE unique_id = '$name'") or die(mysql_error());
+        $no_of_rows = mysql_num_rows($result);
+        if ($no_of_rows > 0) {
+            $result = mysql_fetch_array($result);
+            $passwordInDB = $result['password'];
+            return $passwordInDB;
+        }else
+        {
             return false;
         }
     }

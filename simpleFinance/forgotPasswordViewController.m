@@ -164,22 +164,25 @@
         lang = @"en";
     }
     
-    NSDictionary *parameters = @{@"tag": @"sendEmail",@"name":self.userField.text,@"Lang":lang};
+    NSDictionary *parameters = @{@"tag": @"sendEmail",@"name":self.userField.text,@"Lang":@"en"};
     
-    [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:backupService params:parameters success:^(NSDictionary *success){
+    
+    
+    [[CommonUtility sharedCommonUtility] httpGetUrlTEXT:emailService params:parameters success:^(id success){
         //
         hud.mode = MBProgressHUDModeText;
         hud.labelText = NSLocalizedString(@"请前往您的邮箱查看您的密码",nil);
-        [hud hide:YES afterDelay:2.0];
+        [hud hide:YES afterDelay:3.0];
 
-
+        NSString *string = [[NSString alloc] initWithData:success encoding:NSUTF8StringEncoding];
         
-        [self performSelector:@selector(closeVC) withObject:nil afterDelay:0.21];
         
-        NSLog(@"%@",success);
+        [self performSelector:@selector(closeVC) withObject:nil afterDelay:3.1];
+        
+        NSLog(@"string：%@",string);
         
     } failure:^(NSError * failure){
-        NSLog(@"%@",failure);
+        NSLog(@"failure:%@",failure);
         hud.mode = MBProgressHUDModeText;
         [hud hide:YES afterDelay:2.0];
         

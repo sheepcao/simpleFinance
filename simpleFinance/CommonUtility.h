@@ -57,6 +57,11 @@
                   success:(void(^)(NSDictionary *))success
                   failure:(void(^)(NSError *))failure;
 
+- (void)httpGetUrlTEXT:(NSString *)url
+                params:(NSDictionary *)paramsDict
+               success:(void (^)(id))success
+               failure:(void (^)(NSError *))failure;
+
 -(void)fetchConstellation:(NSString *)constellation ForView:(LuckyLabel *)textLabel;
 -(void)shimmerRegisterButton:(UIView *)registerButtonView;
 - (BOOL) validateEmail: (NSString *) candidate ;

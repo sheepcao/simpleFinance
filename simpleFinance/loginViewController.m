@@ -71,7 +71,7 @@
 
 -(void)configInputArea
 {
-    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT)];
     content.backgroundColor = [UIColor clearColor];
     [self.view addSubview:content];
     

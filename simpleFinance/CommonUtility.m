@@ -455,6 +455,26 @@
     }];
 }
 
+- (void)httpGetUrlTEXT:(NSString *)url
+                   params:(NSDictionary *)paramsDict
+                  success:(void (^)(id))success
+                  failure:(void (^)(NSError *))failure
+{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.requestSerializer.timeoutInterval = 12.0f;
+    manager.responseSerializer.acceptableContentTypes =[NSSet setWithObject:@"application/json"];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+
+//    [manager.requestSerializer  setValue: @"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    
+    [manager POST:url parameters:paramsDict progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+    }];
+}
+
 
 #pragma mark constellation info
 

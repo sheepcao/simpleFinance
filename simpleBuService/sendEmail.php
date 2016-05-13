@@ -68,43 +68,45 @@
         
         require_once 'include/DB_Functions.php';
         require_once 'email.class.php';
-        
+
+        $db = new DB_Functions();
         // response Array
         $response = array("tag" => $tag, "success" => 0, "error" => 0);
-        
+//        sendResponse(200,json_encode($_POST));
+
         // check for tag type
         if ($tag == 'sendEmail') {
-            // Request type is check Login
-            $Lang = $_POST['Lang'];
-//            if($Lang === "en")
-//            {
-//                $subject="Smarney"; //邮件主题
-//                $body="Hey gotYa!";  //邮件内容
-//                $userInfo ="Smarney <sheepcao1986@163.com>";
-//                sendResponse(200,json_encode($subject));
-//                
-//            }
-            
-            
-                        if($Lang === "en")
-                        {
-                            sendResponse(200,json_encode($_POST));
-            
-                            $subject="Smarney"; //邮件主题
-                            $body="Hey gotYa!";  //邮件内容
-                            $user ="Smarney <sheepcao1986@163.com>";
-                        }else
-                        {
-                            $subject="简簿"; //邮件主题
-                            $body="真的可以吗";  //邮件内容
-                            $user ="简簿 <sheepcao1986@163.com>";
-            
-                        }
-                        $mailto='sheepcao1986@163.com';  //收件人
-                        sendmailto($mailto,$subject,$body,$user);
-                        sendResponse(200,json_encode($response));
-            
+            $name = $_POST['name'];
+//                    sendResponse(200,json_encode($_POST));
+
+            $password = $db->getPassword($name);
+            sendResponse(416,$password);
+
+            if ($password != false) {
+                $Lang = $_POST['Lang'];
+                
+                if($Lang === "en")
+                {
+                    $subject="Money OnGo Password"; //邮件主题
+                    $body="Dear user:</br>Here is your password:</br>".$password."</br></br>Please protect your password seriously!</br></br>Best Regard!";  //邮件内容
+                    $user ="Money OnGo <sheepcao1986@163.com>";
+                }else
+                {
+                    $subject="简簿 密码找回"; //邮件主题
+                    $body="尊敬的用户:</br>您在简簿注册账号的密码为:</br>".$password."</br></br>请妥善保管</br></br>感谢您的支持!";   //邮件内容
+                    $user ="简簿 <sheepcao1986@163.com>";
+                }
+                $mailto=$name;  //收件人
+                $isDone = sendmailto($mailto,$subject,$body,$user);
+                sendResponse(200,"done");
+
+            }else
+            {
+                sendResponse(416,"not exist");
+            }
+
         }
+
         
     } else {
         echo "Access Denied";
@@ -125,11 +127,12 @@
         $mailsubject    = "=?UTF-8?B?" . base64_encode($mailsubject) . "?="; //防止乱码
         $mailbody       = $mailbd; //邮件内容
         //$mailbody = "=?UTF-8?B?".base64_encode($mailbody)."?="; //防止乱码
-        $mailtype       = "HTML"; //邮件格式（HTML/TXT）,TXT为文本邮件. 139邮箱的短信提醒要设置为HTML才正常
+        $mailtype   = "HTML"; //邮件格式（HTML/TXT）,TXT为文本邮件. 139邮箱的短信提醒要设置为HTML才正常
         ##########################################
-        $smtp           = new smtp($smtpserver, $smtpserverport, true, $smtpuser, $smtppass); //这里面的一个true是表示使用身份验证,否则不使用身份验证.
+        $smtp  = new smtp($smtpserver, $smtpserverport, true, $smtpuser, $smtppass); //这里面的一个true是表示使用身份验证,否则不使用身份验证.
         $smtp->debug    = FALSE; //是否显示发送的调试信息
-        $smtp->sendmail($smtpemailto, $smtpusermail, $mailsubject, $mailbody, $mailtype);
+       
+        return $smtp->sendmail($smtpemailto, $smtpusermail, $mailsubject, $mailbody, $mailtype);
         
     }
     

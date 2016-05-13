@@ -1403,7 +1403,7 @@
                   moduleName = "simpleFinance"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/dayRATableViewCell.m"
-                  timestampString = "484823733.963977"
+                  timestampString = "484829279.143478"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "53"
@@ -1418,7 +1418,7 @@
                   moduleName = "simpleFinance"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/dayRATableViewCell.m"
-                  timestampString = "484823733.964123"
+                  timestampString = "484829279.143616"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "53"
@@ -1451,7 +1451,7 @@
                   moduleName = "simpleFinance"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/dayRATableViewCell.m"
-                  timestampString = "484823733.965079"
+                  timestampString = "484829279.144418"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
@@ -1466,7 +1466,7 @@
                   moduleName = "simpleFinance"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/dayRATableViewCell.m"
-                  timestampString = "484823733.965232"
+                  timestampString = "484829279.144543"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "59"
@@ -1579,11 +1579,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/CommonUtility.m"
-            timestampString = "484822695.44952"
+            timestampString = "484827509.69656"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "517"
-            endingLineNumber = "517"
+            startingLineNumber = "537"
+            endingLineNumber = "537"
             landmarkName = "-fetchConstellation:ForView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1722,54 +1722,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "simpleFinance/CommonUtility.m"
-            timestampString = "484822695.44952"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "577"
-            endingLineNumber = "577"
-            landmarkName = "-shimmerRegisterButton:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CommonUtility shimmerRegisterButton:]"
-                  moduleName = "simpleFinance"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/CommonUtility.m"
-                  timestampString = "484823733.969708"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "578"
-                  endingLineNumber = "578"
-                  offsetFromSymbolStart = "809">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__39-[CommonUtility shimmerRegisterButton:]_block_invoke"
-                  moduleName = "simpleFinance"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ericcao/Documents/develop/iOSTest/simpleFinance/simpleFinance/CommonUtility.m"
-                  timestampString = "484823733.969837"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "578"
-                  endingLineNumber = "578"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "simpleFinance/AppDelegate.m"
             timestampString = "484812708.215863"
             startingColumnNumber = "9223372036854775807"
@@ -1825,6 +1777,22 @@
             startingLineNumber = "175"
             endingLineNumber = "175"
             landmarkName = "-judgeTimeFrame"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "simpleFinance/forgotPasswordViewController.m"
+            timestampString = "484829279.019686"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-findPassword"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
