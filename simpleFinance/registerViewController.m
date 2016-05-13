@@ -13,6 +13,7 @@
 #import "CommonUtility.h"
 #import "MBProgressHUD.h"
 #import "backupViewController.h"
+#import "TermUseViewController.h"
 
 @interface registerViewController ()<UITextFieldDelegate>
 @property (nonatomic,strong) UIView *contentView;
@@ -150,8 +151,23 @@
     [content addSubview:loginButton];
     [loginButton addTarget:self action:@selector(userRegister) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *termsLabel = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 100 , SCREEN_HEIGHT - 40, 200, 20)];
+    termsLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
+    termsLabel.titleLabel.numberOfLines = 2;
+    termsLabel.titleLabel.font =  [UIFont fontWithName:@"SourceHanSansCN-Normal" size:11.0f];
+    termsLabel.titleLabel.textColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:0.88];
+    [termsLabel setTitle:@"点击提交，您将同意并遵守简簿的用户使用条款。点击阅读 >" forState:UIControlStateNormal];
+    [termsLabel addTarget: self action:@selector(userTerms) forControlEvents:UIControlEventTouchUpInside];
+    [content addSubview:termsLabel];
+    
     [[CommonUtility sharedCommonUtility] shimmerRegisterButton:loginButton];
     
+}
+
+-(void)userTerms
+{
+    TermUseViewController *termsVC = [[TermUseViewController alloc] initWithNibName:@"TermUseViewController" bundle:nil];
+    [self.navigationController pushViewController:termsVC animated:YES];
 }
 
 -(void)keyboardWasShown:(NSNotification*)notification

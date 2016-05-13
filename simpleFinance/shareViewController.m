@@ -12,7 +12,9 @@
 #import <MessageUI/MessageUI.h>
 #import "topBarView.h"
 #import "global.h"
-
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 @interface shareViewController ()<XHShareViewDelegate,MFMessageComposeViewControllerDelegate>
 @property (nonatomic,strong) topBarView *topBar;
@@ -98,7 +100,9 @@
             break;
         }case ShareMsg:{
             // 点击了短信
-            [self sendMessage];
+            [FBSDKShareDialog showFromViewController:self
+                                         withContent:[self fbClick]
+                                            delegate:nil];
             break;
         }case ShareSina:{
             // 分享到微博
@@ -129,7 +133,7 @@
     message.image = [UIImage imageNamed:@"logo"];
     // 缩略图
     message.thumbnail = [UIImage imageNamed:@"switchChart.png"];
-    message.desc = [NSString stringWithFormat:@"简单一点,一目了然。\n财务详情，了然于心"];
+    message.desc = [NSString stringWithFormat:@"简单一点,一目了然。\n财务详情,了然于心"];
     message.link=@"http://www.baidu.com";
     return message;
 }
@@ -185,13 +189,37 @@
     }];
 }
 
+
+#pragma nark --fb
+-(FBSDKShareLinkContent *)fbClick
+{
+    
+//    OSMessage *message = [self shareMessage];
+
+    FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+    content.contentURL = [NSURL URLWithString:REVIEW_URL];
+//    content.contentTitle = message.title;
+//    content.contentDescription = message.desc;
+//    content.imageURL = [[NSBundle mainBundle]
+//                        URLForResource: @"logo" withExtension:@"png"];
+    return content;
+
+}
+
+- (FBSDKShareDialog *)getShareDialogWithContent
+{
+    FBSDKShareDialog *shareDialog = [[FBSDKShareDialog alloc] init];
+    shareDialog.shareContent = [self fbClick];
+    return shareDialog;
+}
+
 #pragma mark - 发送短信
 - (void)sendMessage{
     if( [MFMessageComposeViewController canSendText] ){
         MFMessageComposeViewController * controller = [[MFMessageComposeViewController alloc]init]; //autorelease];
         // 短信的接收人
         controller.recipients = nil;//[NSArray arrayWithObject:@""]
-        controller.body = @"简簿－简明财务,跃然于簿\n简单一点,一目了然。\n财务详情，了然于心\n简簿App下载地址:www.baidu.com";
+        controller.body = @"简簿－简明财务,跃然于簿\n简单一点,一目了然。\n财务详情,了然于心\n简簿App下载地址:www.baidu.com";
         controller.messageComposeDelegate = self;
         [self presentViewController:controller animated:YES completion:nil];
     }else{

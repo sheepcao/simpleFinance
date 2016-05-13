@@ -12,6 +12,8 @@
 #import "MFSideMenuContainerViewController.h"
 #import "CommonUtility.h"
 #import "OpenShareHeader.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+
 
 @interface AppDelegate ()
 @property (nonatomic,strong) FMDatabase *db;
@@ -54,6 +56,8 @@
     [self initDB];
     [self judgeTimeFrame];
     [self configShare];
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
     
     if ([CommonUtility isSystemLangChinese]) {
         [self loadLuckInfoFromServer];
@@ -73,7 +77,15 @@
     //第二步：添加回调
     if ([OpenShare handleOpenURL:url]) {
         return YES;
+    }else if ([CommonUtility myContainsStringFrom:[NSString stringWithFormat:@"%@",url]  forSubstring:@"fb"] )
+    {
+        return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                              openURL:url
+                                                    sourceApplication:sourceApplication
+                                                           annotation:annotation];
     }
+
+    
     return YES;
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -94,6 +106,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBSDKAppEvents activateApp];
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

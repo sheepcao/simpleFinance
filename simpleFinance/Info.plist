@@ -30,9 +30,14 @@
 				<string>tencent1104406509.content</string>
 				<string>QQ41D3E7ED</string>
 				<string>wb3086417886</string>
+                <string>fb233126460411974</string>
 			</array>
 		</dict>
 	</array>
+    <key>FacebookAppID</key>
+    <string>233126460411974</string>
+    <key>FacebookDisplayName</key>
+    <string>Money OnGo</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -62,5 +67,13 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 </dict>
+
 </plist>
