@@ -147,7 +147,7 @@
     
     gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, passwordField.frame.origin.y + passwordField.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/7.5)];
     loginButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:23.0f];
-    [loginButton setTitle:@"提  交" forState:UIControlStateNormal];
+    [loginButton setTitle:@"注  册" forState:UIControlStateNormal];
     [content addSubview:loginButton];
     [loginButton addTarget:self action:@selector(userRegister) forControlEvents:UIControlEventTouchUpInside];
     
@@ -215,7 +215,6 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
     hud.dimBackground = YES;
-    [hud hide:YES afterDelay:2.0];
 
     NSDictionary *parameters = @{@"tag": @"register",@"name":self.userField.text,@"password":self.pswdField.text};
     
@@ -223,7 +222,8 @@
         //
         hud.mode = MBProgressHUDModeText;
         hud.labelText = NSLocalizedString(@"注册成功",nil);
-        
+        [hud hide:YES afterDelay:2.0];
+
         NSString *name = [success objectForKey:@"username"];
         
         [[NSUserDefaults standardUserDefaults] setObject:name forKey:DEFAULT_USER];
@@ -239,7 +239,7 @@
         
         NSString *error = [NSString stringWithFormat:@"Error: ***** %@", failure];
         if ([CommonUtility myContainsStringFrom:error forSubstring:@"416"]) {
-            hud.labelText = NSLocalizedString(@"您输入的用户名已存在，换一个吧",nil);
+            hud.labelText = NSLocalizedString(@"您输入的注册邮箱已存在，换一个吧",nil);
         }else
         {
             hud.labelText = NSLocalizedString(@"注册失败，请重试",nil);

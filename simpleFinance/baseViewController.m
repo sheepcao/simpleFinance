@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self registerThemeChangedNotification];
     NSLog(@"base view....");
     // Do any additional setup after loading the view from its nib.

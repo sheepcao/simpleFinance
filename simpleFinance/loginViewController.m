@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import "registerViewController.h"
 #import "backupViewController.h"
+#import "forgotPasswordViewController.h"
 
 
 @interface loginViewController ()<UITextFieldDelegate>
@@ -176,7 +177,13 @@
     [forgotButton setBackgroundColor:[UIColor clearColor]];
     [forgotButton setAttributedTitle:title forState:UIControlStateNormal];
     [content addSubview:forgotButton];
+    [forgotButton addTarget:self action:@selector(goFindPassword) forControlEvents:UIControlEventTouchUpInside];
     
+}
+-(void)goFindPassword
+{
+    forgotPasswordViewController *forgotVC = [[forgotPasswordViewController alloc] initWithNibName:@"forgotPasswordViewController" bundle:nil];
+    [self.navigationController pushViewController:forgotVC animated:YES];
 }
 
 -(void)keyboardWasShown:(NSNotification*)notification

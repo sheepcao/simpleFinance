@@ -37,6 +37,8 @@
 		A40F6C2C1CE5A6880010A0CE /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40F6C291CE5A6880010A0CE /* FBSDKCoreKit.framework */; };
 		A40F6C2D1CE5A6880010A0CE /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40F6C2A1CE5A6880010A0CE /* FBSDKLoginKit.framework */; };
 		A40F6C301CE5A6A50010A0CE /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A40F6C2F1CE5A6A50010A0CE /* FBSDKShareKit.framework */; };
+		A40F6C341CE5BFA30010A0CE /* forgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6C321CE5BFA30010A0CE /* forgotPasswordViewController.m */; };
+		A40F6C351CE5BFA30010A0CE /* forgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6C331CE5BFA30010A0CE /* forgotPasswordViewController.xib */; };
 		A425B2C31CCE04710008BFE2 /* categoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */; };
 		A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */; };
 		A425B2C71CCE234F0008BFE2 /* dateShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = A425B2C61CCE234F0008BFE2 /* dateShowView.m */; };
@@ -186,6 +188,9 @@
 		A40F6C291CE5A6880010A0CE /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A40F6C2A1CE5A6880010A0CE /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		A40F6C2F1CE5A6A50010A0CE /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		A40F6C311CE5BFA30010A0CE /* forgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forgotPasswordViewController.h; sourceTree = "<group>"; };
+		A40F6C321CE5BFA30010A0CE /* forgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = forgotPasswordViewController.m; sourceTree = "<group>"; };
+		A40F6C331CE5BFA30010A0CE /* forgotPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = forgotPasswordViewController.xib; sourceTree = "<group>"; };
 		A425B2C01CCE04710008BFE2 /* categoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryDetailViewController.h; sourceTree = "<group>"; };
 		A425B2C11CCE04710008BFE2 /* categoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryDetailViewController.m; sourceTree = "<group>"; };
 		A425B2C21CCE04710008BFE2 /* categoryDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = categoryDetailViewController.xib; sourceTree = "<group>"; };
@@ -403,6 +408,9 @@
 				A40F6BF91CE338BA0010A0CE /* registerViewController.h */,
 				A40F6BFA1CE338BA0010A0CE /* registerViewController.m */,
 				A40F6BFB1CE338BB0010A0CE /* registerViewController.xib */,
+				A40F6C311CE5BFA30010A0CE /* forgotPasswordViewController.h */,
+				A40F6C321CE5BFA30010A0CE /* forgotPasswordViewController.m */,
+				A40F6C331CE5BFA30010A0CE /* forgotPasswordViewController.xib */,
 			);
 			name = backupVC;
 			sourceTree = "<group>";
@@ -862,6 +870,7 @@
 				A4ECE2931CDA4D5D000FF10D /* 夕.jpg in Resources */,
 				A40F6C021CE456EC0010A0CE /* aboutViewController.xib in Resources */,
 				A40F6C081CE460380010A0CE /* shareViewController.xib in Resources */,
+				A40F6C351CE5BFA30010A0CE /* forgotPasswordViewController.xib in Resources */,
 				A4CC246D1CBE8EC3007A94F1 /* minus1.png in Resources */,
 				A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */,
 				A40F6BFD1CE338BB0010A0CE /* registerViewController.xib in Resources */,
@@ -1032,6 +1041,7 @@
 				A45752741CDB42130013EFBF /* dayRATableViewCell.m in Sources */,
 				A4637AB01CDDD00100BC86AC /* AFHTTPRequestOperation.m in Sources */,
 				A490C1891CB7A887006EEEF1 /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				A40F6C341CE5BFA30010A0CE /* forgotPasswordViewController.m in Sources */,
 				A4ECE3301CDB3064000FF10D /* RATableViewCell.m in Sources */,
 				A490C1841CB7A887006EEEF1 /* FabonacciNum.m in Sources */,
 				A40F6BF11CE17CB40010A0CE /* gradientButton.m in Sources */,

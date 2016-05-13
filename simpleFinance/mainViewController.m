@@ -52,10 +52,17 @@
 @implementation mainViewController
 @synthesize db;
 
+- (void)registerLuckChangedNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(configLuckyText)
+                                                 name:LuckChanged
+                                               object:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"main view....");
+    [self registerLuckChangedNotification];
     
     if (IS_IPHONE_6P) {
         bottomHeight = 65;

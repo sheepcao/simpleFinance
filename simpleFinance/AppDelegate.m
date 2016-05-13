@@ -107,6 +107,12 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [FBSDKAppEvents activateApp];
+    if ([CommonUtility isSystemLangChinese]) {
+        [self loadLuckInfoFromServer];
+    }else
+    {
+        NSLog(@"不是中文");
+    }
 
 }
 
@@ -240,11 +246,8 @@
             
             
             NSLog(@"%@",startDate);
-//            DLogObject(nameArray);
-//            NSLog(@"%@",nameArray[0]);
-//            NSLog(@"%@",contentArray[0]);
-//            NSLog(@"%@",week);
-            NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where start_date = '%@'",dateString];
+
+            NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where start_date = '%@'",startDate];
             if (![db open]) {
                 NSLog(@"Could not open db.");
                 return;
@@ -261,6 +264,8 @@
                     NSLog(@"ERROR: %d - %@", db.lastErrorCode, db.lastErrorMessage);
                 }
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:LuckChanged  object:nil];
+
             [db close];
             
         } failure:^(NSError * failure){
@@ -307,6 +312,6 @@
 {
     [OpenShare connectQQWithAppId:@"1104406509"];
     [OpenShare connectWeiboWithAppKey:@"3086417886"];
-    [OpenShare connectWeixinWithAppId:@"wx060aa2d39d56bf11"];
+    [OpenShare connectWeixinWithAppId:@"wx0932d291dbf97131"];
 }
 @end

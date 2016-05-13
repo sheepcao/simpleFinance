@@ -481,7 +481,8 @@
         return ;
     }
     
-    NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where start_date = '%@' and constellation = '%@'",dateString,constellation];
+    NSString *selectLuckExist = [NSString stringWithFormat:@"select * from MONEYLUCK where constellation = '%@' order by start_date desc LIMIT 1",constellation];
+
     
     FMResultSet *rs = [db executeQuery:selectLuckExist];
     if ([rs next]) {
