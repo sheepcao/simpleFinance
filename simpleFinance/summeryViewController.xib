@@ -44,8 +44,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="月收入:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6We-u0-J7T">
-                    <rect key="frame" x="154" y="14" width="63" height="33"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月收入:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6We-u0-J7T">
+                    <rect key="frame" x="156" y="14" width="63" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="63" id="Z9e-Ca-ee6"/>
                         <constraint firstAttribute="height" constant="33" id="fKY-oc-VYW"/>
@@ -56,15 +56,15 @@
                     <color key="shadowColor" red="0.12798108550000001" green="0.12798108550000001" blue="0.134842722" alpha="1" colorSpace="calibratedRGB"/>
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-vl-D4w" userLabel="downline">
-                    <rect key="frame" x="0.0" y="111" width="320" height="1"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-vl-D4w" userLabel="downline">
+                    <rect key="frame" x="0.0" y="117" width="320" height="1"/>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="2cj-ie-hbh"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="123232245.22" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="i5Q-3x-nn1">
-                    <rect key="frame" x="217" y="14" width="81" height="33"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123232245.22" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="i5Q-3x-nn1">
+                    <rect key="frame" x="219" y="14" width="79" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="33" id="C71-2b-9GU"/>
                         <constraint firstAttribute="width" constant="60" id="XZf-Ju-FWd"/>
@@ -80,8 +80,8 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="PgN-8z-QWI">
-                    <rect key="frame" x="218" y="71" width="80" height="33"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="PgN-8z-QWI">
+                    <rect key="frame" x="220" y="77" width="78" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="66" id="INw-UE-F2z"/>
                         <constraint firstAttribute="width" constant="60" id="rCE-Hi-Z5Q"/>
@@ -99,8 +99,8 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Wv-0S-rtg" userLabel="rightEmpty">
-                    <rect key="frame" x="136" y="27" width="18" height="100"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Wv-0S-rtg" userLabel="rightEmpty">
+                    <rect key="frame" x="138" y="30" width="18" height="100"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="D8s-2f-ASE"/>
                     </constraints>
@@ -108,8 +108,8 @@
                     <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1M-vk-dWm" userLabel="leftEmpty">
-                    <rect key="frame" x="3" y="27" width="18" height="100"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1M-vk-dWm" userLabel="leftEmpty">
+                    <rect key="frame" x="3" y="30" width="18" height="100"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="100" id="3as-vz-DD2"/>
                         <constraint firstAttribute="height" constant="33" id="BxY-UR-g0E"/>
@@ -125,8 +125,8 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qmu-65-Hd1">
-                    <rect key="frame" x="218" y="42" width="80" height="33"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qmu-65-Hd1">
+                    <rect key="frame" x="220" y="45.5" width="78" height="33"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="33" id="5UO-CU-SLV"/>
                         <constraint firstAttribute="width" constant="60" id="QAo-Wj-793"/>
@@ -142,8 +142,8 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="月结余:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNS-ZU-Uhg">
-                    <rect key="frame" x="153" y="71" width="65" height="33"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月结余:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNS-ZU-Uhg">
+                    <rect key="frame" x="155" y="77" width="65" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="65" id="biG-ti-T5B"/>
                         <constraint firstAttribute="height" constant="33" id="maV-vI-s2c"/>
@@ -154,8 +154,8 @@
                     <color key="shadowColor" red="0.12798108550000001" green="0.12798108550000001" blue="0.134842722" alpha="1" colorSpace="calibratedRGB"/>
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="9Dw-iy-bSj">
-                    <rect key="frame" x="91" y="60" width="9" height="33"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="9Dw-iy-bSj">
+                    <rect key="frame" x="91" y="66" width="9" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="66" id="GbL-8f-J3b"/>
                         <constraint firstAttribute="width" constant="60" id="gKK-IF-YST"/>
@@ -173,8 +173,8 @@
                         </mask>
                     </variation>
                 </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="预算余额:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mgi-DR-rcd">
-                    <rect key="frame" x="21" y="60" width="70" height="33"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预算余额:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mgi-DR-rcd">
+                    <rect key="frame" x="21" y="66" width="70" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="4gI-it-xbK"/>
                         <constraint firstAttribute="height" constant="33" id="r4P-Kq-ruI"/>
@@ -211,8 +211,8 @@
                         <constraint firstAttribute="height" constant="1" id="0gn-0T-75Y"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIm-yS-jMm" userLabel="midline">
-                    <rect key="frame" x="127" y="20" width="1" height="78"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oIm-yS-jMm" userLabel="midline">
+                    <rect key="frame" x="129" y="20" width="1" height="84"/>
                     <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="qxn-cm-x3w"/>
@@ -236,8 +236,8 @@
                         <action selector="planMoney:" destination="-1" eventType="touchUpInside" id="zST-48-Dnp"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="月支出:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iog-Bh-uux">
-                    <rect key="frame" x="153" y="42" width="65" height="33"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月支出:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iog-Bh-uux">
+                    <rect key="frame" x="155" y="45.5" width="65" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="65" id="d50-De-VMm"/>
                         <constraint firstAttribute="height" constant="33" id="pxn-nT-xG2"/>
@@ -248,8 +248,8 @@
                     <color key="shadowColor" red="0.12798108550000001" green="0.12798108550000001" blue="0.134842722" alpha="1" colorSpace="calibratedRGB"/>
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2016-4-15        星期五" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMk-Qs-rjF">
-                    <rect key="frame" x="8" y="112" width="284" height="40"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-4-15        星期五" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMk-Qs-rjF">
+                    <rect key="frame" x="8" y="118" width="284" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="tWj-lD-gBc"/>
                     </constraints>
@@ -259,8 +259,8 @@
                     <color key="shadowColor" red="0.12798108552631579" green="0.12798108552631579" blue="0.13484272203947367" alpha="1" colorSpace="calibratedRGB"/>
                     <size key="shadowOffset" width="0.0" height="1"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-tj-up4">
-                    <rect key="frame" x="275" y="118" width="25" height="23"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bp1-tj-up4">
+                    <rect key="frame" x="275" y="124" width="25" height="23"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="25" id="F6e-vW-3Qq"/>
                         <constraint firstAttribute="height" constant="23" id="jxr-wo-d7A"/>
@@ -271,8 +271,8 @@
                         <action selector="showCalendar:" destination="-1" eventType="touchUpInside" id="SjO-D6-u4j"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BpZ-qu-zZi">
-                    <rect key="frame" x="21.5" y="25" width="62.5" height="22"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BpZ-qu-zZi">
+                    <rect key="frame" x="21.5" y="27.5" width="64.5" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="fZx-B9-sGV"/>
                     </constraints>
@@ -280,8 +280,8 @@
                     <color key="textColor" red="0.8662109375" green="0.8682154605263156" blue="0.86821546052631571" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="04" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28d-y6-ilJ">
-                    <rect key="frame" x="21" y="38" width="62.5" height="62"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28d-y6-ilJ">
+                    <rect key="frame" x="21" y="40.5" width="64.5" height="64"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="28d-y6-ilJ" secondAttribute="height" multiplier="1:1" id="ri5-fj-YtK"/>
                     </constraints>
@@ -289,8 +289,8 @@
                     <color key="textColor" red="0.96520353618421051" green="0.96520353618421051" blue="0.95834189967105265" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="月" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkx-9w-Upc">
-                    <rect key="frame" x="65.5" y="62" width="30" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkx-9w-Upc">
+                    <rect key="frame" x="67.5" y="66.5" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Rkx-9w-Upc" secondAttribute="height" multiplier="1:1" id="07k-mn-hwe"/>
                         <constraint firstAttribute="width" constant="30" id="4IA-0S-l6L"/>
@@ -305,8 +305,8 @@
                         </mask>
                     </variation>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1Q-dd-oDD" userLabel="midEmpty">
-                    <rect key="frame" x="95.5" y="27" width="31" height="100"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1Q-dd-oDD" userLabel="midEmpty">
+                    <rect key="frame" x="97.5" y="30" width="31" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="Cbk-Nt-988"/>
                         <constraint firstAttribute="height" constant="33" id="aOL-is-1CO"/>

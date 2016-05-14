@@ -238,7 +238,7 @@
     UILabel * midLine = [[UILabel alloc] initWithFrame:CGRectMake(dateSelectionView.frame.size.width/2-15, 0, 30, dateSelectionView.frame.size.height)];
     [midLine setText:@"至"];
     midLine.textAlignment = NSTextAlignmentCenter;
-    [midLine setTextColor:TextColor];
+    [midLine setTextColor:normalColor];
     [midLine setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0f]];
     [midLine setBackgroundColor:[UIColor clearColor]];
     [dateSelectionView addTarget:self action:@selector(dateSelect) forControlEvents:UIControlEventTouchUpInside];
@@ -266,7 +266,7 @@
     self.timeWindowCategories = [self makePieData:0];
     NSArray *items = self.timeWindowCategories;
     self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-SCREEN_WIDTH*3/8, dateSelectionView.frame.size.height + dateSelectionView.frame.origin.y + 15, SCREEN_WIDTH *3/4, SCREEN_WIDTH *3/4) items:items];
-    self.pieChart.descriptionTextColor = [UIColor whiteColor];
+    self.pieChart.descriptionTextColor = self.myTextColor;
     self.pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:13.0];
     [self.pieChart strokeChart];
     self.pieChart.displayAnimated = YES;
@@ -281,7 +281,7 @@
     
     self.centerLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.pieChart.innerCircleRadius*2, self.pieChart.innerCircleRadius*2)];
     [self.centerLabel setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];
-    self.centerLabel.layer.borderWidth = 0.8f;
+    self.centerLabel.layer.borderWidth = 1.0f;
     self.centerLabel.layer.borderColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f].CGColor;
     self.centerLabel.backgroundColor = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:194/255.0f alpha:1.0f];
     self.centerLabel.titleLabel.numberOfLines = 2;
@@ -334,7 +334,7 @@
                        value:style
                        range:NSMakeRange(0, attrString.length)];
     [attrString addAttribute:NSForegroundColorAttributeName
-                       value:TextColor
+                       value:normalColor
                        range:NSMakeRange(0, attrString.length)];
     [attrString addAttribute:NSShadowAttributeName
                        value:shadow
@@ -534,6 +534,9 @@
     [cell.categoryName setText:category];
     [cell.money setText:money];
     [cell.MoneyRatio setText:moneyRatio];
+    cell.categoryName.textColor = self.myTextColor;
+    cell.money.textColor = self.myTextColor;
+    cell.MoneyRatio.textColor = self.myTextColor;
     [cell.seperator setBackgroundColor:categoryColor];
     
     return cell;

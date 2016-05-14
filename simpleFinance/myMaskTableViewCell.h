@@ -21,6 +21,6 @@
 
 
 - (void)maskCellFromTop:(CGFloat)margin;
--(void)makeTextStyle;
+-(void)makeTextStyle:(UIColor *)myColor;
 -(void)makeColor:(NSString *)category;
 @end

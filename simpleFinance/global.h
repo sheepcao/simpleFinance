@@ -47,7 +47,14 @@
 #define  numberColor   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]
 #define  numberSelectedColor   [UIColor colorWithRed:124/255.0f green:167/255.0f blue:197/255.0f alpha:1.0f]
 
-#define TextColor [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
+#define normalColor [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0]
+
+//#define self.myTextColor [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
+
+#define TextColor0 [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
+#define TextColor1 [UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1.0]
+#define TextColor2 [UIColor colorWithRed:0.87 green:0.87 blue:0.87 alpha:1.0]
+#define TextColor3 [UIColor colorWithRed:0.78 green:0.78 blue:0.78 alpha:1.0]
 
 #define REVIEW_URL @"https://itunes.apple.com/cn/app/dota-quan-zi/id1028906602?ls=1&mt=8"
 

@@ -31,8 +31,7 @@
         self.rightText.numberOfLines = 2;
         self.rightText.minimumScaleFactor = 0.8;
         
-        [self.leftText setTextColor:TextColor];
-        [self.rightText setTextColor:TextColor];
+
 
     }
     return self;

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface baseViewController : UIViewController
+@property (nonatomic,strong) UIColor *myTextColor;
 - (void)configUIAppearance;
 @end

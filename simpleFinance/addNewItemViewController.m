@@ -185,7 +185,7 @@
     
     categoryObject *oneCategory = [[categoryObject alloc] init];
     
-    oneCategory.categoryName = @"+新分类";
+    oneCategory.categoryName = @"+ 新分类";
     oneCategory.color_R  =245;
     oneCategory.color_G =245;
     oneCategory.color_B = 245;
@@ -260,7 +260,7 @@
                                                    }];
     
     [self.InputLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
-    self.InputLabel.textColor = TextColor;
+    self.InputLabel.textColor = self.myTextColor;
     self.InputLabel.textAlignment = NSTextAlignmentRight;
     self.InputLabel.adjustsFontSizeToFitWidth = YES;
     [inputView addSubview:self.InputLabel];
@@ -279,7 +279,7 @@
                                                   }];
     
     [self.categoryLabel setFont:[UIFont fontWithDescriptor:categoryFontDescriptor size:0.0]];
-    self.categoryLabel.textColor = TextColor;
+    self.categoryLabel.textColor = normalColor;
     self.categoryLabel.textAlignment = NSTextAlignmentCenter;
     self.categoryLabel.adjustsFontSizeToFitWidth = YES;
     [self.categoryLabel setText:@""];
@@ -301,11 +301,11 @@
     noteTitle.backgroundColor = [UIColor clearColor];
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                  @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
-                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue-Light",
+                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 17.0f]
                                                    }];
     [noteTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
-    [noteTitle setText:@"备注"];
+    [noteTitle setText:@"备 注"];
     [noteTitle setTextColor:[UIColor whiteColor]];
     noteTitle.textAlignment = NSTextAlignmentCenter;
     
@@ -323,11 +323,11 @@
     UIFontDescriptor *bodyFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                             @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
                                               UIFontDescriptorNameAttribute:@"HelveticaNeue-LightItalic",
-                                              UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 13.0f]
+                                              UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 14.0f]
                                               }];
     [noteText setFont:[UIFont fontWithDescriptor:bodyFontDescriptor size:0.0]];
     noteText.backgroundColor = [UIColor clearColor];
-    [noteText setTextColor:[UIColor whiteColor]];
+    [noteText setTextColor:self.myTextColor];
     noteText.textAlignment = NSTextAlignmentLeft;
     noteText.tintColor = [UIColor whiteColor];
     
@@ -409,7 +409,7 @@
     self.inputField.delegate = self;
     self.inputField.tintColor = [UIColor colorWithRed:0.43 green:0.43 blue:0.43 alpha:0.88];
     self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
-    self.inputField.textColor = TextColor;
+    self.inputField.textColor = self.myTextColor;
     self.inputField.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:@"  请输入(限4字以内)"
                                     attributes:@{
@@ -787,7 +787,7 @@
 
 -(void)categoryTap:(categoryButton *)sender
 {
-    if ([sender.titleLabel.text isEqualToString:@"+新分类"])
+    if ([sender.titleLabel.text isEqualToString:@"+ 新分类"])
     {
         isInputingNote = NO;
         isAddingCategory = YES;
@@ -828,7 +828,7 @@
         [hud hide:YES afterDelay:1.5];
         
         return;
-    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"+新分类"] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
+    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"+ 新分类"] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
     {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.animationType = MBProgressHUDAnimationZoom;

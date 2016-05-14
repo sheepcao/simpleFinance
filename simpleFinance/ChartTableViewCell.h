@@ -15,8 +15,8 @@
 
 @property (nonatomic,strong) UIButton *centerButton;
 
--(void)drawPie;
--(void)updatePieWith:(NSArray *)array;
+-(void)drawPieWithTextColor:(UIColor *)myColor;
+-(void)updatePieWith:(NSArray *)array andColor:(UIColor *)myColor;
 -(void)switchCenterButtonToOutcome:(BOOL)isShowOutcome ByMoney:(NSString *)money;
 - (void)maskCellFromTop:(CGFloat)margin;
 

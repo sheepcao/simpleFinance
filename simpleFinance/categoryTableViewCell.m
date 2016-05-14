@@ -32,20 +32,20 @@
     {
         
         for (int i = 0; i< 4; i++) {
-            categoryButton *categoryLabel = [[categoryButton alloc] initWithFrame:CGRectMake(20+i * ((SCREEN_WIDTH-20)/4), self.contentView.frame.size.height/2-15, (SCREEN_WIDTH-20)/4-20, (int)(SCREEN_WIDTH/13))];
+            categoryButton *categoryLabel = [[categoryButton alloc] initWithFrame:CGRectMake(16+i * ((SCREEN_WIDTH-20)/4), self.contentView.frame.size.height/2-15, (SCREEN_WIDTH-16)/4-16, (int)(SCREEN_WIDTH/12))];
             
             UIFontDescriptor *categoryFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                         @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
                                                           UIFontDescriptorNameAttribute:@"HelveticaNeue",
-                                                          UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: (int)(SCREEN_WIDTH/30)]
+                                                          UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: (int)(SCREEN_WIDTH/28)]
                                                           }];
             
             [categoryLabel.titleLabel setFont:[UIFont fontWithDescriptor:categoryFontDescriptor size:0.0]];
-            [categoryLabel setTintColor:TextColor];
+            [categoryLabel setTintColor:normalColor];
             categoryLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
             categoryLabel.titleLabel.adjustsFontSizeToFitWidth = YES;
             categoryLabel.layer.borderWidth = 0.0f;
-            categoryLabel.layer.borderColor = TextColor.CGColor;
+            categoryLabel.layer.borderColor = normalColor.CGColor;
             categoryLabel.layer.cornerRadius =(int)(SCREEN_WIDTH/65);
             categoryLabel.tag = i+1;
             
@@ -66,7 +66,7 @@
         categoryButton *categoryLabel = (categoryButton *)[self viewWithTag:(i+1)];
         [categoryLabel removeTarget:self.categoryDelegate action:@selector(categoryTap:) forControlEvents:UIControlEventTouchUpInside];
         
-        categoryLabel.categoryColor = TextColor;
+        categoryLabel.categoryColor = normalColor;
         categoryLabel.layer.borderWidth = 0.0f;
         [categoryLabel setTitle:@"" forState:UIControlStateNormal];
         
@@ -84,15 +84,15 @@
         categoryLabel.layer.borderWidth = 0.8f;
         [categoryLabel setTitle:oneCategory.categoryName forState:UIControlStateNormal];
         
-        if ([oneCategory.categoryName isEqualToString:@"+新分类"]) {
+        if ([oneCategory.categoryName isEqualToString:@"+ 新分类"]) {
             UIFontDescriptor *categoryFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                         @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                          UIFontDescriptorNameAttribute:@"AvenirNext-Medium",
-                                                          UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: (int)(SCREEN_WIDTH/28)]
+                                                          UIFontDescriptorNameAttribute:@"AvenirNext-DemiBold",
+                                                          UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: (int)(SCREEN_WIDTH/26)]
                                                           }];
             
             [categoryLabel.titleLabel setFont:[UIFont fontWithDescriptor:categoryFontDescriptor size:0.0]];
-            categoryLabel.layer.borderWidth = 1.0f;
+            categoryLabel.layer.borderWidth = 1.2f;
 
         }
         //clear color when reload data

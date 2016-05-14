@@ -54,14 +54,12 @@
 
         self.categoryName.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.48];
         self.categoryName.shadowOffset =  CGSizeMake(0, 0.65);
-        self.money.shadowColor = [TextColor colorWithAlphaComponent:0.35];
+        self.money.shadowColor = [normalColor colorWithAlphaComponent:0.35];
         self.money.shadowOffset =  CGSizeMake(0.16, 0.16);
-        self.MoneyRatio.shadowColor = [TextColor colorWithAlphaComponent:0.35];
+        self.MoneyRatio.shadowColor = [normalColor colorWithAlphaComponent:0.35];
         self.MoneyRatio.shadowOffset =  CGSizeMake(0.16, 0.16);
         
-        self.categoryName.textColor = TextColor;
-        self.money.textColor = TextColor;
-        self.MoneyRatio.textColor = TextColor;
+
 
         
         [self addSubview:self.categoryName];

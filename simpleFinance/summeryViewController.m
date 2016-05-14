@@ -19,6 +19,21 @@
 
 @implementation summeryViewController
 
+-(void)makeTextColor:(UIColor *)myColor
+{
+    [self.dateLabel setTextColor:myColor];
+    [self.monthIncome setTextColor:myColor];
+    [self.monthExpense setTextColor:myColor];
+    [self.monthSurplus setTextColor:myColor];
+    [self.yearLabel setTextColor:myColor];
+    [self.monthLabel setTextColor:myColor];
+    [self.timeUnitLabel setTextColor:myColor];
+    [self.incomeTitle setTextColor:myColor];
+    [self.expenseTitle setTextColor:myColor];
+    [self.surplusTitle setTextColor:myColor];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.

@@ -6,8 +6,8 @@
 //  Copyright © 2016 sheepcao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface SideMenuViewController : UIViewController
+#import "baseViewController.h"
+@interface SideMenuViewController : baseViewController
+@property(nonatomic,strong) UITableView *myMenuTable;
 
 @end

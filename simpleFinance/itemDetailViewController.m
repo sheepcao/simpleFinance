@@ -106,7 +106,7 @@
                                                    }];
     
     [moneyLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
-    moneyLabel.textColor = TextColor;
+    moneyLabel.textColor = self.myTextColor;
     moneyLabel.textAlignment = NSTextAlignmentCenter;
     moneyLabel.adjustsFontSizeToFitWidth = YES;
     [moneyLabel setText:self.money];
@@ -148,6 +148,8 @@
         cell.backgroundColor = [UIColor clearColor];
         
     }
+    [cell.leftText setTextColor:self.myTextColor];
+    [cell.rightText setTextColor:self.myTextColor];
 
     switch (indexPath.row) {
         case 0:
@@ -160,7 +162,6 @@
 
             break;
         case 2:
-            cell.detailTextLabel.textAlignment = NSTextAlignmentCenter;
             [cell.leftText  setText: @"帐目备注"];
             [cell.rightText setText:self.itemDescription];
 

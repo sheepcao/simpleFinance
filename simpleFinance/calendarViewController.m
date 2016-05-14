@@ -51,8 +51,8 @@
     calendar.firstWeekday = 2;
     calendar.appearance.caseOptions = FSCalendarCaseOptionsWeekdayUsesDefaultCase|FSCalendarCaseOptionsHeaderUsesDefaultCase;
     calendar.appearance.eventColor = [UIColor redColor];
-    calendar.appearance.headerTitleColor = TextColor;
-    calendar.appearance.weekdayTextColor = TextColor;
+    calendar.appearance.headerTitleColor = normalColor;
+    calendar.appearance.weekdayTextColor = normalColor;
     calendar.appearance.titleDefaultColor = [UIColor colorWithRed:0.64 green:0.64 blue:0.64 alpha:1.0];
     calendar.appearance.titlePlaceholderColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.24 alpha:0.9];
 

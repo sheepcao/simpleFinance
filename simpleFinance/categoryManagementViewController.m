@@ -354,7 +354,7 @@
     self.inputField.delegate = self;
     self.inputField.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.9];
     self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
-    self.inputField.textColor = TextColor;
+    self.inputField.textColor = self.myTextColor;
     self.inputField.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:@"请输入(限4字以内)"
                                     attributes:@{
@@ -565,7 +565,7 @@
         [hud hide:YES afterDelay:1.5];
         
         return;
-    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"+新分类"] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
+    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"+ 新分类"] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
     {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.animationType = MBProgressHUDAnimationZoom;

@@ -7,6 +7,7 @@
 //
 
 #import "mainViewController.h"
+#import "SideMenuViewController.h"
 #import "global.h"
 #import "summeryViewController.h"
 #import "myMaskTableViewCell.h"
@@ -24,6 +25,7 @@
 #import "AppDelegate.h"
 #import "constellationView.h"
 #import "pickerLabel.h"
+
 
 @interface mainViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UIPickerViewDataSource,UIPickerViewDelegate,constellationDelegate>
 {
@@ -59,6 +61,16 @@
                                                object:nil];
 }
 
+-(void)configTextColor
+{
+    [self.titleTextLabel setTextColor:self.myTextColor];
+    [self.moneyBookText setTextColor:self.myTextColor];
+    [self.luckyText setTextColor:self.myTextColor];
+    [self.constellationButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
+    
+    [self.summaryVC makeTextColor:self.myTextColor];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"main view....");
@@ -84,6 +96,9 @@
     self.summaryVC.view.opaque = NO;
     [self addChildViewController:self.summaryVC];
     [self.summaryVC didMoveToParentViewController:self];
+    
+    [self configTextColor];
+
     
     [self configLuckyText];
     
@@ -553,9 +568,9 @@
             categoryOnly = oneItem.itemCategory;
             description = oneItem.itemDescription;
             itemType = oneItem.itemType;
-            if ([[description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]] isEqualToString:@""]) {
-                description = @"无";
-            }
+//            if ([[description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]] isEqualToString:@""]) {
+//                description = @"无";
+//            }
             money = [NSString stringWithFormat:@"%.2f",(oneItem.moneyAmount)];
             itemTime = oneItem.createdTime;
             if (oneItem.itemType == 0)
@@ -588,7 +603,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
         myMaskTableViewCell *itemCell = (myMaskTableViewCell *)cell;
-        [itemCell.category setTextColor:TextColor];
+        [itemCell.category setTextColor:self.myTextColor];
     }
     
 }
@@ -662,28 +677,27 @@
             NSLog(@"row:%ld",(long)indexPath.row);
             
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
             if (cell == nil) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.backgroundColor = [UIColor clearColor];
                 
-                NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"本日尚无帐目记录"];
-                
-                UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                             @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                               UIFontDescriptorNameAttribute:@"AvenirNext-Thin",
-                                                               UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
-                                                               }];
-                CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(5 * (CGFloat)M_PI / 180), 1, 0, 0);
-                attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
-                [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:NSMakeRange(0, attributedText.length)];
-                [attributedText addAttribute:NSForegroundColorAttributeName value:TextColor range:NSMakeRange(0, attributedText.length)];
-                [attributedText addAttribute:NSUnderlineStyleAttributeName value:@1 range:NSMakeRange(0, attributedText.length)];
-                
-                [cell.textLabel setAttributedText:attributedText];
                 cell.textLabel.textAlignment = NSTextAlignmentCenter;
             }
-            
+            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"本日尚无帐目记录"];
+            UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                         @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
+                                                           UIFontDescriptorNameAttribute:@"AvenirNext-Thin",
+                                                           UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
+                                                           }];
+            CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(5 * (CGFloat)M_PI / 180), 1, 0, 0);
+            attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
+            [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:NSMakeRange(0, attributedText.length)];
+            [attributedText addAttribute:NSUnderlineStyleAttributeName value:@1 range:NSMakeRange(0, attributedText.length)];
+            [attributedText addAttribute:NSForegroundColorAttributeName value:self.myTextColor range:NSMakeRange(0, attributedText.length)];
+            [cell.textLabel setAttributedText:attributedText];
+
             return cell;
         }
         pieChartIndexPath = indexPath;
@@ -694,7 +708,7 @@
             cell = [[ChartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellPieIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
-            [cell drawPie];
+            [cell drawPieWithTextColor:self.myTextColor];
             [cell.centerButton addTarget:self action:@selector(switchMoneyChart:) forControlEvents:UIControlEventTouchUpInside];
         }
         
@@ -712,7 +726,7 @@
                 
             }
             
-            [cell updatePieWith:items];
+            [cell updatePieWith:items andColor:self.myTextColor];
             isSwitchingChart = NO;
         }else
         {
@@ -726,7 +740,7 @@
                 items = [self makePieData:YES];
                 [cell switchCenterButtonToOutcome:NO ByMoney:[NSString stringWithFormat:@"%.1f",self.sumIncome]];
             }
-            [cell updatePieWith:items];
+            [cell updatePieWith:items andColor:self.myTextColor];
         }
         
         
@@ -778,7 +792,7 @@
         [cell.money setText:money];
         
         [cell makeColor:category];
-        [cell makeTextStyle];
+        [cell makeTextStyle:self.myTextColor];
         return cell;
         
     }else
@@ -866,7 +880,10 @@
 
 - (IBAction)menuTapped:(id)sender {
     [self.menuContainerViewController toggleRightSideMenuCompletion:^{
-        
+        if ([self.menuContainerViewController .rightMenuViewController isKindOfClass:[SideMenuViewController class]]) {
+            SideMenuViewController *mySide = (SideMenuViewController *)self.menuContainerViewController .rightMenuViewController;
+            mySide.myMenuTable.userInteractionEnabled = YES;
+        }
     }];
     
 }
@@ -953,9 +970,9 @@
     midline.backgroundColor = [UIColor darkGrayColor];
     [contentView addSubview:midline];
     
-    NSArray *timeTitle = @[@"早",@"午",@"夕",@"夜"];
-    for (int i = 4; i>0; i--) {
-        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width - 55 - (4-i) *(40+10), contentView.frame.size.height*2/5 + modelTitle.frame.size.height/2 - 20, 40, 40)];
+    NSArray *timeTitle = @[@"上午",@"下午",@"夜间"];
+    for (int i = 3; i>0; i--) {
+        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width - 55 - (3-i) *(40+10), contentView.frame.size.height*2/5 + modelTitle.frame.size.height/2 - 20, 40, 40)];
         [timeButton setTitle:timeTitle[i - 1] forState:UIControlStateNormal];
         timeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
         [timeButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
@@ -971,7 +988,7 @@
     }
     
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
-    for (int i = 0 ; i < 4; i++) {
+    for (int i = 0 ; i < 3; i++) {
         if ([showModel isEqualToString:timeTitle[i]])
         {
             UIButton *button = (UIButton *)[contentView viewWithTag:i+1];
@@ -990,7 +1007,7 @@
 
 -(void)timeSelect:(UIButton *)sender
 {
-    for (int i =4 ; i>0; i--) {
+    for (int i =3 ; i>0; i--) {
         UIView *superView = sender.superview;
         UIButton *button = (UIButton *)[superView viewWithTag:i];
         [button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
@@ -1005,11 +1022,24 @@
     UIView *selectBar = (UIView *)[sender viewWithTag:10];
     [selectBar setHidden:NO];
     
-    NSArray *timeTitle = @[@"早",@"午",@"夕",@"夜"];
+    NSArray *timeTitle = @[@"上午",@"下午",@"夜间"];
     
     [[NSUserDefaults standardUserDefaults] setObject:timeTitle[sender.tag - 1] forKey:MODEL];
     [[NSNotificationCenter defaultCenter] postNotificationName:ThemeChanged  object:nil];
     
+    if ([timeTitle[sender.tag - 1] isEqualToString:@"上午"]) {
+        self.myTextColor = TextColor0;
+    }else if([timeTitle[sender.tag - 1] isEqualToString:@"下午"]) {
+        self.myTextColor = TextColor1;
+    }else if([timeTitle[sender.tag - 1] isEqualToString:@"夜间"]) {
+        self.myTextColor = TextColor3;
+    }
+//    else if([timeTitle[sender.tag - 1] isEqualToString:@"夜间"]) {
+//        self.myTextColor = TextColor3;
+//    }
+    [self.maintableView reloadData];
+    [self configTextColor];
+
     
 }
 
@@ -1025,11 +1055,11 @@
     [appDelegate judgeTimeFrame];
     
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
-    NSArray *timeTitle = @[@"早",@"午",@"夕",@"夜"];
+    NSArray *timeTitle = @[@"上午",@"下午",@"夜间"];
     UIView *contentView = [self.myDimView viewWithTag:100];
     
     //还原未选状态
-    for (int i =4 ; i>0; i--) {
+    for (int i =3 ; i>0; i--) {
         UIView *superView = sender.superview;
         UIButton *button = (UIButton *)[superView viewWithTag:i];
         [button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
@@ -1039,7 +1069,7 @@
         
     }
 //选择一个模式
-    for (int i = 0 ; i < 4; i++) {
+    for (int i = 0 ; i < 3; i++) {
         if ([showModel isEqualToString:timeTitle[i]])
         {
             UIButton *button = (UIButton *)[contentView viewWithTag:i+1];

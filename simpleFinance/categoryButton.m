@@ -21,7 +21,7 @@
 -(void)categoryNormalColor
 {
     self.layer.borderWidth = 0.7f;
-    self.layer.borderColor = TextColor.CGColor;
+    self.layer.borderColor = normalColor.CGColor;
 }
 
 /*

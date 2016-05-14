@@ -185,7 +185,7 @@
                                                    }];
     
     [categoryLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
-    categoryLabel.textColor = TextColor;
+    categoryLabel.textColor = self.myTextColor;
     categoryLabel.textAlignment = NSTextAlignmentCenter;
     categoryLabel.adjustsFontSizeToFitWidth = YES;
     [categoryLabel setText:self.categoryName];
@@ -197,7 +197,7 @@
     [moneyRatio setText:@""];
     moneyRatio.font = [UIFont fontWithName:@"HelveticaNeue" size:13.5f];
     moneyRatio.textAlignment = NSTextAlignmentCenter;
-    [moneyRatio setTextColor:TextColor];
+    [moneyRatio setTextColor:self.myTextColor];
     [topBar addSubview:moneyRatio];
     self.moneyRatioLabel = moneyRatio;
     
@@ -214,7 +214,7 @@
     totalAmount.adjustsFontSizeToFitWidth = YES;
     totalAmount.font = [UIFont fontWithName:@"HelveticaNeue" size:13.5f];
     totalAmount.textAlignment = NSTextAlignmentRight;
-    [totalAmount setTextColor:TextColor];
+    [totalAmount setTextColor:self.myTextColor];
     [topBar addSubview:totalAmount];
     self.moneyLabel = totalAmount;
     
@@ -223,7 +223,7 @@
     totalCount.adjustsFontSizeToFitWidth = YES;
     totalCount.font = [UIFont fontWithName:@"HelveticaNeue" size:13.5f];
     totalCount.textAlignment = NSTextAlignmentLeft;
-    [totalCount setTextColor:TextColor];
+    [totalCount setTextColor:self.myTextColor];
     [topBar addSubview:totalCount];
     self.moneyCountLabel = totalCount;
 }
@@ -379,9 +379,9 @@
             categoryOnly = oneItem.itemCategory;
             description = oneItem.itemDescription;
             itemType = oneItem.itemType;
-            if ([[description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]] isEqualToString:@""]) {
-                description = @"无";
-            }
+//            if ([[description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]] isEqualToString:@""]) {
+//                description = @"无";
+//            }
             money = [NSString stringWithFormat:@"%.2f",(oneItem.moneyAmount)];
             itemTime = oneItem.createdTime;
             if (oneItem.itemType == 0)
@@ -413,7 +413,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[categoryItemsTableViewCell class]]) {
         categoryItemsTableViewCell *itemCell = (categoryItemsTableViewCell *)cell;
-        [itemCell.category setTextColor:TextColor];
+        [itemCell.category setTextColor:self.myTextColor];
     }
     
 }
@@ -477,7 +477,7 @@
         NSString *contentString = [NSString stringWithFormat:@"%@%@",category,description];
         [cell.category setText:contentString];
         [cell.money setText:money];
-        [cell makeTextStyle];
+        [cell makeTextStyle:self.myTextColor];
 
     }
     

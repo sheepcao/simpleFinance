@@ -109,7 +109,7 @@
     lastTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:50.0f];
     lastTitleLabel.textAlignment = NSTextAlignmentCenter;
     [lastTitleLabel setText:@"首次备份"];
-    [lastTitleLabel setTextColor: TextColor];
+    [lastTitleLabel setTextColor: self.myTextColor];
     lastTitleLabel.backgroundColor = [UIColor clearColor];
     
     [content addSubview:lastTitleLabel];
@@ -126,7 +126,7 @@
     lastTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
     lastTitleLabel.textAlignment = NSTextAlignmentCenter;
     [lastTitleLabel setText:@"上次备份时间及设备"];
-    [lastTitleLabel setTextColor: TextColor];
+    [lastTitleLabel setTextColor: self.myTextColor];
     lastTitleLabel.backgroundColor = [UIColor clearColor];
     [content addSubview:lastTitleLabel];
     
@@ -145,7 +145,7 @@
     yearAndMonth.textAlignment = NSTextAlignmentCenter;
     [yearAndMonth setText:@"None-None"];
     
-    [yearAndMonth setTextColor:  TextColor];
+    [yearAndMonth setTextColor:  self.myTextColor];
     yearAndMonth.backgroundColor = [UIColor clearColor];
     yearAndMonth.tag = 1;
     [content addSubview:yearAndMonth];
@@ -154,7 +154,7 @@
     dayLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:40.0f];
     dayLabel.textAlignment = NSTextAlignmentCenter;
     [dayLabel setText:@"None"];
-    [dayLabel setTextColor:  TextColor];
+    [dayLabel setTextColor:  self.myTextColor];
     dayLabel.backgroundColor = [UIColor clearColor];
     dayLabel.tag = 2;
     [content addSubview:dayLabel];
@@ -163,7 +163,7 @@
     timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f];
     timeLabel.textAlignment = NSTextAlignmentCenter;
     [timeLabel setText:@"None"];
-    [timeLabel setTextColor:  TextColor];
+    [timeLabel setTextColor:  self.myTextColor];
     timeLabel.backgroundColor = [UIColor clearColor];
     timeLabel.tag = 3;
     [content addSubview:timeLabel];
@@ -175,7 +175,7 @@
     deviceLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f];
     deviceLabel.textAlignment = NSTextAlignmentCenter;
     [deviceLabel setText:@"None"];
-    [deviceLabel setTextColor:  TextColor];
+    [deviceLabel setTextColor:  self.myTextColor];
     deviceLabel.backgroundColor = [UIColor clearColor];
     deviceLabel.tag = 4;
     [content addSubview:deviceLabel];

@@ -21,7 +21,7 @@
 }
 
 
--(void)drawPie
+-(void)drawPieWithTextColor:(UIColor *)myColor
 {
     NSArray *items = @[[PNPieChartDataItem dataItemWithValue:80 color:PNRed
                                                  description:@"吃喝"],
@@ -30,7 +30,7 @@
                        ];
     
     self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-120, 15.0, 240.0, 240.0) items:items];
-    self.pieChart.descriptionTextColor = [UIColor whiteColor];
+    self.pieChart.descriptionTextColor = myColor;
     self.pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:14.0];
     [self.pieChart strokeChart];
     self.pieChart.displayAnimated = YES;
@@ -42,7 +42,7 @@
     
     self.centerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.pieChart.innerCircleRadius*2, self.pieChart.innerCircleRadius*2)];
     [self.centerButton setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];    ;
-    self.centerButton.layer.borderWidth = 0.8f;
+    self.centerButton.layer.borderWidth = 1.0f;
     self.centerButton.layer.borderColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f].CGColor;
     self.centerButton.backgroundColor = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:194/255.0f alpha:1.0f];
     self.centerButton.titleLabel.numberOfLines = 2;
@@ -100,7 +100,7 @@
                        value:style
                        range:NSMakeRange(0, attrString.length)];
     [attrString addAttribute:NSForegroundColorAttributeName
-                       value:TextColor
+                       value:normalColor
                        range:NSMakeRange(0, attrString.length)];
     [attrString addAttribute:NSShadowAttributeName
                        value:shadow
@@ -115,13 +115,14 @@
     
 }
 
--(void)updatePieWith:(NSArray *)array
+-(void)updatePieWith:(NSArray *)array andColor:(UIColor *)myColor
 {
     
     [self.pieChart setItems:array];
     [self.pieChart recompute];
     [self.pieChart strokeChart];
-    
+    self.pieChart.descriptionTextColor = TextColor1;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

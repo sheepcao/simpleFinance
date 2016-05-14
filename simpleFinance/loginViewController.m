@@ -141,7 +141,7 @@
     [registerButton setBackgroundColor:[UIColor clearColor]];
     [registerButton setTitle:@"创建新的用户" forState:UIControlStateNormal];
     registerButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:15.5f];
-    [registerButton setTitleColor:TextColor forState:UIControlStateNormal];
+    [registerButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
     [registerButton addTarget:self action:@selector(goRegister) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:registerButton];
     
@@ -170,7 +170,7 @@
     
     NSString *forgotText = @"忘记密码?";
     NSDictionary *attrDict = @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:17.5f],
-                                                        NSForegroundColorAttributeName : TextColor};
+                                                        NSForegroundColorAttributeName : self.myTextColor};
     NSMutableAttributedString *title =[[NSMutableAttributedString alloc] initWithString:forgotText attributes: attrDict];
     [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0,[forgotText length])];
     UIButton *forgotButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 120, SCREEN_HEIGHT-60, 100, 30)];

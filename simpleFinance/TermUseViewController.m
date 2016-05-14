@@ -73,7 +73,7 @@
    value:style
    range:NSMakeRange(0, attrString.length)];
     [attrString addAttribute:NSForegroundColorAttributeName
-   value:TextColor
+   value:self.myTextColor
    range:NSMakeRange(0, attrString.length)];
     body.attributedText = attrString;
     body.indicatorStyle = UIScrollViewIndicatorStyleWhite;

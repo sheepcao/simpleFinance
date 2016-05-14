@@ -30,7 +30,7 @@
     [self configTopbar];
     
     UILabel *sao = [[UILabel alloc]init];
-    sao.textColor = TextColor;
+    sao.textColor = self.myTextColor;
     sao.frame = CGRectMake((size.width - 100) * 0.5, topBarHeight+20, 100,50);
     sao.textAlignment = NSTextAlignmentCenter;
     sao.text = @"扫码下载";
@@ -47,7 +47,7 @@
     [self.view addSubview:shareView];
     
     UILabel *share = [[UILabel alloc]init];
-    share.textColor = TextColor;
+    share.textColor = self.myTextColor;
     share.frame = CGRectMake((size.width - 70) * 0.5,shareView.frame.origin.y - 50 , 70,40);
     share.text = @"或分享至";
     share.textAlignment = NSTextAlignmentCenter;

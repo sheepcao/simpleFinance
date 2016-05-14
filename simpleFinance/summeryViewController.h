@@ -32,4 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *expenseTitle;
 @property (weak, nonatomic) IBOutlet UILabel *surplusTitle;
 @property (weak, nonatomic) IBOutlet UIButton *calendarButton;
+
+-(void)makeTextColor:(UIColor *)myColor;
+
 @end

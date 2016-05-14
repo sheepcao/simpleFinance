@@ -13,7 +13,7 @@
 @property (nonatomic,strong) UILabel *category;
 @property (nonatomic,strong) UILabel *money;
 
--(void)makeTextStyle;
+-(void)makeTextStyle:(UIColor *)myColor;
 - (void)maskCellFromTop:(CGFloat)margin;
 
 @end

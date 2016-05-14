@@ -50,11 +50,10 @@
         
         self.category.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.48];
         self.category.shadowOffset =  CGSizeMake(0, 0.65);
-        self.money.titleLabel.shadowColor = [TextColor colorWithAlphaComponent:0.35];
+        self.money.titleLabel.shadowColor = [normalColor colorWithAlphaComponent:0.35];
         self.money.titleLabel.shadowOffset =  CGSizeMake(0.16, 0.16);
         
-        self.category.textColor = TextColor;
-        self.money.titleLabel.textColor = TextColor;
+
         self.money.titleLabel.adjustsFontSizeToFitWidth = YES;
         
         [self addSubview:self.seperator];
@@ -69,6 +68,8 @@
 
 -(void)makeTextColorForIncrease:(NSString *)increase
 {
+    
+    
     if ([CommonUtility myContainsStringFrom:increase forSubstring:@"+"] ) {
         [self.money setBackgroundColor:[UIColor colorWithRed:211/255.0f green:65/255.0f blue:43/255.0f alpha:0.9f]];
         if ([increase integerValue] == 0 || ![increase integerValue] ) {

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "simpleFinance/mainViewController.m"
-            timestampString = "484823293.665401"
+            timestampString = "484935447.781761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>

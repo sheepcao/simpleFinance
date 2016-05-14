@@ -35,7 +35,7 @@
     UILabel * midLine = [[UILabel alloc] initWithFrame:CGRectMake(self.selectionButton.frame.size.width/2-15, 0, 30, self.selectionButton.frame.size.height)];
     [midLine setText:@"至"];
     midLine.textAlignment = NSTextAlignmentCenter;
-    [midLine setTextColor:TextColor];
+    [midLine setTextColor:normalColor];
     [midLine setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0f]];
     [midLine setBackgroundColor:[UIColor clearColor]];
     [self.selectionButton addSubview:midLine];

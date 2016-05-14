@@ -336,9 +336,9 @@
             categoryOnly = oneItem.itemCategory;
             description = oneItem.itemDescription;
             itemType = oneItem.itemType;
-            if ([[description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]] isEqualToString:@""]) {
-                description = @"无";
-            }
+//            if ([[description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]] isEqualToString:@""]) {
+//                description = @"无";
+//            }
             money = [NSString stringWithFormat:@"%.2f",(oneItem.moneyAmount)];
             itemTime = oneItem.createdTime;
             if (oneItem.itemType == 0)
@@ -371,7 +371,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
         myMaskTableViewCell *itemCell = (myMaskTableViewCell *)cell;
-        [itemCell.category setTextColor:TextColor];
+        [itemCell.category setTextColor:self.myTextColor];
     }
     
 }
@@ -406,23 +406,22 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.backgroundColor = [UIColor clearColor];
-                
-                NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"本日尚无帐目记录"];
-                
-                UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                             @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                               UIFontDescriptorNameAttribute:@"AvenirNext-Thin",
-                                                               UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
-                                                               }];
-                CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(5 * (CGFloat)M_PI / 180), 1, 0, 0);
-                attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
-                [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:NSMakeRange(0, attributedText.length)];
-                [attributedText addAttribute:NSForegroundColorAttributeName value:TextColor range:NSMakeRange(0, attributedText.length)];
-                [attributedText addAttribute:NSUnderlineStyleAttributeName value:@1 range:NSMakeRange(0, attributedText.length)];
-                
-                [cell.textLabel setAttributedText:attributedText];
                 cell.textLabel.textAlignment = NSTextAlignmentCenter;
             }
+            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"本日尚无帐目记录"];
+            
+            UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                         @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
+                                                           UIFontDescriptorNameAttribute:@"AvenirNext-Thin",
+                                                           UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
+                                                           }];
+            CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(5 * (CGFloat)M_PI / 180), 1, 0, 0);
+            attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
+            [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:NSMakeRange(0, attributedText.length)];
+            [attributedText addAttribute:NSForegroundColorAttributeName value:self.myTextColor range:NSMakeRange(0, attributedText.length)];
+            [attributedText addAttribute:NSUnderlineStyleAttributeName value:@1 range:NSMakeRange(0, attributedText.length)];
+            
+            [cell.textLabel setAttributedText:attributedText];
             
             return cell;
         }
@@ -434,7 +433,7 @@
             cell = [[ChartTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellPieIdentifier];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor = [UIColor clearColor];
-            [cell drawPie];
+            [cell drawPieWithTextColor:self.myTextColor];
             [cell.centerButton addTarget:self action:@selector(switchMoneyChart:) forControlEvents:UIControlEventTouchUpInside];
         }
         
@@ -452,7 +451,7 @@
                 
             }
             
-            [cell updatePieWith:items];
+            [cell updatePieWith:items andColor:self.myTextColor];
             isSwitchingChart = NO;
         }else
         {
@@ -466,7 +465,7 @@
                 items = [self makePieData:YES];
                 [cell switchCenterButtonToOutcome:NO ByMoney:[NSString stringWithFormat:@"%.1f",self.sumIncome]];
             }
-            [cell updatePieWith:items];
+            [cell updatePieWith:items andColor:self.myTextColor];
         }
         
         
@@ -518,7 +517,7 @@
         [cell.money setText:money];
         
         [cell makeColor:category];
-        [cell makeTextStyle];
+        [cell makeTextStyle:self.myTextColor];
         return cell;
         
     }else

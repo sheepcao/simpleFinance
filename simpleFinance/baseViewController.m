@@ -17,6 +17,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    if (!showModel) {
+        self.myTextColor = normalColor;
+    }else if ([showModel isEqualToString:@"上午"]) {
+        self.myTextColor = TextColor0;
+    }else if([showModel isEqualToString:@"下午"]) {
+        self.myTextColor = TextColor1;
+    }else if([showModel isEqualToString:@"夜间"]) {
+        self.myTextColor = TextColor3;
+    }
 
     [self registerThemeChangedNotification];
     NSLog(@"base view....");
@@ -40,13 +51,20 @@
 - (void)configUIAppearance{
     NSLog(@"base config ui ");
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    if ([showModel isEqualToString:@"上午"]) {
+        self.myTextColor = TextColor0;
+    }else if([showModel isEqualToString:@"下午"]) {
+        self.myTextColor = TextColor1;
+    }else if([showModel isEqualToString:@"夜间"]) {
+        self.myTextColor = TextColor3;
+    }
     NSString *backName;
     
     if (!showModel) {
-        backName = @"早.jpg";
+        backName = @"上午.png";
     }else
     {
-        backName  = [NSString stringWithFormat:@"%@.jpg",showModel];
+        backName  = [NSString stringWithFormat:@"%@.png",showModel];
     }
     
     if (!self.myBackImage)

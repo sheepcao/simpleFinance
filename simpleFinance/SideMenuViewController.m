@@ -20,6 +20,7 @@
 @interface SideMenuViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) NSArray *menuArray;
 @property(nonatomic,strong) UIImageView *myBackImage;
+
 @end
 
 @implementation SideMenuViewController
@@ -38,9 +39,9 @@
     menuTable.backgroundColor = [UIColor clearColor];
     menuTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:menuTable];
+    self.myMenuTable = menuTable;
     
-    [self configUIAppearance];
-    [self registerThemeChangedNotification];
+//    [self configUIAppearance];
     
 }
 
@@ -64,13 +65,20 @@
 - (void)configUIAppearance{
     NSLog(@"sidebar config ui ");
     NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    if ([showModel isEqualToString:@"上午"]) {
+        self.myTextColor = TextColor0;
+    }else if([showModel isEqualToString:@"下午"]) {
+        self.myTextColor = TextColor1;
+    }else if([showModel isEqualToString:@"夜间"]) {
+        self.myTextColor = TextColor3;
+    }
     NSString *backName;
     
     if (!showModel) {
-        backName = @"早.jpg";
+        backName = @"上午1.png";
     }else
     {
-        backName  = [NSString stringWithFormat:@"%@.jpg",showModel];
+        backName  = [NSString stringWithFormat:@"%@1.png",showModel];
     }
     
     if (!self.myBackImage)
@@ -85,6 +93,7 @@
         [self.myBackImage setImage:[UIImage imageNamed:backName]];
     }
 
+    [self.myMenuTable reloadData];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -117,7 +126,7 @@
     }
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@", self.menuArray[indexPath.row]];
-    cell.textLabel.textColor = TextColor;
+    cell.textLabel.textColor = self.myTextColor;
     UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                           @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
                                                             UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
@@ -133,6 +142,8 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    tableView.userInteractionEnabled = NO;
+
     if (indexPath.row ==0) {
 
         loginViewController *loginVC = [[loginViewController alloc] initWithNibName:@"loginViewController" bundle:nil];

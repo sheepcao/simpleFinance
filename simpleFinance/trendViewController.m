@@ -329,7 +329,7 @@
     
     self.dateRangeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, topbar.frame.size.height + 2, SCREEN_WIDTH, 40)];
     self.dateRangeLabel.backgroundColor = [UIColor clearColor];
-    [self.dateRangeLabel setTextColor:TextColor];
+    [self.dateRangeLabel setTextColor:self.myTextColor];
     [self.dateRangeLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/23]];
     
     self.dateRangeLabel.textAlignment = NSTextAlignmentCenter;
@@ -553,7 +553,7 @@
     UITableViewCell *cellbefore = [tableView cellForRowAtIndexPath:currentIndexPath];
     if ([cellbefore isKindOfClass:[trendTableViewCell class]]) {
         trendTableViewCell *itemCell = (trendTableViewCell *)cellbefore;
-        [itemCell.category setTextColor:TextColor];
+        [itemCell.category setTextColor:self.myTextColor];
         [itemCell.seperator setHidden:YES];
     }
     [cellbefore setNeedsDisplay];
@@ -648,6 +648,8 @@
         cell.backgroundColor = [UIColor clearColor];
         [cell.money addTarget:self action:@selector(dataTypeChanged:) forControlEvents:UIControlEventTouchUpInside];
     }
+    cell.category.textColor = self.myTextColor;
+    cell.money.titleLabel.textColor = self.myTextColor;
     
     NSArray *dataArray ;
     

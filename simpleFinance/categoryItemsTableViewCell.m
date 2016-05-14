@@ -35,11 +35,9 @@
 
         self.category.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.48];
         self.category.shadowOffset =  CGSizeMake(0, 0.65);
-        self.money.shadowColor = [TextColor colorWithAlphaComponent:0.35];
+        self.money.shadowColor = [normalColor colorWithAlphaComponent:0.35];
         self.money.shadowOffset =  CGSizeMake(0.16, 0.16);
         
-        self.category.textColor = TextColor;
-        self.money.textColor = TextColor;
         self.money.adjustsFontSizeToFitWidth = YES;
         
         
@@ -49,8 +47,12 @@
     return self;
 }
 
--(void)makeTextStyle
+-(void)makeTextStyle:(UIColor *)myColor
 {
+    
+    self.category.textColor = myColor;
+    self.money.textColor = myColor;
+    
     UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                           @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
                                                             UIFontDescriptorNameAttribute:@"AvenirNext-Regular",

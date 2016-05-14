@@ -79,7 +79,7 @@
     versionLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:13.0f];
     versionLabel.adjustsFontSizeToFitWidth = YES;
     versionLabel.textAlignment = NSTextAlignmentCenter;
-    [versionLabel setTextColor:TextColor];
+    [versionLabel setTextColor:self.myTextColor];
     [self.view addSubview:versionLabel];
     
     self.settingTable = [[UITableView alloc] initWithFrame:CGRectMake(16, versionLabel.frame.origin.y + versionLabel.frame.size.height+30, SCREEN_WIDTH-32, SCREEN_HEIGHT- (versionLabel.frame.origin.y + versionLabel.frame.size.height)) style:UITableViewStylePlain];
@@ -121,13 +121,13 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         [cell.detailTextLabel setBackgroundColor:[UIColor clearColor]];
         cell.detailTextLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:14.5f];
-        [cell.detailTextLabel setTextColor:TextColor];
+        [cell.detailTextLabel setTextColor:self.myTextColor];
         [cell.detailTextLabel setText:@"QQ : 82107815"];
     }
     
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     cell.textLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f];
-    [cell.textLabel setTextColor:TextColor];
+    [cell.textLabel setTextColor:self.myTextColor];
     [cell.textLabel setText:self.rowList[indexPath.row]];
 
     
