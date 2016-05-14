@@ -59,7 +59,6 @@
         self.myTextColor = TextColor3;
     }
     NSString *backName;
-    
     if (!showModel) {
         backName = @"上午.png";
     }else
