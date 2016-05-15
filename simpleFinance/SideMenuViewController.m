@@ -64,7 +64,7 @@
 
 - (void)configUIAppearance{
     NSLog(@"sidebar config ui ");
-    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     if ([showModel isEqualToString:@"上午"]) {
         self.myTextColor = TextColor0;
     }else if([showModel isEqualToString:@"下午"]) {

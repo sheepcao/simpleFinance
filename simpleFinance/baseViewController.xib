@@ -14,7 +14,7 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="LGGradientBackgroundView">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.35686274509803922" green="0.53333333333333333" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="point" keyPath="inputPoint0">
                     <point key="value" x="0.5" y="0.0"/>

@@ -31,12 +31,14 @@
     
     self.pieChart = [[PNPieChart alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-120, 15.0, 240.0, 240.0) items:items];
     self.pieChart.descriptionTextColor = myColor;
+    self.pieChart.descriptionTextShadowOffset = CGSizeMake(0.5, 0.7);
+
     self.pieChart.descriptionTextFont  = [UIFont fontWithName:@"Avenir-Medium" size:14.0];
     [self.pieChart strokeChart];
     self.pieChart.displayAnimated = YES;
     self.pieChart.shouldHighlightSectorOnTouch = NO;
     self.pieChart.userInteractionEnabled = NO;
-    self.pieChart.labelPercentageCutoff = 0.05;
+    self.pieChart.labelPercentageCutoff = 0.06;
     self.pieChart.duration = 0.65f;
     [self addSubview:self.pieChart];
     

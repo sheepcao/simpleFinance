@@ -69,7 +69,7 @@
 #define backupService @"http://cgx.nwpu.info/simpleBuService/uploads.php"
 #define backupPath @"http://cgx.nwpu.info/simpleBuService/upload/"
 
-#define MODEL @"model"
+#define SHOWMODEL @"showModel"
 #define AUTOSWITCH @"autoSwitch"
 #define DEFAULT_USER @"defaultUser"
 

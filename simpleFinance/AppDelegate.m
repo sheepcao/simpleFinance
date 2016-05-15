@@ -183,17 +183,14 @@
     NSDate *date = [NSDate date];
     NSInteger hour = [cal component:NSCalendarUnitHour fromDate:date];
     
-    if (hour>6 &&hour<11) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"早" forKey:MODEL];
-    }else if(hour>=11 &&hour<14)
+    if (hour>6 &&hour<12) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"上午" forKey:SHOWMODEL];
+    }else if(hour>=12 &&hour<19)
     {
-        [[NSUserDefaults standardUserDefaults] setObject:@"午" forKey:MODEL];
-    }else if(hour>=14 &&hour<=19)
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:@"夕" forKey:MODEL];
+        [[NSUserDefaults standardUserDefaults] setObject:@"下午" forKey:SHOWMODEL];
     }else
     {
-        [[NSUserDefaults standardUserDefaults] setObject:@"夜" forKey:MODEL];
+        [[NSUserDefaults standardUserDefaults] setObject:@"夜间" forKey:SHOWMODEL];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:ThemeChanged  object:nil];
     

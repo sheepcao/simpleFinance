@@ -987,7 +987,7 @@
         [selectedBar setHidden:YES];
     }
     
-    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     for (int i = 0 ; i < 3; i++) {
         if ([showModel isEqualToString:timeTitle[i]])
         {
@@ -1024,7 +1024,7 @@
     
     NSArray *timeTitle = @[@"上午",@"下午",@"夜间"];
     
-    [[NSUserDefaults standardUserDefaults] setObject:timeTitle[sender.tag - 1] forKey:MODEL];
+    [[NSUserDefaults standardUserDefaults] setObject:timeTitle[sender.tag - 1] forKey:SHOWMODEL];
     [[NSNotificationCenter defaultCenter] postNotificationName:ThemeChanged  object:nil];
     
     if ([timeTitle[sender.tag - 1] isEqualToString:@"上午"]) {
@@ -1054,7 +1054,7 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [appDelegate judgeTimeFrame];
     
-    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     NSArray *timeTitle = @[@"上午",@"下午",@"夜间"];
     UIView *contentView = [self.myDimView viewWithTag:100];
     

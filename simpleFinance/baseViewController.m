@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     if (!showModel) {
         self.myTextColor = normalColor;
     }else if ([showModel isEqualToString:@"上午"]) {
@@ -50,7 +50,7 @@
 
 - (void)configUIAppearance{
     NSLog(@"base config ui ");
-    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:MODEL];
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
     if ([showModel isEqualToString:@"上午"]) {
         self.myTextColor = TextColor0;
     }else if([showModel isEqualToString:@"下午"]) {
