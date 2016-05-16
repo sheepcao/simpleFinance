@@ -32,10 +32,11 @@
     [topbar.titleLabel  setText:@"帐目日历"];
     [self.view addSubview:topbar];
     
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 34, 60, 40)];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 34, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
+    [closeViewButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     [closeViewButton setTitleColor:   [UIColor whiteColor]forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];

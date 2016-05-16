@@ -208,7 +208,7 @@
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [closeViewButton setTitle:@"取消" forState:UIControlStateNormal];
-    [closeViewButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
@@ -217,7 +217,7 @@
     saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [saveButton setTitle:@"保存" forState:UIControlStateNormal];
-    [saveButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [saveButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(saveItem:) forControlEvents:UIControlEventTouchUpInside];
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
@@ -225,7 +225,7 @@
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 30, SCREEN_WIDTH*3/7, 30);
-    self.moneyTypeSeg.tintColor =  [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f];
+    self.moneyTypeSeg.tintColor =  TextColor2;
     self.moneyTypeSeg.selectedSegmentIndex = 0;
     [self.moneyTypeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
     [topbar addSubview:self.moneyTypeSeg];

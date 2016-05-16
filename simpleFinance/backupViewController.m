@@ -57,28 +57,29 @@
     self.topBar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.topBar];
     
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 32, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
-    [closeViewButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [closeViewButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+    [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [self.topBar addSubview:closeViewButton];
     
-    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 22, 100, 50)];
+    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 28, 100, 50)];
     [titileLabel setText:@"同步｜备份"];
     titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
     titileLabel.textAlignment = NSTextAlignmentCenter;
-    [titileLabel setTextColor:[UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]];
+    [titileLabel setTextColor:normalColor];
     [self.topBar addSubview:titileLabel];
 
     
-    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 27, 60, 40)];
+    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-69, 33, 60, 40)];
     changeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     changeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [changeButton setTitle:@"切换账号" forState:UIControlStateNormal];
-    [changeButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [changeButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [changeButton addTarget:self action:@selector(changeAccount) forControlEvents:UIControlEventTouchUpInside];
     changeButton.backgroundColor = [UIColor clearColor];
     [self.topBar addSubview:changeButton];

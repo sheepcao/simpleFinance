@@ -39,11 +39,13 @@
     
     
     [self configInputArea];
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 32, 42, 42)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
-    [closeViewButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [closeViewButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+//    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
+    [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [self.view addSubview:closeViewButton];

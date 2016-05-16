@@ -172,32 +172,33 @@
 {
     topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight)];
     topbar.backgroundColor = [UIColor clearColor];
-    
-    
+
     [self.view addSubview:topbar];
     
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 25, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
-    [closeViewButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [closeViewButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+//    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
+    [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
     
-    UIButton *sortButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 27, 60, 40)];
+    UIButton *sortButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-69, 26, 60, 40)];
     sortButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     sortButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [sortButton setTitle:@"排序" forState:UIControlStateNormal];
-    [sortButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [sortButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [sortButton addTarget:self action:@selector(showSortView) forControlEvents:UIControlEventTouchUpInside];
     sortButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:sortButton];
     
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
-    self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 30, SCREEN_WIDTH*3/7, 30);
-    self.moneyTypeSeg.tintColor =  [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f];
+    self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 28, SCREEN_WIDTH*3/7, 30);
+    self.moneyTypeSeg.tintColor =  TextColor2;
     self.moneyTypeSeg.selectedSegmentIndex = 0;
     [self.moneyTypeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
     [topbar addSubview:self.moneyTypeSeg];

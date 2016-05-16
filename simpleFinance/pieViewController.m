@@ -195,19 +195,21 @@
     [self.view addSubview:topbar];
     
     
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 26, 40, 40)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [saveButton setTitle:@"返回" forState:UIControlStateNormal];
-    [saveButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [saveButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    saveButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+//    [saveButton setTitle:@"返回" forState:UIControlStateNormal];
+    [saveButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
-    self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 30, SCREEN_WIDTH*3/7, 30);
-    self.moneyTypeSeg.tintColor =  [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f];
+    self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 28, SCREEN_WIDTH*3/7, 30);
+    self.moneyTypeSeg.tintColor =  TextColor2;
     self.moneyTypeSeg.selectedSegmentIndex = 0;
     [self.moneyTypeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
     [topbar addSubview:self.moneyTypeSeg];

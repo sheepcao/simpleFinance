@@ -305,19 +305,21 @@
     [self.view addSubview:topbar];
     
     
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 32, 60, 40)];
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 30, 40, 40)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [saveButton setTitle:@"返回" forState:UIControlStateNormal];
-    [saveButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [saveButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    saveButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+//    [saveButton setTitle:@"返回" forState:UIControlStateNormal];
+    [saveButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"1天",@"1周",@"2周",@"4周",@"13周",nil];
     UISegmentedControl *timeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
-    timeSeg.frame = CGRectMake(SCREEN_WIDTH*0.18, 35, SCREEN_WIDTH*0.64, 30);
-    timeSeg.tintColor =  [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f];
+    timeSeg.frame = CGRectMake(SCREEN_WIDTH*0.16, 35, SCREEN_WIDTH*0.7, 28);
+    timeSeg.tintColor =  normalColor;
     timeSeg.selectedSegmentIndex = 1;
     [timeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
     [topbar addSubview:timeSeg];
@@ -330,11 +332,12 @@
     self.dateRangeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, topbar.frame.size.height + 2, SCREEN_WIDTH, 40)];
     self.dateRangeLabel.backgroundColor = [UIColor clearColor];
     [self.dateRangeLabel setTextColor:self.myTextColor];
-    [self.dateRangeLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/23]];
+    [self.dateRangeLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/23]];
     
     self.dateRangeLabel.textAlignment = NSTextAlignmentCenter;
     NSString *dateRange = [NSString stringWithFormat:@"%@  至  %@",self.startDate,self.endDate];
     [self.dateRangeLabel setText:dateRange];
+    [self.dateRangeLabel setTextColor:self.myTextColor];
     [self.view addSubview:self.dateRangeLabel];
     
     
@@ -364,7 +367,7 @@
     [dataExplain setText:@"金 额"];
     dataExplain.textAlignment = NSTextAlignmentRight;
     dataExplain.textColor = [UIColor colorWithRed:253/255.0f green:197/255.0f blue:65/255.0f alpha:1.0f];
-    dataExplain.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:SCREEN_WIDTH/21];
+    dataExplain.font = [UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/24];
     self.myDataExplain = dataExplain;
     [self.view addSubview:dataExplain];
     

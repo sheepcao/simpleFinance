@@ -15,16 +15,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-80, 28, 160, 40)];
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-80, 28, 160, 50)];
         
         UIFontDescriptor *titleFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                 @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
-                                                   UIFontDescriptorNameAttribute:@"HelveticaNeue",
+                                                 @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
+                                                   UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: titleSize]
                                                    }];
         title.font = [UIFont fontWithDescriptor:titleFontDescriptor size:0.0f];
         title.textAlignment = NSTextAlignmentCenter;
-        [title setTextColor: [UIColor whiteColor]];
+        [title setTextColor: normalColor];
         title.backgroundColor = [UIColor clearColor];
         self.titleLabel = title;
         [self addSubview:title];

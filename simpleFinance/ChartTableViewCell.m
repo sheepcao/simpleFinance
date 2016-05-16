@@ -42,11 +42,11 @@
     self.pieChart.duration = 0.65f;
     [self addSubview:self.pieChart];
     
-    self.centerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.pieChart.innerCircleRadius*2, self.pieChart.innerCircleRadius*2)];
+    self.centerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, (self.pieChart.innerCircleRadius+2)*2, (self.pieChart.innerCircleRadius+2)*2)];
     [self.centerButton setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];    ;
-    self.centerButton.layer.borderWidth = 1.0f;
-    self.centerButton.layer.borderColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f].CGColor;
-    self.centerButton.backgroundColor = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:194/255.0f alpha:1.0f];
+//    self.centerButton.layer.borderWidth = 1.0f;
+//    self.centerButton.layer.borderColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f].CGColor;
+//    self.centerButton.backgroundColor = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:194/255.0f alpha:1.0f];
     self.centerButton.titleLabel.numberOfLines = 2;
     
     self.centerButton.layer.cornerRadius = self.centerButton.frame.size.width/2;
@@ -55,17 +55,18 @@
     self.centerButton.layer.shadowOpacity = 1.0;
     self.centerButton.layer.shadowRadius = 1.5f;
     self.centerButton.layer.shadowOffset = CGSizeMake(0.0f, 1.5f);
-    self.centerButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
+//    self.centerButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
     
     self.centerButton.titleLabel.layer.shadowColor =  [UIColor blackColor].CGColor;
     self.centerButton.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
     
+    [self.centerButton setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
     
-    UIImageView *switchImage= [[UIImageView alloc] initWithFrame:CGRectMake(self.centerButton.frame.size.width/3, self.centerButton.frame.size.height*3/4, self.centerButton.frame.size.width/3, self.centerButton.frame.size.height/6)];
-    [switchImage setImage:[UIImage imageNamed:@"switchChart.png"]];
-    //    switchImage.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
-    
-    [self.centerButton addSubview:switchImage];
+//    UIImageView *switchImage= [[UIImageView alloc] initWithFrame:CGRectMake(self.centerButton.frame.size.width/3, self.centerButton.frame.size.height*3/4, self.centerButton.frame.size.width/3, self.centerButton.frame.size.height/6)];
+//    [switchImage setImage:[UIImage imageNamed:@"switchChart.png"]];
+//    //    switchImage.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
+//    
+//    [self.centerButton addSubview:switchImage];
     
     
     [self addSubview:self.centerButton];

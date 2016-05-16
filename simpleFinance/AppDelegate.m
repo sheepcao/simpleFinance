@@ -181,7 +181,14 @@
     NSCalendar *cal = [[NSCalendar alloc]
                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDate *date = [NSDate date];
-    NSInteger hour = [cal component:NSCalendarUnitHour fromDate:date];
+    NSInteger hour;
+    if (SYSTEM_VERSION_LESS_THAN(iOS8_0)) {
+        NSDateComponents *components = [cal components:NSCalendarUnitHour fromDate:date];
+        hour = components.hour;
+    }else
+    {
+        hour = [cal component:NSCalendarUnitHour fromDate:date];
+    }
     
     if (hour>6 &&hour<12) {
         [[NSUserDefaults standardUserDefaults] setObject:@"上午" forKey:SHOWMODEL];

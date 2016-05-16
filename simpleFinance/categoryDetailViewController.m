@@ -161,21 +161,25 @@
     
     [self configDateSelection];
     
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 32, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
-    [closeViewButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [closeViewButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+//    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
+    [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topBar addSubview:closeViewButton];
     
-    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 22, 100, 50)];
-    [titileLabel setText:@"分类明细"];
-    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
-    titileLabel.textAlignment = NSTextAlignmentCenter;
-    [titileLabel setTextColor:[UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]];
-    [topBar addSubview:titileLabel];
+    [self.myTopBar.titleLabel  setText:@"分类明细"];
+
+//    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 22, 100, 50)];
+//    [titileLabel setText:@"分类明细"];
+//    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
+//    titileLabel.textAlignment = NSTextAlignmentCenter;
+//    [titileLabel setTextColor:normalColor];
+//    [topBar addSubview:titileLabel];
     
     UILabel *categoryLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/4, topBar.frame.size.height - 100,SCREEN_WIDTH/2,65)];
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:

@@ -404,28 +404,53 @@
     
     
     // add new item button----------------------------------------------------
-    RoundedButton *addMoneyButton = [[RoundedButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-bottomHeight/2, -9, bottomHeight, bottomHeight)];
-    [addMoneyButton setTitle:@"＋" forState:UIControlStateNormal];
+    UIButton *addMoneyButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-(bottomHeight+11)/2, -16, bottomHeight+11, bottomHeight+11)];
+    addMoneyButton.layer.cornerRadius = addMoneyButton.frame.size.width/2;
+    addMoneyButton.layer.masksToBounds = NO;
+    addMoneyButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    addMoneyButton.layer.shadowOpacity = 0.8;
+    addMoneyButton.layer.shadowRadius = 2;
+    addMoneyButton.layer.shadowOffset = CGSizeMake(0.0f, 1.5f);
+    [addMoneyButton setImage:[UIImage imageNamed:@"add1.png"] forState:UIControlStateNormal];
+
     addMoneyButton.titleLabel.font = [UIFont boldSystemFontOfSize:42.0f];
     [addMoneyButton addTarget:self action:@selector(popAddNewView:) forControlEvents:UIControlEventTouchUpInside];
     //for button style on diff states.
-    [addMoneyButton addTarget:self action:@selector(tapDownAddNewButton:) forControlEvents:UIControlEventTouchDown];
-    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchCancel];
-    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragExit];
-    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragOutside];
-    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchUpOutside];
+//    [addMoneyButton addTarget:self action:@selector(tapDownAddNewButton:) forControlEvents:UIControlEventTouchDown];
+//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchCancel];
+//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragExit];
+//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragOutside];
+//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchUpOutside];
     
     [bottomView addSubview:addMoneyButton];
     
-    UIButton *pieButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 10, bottomHeight-20, bottomHeight-20)];
+    UIButton *pieButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 5, bottomHeight-23, bottomHeight-8)];
     [pieButton setBackgroundColor:[UIColor clearColor]];
-    [pieButton setTitle:@"饼" forState:UIControlStateNormal];
+    [pieButton setImage:[UIImage imageNamed:@"pie.png"] forState:UIControlStateNormal];
+    pieButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 15, 0);
+    UILabel *pieTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, pieButton.frame.size.height -15, pieButton.frame.size.width, 15)];
+    [pieTitle setText:@"统 计"];
+    pieTitle.font =[UIFont fontWithName:@"SourceHanSansCN-Normal" size:10.0f];
+    pieTitle.textAlignment = NSTextAlignmentCenter;
+    [pieTitle setTextColor:normalColor];
+    pieTitle.adjustsFontSizeToFitWidth = YES;
+    [pieButton addSubview:pieTitle];
+    
     [pieButton addTarget:self action:@selector(popPieView) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:pieButton];
     
-    UIButton *TrendButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - (bottomHeight-20), 10, bottomHeight-20, bottomHeight-20)];
+    UIButton *TrendButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - (bottomHeight-20), 5, bottomHeight-23, bottomHeight-8)];
     [TrendButton setBackgroundColor:[UIColor clearColor]];
-    [TrendButton setTitle:@"条" forState:UIControlStateNormal];
+    [TrendButton setImage:[UIImage imageNamed:@"trend.png"] forState:UIControlStateNormal];
+    TrendButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 15, 0);
+    UILabel *trendTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, pieButton.frame.size.height -15, pieButton.frame.size.width, 15)];
+    [trendTitle setText:@"走 势"];
+    trendTitle.font =[UIFont fontWithName:@"SourceHanSansCN-Normal" size:10.0f];
+    trendTitle.textAlignment = NSTextAlignmentCenter;
+    [trendTitle setTextColor:normalColor];
+    trendTitle.adjustsFontSizeToFitWidth = YES;
+    [TrendButton addSubview:trendTitle];
+
     [TrendButton addTarget:self action:@selector(popTrendView) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:TrendButton];
     
@@ -442,9 +467,9 @@
 }
 -(void)popAddNewView:(RoundedButton *)sender
 {
-    if (sender) {
-        [sender notSelectedStyle];
-    }
+//    if (sender) {
+//        [sender notSelectedStyle];
+//    }
     
     [self presentViewController:[self nextAddNewItemViewController] animated:YES completion:nil];
     

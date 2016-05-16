@@ -71,7 +71,7 @@
     [titileLabel setText:@"邀请好友"];
     titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
     titileLabel.textAlignment = NSTextAlignmentCenter;
-    [titileLabel setTextColor:[UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]];
+    [titileLabel setTextColor:normalColor];
     [self.topBar addSubview:titileLabel];
     
     
@@ -79,7 +79,7 @@
     changeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     changeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [changeButton setTitle:@"取消" forState:UIControlStateNormal];
-    [changeButton setTitleColor:   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]forState:UIControlStateNormal];
+    [changeButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [changeButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     changeButton.backgroundColor = [UIColor clearColor];
     [self.topBar addSubview:changeButton];

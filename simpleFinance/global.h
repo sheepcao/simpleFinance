@@ -11,6 +11,15 @@
 
 #import "FMDatabase.h"
 
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+#define iOS7_0 @"7.0"
+#define iOS8_0 @"8.0"
+
+
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
@@ -47,9 +56,7 @@
 #define  numberColor   [UIColor colorWithRed:76/255.0f green:101/255.0f blue:120/255.0f alpha:1.0f]
 #define  numberSelectedColor   [UIColor colorWithRed:124/255.0f green:167/255.0f blue:197/255.0f alpha:1.0f]
 
-#define normalColor [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0]
-
-//#define self.myTextColor [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
+#define normalColor [UIColor colorWithRed:0.93 green:0.93 blue:0.93 alpha:1.0]
 
 #define TextColor0 [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0]
 #define TextColor1 [UIColor colorWithRed:0.91 green:0.91 blue:0.91 alpha:1.0]
