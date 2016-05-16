@@ -28,11 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardWillShowNotification
-                                               object:nil];
+
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -58,9 +55,18 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
     [[CommonUtility sharedCommonUtility] shimmerRegisterButton:self.myLoginBtn];
 
 }
@@ -73,6 +79,11 @@
 
 -(void)configInputArea
 {
+    CGFloat space =20;
+    if (IS_IPHONE_4_OR_LESS)
+    {
+        space = 10;
+    }
     UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT)];
     content.backgroundColor = [UIColor clearColor];
     [self.view addSubview:content];
@@ -109,7 +120,7 @@
         [usernameField setText:defaultUser];
     }
     
-    UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, usernameField.frame.origin.y + usernameField.frame.size.height + 20, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
+    UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, usernameField.frame.origin.y + usernameField.frame.size.height + space, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
     passwordField.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:@"密码"
                                     attributes:@{
@@ -131,7 +142,7 @@
     passwordField.secureTextEntry = YES;
     self.pswdField = passwordField;
     
-     gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, passwordField.frame.origin.y + passwordField.frame.size.height + 25, SCREEN_WIDTH*3/4, SCREEN_WIDTH/7.5)];
+     gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, passwordField.frame.origin.y + passwordField.frame.size.height + space+5, SCREEN_WIDTH*3/4, SCREEN_WIDTH/7.5)];
     loginButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:23.0f];
     [loginButton setTitle:@"登  录" forState:UIControlStateNormal];
     [content addSubview:loginButton];
@@ -139,7 +150,7 @@
     [loginButton addTarget:self action:@selector(userLogin) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 65, loginButton.frame.origin.y + loginButton.frame.size.height + 25, 130, 30)];
+    UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 65, loginButton.frame.origin.y + loginButton.frame.size.height + space+5, 130, 30)];
     [registerButton setBackgroundColor:[UIColor clearColor]];
     [registerButton setTitle:@"创建新的用户" forState:UIControlStateNormal];
     registerButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:15.5f];
@@ -176,6 +187,10 @@
     NSMutableAttributedString *title =[[NSMutableAttributedString alloc] initWithString:forgotText attributes: attrDict];
     [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0,[forgotText length])];
     UIButton *forgotButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 120, SCREEN_HEIGHT-60, 100, 30)];
+    if (IS_IPHONE_4_OR_LESS)
+    {
+        [forgotButton setFrame:CGRectMake(SCREEN_WIDTH - 120, SCREEN_HEIGHT-35, 100, 20)];
+    }
     [forgotButton setBackgroundColor:[UIColor clearColor]];
     [forgotButton setAttributedTitle:title forState:UIControlStateNormal];
     [content addSubview:forgotButton];
@@ -193,7 +208,7 @@
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
     [UIView animateWithDuration:0.25f animations:^{
-        [self.contentView setFrame:CGRectMake(0,0 - (keyboardSize.height-(SCREEN_HEIGHT - self.pswdField.frame.origin.y - SCREEN_WIDTH*2/7-35)) , self.contentView.frame.size.width, self.contentView.frame.size.height)];
+        [self.contentView setFrame:CGRectMake(0,0 - (keyboardSize.height-(SCREEN_HEIGHT - self.myLoginBtn.frame.origin.y - self.myLoginBtn.frame.size.height-5)) , self.contentView.frame.size.width, self.contentView.frame.size.height)];
     }];
     
 }

@@ -16,23 +16,6 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self)
     {
-        CGFloat thisRowHeight = self.frame.size.height;
-        self.seperator = [[UILabel alloc] initWithFrame:CGRectMake(25, thisRowHeight/2-pointRadius, pointRadius*2, pointRadius*2)];
-        self.seperator.backgroundColor = [UIColor clearColor];
-        self.seperator.layer.cornerRadius = pointRadius;
-        self.seperator.layer.masksToBounds = YES;
-        
-        self.categoryName = [[UILabel alloc] initWithFrame:CGRectMake(self.seperator.frame.size.width+self.seperator.frame.origin.x+10, 6, 100, thisRowHeight-6*2)];
-        
-        self.MoneyRatio = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 95 , 7, 75, thisRowHeight-6*2)];
-        self.MoneyRatio.textAlignment = NSTextAlignmentRight;
-
-        self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.categoryName.frame.origin.x+self.categoryName.frame.size.width, 7, (SCREEN_WIDTH-(self.categoryName.frame.origin.x+self.categoryName.frame.size.width) - 95), thisRowHeight-6*2)];
-        self.categoryName.textAlignment = NSTextAlignmentLeft;
-        self.money.textAlignment = NSTextAlignmentRight;
-        
-        
-        
         if (IS_IPHONE_5_OR_LESS) {
             fontSize = 14.5f;
         }else if(IS_IPHONE_6)
@@ -40,8 +23,34 @@
             fontSize = 15.0f;
         }else
         {
-            fontSize = 16.5f;
+            fontSize = 15.5f;
         }
+        
+        CGFloat thisRowHeight = self.frame.size.height;
+        self.seperator = [[UILabel alloc] initWithFrame:CGRectMake(25, thisRowHeight/2-pointRadius, pointRadius*2, pointRadius*2)];
+        self.seperator.backgroundColor = [UIColor clearColor];
+        self.seperator.layer.cornerRadius = pointRadius;
+        self.seperator.layer.masksToBounds = YES;
+        
+        self.categoryName = [[UILabel alloc] initWithFrame:CGRectMake(self.seperator.frame.size.width+self.seperator.frame.origin.x+10, 6, 90, thisRowHeight-6*2)];
+        
+        self.MoneyRatio = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - fontSize*5.5 , 7, fontSize*4.52, thisRowHeight-6*2)];
+        self.MoneyRatio.textAlignment = NSTextAlignmentLeft;
+        self.MoneyRatio.adjustsFontSizeToFitWidth = YES;
+
+        UIView *midline = [[UIView alloc] initWithFrame:CGRectMake(self.MoneyRatio.frame.origin.x - 9, self.MoneyRatio.frame.size.height/3, 1, self.MoneyRatio.frame.size.height*2/3)];
+        [midline setBackgroundColor:[UIColor whiteColor]];
+        [self addSubview:midline];
+        
+        self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.categoryName.frame.origin.x+self.categoryName.frame.size.width, 7, (midline.frame.origin.x - 8 -(self.categoryName.frame.origin.x+self.categoryName.frame.size.width) ), thisRowHeight-6*2)];
+        self.categoryName.textAlignment = NSTextAlignmentLeft;
+        self.money.textAlignment = NSTextAlignmentRight;
+        self.money.adjustsFontSizeToFitWidth = YES;
+        
+
+        
+        
+
         //
         UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                      @{UIFontDescriptorFamilyAttribute: @"Avenir Next",

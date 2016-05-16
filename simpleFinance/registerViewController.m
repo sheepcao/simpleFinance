@@ -19,6 +19,8 @@
 @property (nonatomic,strong) UIView *contentView;
 @property (nonatomic,strong) UITextField *userField;
 @property (nonatomic,strong) UITextField *pswdField;
+@property (nonatomic,strong) gradientButton *myLoginBtn;
+
 @end
 
 @implementation registerViewController
@@ -62,6 +64,12 @@
 
 -(void)configInputArea
 {
+    CGFloat space =20;
+    if (IS_IPHONE_4_OR_LESS)
+    {
+        space = 10;
+    }
+    
     UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     content.backgroundColor = [UIColor clearColor];
     [self.view addSubview:content];
@@ -72,7 +80,7 @@
     self.contentView = content;
     
     
-    UITextField *usernameField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, logoView.frame.origin.y + logoView.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
+    UITextField *usernameField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, logoView.frame.origin.y + logoView.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/9)];
     usernameField.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:@"邮箱（用户名）"
                                     attributes:@{
@@ -125,19 +133,17 @@
     
 
 
-    UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, usernameField.frame.origin.y + usernameField.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
+    UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, usernameField.frame.origin.y + usernameField.frame.size.height + 24, SCREEN_WIDTH*3/4, SCREEN_WIDTH/9)];
     passwordField.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:@"设置密码(大小写字母或数字,6-20位)"
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
-                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/29]
+                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/32]
                                                  }
      ];
     passwordField.textAlignment = NSTextAlignmentCenter;
     passwordField.returnKeyType = UIReturnKeyDone;
     passwordField.delegate = self;
-    passwordField.tintColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.9];
-//    passwordField.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/21];
     passwordField.textColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.9];
     [passwordField.layer setCornerRadius:passwordField.frame.size.height/2];
     [passwordField setBackgroundColor:[UIColor whiteColor]];
@@ -147,18 +153,19 @@
     passwordField.secureTextEntry = YES;
     self.pswdField = passwordField;
     
-    gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, passwordField.frame.origin.y + passwordField.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/7.5)];
+    gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, passwordField.frame.origin.y + passwordField.frame.size.height + space+5, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8.5)];
     loginButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:23.0f];
     [loginButton setTitle:@"注  册" forState:UIControlStateNormal];
     [content addSubview:loginButton];
     [loginButton addTarget:self action:@selector(userRegister) forControlEvents:UIControlEventTouchUpInside];
+    self.myLoginBtn = loginButton;
     
     UIButton *termsLabel = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 100 , SCREEN_HEIGHT - 40, 200, 20)];
     termsLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
     termsLabel.titleLabel.numberOfLines = 2;
     termsLabel.titleLabel.font =  [UIFont fontWithName:@"SourceHanSansCN-Normal" size:11.0f];
     termsLabel.titleLabel.textColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:0.88];
-    [termsLabel setTitle:@"点击提交，您将同意并遵守简簿的用户使用条款。点击阅读 >" forState:UIControlStateNormal];
+    [termsLabel setTitle:@"点击提交，您将同意并遵守简簿的用户使用协议。点击阅读 >" forState:UIControlStateNormal];
     [termsLabel addTarget: self action:@selector(userTerms) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:termsLabel];
     
@@ -177,7 +184,7 @@
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
     [UIView animateWithDuration:0.25f animations:^{
-        [self.contentView setFrame:CGRectMake(0,0 - (keyboardSize.height-(SCREEN_HEIGHT - self.pswdField.frame.origin.y - SCREEN_WIDTH*2/7-35)) , self.contentView.frame.size.width, self.contentView.frame.size.height)];
+        [self.contentView setFrame:CGRectMake(0,0 - (keyboardSize.height-(SCREEN_HEIGHT - self.myLoginBtn.frame.origin.y - self.myLoginBtn.frame.size.height-5)) , self.contentView.frame.size.width, self.contentView.frame.size.height)];
     }];
     
 }

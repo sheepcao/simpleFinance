@@ -180,11 +180,14 @@
 -(void)configButton
 {
     UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/5, self.itemInfoTable.frame.origin.y + self.itemInfoTable.frame.size.height + 20, SCREEN_WIDTH/5,SCREEN_WIDTH/5 )];
-    [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+    [deleteButton setImage:[UIImage imageNamed:@"trush"] forState:UIControlStateNormal];
+//    [deleteButton setTitle:@"删除" forState:UIControlStateNormal];
     [deleteButton addTarget:self action:@selector(deleteTap) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/5-deleteButton.frame.size.width, deleteButton.frame.origin.y,deleteButton.frame.size.width,deleteButton.frame.size.height)];
     [editButton setTitle:@"编辑" forState:UIControlStateNormal];
+    [editButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
+
     [editButton addTarget:self action:@selector(editTap) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:deleteButton];

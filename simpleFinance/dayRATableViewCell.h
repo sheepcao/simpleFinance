@@ -13,9 +13,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *incomeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *customTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *expandImage;
+@property (weak, nonatomic) IBOutlet UILabel *incomeTitle;
+@property (weak, nonatomic) IBOutlet UILabel *expenseTitle;
 
 
-- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense;
+- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense andColor:(UIColor *)myColor;
 - (void)goExpendAnimated:(BOOL)animated;
 - (void)goCollapseAnimated:(BOOL)animated;
 @end

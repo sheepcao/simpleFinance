@@ -25,6 +25,8 @@
     categoryButton *lastCateBtn;
     BOOL isInputingNote;
     BOOL isAddingCategory;
+    CGFloat btnHeight;
+
 }
 @property (nonatomic ,strong) UILabel *InputLabel;
 @property (nonatomic ,strong) UILabel *categoryLabel;
@@ -62,9 +64,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    isInputingNote = NO;;
-    isAddingCategory = NO;;
+    isInputingNote = NO;
+    isAddingCategory = NO;
 
+    if (IS_IPHONE_4_OR_LESS) {
+        btnHeight = 34;
+    }else
+    {
+        btnHeight = 44;
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
@@ -204,19 +213,23 @@
     topbar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:topbar];
     
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 60, 40)];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    [closeViewButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+//    closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     [closeViewButton setTitle:@"取消" forState:UIControlStateNormal];
     [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
     
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 27, 60, 40)];
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 32, 40, 40)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [saveButton setTitle:@"保存" forState:UIControlStateNormal];
+//    [saveButton setImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
+//    saveButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+        [saveButton setTitle:@"保存" forState:UIControlStateNormal];
     [saveButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(saveItem:) forControlEvents:UIControlEventTouchUpInside];
     saveButton.backgroundColor = [UIColor clearColor];
@@ -297,21 +310,23 @@
     noteView.backgroundColor = numberColor;
     self.noteView = noteView;
     [self.view addSubview:noteView];
-    UILabel *noteTitle = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 25, 3, 50, 18)];
+    UILabel *noteTitle = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 25, 3, 50, 17)];
     noteTitle.backgroundColor = [UIColor clearColor];
     UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                  @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
                                                    UIFontDescriptorNameAttribute:@"HelveticaNeue",
-                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 17.0f]
+                                                   UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
                                                    }];
     [noteTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
     [noteTitle setText:@"备 注"];
     [noteTitle setTextColor:[UIColor whiteColor]];
     noteTitle.textAlignment = NSTextAlignmentCenter;
     
-    
-    UIButton *finishNoteButton = [[UIButton alloc] initWithFrame:CGRectMake(noteView.frame.size.width - 70, noteView.frame.size.height - 40, 70, 44)];
-    [finishNoteButton setTitle:@"完成" forState:UIControlStateNormal];
+
+    UIButton *finishNoteButton = [[UIButton alloc] initWithFrame:CGRectMake(noteView.frame.size.width - 70, noteView.frame.size.height - btnHeight +4, 70, btnHeight)];
+    [finishNoteButton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
+    [finishNoteButton setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 2, 15)];
+//    [finishNoteButton setTitle:@"完成" forState:UIControlStateNormal];
     finishNoteButton.layer.cornerRadius = 4.0f;
     [finishNoteButton setBackgroundColor:[UIColor colorWithRed:242/255.0f green:191/255.0f blue:109/255.0f alpha:1.0f]];
     [finishNoteButton addTarget:self action:@selector(finishNote) forControlEvents:UIControlEventTouchUpInside];
@@ -341,7 +356,7 @@
 
 -(void)updateNotePad
 {
-    [self.noteDoneButton setFrame:CGRectMake(self.noteView.frame.size.width - 70, self.noteView.frame.size.height - 40, 70, 44)];
+    [self.noteDoneButton setFrame:CGRectMake(self.noteView.frame.size.width - 70, self.noteView.frame.size.height - btnHeight + 4, 70, btnHeight)];
     [self.noteBody setFrame:CGRectMake(20, 25, SCREEN_WIDTH-40, self.noteView.frame.size.height - 25 - self.noteDoneButton.frame.size.height)];
     
 }
@@ -941,6 +956,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 

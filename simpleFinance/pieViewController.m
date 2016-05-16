@@ -532,7 +532,7 @@
     PNPieChartDataItem *oneItemOfPie = (PNPieChartDataItem *)self.timeWindowCategories[indexPath.row];
     category = oneItemOfPie.textDescription;
     categoryColor = oneItemOfPie.color;
-    money = [NSString stringWithFormat:@"%.2f    |",oneItemOfPie.value];
+    money = [NSString stringWithFormat:@"%.2f    ",oneItemOfPie.value];
     moneyRatio = [NSString stringWithFormat:@"%.2f%%",[self.pieChart ratioForItemAtIndex:indexPath.row] * 100];
 
     [cell.categoryName setText:category];

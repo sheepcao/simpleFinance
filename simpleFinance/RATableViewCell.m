@@ -30,6 +30,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *expenseLabel;
 @property (weak, nonatomic) IBOutlet UILabel *surplusLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *expandImage;
+@property (weak, nonatomic) IBOutlet UILabel *incomeTitle;
+@property (weak, nonatomic) IBOutlet UILabel *expenseTitle;
+@property (weak, nonatomic) IBOutlet UILabel *surplusTitle;
 
 
 @end
@@ -44,7 +47,7 @@
     self.selectedBackgroundView.backgroundColor = [UIColor clearColor];
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.2].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.012].CGColor, nil];
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.13].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.012].CGColor, nil];
     
     gradientLayer.startPoint = CGPointMake(0.0f, 1.0f);
     gradientLayer.endPoint = CGPointMake(0.0f, 0.0f);
@@ -55,19 +58,31 @@
 
 
 
-- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense
+- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense andColor:(UIColor *)myColor
 {
+
+    [self.customTitleLabel setTextColor:myColor];
+    [self.incomeLabel setTextColor:myColor];
+    [self.expenseLabel setTextColor:myColor];
+    [self.surplusLabel setTextColor:myColor];
+    [self.incomeTitle setTextColor:myColor];
+    [self.expenseTitle setTextColor:myColor];
+    [self.surplusTitle setTextColor:myColor];
+
+
+    
+    
     self.customTitleLabel.text = title;
-    self.expenseLabel.text = [NSString stringWithFormat:@"支出:%@",expense];
-    self.incomeLabel.text =  [NSString stringWithFormat:@"收入:%@",income];;
-    self.surplusLabel.text = [NSString stringWithFormat:@"结余:%.2f", [income doubleValue] - [expense doubleValue]];
+    self.expenseLabel.text = [NSString stringWithFormat:@"%@",expense];
+    self.incomeLabel.text =  [NSString stringWithFormat:@"%@",income];;
+    self.surplusLabel.text = [NSString stringWithFormat:@"%.2f", [income doubleValue] - [expense doubleValue]];
 
     
     if (isExpanded) {
-        [self.expandImage setImage:[UIImage imageNamed:@"minus1.png"]];
+        [self.expandImage setImage:[UIImage imageNamed:@"return"]];
     }else
     {
-        [self.expandImage setImage:[UIImage imageNamed:@"plus1.png"]];
+        [self.expandImage setImage:[UIImage imageNamed:@"expend"]];
     }
     
     if (childCount == 0) {
@@ -88,13 +103,13 @@
 - (void)goExpendAnimated:(BOOL)animated
 {
     [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
-        [self.expandImage setImage:[UIImage imageNamed:@"minus1.png"]];
+        [self.expandImage setImage:[UIImage imageNamed:@"return"]];
     }];
 }
 - (void)goCollapseAnimated:(BOOL)animated
 {
     [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
-        [self.expandImage setImage:[UIImage imageNamed:@"plus1.png"]];
+        [self.expandImage setImage:[UIImage imageNamed:@"expend"]];
     }];
 }
 

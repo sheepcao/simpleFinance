@@ -103,7 +103,7 @@
 
 -(void)configLastBackupView
 {
-    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height + (SCREEN_HEIGHT - 480) /2, SCREEN_WIDTH, 200)];
+    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height + (SCREEN_HEIGHT - 480) /3, SCREEN_WIDTH, 200)];
     self.firstBackupView = content;
     
     UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 120, 5, 240, 150)];
@@ -194,17 +194,33 @@
 //    midLine.backgroundColor = [UIColor whiteColor];
 //    [content addSubview:midLine];
     
-    UIButton *uploadButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/2 - 120)/2,  content.frame.size.height/2 - 60, 120, 120)];
-    [uploadButton setTitle:@"备份至云端" forState:UIControlStateNormal];
-    uploadButton.backgroundColor = [UIColor colorWithRed:.92 green:.65 blue:.29 alpha:.85];
+    UIButton *uploadButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/6)/2,  content.frame.size.height/2 - (SCREEN_WIDTH/3)/0.83, SCREEN_WIDTH/3, (SCREEN_WIDTH/3)/0.83)];
+    [uploadButton setImage:[UIImage imageNamed:@"backup"] forState:UIControlStateNormal];
+    uploadButton.backgroundColor = [UIColor clearColor];
     [uploadButton addTarget:self action:@selector(uploadData) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:uploadButton];
     
-    UIButton *downLoadButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 +(SCREEN_WIDTH/2 - 120)/2, content.frame.size.height/2 - 60, 120, 120)];
-    [downLoadButton setTitle:@"同步到本地" forState:UIControlStateNormal];
-    downLoadButton.backgroundColor = [UIColor colorWithRed:.92 green:.65 blue:.29 alpha:.85];
+    UILabel *uploadText = [[UILabel alloc] initWithFrame:CGRectMake(uploadButton.frame.origin.x, uploadButton.frame.origin.y+uploadButton.frame.size.height + 2, uploadButton.frame.size.width, 20)];
+    uploadText.font = [UIFont fontWithName:@"HelveticaNeue" size:16.0f];
+    [uploadText setTextColor:self.myTextColor];
+    [uploadText setText:@"备份至云端"];
+    uploadText.textAlignment = NSTextAlignmentCenter;
+    [content addSubview:uploadText];
+    
+    UIButton *downLoadButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 +(SCREEN_WIDTH/6)/2, content.frame.size.height/2 - (SCREEN_WIDTH/3)/0.83, SCREEN_WIDTH/3, (SCREEN_WIDTH/3)/0.83)];
+    [downLoadButton setImage:[UIImage imageNamed:@"download"] forState:UIControlStateNormal];
+    downLoadButton.backgroundColor = [UIColor clearColor];
+
+//    [downLoadButton setTitle:@"同步到本地" forState:UIControlStateNormal];
     [downLoadButton addTarget:self action:@selector(downloadData) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:downLoadButton];
+    
+    UILabel *downText = [[UILabel alloc] initWithFrame:CGRectMake(downLoadButton.frame.origin.x, downLoadButton.frame.origin.y+downLoadButton.frame.size.height + 2, downLoadButton.frame.size.width, 20)];
+    downText.font = [UIFont fontWithName:@"HelveticaNeue" size:16.0f];
+    [downText setTextColor:self.myTextColor];
+    [downText setText:@"同步到本地"];
+    downText.textAlignment = NSTextAlignmentCenter;
+    [content addSubview:downText];
     
     [self.view addSubview:content];
     

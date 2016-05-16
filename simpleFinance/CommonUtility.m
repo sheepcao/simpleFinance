@@ -584,27 +584,31 @@
     registerButtonView.userInteractionEnabled=YES;
     UIImageView *sheenImageView = (UIImageView *)[registerButtonView viewWithTag:11];
     if (!sheenImageView) {
-         sheenImageView= [[UIImageView alloc] initWithFrame:CGRectMake(-15, 0, 86, registerButtonView.frame.size.height)];
+         sheenImageView= [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 86, registerButtonView.frame.size.height)];
         [sheenImageView setImage:[UIImage imageNamed:@"glow.png"]];
+        sheenImageView.layer.masksToBounds = YES;
         sheenImageView.tag = 11;
         [sheenImageView setAlpha:0.0];
         [registerButtonView addSubview:sheenImageView];
         [registerButtonView setNeedsDisplay];
     }else
     {
-       [sheenImageView setFrame:CGRectMake(-15, 0, 86, registerButtonView.frame.size.height)];
+       [sheenImageView setFrame:CGRectMake(0, 0, 86, registerButtonView.frame.size.height)];
     }
     
-    [UIView animateKeyframesWithDuration:3.5 delay:0.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear  | UIViewKeyframeAnimationOptionRepeat animations:^{
-        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.02 animations:^{
+    [UIView animateKeyframesWithDuration:3.5 delay:1.5 options:UIViewKeyframeAnimationOptionCalculationModeLinear  | UIViewKeyframeAnimationOptionRepeat animations:^{
+        [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.01 animations:^{
+            sheenImageView.layer.cornerRadius = 0;
             [sheenImageView setAlpha:1.0];
         }];
-        [UIView addKeyframeWithRelativeStartTime:0.02 relativeDuration:0.25 animations:^{
-            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86,registerButtonView.frame.size.height)];
+        [UIView addKeyframeWithRelativeStartTime:0.01 relativeDuration:0.15 animations:^{
+            sheenImageView.layer.cornerRadius = 0;
+            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-86, 0, 86,registerButtonView.frame.size.height)];
         }];
-        [UIView addKeyframeWithRelativeStartTime:0.25 relativeDuration:0.27 animations:^{
+        [UIView addKeyframeWithRelativeStartTime:0.15 relativeDuration:0.16 animations:^{
+            sheenImageView.layer.cornerRadius = sheenImageView.frame.size.height/2;
             [sheenImageView setAlpha:0.0];
-            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-67, 0, 86,registerButtonView.frame.size.height)];
+            [sheenImageView setFrame:CGRectMake(registerButtonView.frame.size.width-86, 0, 86,registerButtonView.frame.size.height)];
         }];
     } completion:^(BOOL finished) {
 

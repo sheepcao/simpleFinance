@@ -21,7 +21,7 @@
     // Configure the view for the selected state
 }
 
-- (void)setupWithCategory:(NSString *)category andDescription:(NSString *)description andIncome:(NSString *)income andExpense:(NSString *)expense
+- (void)setupWithCategory:(NSString *)category andDescription:(NSString *)description andIncome:(NSString *)income andExpense:(NSString *)expense andColor:(UIColor *)myColor
 {
     if (!description || [description isEqualToString:@""]) {
         self.categoryLabel.text = category;
@@ -60,12 +60,13 @@
             [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:rangeSecondPart];
             [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0] range:rangeFirstPart];
             
-            [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0f] range:rangeSecondPart];
+//            [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0f] range:rangeSecondPart];
         } else
         {
             [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0] range:NSMakeRange(0, attributedText.length)];
-            [attributedText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.94 green:0.94 blue:0.94 alpha:1.0f] range:NSMakeRange(0, attributedText.length)];
         }
+        [attributedText addAttribute:NSForegroundColorAttributeName value:myColor range:NSMakeRange(0, attributedText.length)];
+
         self.categoryLabel.attributedText = attributedText;
     }
     

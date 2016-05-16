@@ -105,9 +105,9 @@
         return 70;
     }else if(level == 1)
     {
-        return 48;
+        return 50;
     }
-    return 40;
+    return 26;
 }
 
 
@@ -169,17 +169,17 @@
     UITableViewCell * cell1;
     if (level == 0) {
         RATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([RATableViewCell class])];
-        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.income andExpense:dataObject.expense];
+        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.income andExpense:dataObject.expense andColor:self.myTextColor];
         cell1 = cell;
     }else if(level == 1)
     {
         dayRATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([dayRATableViewCell class])];
-        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.income andExpense:dataObject.expense];
+        [cell setupWithTitle:dataObject.name childCount:numberOfChildren level:level isExpanded:expanded andIncome:dataObject.income andExpense:dataObject.expense andColor:self.myTextColor];
         cell1 = cell;
     }else if (level == 2)
     {
         itemRATableViewCell *cell = [self.treeView dequeueReusableCellWithIdentifier:NSStringFromClass([itemRATableViewCell class])];
-        [cell setupWithCategory:dataObject.name andDescription:dataObject.dataDescription andIncome:dataObject.income andExpense:dataObject.expense];
+        [cell setupWithCategory:dataObject.name andDescription:dataObject.dataDescription andIncome:dataObject.income andExpense:dataObject.expense andColor:self.myTextColor];
         cell1 = cell;
     }
     

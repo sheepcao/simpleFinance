@@ -206,7 +206,7 @@
 }
 -(void)configSortView
 {
-    UIView *sortView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, topRowHeight, SCREEN_WIDTH/3+10, 180)];
+    UIView *sortView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, topRowHeight, SCREEN_WIDTH/3+10, 150)];
     sortView.layer.cornerRadius = 8;
     sortView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.9 alpha:1.0];
     [self.view addSubview:sortView];
@@ -224,7 +224,7 @@
         sortBtn.tag = i+1;
         [sortBtn addTarget:self action:@selector(sortTypeChange:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIImageView *selectedImage = [[UIImageView alloc] initWithFrame:CGRectMake(sortBtn.frame.size.width-40, sortBtn.frame.size.height/2 - 20 + i*sortView.frame.size.height/3, 40, 40)];
+        UIImageView *selectedImage = [[UIImageView alloc] initWithFrame:CGRectMake(sortBtn.frame.size.width-35, sortBtn.frame.size.height/2 - 12.5 + i*sortView.frame.size.height/3, 25, 25)];
         selectedImage.tag = i+1+10;
         NSArray *sortKeys = @[@"category_id",@"recently create",@"usage"];
         NSString*sortType = [[NSUserDefaults standardUserDefaults] objectForKey:@"sortType"];
@@ -232,10 +232,10 @@
         
         if  ([sortKeys[i] isEqualToString:sortType])
         {
-            [selectedImage setImage:[UIImage imageNamed:@"plus1.png"]];
+            [selectedImage setImage:[UIImage imageNamed:@"done.png"]];
         }else
         {
-            [selectedImage setImage:[UIImage imageNamed:@"delete1.png"]];
+            [selectedImage setImage:nil];
             
         }
         
@@ -250,10 +250,10 @@
     
     for (int i = 0; i<3; i++) {
         UIImageView *selected =(UIImageView *) [self.mySortView viewWithTag:(i+1+10)];
-        [selected setImage:[UIImage imageNamed:@"delete1.png"]];
+        [selected setImage:nil];
     }
     UIImageView *selected =(UIImageView *) [self.mySortView viewWithTag:(sender.tag + 10)];
-    [selected setImage:[UIImage imageNamed:@"plus1.png"]];
+    [selected setImage:[UIImage imageNamed:@"done.png"]];
     
     [[NSUserDefaults standardUserDefaults] setObject:sortKeys[sender.tag -1] forKey:@"sortType"];
     
@@ -301,13 +301,17 @@
     
     UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2-1, bottomHeight)];
     self.myDeleteButton = deleteButton;
-    UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, bottomHeight)];
     [deleteButton setTitle:@"删减" forState:UIControlStateNormal];
-    [addNewButton setTitle:@"添加" forState:UIControlStateNormal];
     deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     deleteButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, bottomHeight)];
+//    [addNewButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -addNewButton.frame.size.width, 0, 0)];
+//    [addNewButton setImageEdgeInsets:UIEdgeInsetsMake(bottomHeight/6, addNewButton.frame.size.width /4, bottomHeight/6, addNewButton.frame.size.width *3/4 - bottomHeight*2/3)];
+//    [addNewButton setImage:[UIImage imageNamed:@"expend"] forState:UIControlStateNormal];
+    [addNewButton setTitle:@"添加" forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
-    addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+//    addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     [deleteButton addTarget:self action:@selector(deleteItem:) forControlEvents:UIControlEventTouchUpInside];
     [addNewButton addTarget:self action:@selector(addItem:) forControlEvents:UIControlEventTouchUpInside];
@@ -369,7 +373,9 @@
     [inputCategoryView addSubview:self.inputField];
     
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.inputView.frame.size.width-60, (self.inputView.frame.size.height -40)/2, 40, 40)];
-    [doneButton setTitle:@"OK" forState:UIControlStateNormal];
+    [doneButton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
+    [doneButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+//    [doneButton setTitle:@"OK" forState:UIControlStateNormal];
     [doneButton addTarget:self action:@selector(addNewCategory) forControlEvents:UIControlEventTouchUpInside];
     
     [inputCategoryView addSubview:doneButton];
@@ -527,6 +533,7 @@
 -(void)showDelete:(UIButton *)sender
 {
     [sender setTitle:@"取消" forState:UIControlStateNormal];
+    [sender setTitleColor:[UIColor colorWithRed:253/255.0f green:197/255.0f blue:65/255.0f alpha:1.0f] forState:UIControlStateNormal];
     willShowDeleteBtn = YES;
     [self.categoryTableView reloadData];
     
@@ -534,6 +541,10 @@
 -(void)hideDelete:(UIButton *)sender
 {
     [sender setTitle:@"删减" forState:UIControlStateNormal];
+//    sender.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 130);
+//    [sender setImage:[UIImage imageNamed:@"trush"] forState:UIControlStateNormal];
+    [sender setTitleColor:self.myTextColor forState:UIControlStateNormal];
+
     willShowDeleteBtn = NO;
     [self.categoryTableView reloadData];
     

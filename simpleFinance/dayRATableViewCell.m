@@ -24,22 +24,40 @@
     self.selectedBackgroundView = [UIView new];
     self.selectedBackgroundView.backgroundColor = [UIColor clearColor];
     
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    gradientLayer.colors = [NSArray arrayWithObjects:(id)[UIColor colorWithWhite:1.0 alpha:0.041].CGColor, (id)[UIColor colorWithWhite:1.0 alpha:0.008].CGColor, nil];
+    
+    gradientLayer.startPoint = CGPointMake(0.0f, 1.0f);
+    gradientLayer.endPoint = CGPointMake(0.0f, 0.0f);
+    self.layer.mask = gradientLayer;
+    [self.layer insertSublayer:gradientLayer atIndex:0];
+    
 }
 
 
-- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense
+- (void)setupWithTitle:(NSString *)title childCount:(NSInteger)childCount level:(NSInteger)level isExpanded:(BOOL)isExpanded  andIncome:(NSString *)income andExpense:(NSString *)expense andColor:(UIColor *)myColor
 {
-    self.customTitleLabel.text = title;
-    self.expenseLabel.text = [NSString stringWithFormat:@"支出:%@",expense];
-    self.incomeLabel.text =  [NSString stringWithFormat:@"收入:%@",income];;
+    
+    
+    [self.customTitleLabel setTextColor:myColor];
+    [self.incomeLabel setTextColor:myColor];
+    [self.expenseLabel setTextColor:myColor];
+    [self.incomeTitle setTextColor:myColor];
+    [self.expenseTitle setTextColor:myColor];
+
+    
+    self.customTitleLabel.text = [title stringByAppendingString:@"日"];
+    self.expenseLabel.text = [NSString stringWithFormat:@"%@",expense];
+    self.incomeLabel.text =  [NSString stringWithFormat:@"%@",income];;
 
     self.backgroundColor = [UIColor clearColor];
     
     if (isExpanded) {
-        [self.expandImage setImage:[UIImage imageNamed:@"minus1.png"]];
+        [self.expandImage setImage:[UIImage imageNamed:@"return"]];
     }else
     {
-        [self.expandImage setImage:[UIImage imageNamed:@"plus1.png"]];
+        [self.expandImage setImage:[UIImage imageNamed:@"expend"]];
     }
     
 
@@ -51,13 +69,13 @@
 - (void)goExpendAnimated:(BOOL)animated
 {
     [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
-        [self.expandImage setImage:[UIImage imageNamed:@"minus1.png"]];
+        [self.expandImage setImage:[UIImage imageNamed:@"return"]];
     }];
 }
 - (void)goCollapseAnimated:(BOOL)animated
 {
     [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
-        [self.expandImage setImage:[UIImage imageNamed:@"plus1.png"]];
+        [self.expandImage setImage:[UIImage imageNamed:@"expend"]];
     }];
 }
 
