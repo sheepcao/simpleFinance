@@ -45,7 +45,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ycQ-BJ-LHx">
-                        <rect key="frame" x="31" y="8.5" width="110" height="53.5"/>
+                        <rect key="frame" x="39" y="12.5" width="110" height="53.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="53.5" id="UEl-re-1t0"/>
                             <constraint firstAttribute="width" constant="110" id="pal-MM-bXk"/>
@@ -55,10 +55,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="expend.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Sj-eO-QvF">
-                        <rect key="frame" x="5" y="25" width="20" height="20"/>
+                        <rect key="frame" x="8" y="26.5" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="A0E-iT-wcH"/>
-                            <constraint firstAttribute="width" constant="20" id="fLU-2N-3cO"/>
+                            <constraint firstAttribute="height" constant="25" id="A0E-iT-wcH"/>
+                            <constraint firstAttribute="width" constant="25" id="fLU-2N-3cO"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收入:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oX9-pT-bnT">
@@ -93,12 +93,12 @@
                     <constraint firstItem="eYV-Zd-xTO" firstAttribute="width" secondItem="oX9-pT-bnT" secondAttribute="width" id="BDa-0a-TTf"/>
                     <constraint firstItem="eYV-Zd-xTO" firstAttribute="centerY" secondItem="KTU-EX-Cpt" secondAttribute="centerY" id="DC6-8z-MZx"/>
                     <constraint firstItem="oX9-pT-bnT" firstAttribute="centerY" secondItem="NXj-XG-PUq" secondAttribute="centerY" id="DCS-yF-scd"/>
-                    <constraint firstItem="1Sj-eO-QvF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DZF-Sg-qUu"/>
+                    <constraint firstItem="1Sj-eO-QvF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="4" id="DZF-Sg-qUu"/>
                     <constraint firstItem="KTU-EX-Cpt" firstAttribute="centerX" secondItem="NXj-XG-PUq" secondAttribute="centerX" id="GrY-nv-LfX"/>
                     <constraint firstItem="Ktq-DL-bUz" firstAttribute="centerX" secondItem="KTU-EX-Cpt" secondAttribute="centerX" id="KP3-Pq-Z18"/>
                     <constraint firstItem="eYV-Zd-xTO" firstAttribute="centerX" secondItem="oX9-pT-bnT" secondAttribute="centerX" id="KZo-1a-TRN"/>
                     <constraint firstItem="Ktq-DL-bUz" firstAttribute="width" secondItem="KTU-EX-Cpt" secondAttribute="width" id="Ljy-YZ-Alr"/>
-                    <constraint firstItem="1Sj-eO-QvF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-3" id="Mcg-g9-idN"/>
+                    <constraint firstItem="1Sj-eO-QvF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Mcg-g9-idN"/>
                     <constraint firstItem="Ktq-DL-bUz" firstAttribute="height" secondItem="KTU-EX-Cpt" secondAttribute="height" id="Mjf-ax-C84"/>
                     <constraint firstItem="Ktq-DL-bUz" firstAttribute="top" secondItem="KTU-EX-Cpt" secondAttribute="bottom" constant="1" id="P92-8Z-pct"/>
                     <constraint firstItem="KTU-EX-Cpt" firstAttribute="top" secondItem="NXj-XG-PUq" secondAttribute="bottom" constant="1" id="QYb-WA-u2W"/>

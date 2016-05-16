@@ -216,20 +216,20 @@
     UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [closeViewButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
-//    closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-    [closeViewButton setTitle:@"取消" forState:UIControlStateNormal];
+    [closeViewButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
+//    [closeViewButton setTitle:@"取消" forState:UIControlStateNormal];
     [closeViewButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
     
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 32, 40, 40)];
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-60, 26, 40, 40)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [saveButton setImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
-//    saveButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-        [saveButton setTitle:@"保存" forState:UIControlStateNormal];
+    [saveButton setImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
+    saveButton.imageEdgeInsets = UIEdgeInsetsMake(7, 8,7, 8);
+//        [saveButton setTitle:@"保存" forState:UIControlStateNormal];
     [saveButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(saveItem:) forControlEvents:UIControlEventTouchUpInside];
     saveButton.backgroundColor = [UIColor clearColor];

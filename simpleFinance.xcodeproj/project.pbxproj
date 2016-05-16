@@ -93,22 +93,22 @@
 		A490C19D1CBB822F006EEEF1 /* ChartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A490C19C1CBB822F006EEEF1 /* ChartTableViewCell.m */; };
 		A4A141201CE967B6003DF45B /* add1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141081CE967B6003DF45B /* add1.png */; };
 		A4A141211CE967B6003DF45B /* add2.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141091CE967B6003DF45B /* add2.png */; };
-		A4A141221CE967B6003DF45B /* add3.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1410A1CE967B6003DF45B /* add3.png */; };
 		A4A141231CE967B6003DF45B /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1410B1CE967B6003DF45B /* back.png */; };
-		A4A141241CE967B6003DF45B /* backup.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1410C1CE967B6003DF45B /* backup.png */; };
 		A4A141271CE967B6003DF45B /* done.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1410F1CE967B6003DF45B /* done.png */; };
-		A4A141281CE967B6003DF45B /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141101CE967B6003DF45B /* download.png */; };
-		A4A1412A1CE967B6003DF45B /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141121CE967B6003DF45B /* edit.png */; };
-		A4A1412B1CE967B6003DF45B /* expend.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141131CE967B6003DF45B /* expend.png */; };
 		A4A1412D1CE967B6003DF45B /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141151CE967B6003DF45B /* menu.png */; };
-		A4A1412E1CE967B6003DF45B /* pie.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141161CE967B6003DF45B /* pie.png */; };
-		A4A1412F1CE967B6003DF45B /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141171CE967B6003DF45B /* return.png */; };
-		A4A141301CE967B6003DF45B /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141181CE967B6003DF45B /* save.png */; };
-		A4A141311CE967B6003DF45B /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141191CE967B6003DF45B /* switch.png */; };
-		A4A141321CE967B6003DF45B /* switch1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1411A1CE967B6003DF45B /* switch1.png */; };
 		A4A141361CE967B6003DF45B /* trend.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1411E1CE967B6003DF45B /* trend.png */; };
 		A4A141371CE967B6003DF45B /* trush.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1411F1CE967B6003DF45B /* trush.png */; };
 		A4A141391CE9C39A003DF45B /* glow.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141381CE9C39A003DF45B /* glow.png */; };
+		A4A141421CEA1D58003DF45B /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1413A1CEA1D58003DF45B /* cancel.png */; };
+		A4A141441CEA1D58003DF45B /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1413C1CEA1D58003DF45B /* download.png */; };
+		A4A141451CEA1D58003DF45B /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1413D1CEA1D58003DF45B /* edit.png */; };
+		A4A141481CEA1D58003DF45B /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141401CEA1D58003DF45B /* switch.png */; };
+		A4A141491CEA1D58003DF45B /* backup.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141411CEA1D58003DF45B /* backup.png */; };
+		A4A1414D1CEA2122003DF45B /* pie.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1414C1CEA2122003DF45B /* pie.png */; };
+		A4A141571CEA2C0D003DF45B /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141561CEA2C0D003DF45B /* delete.png */; };
+		A4A1415B1CEA2E79003DF45B /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1415A1CEA2E79003DF45B /* save.png */; };
+		A4A141621CEA316B003DF45B /* expend.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141601CEA316B003DF45B /* expend.png */; };
+		A4A141631CEA316B003DF45B /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141611CEA316B003DF45B /* return.png */; };
 		A4ABB82F1CE7A14900EB4879 /* 上午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB8291CE7A14900EB4879 /* 上午.png */; };
 		A4ABB8311CE7A14900EB4879 /* 下午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB82B1CE7A14900EB4879 /* 下午.png */; };
 		A4ABB8331CE7A14900EB4879 /* 夜间.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB82D1CE7A14900EB4879 /* 夜间.png */; };
@@ -311,22 +311,22 @@
 		A490C19C1CBB822F006EEEF1 /* ChartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChartTableViewCell.m; sourceTree = "<group>"; };
 		A4A141081CE967B6003DF45B /* add1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add1.png; sourceTree = "<group>"; };
 		A4A141091CE967B6003DF45B /* add2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add2.png; sourceTree = "<group>"; };
-		A4A1410A1CE967B6003DF45B /* add3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add3.png; sourceTree = "<group>"; };
 		A4A1410B1CE967B6003DF45B /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
-		A4A1410C1CE967B6003DF45B /* backup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backup.png; sourceTree = "<group>"; };
 		A4A1410F1CE967B6003DF45B /* done.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = done.png; sourceTree = "<group>"; };
-		A4A141101CE967B6003DF45B /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
-		A4A141121CE967B6003DF45B /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
-		A4A141131CE967B6003DF45B /* expend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expend.png; sourceTree = "<group>"; };
 		A4A141151CE967B6003DF45B /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
-		A4A141161CE967B6003DF45B /* pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pie.png; sourceTree = "<group>"; };
-		A4A141171CE967B6003DF45B /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
-		A4A141181CE967B6003DF45B /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
-		A4A141191CE967B6003DF45B /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch.png; sourceTree = "<group>"; };
-		A4A1411A1CE967B6003DF45B /* switch1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch1.png; sourceTree = "<group>"; };
 		A4A1411E1CE967B6003DF45B /* trend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trend.png; sourceTree = "<group>"; };
 		A4A1411F1CE967B6003DF45B /* trush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trush.png; sourceTree = "<group>"; };
 		A4A141381CE9C39A003DF45B /* glow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glow.png; sourceTree = "<group>"; };
+		A4A1413A1CEA1D58003DF45B /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cancel.png; path = ../cancel.png; sourceTree = "<group>"; };
+		A4A1413C1CEA1D58003DF45B /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = download.png; path = ../download.png; sourceTree = "<group>"; };
+		A4A1413D1CEA1D58003DF45B /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edit.png; path = ../edit.png; sourceTree = "<group>"; };
+		A4A141401CEA1D58003DF45B /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch.png; path = ../switch.png; sourceTree = "<group>"; };
+		A4A141411CEA1D58003DF45B /* backup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backup.png; path = ../backup.png; sourceTree = "<group>"; };
+		A4A1414C1CEA2122003DF45B /* pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pie.png; sourceTree = "<group>"; };
+		A4A141561CEA2C0D003DF45B /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		A4A1415A1CEA2E79003DF45B /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
+		A4A141601CEA316B003DF45B /* expend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expend.png; sourceTree = "<group>"; };
+		A4A141611CEA316B003DF45B /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
 		A4ABB8291CE7A14900EB4879 /* 上午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午.png"; sourceTree = "<group>"; };
 		A4ABB82B1CE7A14900EB4879 /* 下午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午.png"; sourceTree = "<group>"; };
 		A4ABB82D1CE7A14900EB4879 /* 夜间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间.png"; sourceTree = "<group>"; };
@@ -750,22 +750,22 @@
 		A4A141071CE967B6003DF45B /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4A141601CEA316B003DF45B /* expend.png */,
+				A4A141611CEA316B003DF45B /* return.png */,
+				A4A1415A1CEA2E79003DF45B /* save.png */,
+				A4A141561CEA2C0D003DF45B /* delete.png */,
+				A4A1413A1CEA1D58003DF45B /* cancel.png */,
+				A4A1414C1CEA2122003DF45B /* pie.png */,
+				A4A1413C1CEA1D58003DF45B /* download.png */,
+				A4A1413D1CEA1D58003DF45B /* edit.png */,
+				A4A141401CEA1D58003DF45B /* switch.png */,
+				A4A141411CEA1D58003DF45B /* backup.png */,
 				A4A141081CE967B6003DF45B /* add1.png */,
 				A4A141091CE967B6003DF45B /* add2.png */,
-				A4A1410A1CE967B6003DF45B /* add3.png */,
 				A4A1410B1CE967B6003DF45B /* back.png */,
-				A4A1410C1CE967B6003DF45B /* backup.png */,
 				A4A1410F1CE967B6003DF45B /* done.png */,
 				A4A141381CE9C39A003DF45B /* glow.png */,
-				A4A141101CE967B6003DF45B /* download.png */,
-				A4A141121CE967B6003DF45B /* edit.png */,
-				A4A141131CE967B6003DF45B /* expend.png */,
 				A4A141151CE967B6003DF45B /* menu.png */,
-				A4A141161CE967B6003DF45B /* pie.png */,
-				A4A141171CE967B6003DF45B /* return.png */,
-				A4A141181CE967B6003DF45B /* save.png */,
-				A4A141191CE967B6003DF45B /* switch.png */,
-				A4A1411A1CE967B6003DF45B /* switch1.png */,
 				A4A1411E1CE967B6003DF45B /* trend.png */,
 				A4A1411F1CE967B6003DF45B /* trush.png */,
 			);
@@ -927,13 +927,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4A141241CE967B6003DF45B /* backup.png in Resources */,
-				A4A1412F1CE967B6003DF45B /* return.png in Resources */,
 				A4ABB8391CE8651700EB4879 /* 上午1.png in Resources */,
+				A4A141491CEA1D58003DF45B /* backup.png in Resources */,
 				A40F6BF81CE1CEC70010A0CE /* backupViewController.xib in Resources */,
+				A4A141631CEA316B003DF45B /* return.png in Resources */,
 				A40F6C281CE57B4A0010A0CE /* TermUseViewController.xib in Resources */,
 				A4ECE27D1CD62FC0000FF10D /* categoryManagementViewController.xib in Resources */,
 				A4CC246B1CBE8EC3007A94F1 /* delete1.png in Resources */,
+				A4A1415B1CEA2E79003DF45B /* save.png in Resources */,
 				A40F6C021CE456EC0010A0CE /* aboutViewController.xib in Resources */,
 				A4ABB8381CE8651700EB4879 /* 下午1.png in Resources */,
 				A40F6C081CE460380010A0CE /* shareViewController.xib in Resources */,
@@ -941,16 +942,14 @@
 				A4CC246D1CBE8EC3007A94F1 /* minus1.png in Resources */,
 				A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */,
 				A40F6BFD1CE338BB0010A0CE /* registerViewController.xib in Resources */,
-				A4A141311CE967B6003DF45B /* switch.png in Resources */,
 				A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
-				A4A1412B1CE967B6003DF45B /* expend.png in Resources */,
 				A457527A1CDB4FA40013EFBF /* itemRATableViewCell.xib in Resources */,
 				A45752701CDB35350013EFBF /* Info.plist in Resources */,
 				A45752751CDB42130013EFBF /* dayRATableViewCell.xib in Resources */,
 				A490C19A1CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf in Resources */,
 				A4ECE2861CDA2997000FF10D /* monthListViewController.xib in Resources */,
-				A4A141221CE967B6003DF45B /* add3.png in Resources */,
+				A4A141441CEA1D58003DF45B /* download.png in Resources */,
 				A4CC246E1CBE8EC3007A94F1 /* plus1.png in Resources */,
 				A4ABB83A1CE8651700EB4879 /* 夜间1.png in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
@@ -963,26 +962,27 @@
 				A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */,
 				A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
-				A4A141281CE967B6003DF45B /* download.png in Resources */,
 				A4CC247B1CC0D7DE007A94F1 /* calendarViewController.xib in Resources */,
 				A4ECE28B1CDA422B000FF10D /* baseViewController.xib in Resources */,
 				A4ABB8311CE7A14900EB4879 /* 下午.png in Resources */,
 				A40F6BEC1CE1767A0010A0CE /* logo.png in Resources */,
 				A4A141371CE967B6003DF45B /* trush.png in Resources */,
+				A4A141451CEA1D58003DF45B /* edit.png in Resources */,
 				A4A141231CE967B6003DF45B /* back.png in Resources */,
 				A4A141201CE967B6003DF45B /* add1.png in Resources */,
-				A4A141301CE967B6003DF45B /* save.png in Resources */,
-				A4A1412E1CE967B6003DF45B /* pie.png in Resources */,
 				A4CC24811CC4AFF8007A94F1 /* calendar1.png in Resources */,
 				A425B2D11CCF72400008BFE2 /* historyViewController.xib in Resources */,
-				A4A141321CE967B6003DF45B /* switch1.png in Resources */,
 				A4A141211CE967B6003DF45B /* add2.png in Resources */,
+				A4A141571CEA2C0D003DF45B /* delete.png in Resources */,
 				A4A141391CE9C39A003DF45B /* glow.png in Resources */,
 				A4ECE3311CDB3064000FF10D /* RATableViewCell.xib in Resources */,
 				A4CC246C1CBE8EC3007A94F1 /* equal1.png in Resources */,
+				A4A141481CEA1D58003DF45B /* switch.png in Resources */,
+				A4A141621CEA316B003DF45B /* expend.png in Resources */,
 				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
-				A4A1412A1CE967B6003DF45B /* edit.png in Resources */,
+				A4A141421CEA1D58003DF45B /* cancel.png in Resources */,
 				A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */,
+				A4A1414D1CEA2122003DF45B /* pie.png in Resources */,
 				A4ABB8331CE7A14900EB4879 /* 夜间.png in Resources */,
 				A40F6BEE1CE179EF0010A0CE /* loginViewController.xib in Resources */,
 				A4A1412D1CE967B6003DF45B /* menu.png in Resources */,

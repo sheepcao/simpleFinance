@@ -51,10 +51,10 @@
     
     self.centerButton.layer.cornerRadius = self.centerButton.frame.size.width/2;
     self.centerButton.layer.masksToBounds = NO;
-    self.centerButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.centerButton.layer.shadowColor = [UIColor colorWithRed:.23 green:.23 blue:.23 alpha:1.0f].CGColor;
     self.centerButton.layer.shadowOpacity = 1.0;
     self.centerButton.layer.shadowRadius = 1.5f;
-    self.centerButton.layer.shadowOffset = CGSizeMake(0.0f, 1.5f);
+    self.centerButton.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
 //    self.centerButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 10, 0);
     
     self.centerButton.titleLabel.layer.shadowColor =  [UIColor blackColor].CGColor;

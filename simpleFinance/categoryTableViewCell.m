@@ -99,8 +99,8 @@
 //        [categoryLabel categoryNormalColor];
         
         //for delete button
-        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(categoryLabel.frame.origin.x-5, categoryLabel.frame.origin.y-5, 20, 20)];
-        [deleteBtn setImage:[UIImage imageNamed:@"switchChart.png"] forState:UIControlStateNormal];
+        UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(categoryLabel.frame.origin.x-5, categoryLabel.frame.origin.y-5, 13, 13)];
+        [deleteBtn setImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
         deleteBtn.tag = 10 + 1 + i;
         [deleteBtn addTarget:self.categoryDelegate action:@selector(categoryDeleteTap:) forControlEvents:UIControlEventTouchUpInside];
         [deleteBtn setHidden:YES];
