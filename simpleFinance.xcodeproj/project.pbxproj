@@ -104,11 +104,11 @@
 		A4A141451CEA1D58003DF45B /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1413D1CEA1D58003DF45B /* edit.png */; };
 		A4A141481CEA1D58003DF45B /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141401CEA1D58003DF45B /* switch.png */; };
 		A4A141491CEA1D58003DF45B /* backup.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141411CEA1D58003DF45B /* backup.png */; };
-		A4A1414D1CEA2122003DF45B /* pie.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1414C1CEA2122003DF45B /* pie.png */; };
 		A4A141571CEA2C0D003DF45B /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141561CEA2C0D003DF45B /* delete.png */; };
 		A4A1415B1CEA2E79003DF45B /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A1415A1CEA2E79003DF45B /* save.png */; };
 		A4A141621CEA316B003DF45B /* expend.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141601CEA316B003DF45B /* expend.png */; };
 		A4A141631CEA316B003DF45B /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141611CEA316B003DF45B /* return.png */; };
+		A4A141671CEA3411003DF45B /* pie.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141661CEA3411003DF45B /* pie.png */; };
 		A4ABB82F1CE7A14900EB4879 /* 上午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB8291CE7A14900EB4879 /* 上午.png */; };
 		A4ABB8311CE7A14900EB4879 /* 下午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB82B1CE7A14900EB4879 /* 下午.png */; };
 		A4ABB8331CE7A14900EB4879 /* 夜间.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB82D1CE7A14900EB4879 /* 夜间.png */; };
@@ -143,6 +143,8 @@
 		A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2F01CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png */; };
 		A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2F11CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png */; };
 		A4E4A2F81CC9BE6000E36AFE /* FlatDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2F31CC9BE6000E36AFE /* FlatDatePicker.m */; };
+		A4E6DB1F1CEABE1A009CBA87 /* QR_cn1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB1D1CEABE1A009CBA87 /* QR_cn1.png */; };
+		A4E6DB201CEABE1A009CBA87 /* QR_en1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB1E1CEABE1A009CBA87 /* QR_en1.png */; };
 		A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */; };
 		A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */; };
 		A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */; };
@@ -322,11 +324,11 @@
 		A4A1413D1CEA1D58003DF45B /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edit.png; path = ../edit.png; sourceTree = "<group>"; };
 		A4A141401CEA1D58003DF45B /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = switch.png; path = ../switch.png; sourceTree = "<group>"; };
 		A4A141411CEA1D58003DF45B /* backup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backup.png; path = ../backup.png; sourceTree = "<group>"; };
-		A4A1414C1CEA2122003DF45B /* pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pie.png; sourceTree = "<group>"; };
 		A4A141561CEA2C0D003DF45B /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		A4A1415A1CEA2E79003DF45B /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		A4A141601CEA316B003DF45B /* expend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = expend.png; sourceTree = "<group>"; };
 		A4A141611CEA316B003DF45B /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = return.png; sourceTree = "<group>"; };
+		A4A141661CEA3411003DF45B /* pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pie.png; sourceTree = "<group>"; };
 		A4ABB8291CE7A14900EB4879 /* 上午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午.png"; sourceTree = "<group>"; };
 		A4ABB82B1CE7A14900EB4879 /* 下午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午.png"; sourceTree = "<group>"; };
 		A4ABB82D1CE7A14900EB4879 /* 夜间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间.png"; sourceTree = "<group>"; };
@@ -376,6 +378,8 @@
 		A4E4A2F11CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FlatDatePicker-Icon-Close@2x.png"; sourceTree = "<group>"; };
 		A4E4A2F21CC9BE6000E36AFE /* FlatDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatDatePicker.h; sourceTree = "<group>"; };
 		A4E4A2F31CC9BE6000E36AFE /* FlatDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatDatePicker.m; sourceTree = "<group>"; };
+		A4E6DB1D1CEABE1A009CBA87 /* QR_cn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR_cn1.png; sourceTree = "<group>"; };
+		A4E6DB1E1CEABE1A009CBA87 /* QR_en1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR_en1.png; sourceTree = "<group>"; };
 		A4E938DD1CCB4CF300D5DA77 /* itemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemDetailViewController.h; sourceTree = "<group>"; };
 		A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemDetailViewController.m; sourceTree = "<group>"; };
 		A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemDetailViewController.xib; sourceTree = "<group>"; };
@@ -750,12 +754,14 @@
 		A4A141071CE967B6003DF45B /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4E6DB1D1CEABE1A009CBA87 /* QR_cn1.png */,
+				A4E6DB1E1CEABE1A009CBA87 /* QR_en1.png */,
+				A4A141661CEA3411003DF45B /* pie.png */,
 				A4A141601CEA316B003DF45B /* expend.png */,
 				A4A141611CEA316B003DF45B /* return.png */,
 				A4A1415A1CEA2E79003DF45B /* save.png */,
 				A4A141561CEA2C0D003DF45B /* delete.png */,
 				A4A1413A1CEA1D58003DF45B /* cancel.png */,
-				A4A1414C1CEA2122003DF45B /* pie.png */,
 				A4A1413C1CEA1D58003DF45B /* download.png */,
 				A4A1413D1CEA1D58003DF45B /* edit.png */,
 				A4A141401CEA1D58003DF45B /* switch.png */,
@@ -943,6 +949,7 @@
 				A490C1931CB7B1B3006EEEF1 /* SideMenuViewController.xib in Resources */,
 				A40F6BFD1CE338BB0010A0CE /* registerViewController.xib in Resources */,
 				A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */,
+				A4E6DB201CEABE1A009CBA87 /* QR_en1.png in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
 				A457527A1CDB4FA40013EFBF /* itemRATableViewCell.xib in Resources */,
 				A45752701CDB35350013EFBF /* Info.plist in Resources */,
@@ -960,6 +967,7 @@
 				A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */,
 				A425B2D71CD086440008BFE2 /* trendViewController.xib in Resources */,
 				A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */,
+				A4A141671CEA3411003DF45B /* pie.png in Resources */,
 				A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */,
 				A42D1C941CB60AC900C208A0 /* Main.storyboard in Resources */,
 				A4CC247B1CC0D7DE007A94F1 /* calendarViewController.xib in Resources */,
@@ -982,7 +990,6 @@
 				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
 				A4A141421CEA1D58003DF45B /* cancel.png in Resources */,
 				A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */,
-				A4A1414D1CEA2122003DF45B /* pie.png in Resources */,
 				A4ABB8331CE7A14900EB4879 /* 夜间.png in Resources */,
 				A40F6BEE1CE179EF0010A0CE /* loginViewController.xib in Resources */,
 				A4A1412D1CE967B6003DF45B /* menu.png in Resources */,
@@ -990,6 +997,7 @@
 				A4ABB82F1CE7A14900EB4879 /* 上午.png in Resources */,
 				A4E4A2F51CC9BE6000E36AFE /* FlatDatePicker-Icon-Check@2x.png in Resources */,
 				A42D1CAE1CB657C300C208A0 /* summeryViewController.xib in Resources */,
+				A4E6DB1F1CEABE1A009CBA87 /* QR_cn1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -44,6 +44,7 @@
         [contentView addSubview:self.constellPicker];
         
         UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(8, 5, 40, 35)];
+//        [cancelBtn setTitleEdgeInsets:UIEdgeInsetsMake(15, 0, 15, 0)];
         [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [cancelBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
         cancelBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
@@ -58,10 +59,10 @@
         [cancelBtn addTarget:self.constellDelegate action:@selector(cancelConstellation) forControlEvents:UIControlEventTouchUpInside];
         [selectBtn addTarget:self.constellDelegate action:@selector(constellationChoose) forControlEvents:UIControlEventTouchUpInside];
         
-        UILabel *pickerTitle = [[UILabel alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 80, 5, 160, 41)];
+        UILabel *pickerTitle = [[UILabel alloc] initWithFrame:CGRectMake(contentView.frame.size.width/2 - 80, 5, 160, 32)];
         [pickerTitle setText:@"请选择您的星座"];
         pickerTitle.textAlignment = NSTextAlignmentCenter;
-        pickerTitle.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        pickerTitle.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
         
         [contentView addSubview:pickerTitle];
         

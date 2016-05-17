@@ -283,23 +283,27 @@
     self.pieChart.delegate = self;
     [pieView addSubview:self.pieChart];
     
-    self.centerLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.pieChart.innerCircleRadius*2, self.pieChart.innerCircleRadius*2)];
+    self.centerLabel = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, (self.pieChart.innerCircleRadius+2)*2, (self.pieChart.innerCircleRadius+2)*2)];
     [self.centerLabel setCenter:CGPointMake(self.pieChart.center.x, self.pieChart.center.y)];
-    self.centerLabel.layer.borderWidth = 1.0f;
-    self.centerLabel.layer.borderColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f].CGColor;
-    self.centerLabel.backgroundColor = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:194/255.0f alpha:1.0f];
+//    self.centerLabel.layer.borderWidth = 1.0f;
+//    self.centerLabel.layer.borderColor = [UIColor colorWithRed:0.88f green:0.88f blue:0.88f alpha:1.0f].CGColor;
+//    self.centerLabel.backgroundColor = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:194/255.0f alpha:1.0f];
     self.centerLabel.titleLabel.numberOfLines = 2;
     self.centerLabel.titleLabel.minimumScaleFactor = 0.8;
     
     self.centerLabel.layer.cornerRadius = self.centerLabel.frame.size.width/2;
-    self.centerLabel.layer.masksToBounds = YES;
-    self.centerLabel.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.centerLabel.layer.masksToBounds = NO;
+    self.centerLabel.layer.shadowColor = [UIColor colorWithRed:.23 green:.23 blue:.23 alpha:1.0f].CGColor;
+//    self.centerLabel.layer.shadowOpacity = 1.0;
+//    self.centerLabel.layer.shadowRadius = 1.5f;
     self.centerLabel.layer.shadowOpacity = 1.0;
     self.centerLabel.layer.shadowRadius = 1.5f;
-    self.centerLabel.layer.shadowOffset = CGSizeMake(0.0f, 1.5f);
-    self.centerLabel.layer.shadowColor =  [UIColor blackColor].CGColor;
-    self.centerLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
+    self.centerLabel.layer.shadowOffset = CGSizeMake(0.0f, 2.0f);
+    self.centerLabel.titleLabel.layer.shadowColor =  [UIColor blackColor].CGColor;
+    self.centerLabel.titleLabel.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
     [self.centerLabel addTarget:self action:@selector(switchMoneyType) forControlEvents:UIControlEventTouchUpInside];
+    [self.centerLabel setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+
     [pieView addSubview:self.centerLabel];
     
     [self makeMidText:self.moneyTypeSeg.selectedSegmentIndex ByMoney: [NSString stringWithFormat:@"%.0f",self.sumExpense]];

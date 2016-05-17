@@ -32,7 +32,7 @@
         [self addSubview:btn2];
         
         UIButton *btn3 = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width-btnHeight, 0, btnHeight, btnHeight)];
-        [btn3 setImage:[UIImage imageNamed:@"share_msg"] forState:UIControlStateNormal];
+        [btn3 setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
         [btn3 addEventHandler:^(id sender) {
             [_delegate XHDidClickShareBtn:ShareMsg];
         } forControlEvents:UIControlEventTouchUpInside];

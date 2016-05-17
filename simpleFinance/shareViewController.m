@@ -12,6 +12,7 @@
 #import <MessageUI/MessageUI.h>
 #import "topBarView.h"
 #import "global.h"
+#import "CommonUtility.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
@@ -36,7 +37,10 @@
     sao.text = @"扫码下载";
     [self.view addSubview:sao];
     
-    UIImageView *QRcode = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"logo.png"]];
+    UIImageView *QRcode = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"QR_en1"]];
+    if ([CommonUtility isSystemLangChinese]) {
+        [QRcode setImage:[UIImage imageNamed:@"QR_cn1"]];
+    }
     QRcode.frame = CGRectMake(size.width * 0.2, sao.frame.size.height + sao.frame.origin.y + 5,size.width * 0.6 , size.width * 0.6);
     [self.view addSubview:QRcode];
     
@@ -67,18 +71,20 @@
     [self.view addSubview:self.topBar];
     
     
-    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 22, 100, 50)];
-    [titileLabel setText:@"邀请好友"];
-    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
-    titileLabel.textAlignment = NSTextAlignmentCenter;
-    [titileLabel setTextColor:normalColor];
-    [self.topBar addSubview:titileLabel];
+    [self.topBar.titleLabel setText:@"邀请好友"];
+//    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 26, 100, 50)];
+//    [titileLabel setText:@"邀请好友"];
+//    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
+//    titileLabel.textAlignment = NSTextAlignmentCenter;
+//    [titileLabel setTextColor:normalColor];
+//    [self.topBar addSubview:titileLabel];
     
     
-    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-65, 30, 60, 40)];
+    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-58, 32, 40, 40)];
     changeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     changeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [changeButton setTitle:@"取消" forState:UIControlStateNormal];
+    [changeButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    changeButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
     [changeButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [changeButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     changeButton.backgroundColor = [UIColor clearColor];
@@ -134,7 +140,12 @@
     // 缩略图
     message.thumbnail = [UIImage imageNamed:@"switchChart.png"];
     message.desc = [NSString stringWithFormat:@"简单一点,一目了然。\n财务详情,了然于心"];
-    message.link=@"http://www.baidu.com";
+    if ([CommonUtility isSystemLangChinese]) {
+        message.link=REVIEW_URL_CN;
+    }else
+    {
+        message.link=REVIEW_URL;
+    }
     return message;
 }
 
@@ -197,11 +208,13 @@
 //    OSMessage *message = [self shareMessage];
 
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-    content.contentURL = [NSURL URLWithString:REVIEW_URL];
-//    content.contentTitle = message.title;
-//    content.contentDescription = message.desc;
-//    content.imageURL = [[NSBundle mainBundle]
-//                        URLForResource: @"logo" withExtension:@"png"];
+    if ([CommonUtility isSystemLangChinese]) {
+        content.contentURL = [NSURL URLWithString:REVIEW_URL_CN];
+    }else
+    {
+        content.contentURL = [NSURL URLWithString:REVIEW_URL];
+    }
+
     return content;
 
 }

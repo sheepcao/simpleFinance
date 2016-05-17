@@ -314,7 +314,7 @@
 
 -(void)configShare
 {
-    [OpenShare connectQQWithAppId:@"1104406509"];
+    [OpenShare connectQQWithAppId:@"1105385156"];
     [OpenShare connectWeiboWithAppKey:@"3086417886"];
     [OpenShare connectWeixinWithAppId:@"wx0932d291dbf97131"];
 }

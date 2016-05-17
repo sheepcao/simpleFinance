@@ -63,7 +63,8 @@
 #define TextColor2 [UIColor colorWithRed:0.87 green:0.87 blue:0.87 alpha:1.0]
 #define TextColor3 [UIColor colorWithRed:0.78 green:0.78 blue:0.78 alpha:1.0]
 
-#define REVIEW_URL @"https://itunes.apple.com/cn/app/dota-quan-zi/id1028906602?ls=1&mt=8"
+#define REVIEW_URL @"https://itunes.apple.com/us/app/money-ongo/id1113936277?ls=1&mt=8"
+#define REVIEW_URL_CN @"https://itunes.apple.com/cn/app/money-ongo/id1113936277?ls=1&mt=8"
 
 #define ALLAPP_URL @"itms://itunes.apple.com/us/artist/cao-guangxu/id844914783"
 

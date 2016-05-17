@@ -157,7 +157,12 @@
         });
     }else if(indexPath.row == 2)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
+        if ([CommonUtility isSystemLangChinese]) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL_CN]];
+        }else
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
+        }
 
     }else if (indexPath.row == 3)
     {
