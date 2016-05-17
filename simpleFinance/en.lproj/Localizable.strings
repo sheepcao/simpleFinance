@@ -1,0 +1,49 @@
+/* 
+  Localizable.strings
+  simpleFinance
+
+  Created by Eric Cao on 5/17/16.
+  Copyright © 2016 sheepcao. All rights reserved.
+*/
+
+"统 计" = "Analyse";
+"走 势" = "Trend";
+
+"1" = "January";
+"2" = "February";
+"3" = "March";
+"4" = "April";
+"5" = "May";
+"6" = "June";
+"7" = "July";
+"8" = "August";
+"9" = "September";
+"10" = "October";
+"11" = "November";
+"12" = "December";
+
+"月支出" = "Expense";
+"月收入" = "Income";
+"月结余" = "Balance";
+
+"日支出" = "Expense";
+"日收入" = "Income";
+"日结余" = "Balance";
+
+"星期日" = "Sunday";
+"星期一" = "Monday";
+"星期二" = "Tuesday";
+"星期三" = "Wednesday";
+"星期四" = "Thursday";
+"星期五" = "Friday";
+"星期六" = "Saturday";
+
+"支出 > " = "Expense > ";
+"收入 > " = "Income > ";
+"本日尚无帐目记录" = "No Record";
+"自动调整" = "Auto Adjust";
+"显示模式" = "Model";
+"上午" = " A.M.";
+"下午" = " P.M.";
+"夜间" = "Night";
+

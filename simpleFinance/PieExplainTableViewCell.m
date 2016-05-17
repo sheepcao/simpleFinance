@@ -53,8 +53,8 @@
 
         //
         UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                     @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                       UIFontDescriptorNameAttribute:@"AvenirNext-Medium",
+                                                     @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                       UIFontDescriptorNameAttribute:@"HelveticaNeue-Medium",
                                                        UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize+1.6]
                                                        }];
         

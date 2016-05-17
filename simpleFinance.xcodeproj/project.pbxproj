@@ -145,6 +145,8 @@
 		A4E4A2F81CC9BE6000E36AFE /* FlatDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2F31CC9BE6000E36AFE /* FlatDatePicker.m */; };
 		A4E6DB1F1CEABE1A009CBA87 /* QR_cn1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB1D1CEABE1A009CBA87 /* QR_cn1.png */; };
 		A4E6DB201CEABE1A009CBA87 /* QR_en1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB1E1CEABE1A009CBA87 /* QR_en1.png */; };
+		A4E6DB2C1CEAFAEC009CBA87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB2E1CEAFAEC009CBA87 /* InfoPlist.strings */; };
+		A4E6DB351CEAFBA6009CBA87 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB371CEAFBA6009CBA87 /* Localizable.strings */; };
 		A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */; };
 		A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */; };
 		A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */; };
@@ -383,6 +385,15 @@
 		A4E6DB241CEAEAFA009CBA87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		A4E6DB261CEAEB04009CBA87 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		A4E6DB281CEAEB27009CBA87 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A4E6DB2D1CEAFAEC009CBA87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A4E6DB2F1CEAFB11009CBA87 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		A4E6DB301CEAFB11009CBA87 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		A4E6DB311CEAFB11009CBA87 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		A4E6DB321CEAFB21009CBA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A4E6DB361CEAFBA6009CBA87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A4E6DB381CEAFBA8009CBA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A4E6DB391CEAFBAA009CBA87 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A4E6DB3B1CEAFF2F009CBA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		A4E938DD1CCB4CF300D5DA77 /* itemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemDetailViewController.h; sourceTree = "<group>"; };
 		A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemDetailViewController.m; sourceTree = "<group>"; };
 		A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemDetailViewController.xib; sourceTree = "<group>"; };
@@ -627,6 +638,8 @@
 				A490C1991CBB4F6A006EEEF1 /* SourceHanSansCN-Normal.ttf */,
 				A42D1C8A1CB60AC900C208A0 /* main.m */,
 				A40F6BE51CE0356C0010A0CE /* PrefixHeader.pch */,
+				A4E6DB2E1CEAFAEC009CBA87 /* InfoPlist.strings */,
+				A4E6DB371CEAFBA6009CBA87 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -923,6 +936,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = A42D1C7D1CB60AC900C208A0;
 			productRefGroup = A42D1C871CB60AC900C208A0 /* Products */;
@@ -970,6 +984,7 @@
 				A4CC247F1CC4AFE1007A94F1 /* calendar.png in Resources */,
 				A4A141271CE967B6003DF45B /* done.png in Resources */,
 				A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */,
+				A4E6DB2C1CEAFAEC009CBA87 /* InfoPlist.strings in Resources */,
 				A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */,
 				A425B2D71CD086440008BFE2 /* trendViewController.xib in Resources */,
 				A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */,
@@ -993,6 +1008,7 @@
 				A4CC246C1CBE8EC3007A94F1 /* equal1.png in Resources */,
 				A4A141481CEA1D58003DF45B /* switch.png in Resources */,
 				A4A141621CEA316B003DF45B /* expend.png in Resources */,
+				A4E6DB351CEAFBA6009CBA87 /* Localizable.strings in Resources */,
 				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
 				A4A141421CEA1D58003DF45B /* cancel.png in Resources */,
 				A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */,
@@ -1153,6 +1169,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				A42D1C931CB60AC900C208A0 /* Base */,
+				A4E6DB2F1CEAFB11009CBA87 /* zh-Hans */,
+				A4E6DB3B1CEAFF2F009CBA87 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1161,8 +1179,29 @@
 			isa = PBXVariantGroup;
 			children = (
 				A42D1C981CB60AC900C208A0 /* Base */,
+				A4E6DB301CEAFB11009CBA87 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		A4E6DB2E1CEAFAEC009CBA87 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4E6DB2D1CEAFAEC009CBA87 /* Base */,
+				A4E6DB311CEAFB11009CBA87 /* zh-Hans */,
+				A4E6DB321CEAFB21009CBA87 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A4E6DB371CEAFBA6009CBA87 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4E6DB361CEAFBA6009CBA87 /* Base */,
+				A4E6DB381CEAFBA8009CBA87 /* en */,
+				A4E6DB391CEAFBAA009CBA87 /* zh-Hans */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

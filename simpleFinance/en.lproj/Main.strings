@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "本周财运"; ObjectID = "3fR-Xx-Re1"; */
+"3fR-Xx-Re1.text" = "Fortune";
+
+/* Class = "UILabel"; text = "账 簿"; ObjectID = "LxS-u4-T6t"; */
+"LxS-u4-T6t.text" = "Daily";
+
+/* Class = "UIButton"; normalTitle = "设置星座，随时掌握财运 >"; ObjectID = "dRK-kk-yKS"; */
+"dRK-kk-yKS.normalTitle" = "设置星座，随时掌握财运 >";

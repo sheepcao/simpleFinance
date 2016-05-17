@@ -289,7 +289,7 @@
                     <color key="textColor" red="0.96520353618421051" green="0.96520353618421051" blue="0.95834189967105265" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkx-9w-Upc">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rkx-9w-Upc">
                     <rect key="frame" x="67.5" y="66.5" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Rkx-9w-Upc" secondAttribute="height" multiplier="1:1" id="07k-mn-hwe"/>

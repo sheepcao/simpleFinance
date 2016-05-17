@@ -421,8 +421,8 @@
             NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"本日尚无帐目记录"];
             
             UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                         @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                           UIFontDescriptorNameAttribute:@"AvenirNext-Thin",
+                                                         @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                           UIFontDescriptorNameAttribute:@"HelveticaNeue",
                                                            UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
                                                            }];
             CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(5 * (CGFloat)M_PI / 180), 1, 0, 0);

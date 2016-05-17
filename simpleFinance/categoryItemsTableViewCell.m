@@ -27,8 +27,8 @@
 
         //
         UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                     @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                       UIFontDescriptorNameAttribute:@"AvenirNext-Medium",
+                                                     @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                       UIFontDescriptorNameAttribute:@"HelveticaNeue-Medium",
                                                        UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/21]
                                                        }];
         [self.money setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
@@ -54,8 +54,8 @@
     self.money.textColor = myColor;
     
     UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                          @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                            UIFontDescriptorNameAttribute:@"AvenirNext-Regular",
+                                                          @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                            UIFontDescriptorNameAttribute:@"HelveticaNeue-Medium",
                                                             UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/22]
                                                             }];
     

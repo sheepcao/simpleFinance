@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  simpleFinance
+
+  Created by Eric Cao on 5/17/16.
+  Copyright © 2016 sheepcao. All rights reserved.
+*/
+
+CFBundleDisplayName = "简簿";

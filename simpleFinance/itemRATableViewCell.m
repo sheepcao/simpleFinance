@@ -30,8 +30,8 @@
         NSString *itemDetail = [NSString stringWithFormat:@"%@ - %@",category,description];
         NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:itemDetail];
         UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                              @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                                UIFontDescriptorNameAttribute:@"AvenirNext-Regular",
+                                                              @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                                UIFontDescriptorNameAttribute:@"HelveticaNeue-Medium",
                                                                 UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 14]
                                                                 }];
         

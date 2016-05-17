@@ -437,8 +437,8 @@
     [pieButton setBackgroundColor:[UIColor clearColor]];
     [pieButton setImage:[UIImage imageNamed:@"pie.png"] forState:UIControlStateNormal];
     pieButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 15, 0);
-    UILabel *pieTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, pieButton.frame.size.height -15, pieButton.frame.size.width, 15)];
-    [pieTitle setText:@"统 计"];
+    UILabel *pieTitle = [[UILabel alloc] initWithFrame:CGRectMake(-5, pieButton.frame.size.height -15, pieButton.frame.size.width+10, 15)];
+    [pieTitle setText:NSLocalizedString(@"统 计",nil)];
     pieTitle.font =[UIFont fontWithName:@"SourceHanSansCN-Normal" size:10.0f];
     pieTitle.textAlignment = NSTextAlignmentCenter;
     [pieTitle setTextColor:normalColor];
@@ -452,8 +452,8 @@
     [TrendButton setBackgroundColor:[UIColor clearColor]];
     [TrendButton setImage:[UIImage imageNamed:@"trend.png"] forState:UIControlStateNormal];
     TrendButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 15, 0);
-    UILabel *trendTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, pieButton.frame.size.height -15, pieButton.frame.size.width, 15)];
-    [trendTitle setText:@"走 势"];
+    UILabel *trendTitle = [[UILabel alloc] initWithFrame:CGRectMake(-5, pieButton.frame.size.height -15, pieButton.frame.size.width+10, 15)];
+    [trendTitle setText:NSLocalizedString(@"走 势",nil)];
     trendTitle.font =[UIFont fontWithName:@"SourceHanSansCN-Normal" size:10.0f];
     trendTitle.textAlignment = NSTextAlignmentCenter;
     [trendTitle setTextColor:normalColor];
@@ -601,17 +601,15 @@
             categoryOnly = oneItem.itemCategory;
             description = oneItem.itemDescription;
             itemType = oneItem.itemType;
-//            if ([[description stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@" "]] isEqualToString:@""]) {
-//                description = @"无";
-//            }
+
             money = [NSString stringWithFormat:@"%.2f",(oneItem.moneyAmount)];
             itemTime = oneItem.createdTime;
             if (oneItem.itemType == 0)
             {
-                category = [@"支出 > " stringByAppendingString:categoryOnly];
+                category = [NSLocalizedString(@"支出 > ",nil) stringByAppendingString:categoryOnly];
             }else
             {
-                category = [@"收入 > " stringByAppendingString:categoryOnly];
+                category = [NSLocalizedString(@"收入 > ",nil) stringByAppendingString:categoryOnly];
             }
         }
         itemDetailVC.currentItemID = itemID;
@@ -714,14 +712,15 @@
                 cell.backgroundColor = [UIColor clearColor];
                 
                 cell.textLabel.textAlignment = NSTextAlignmentCenter;
+
             }
-            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"本日尚无帐目记录"];
+            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"本日尚无帐目记录",nil)];
             UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                         @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
-                                                           UIFontDescriptorNameAttribute:@"AvenirNext-Thin",
-                                                           UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
+                                                         @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
+                                                           UIFontDescriptorNameAttribute:@"HelveticaNeue",
+                                                           UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 21.0f]
                                                            }];
-            CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(5 * (CGFloat)M_PI / 180), 1, 0, 0);
+            CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(3 * (CGFloat)M_PI / 180), 1, 0, 0);
             attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
             [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:NSMakeRange(0, attributedText.length)];
             [attributedText addAttribute:NSUnderlineStyleAttributeName value:@1 range:NSMakeRange(0, attributedText.length)];
@@ -951,9 +950,9 @@
     } completion:nil ];
     
 
-    UILabel *autoChangeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, contentView.frame.size.height*2/5)];
-    [autoChangeTitle setText:@"自动调整"];
-    autoChangeTitle.textAlignment = NSTextAlignmentCenter;
+    UILabel *autoChangeTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 100, contentView.frame.size.height*2/5)];
+    [autoChangeTitle setText:NSLocalizedString(@"自动调整",nil) ];
+    autoChangeTitle.textAlignment = NSTextAlignmentLeft;
     [contentView addSubview:autoChangeTitle];
     
     UISwitch *enableAutoSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(contentView.frame.size.width-110, autoChangeTitle.frame.size.height/2 -20, 80, 40)];
@@ -971,8 +970,8 @@
     [enableAutoSwitch addTarget:self action:@selector(switchAction:) forControlEvents:UIControlEventValueChanged];
     
     UILabel *modelTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, contentView.frame.size.height*2/5, 80, contentView.frame.size.height*3/5)];
-    [modelTitle setText:@"显示模式"];
-    modelTitle.textAlignment = NSTextAlignmentCenter;
+    [modelTitle setText:NSLocalizedString(@"显示模式",nil)];
+    modelTitle.textAlignment = NSTextAlignmentLeft;
     [contentView addSubview:modelTitle];
     
     
@@ -982,9 +981,10 @@
     
     NSArray *timeTitle = @[@"上午",@"下午",@"夜间"];
     for (int i = 3; i>0; i--) {
-        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width - 55 - (3-i) *(40+10), contentView.frame.size.height*2/5 + modelTitle.frame.size.height/2 - 20, 40, 40)];
-        [timeButton setTitle:timeTitle[i - 1] forState:UIControlStateNormal];
-        timeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+        UIButton *timeButton = [[UIButton alloc] initWithFrame:CGRectMake(contentView.frame.size.width - 70 - (3-i) *(60+10), contentView.frame.size.height*2/5 + modelTitle.frame.size.height/2 - 20, 60, 40)];
+        timeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        [timeButton setTitle:NSLocalizedString(timeTitle[i - 1] ,nil)forState:UIControlStateNormal];
+        timeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
         [timeButton setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
         timeButton.tag = i;
         [timeButton addTarget:self action:@selector(timeSelect:) forControlEvents:UIControlEventTouchUpInside];
@@ -1021,7 +1021,7 @@
         UIView *superView = sender.superview;
         UIButton *button = (UIButton *)[superView viewWithTag:i];
         [button setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+        button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
         UIView *selectBar = (UIView *)[button viewWithTag:10];
         [selectBar setHidden:YES];
         

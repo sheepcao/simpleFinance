@@ -7,13 +7,14 @@
 //
 
 #import "summeryViewController.h"
+#import "CommonUtility.h"
 #import "calendarViewController.h"
 
 @interface summeryViewController ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *downLineHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *midLineHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *upLineHeight;
-
+@property (strong, nonatomic) UILabel *monthEn;
 
 @end
 
@@ -31,12 +32,22 @@
     [self.incomeTitle setTextColor:myColor];
     [self.expenseTitle setTextColor:myColor];
     [self.surplusTitle setTextColor:myColor];
+    [self.monthEn setTextColor:myColor];
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.monthEn = [[UILabel alloc] initWithFrame:CGRectMake(self.yearLabel.center.x - 62, self.yearLabel.frame.origin.y + self.yearLabel.frame.size.height, 126, 40)];
+    self.monthEn.font = [UIFont fontWithName:@"HelveticaNeue" size:22.5f];
+    self.monthEn.adjustsFontSizeToFitWidth = YES;
+    self.monthEn.textColor = normal;
+    self.monthEn.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.monthEn];
+    [self.monthEn setHidden:YES];
+    
     NSString *today;
     if (!self.historyDate || [self.historyDate isEqualToString:@""]) {
         today =self.todayDate;
@@ -57,6 +68,13 @@
         day = dateParts[2];
     }
     
+    if ([CommonUtility isSystemLangChinese]) {
+        [self.timeUnitLabel setHidden:NO];
+    }else
+    {
+        [self.timeUnitLabel setHidden:YES];
+    }
+    
     if (self.isShowDaily) {
         [self.timeUnitLabel setText:@"日"];
         [self.yearLabel setText:[NSString stringWithFormat:@"%@-%ld",year,(long)[month integerValue]]];
@@ -64,21 +82,31 @@
         [self.dateLabel setText:@""];
         [self.dateLabel setHidden:YES];
         [self.calendarButton setHidden:YES];
-        [self.expenseTitle setText:@"日支出"];
-        [self.incomeTitle setText:@"日收入"];
-        [self.surplusTitle setText:@"日结余"];
+        [self.expenseTitle setText:NSLocalizedString(@"日支出",nil)];
+        [self.incomeTitle setText:NSLocalizedString(@"日收入",nil)];
+        [self.surplusTitle setText:NSLocalizedString(@"日结余",nil)];
         
     }else
     {
+
         [self.timeUnitLabel setText:@"月"];
         [self.yearLabel setText:year];
-        [self.monthLabel setText:[NSString stringWithFormat:@"%ld",(long)[month integerValue]]];
+        NSString *monthNow = [NSString stringWithFormat:@"%ld",(long)[month integerValue]];
+        if ([CommonUtility isSystemLangChinese]) {
+            [self.monthLabel setText:monthNow];
+
+        }else
+        {
+            [self.monthLabel setHidden:YES];
+            [self.monthEn setHidden:NO];
+            [self.monthEn setText: NSLocalizedString(monthNow,nil)];
+        }
         [self.dateLabel setText:[self weekDayStr:today]];
         [self.dateLabel setHidden:NO];
         [self.calendarButton setHidden:NO];
-        [self.expenseTitle setText:@"月支出"];
-        [self.incomeTitle setText:@"月收入"];
-        [self.surplusTitle setText:@"月结余"];
+        [self.expenseTitle setText:NSLocalizedString(@"月支出",nil)];
+        [self.incomeTitle setText:NSLocalizedString(@"月收入",nil)];
+        [self.surplusTitle setText:NSLocalizedString(@"月结余",nil)];
     }
     
     NSLog(@"summeryViewController\viewDidLoad");
@@ -96,6 +124,7 @@
     
     //fit for daily or monthly
     
+
     
     [self.view layoutIfNeeded];
     
@@ -156,25 +185,25 @@
     NSInteger week = [weekdayComponents weekday];
     switch (week) {
         case 1:
-            weekDayStr = @"星期日";
+            weekDayStr = NSLocalizedString(@"星期日",nil);
             break;
         case 2:
-            weekDayStr = @"星期一";
+            weekDayStr = NSLocalizedString(@"星期一",nil);
             break;
         case 3:
-            weekDayStr = @"星期二";
+            weekDayStr = NSLocalizedString(@"星期二",nil);
             break;
         case 4:
-            weekDayStr = @"星期三";
+            weekDayStr =NSLocalizedString(@"星期三",nil) ;
             break;
         case 5:
-            weekDayStr = @"星期四";
+            weekDayStr = NSLocalizedString(@"星期四",nil);
             break;
         case 6:
-            weekDayStr = @"星期五";
+            weekDayStr = NSLocalizedString(@"星期五",nil);
             break;
         case 7:
-            weekDayStr = @"星期六";
+            weekDayStr = NSLocalizedString(@"星期六",nil);
             break;
         default:
             weekDayStr = @"";
