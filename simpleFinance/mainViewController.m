@@ -140,7 +140,7 @@
         moneyLuckSpace = moneyLuckSpace-38;
 
     }
-    NSLog(@"moneyLuckSpace---:%f",moneyLuckSpace);
+//    NSLog(@"moneyLuckSpace---:%f",moneyLuckSpace);
     
     if ([CommonUtility isSystemLangChinese]) {
         [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
@@ -194,6 +194,13 @@
     [self prepareData];
     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
     [self.maintableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+    [MobClick beginLogPageView:@"homePage"];
+
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"homePage"];
 }
 
 -(void)prepareData
@@ -307,7 +314,6 @@
 {
     
     NSString *Constellation = [[NSUserDefaults standardUserDefaults] objectForKey:@"Constellation"];
-    NSLog(@"~~~!!!!!~~~~~constellation:%@",Constellation);
     if (!Constellation) {
         [self.luckyText makeText:@"设置星座，随时掌握财运 >"];
         return;
@@ -335,6 +341,9 @@
 
 -(void)constellationChoose
 {
+    [MobClick event:@"setConstellation"];
+
+    
     NSString *constellationOnly = [constellationSelected componentsSeparatedByString:@" "][0];
 
     [[NSUserDefaults standardUserDefaults] setObject:constellationOnly forKey:@"Constellation"];
@@ -554,7 +563,6 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"didSelectRowAtIndexPath:%ld",(long)indexPath.section);
     
     if (indexPath.section == 0) {
         [self configConstellation:nil];
@@ -624,7 +632,6 @@
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"didDeselectRowAtIndexPath");
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if ([cell isKindOfClass:[myMaskTableViewCell class]]) {
         myMaskTableViewCell *itemCell = (myMaskTableViewCell *)cell;
@@ -694,12 +701,10 @@
     else if(indexPath.section == 1 && indexPath.row == self.todayItems.count)
     {
         
-        NSLog(@"row:%ld",(long)indexPath.row);
-        
         if (self.todayItems.count == 0)
         {
             NSString *CellIdentifier = @"emptyCell";
-            NSLog(@"row:%ld",(long)indexPath.row);
+//            NSLog(@"row:%ld",(long)indexPath.row);
             
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
@@ -774,7 +779,7 @@
     }else if(indexPath.section == 1 && indexPath.row <self.todayItems.count)
     {
         
-        NSLog(@"row:%ld",(long)indexPath.row);
+//        NSLog(@"row:%ld",(long)indexPath.row);
         NSString *CellItemIdentifier = @"Cell1";
         
         myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellItemIdentifier];
@@ -823,7 +828,6 @@
     }else
     {// 补全table content 的实际长度，以便可以滑上去
         NSString *CellIdentifier = @"Cell";
-        NSLog(@"row:%ld",(long)indexPath.row);
         
         myMaskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
@@ -882,26 +886,7 @@
         return;
 }
 
-//- (IBAction)skinChange:(UIButton *)sender {
-//    NSLog(@"skinChange");
-//    if (sender.tag == 1) {
-//        self.gradientView.inputColor0 = [UIColor darkGrayColor];
-//        self.gradientView.inputColor1 = [UIColor blackColor];
-//        [sender setTitle:@"白" forState:UIControlStateNormal];
-//        [self.gradientView setNeedsDisplay];
-//        sender.tag = 10;
-//
-//    }else
-//    {
-//        self.gradientView.inputColor0 = [UIColor colorWithRed:89/255.0f green:175/255.0f blue:185/255.0f alpha:1.0f];
-//        self.gradientView.inputColor1 = [UIColor colorWithRed:26/255.0f green:130/255.0f blue:195/255.0f alpha:1.0f];
-//        [sender setTitle:@"夜" forState:UIControlStateNormal];
-//        sender.tag = 1;
-//
-//        [self.gradientView setNeedsDisplay];
-//    }
-//
-//}
+
 
 - (IBAction)menuTapped:(id)sender {
     [self.menuContainerViewController toggleRightSideMenuCompletion:^{
@@ -915,7 +900,7 @@
 
 - (void)menuStateEventOccurred:(NSNotification *)notification {
     
-    NSLog(@"eventType:%@",[[notification userInfo] objectForKey:@"eventType"]);
+//    NSLog(@"eventType:%@",[[notification userInfo] objectForKey:@"eventType"]);
     
     
     if ([[[notification userInfo] objectForKey:@"eventType"] intValue] == MFSideMenuStateEventMenuDidClose) {
@@ -929,7 +914,6 @@
 
 -(void)switchMoneyChart:(UIButton *)sender
 {
-    NSLog(@"oooooo");
     isSwitchingChart = YES;
     
     
@@ -939,7 +923,8 @@
 
 -(void)showingModel
 {
-    NSLog(@"showing.....");
+    [MobClick event:@"showModel"];
+    
     UIView *dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     dimView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.7];
     [self.view addSubview:dimView];

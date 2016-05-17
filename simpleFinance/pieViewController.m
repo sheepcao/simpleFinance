@@ -60,7 +60,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [MobClick beginLogPageView:@"pieView"];
+
     if (isInitial) {
         isInitial = NO;
     }else
@@ -72,6 +73,13 @@
         [self.startLabel setText:self.startTime];
         [self.endLabel setText:self.endTime];
     }
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"pieView"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -392,6 +400,9 @@
     [self.dateView.flatDatePicker makeTitle];
 
     [self.dateView.flatDatePicker show];
+    
+    [MobClick event:@"changeTime"];
+
 }
 
 

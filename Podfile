@@ -5,6 +5,6 @@ pod 'PNChart’
 pod 'FMDB’
 pod 'RZTransitions'
 pod 'FSCalendar'
-
+pod 'UMengAnalytics-NO-IDFA'
 
 

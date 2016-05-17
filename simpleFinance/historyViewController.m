@@ -58,9 +58,16 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"historyHome"];
     [self prepareData];
     [self.maintableView reloadData];
     [self.maintableView setContentOffset:CGPointMake(0, 0)];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"historyHome"];
 }
 
 - (void)didReceiveMemoryWarning {

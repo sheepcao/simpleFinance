@@ -59,6 +59,17 @@
     [self.view addSubview:share];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"sharePage"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"sharePage"];
+}
+
 -(void)closeVC
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -94,6 +105,8 @@
 
 #pragma mark -- XHShareViewDelegate
 - (void) XHDidClickShareBtn:(ShareBtn)type{
+    [MobClick event:@"share"];
+
     switch (type) {
         case SharePyQuan:{
             // 分享到朋友圈

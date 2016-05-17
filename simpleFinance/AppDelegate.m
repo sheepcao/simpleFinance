@@ -14,7 +14,6 @@
 #import "OpenShareHeader.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-
 @interface AppDelegate ()
 @property (nonatomic,strong) FMDatabase *db;
 @end
@@ -314,6 +313,10 @@
 
 -(void)configShare
 {
+    [MobClick startWithAppkey:@"573ab031e0f55ac2c900313c" reportPolicy:REALTIME   channelId:nil];
+    [MobClick setAppVersion:VERSIONNUMBER];
+
+    
     [OpenShare connectQQWithAppId:@"1105385156"];
     [OpenShare connectWeiboWithAppKey:@"3086417886"];
     [OpenShare connectWeixinWithAppId:@"wx0932d291dbf97131"];

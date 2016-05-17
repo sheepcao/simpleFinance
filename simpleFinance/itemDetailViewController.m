@@ -38,6 +38,18 @@
                                                 forAction:RZTransitionAction_PresentDismiss];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"itemDetail"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"itemDetail"];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -203,6 +215,8 @@
         
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"永久删除这笔账目?" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"是的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [MobClick event:@"deleteItem"];
+
             db = [[CommonUtility sharedCommonUtility] db];
             if (![db open]) {
                 NSLog(@"mainVC/Could not open db.");

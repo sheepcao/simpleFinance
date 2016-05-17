@@ -63,6 +63,18 @@
     [self configTopbar];
     
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"categoryManage"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"categoryManage"];
+}
+
 -(void)dismissKeyboard {
     [self hideSortView];
     [self textFieldShouldReturn:self.inputField];
@@ -462,6 +474,8 @@
     NSLog(@"categoryButton.text:%@",categoryButton.titleLabel.text);
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"永久删除该类别?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"是的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [MobClick event:@"deleteCategory"];
+
         db = [[CommonUtility sharedCommonUtility] db];
         if (![db open]) {
             NSLog(@"mainVC/Could not open db.");
@@ -653,6 +667,8 @@
             [self.inputField resignFirstResponder];
             
             [self.categoryTableView reloadData];
+            
+            [MobClick event:@"addCategory"];
         }
     }
     [db close];

@@ -37,6 +37,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"aboutPage"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"aboutPage"];
+}
 
 -(void)configTopbar
 {
@@ -157,6 +167,8 @@
         });
     }else if(indexPath.row == 2)
     {
+        [MobClick event:@"reviewAPP"];
+
         if ([CommonUtility isSystemLangChinese]) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL_CN]];
         }else

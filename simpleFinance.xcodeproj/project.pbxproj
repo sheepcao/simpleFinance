@@ -380,6 +380,9 @@
 		A4E4A2F31CC9BE6000E36AFE /* FlatDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatDatePicker.m; sourceTree = "<group>"; };
 		A4E6DB1D1CEABE1A009CBA87 /* QR_cn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR_cn1.png; sourceTree = "<group>"; };
 		A4E6DB1E1CEABE1A009CBA87 /* QR_en1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QR_en1.png; sourceTree = "<group>"; };
+		A4E6DB241CEAEAFA009CBA87 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		A4E6DB261CEAEB04009CBA87 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		A4E6DB281CEAEB27009CBA87 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A4E938DD1CCB4CF300D5DA77 /* itemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemDetailViewController.h; sourceTree = "<group>"; };
 		A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemDetailViewController.m; sourceTree = "<group>"; };
 		A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemDetailViewController.xib; sourceTree = "<group>"; };
@@ -421,6 +424,9 @@
 		17A1F070A6A6E5B02514A53C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4E6DB281CEAEB27009CBA87 /* libsqlite3.tbd */,
+				A4E6DB261CEAEB04009CBA87 /* libz.tbd */,
+				A4E6DB241CEAEAFA009CBA87 /* CoreTelephony.framework */,
 				A40F6C2F1CE5A6A50010A0CE /* FBSDKShareKit.framework */,
 				A40F6C291CE5A6880010A0CE /* FBSDKCoreKit.framework */,
 				A40F6C2A1CE5A6880010A0CE /* FBSDKLoginKit.framework */,
@@ -1254,6 +1260,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/simpleFinance",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";
@@ -1298,6 +1305,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/simpleFinance",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch";

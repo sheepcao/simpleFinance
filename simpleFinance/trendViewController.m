@@ -80,11 +80,11 @@
     
     dispatch_source_set_event_handler(_timer, ^{
         
-        NSLog(@"done on custom background queue");
+//        NSLog(@"done on custom background queue");
         
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"done on main queue");
+//            NSLog(@"done on main queue");
             [self dataTypeChanged:nil];
         });
     });
@@ -92,6 +92,16 @@
     dispatch_resume(_timer);
     
     
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"trend"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"trend"];
 }
 -(void)viewDidAppear:(BOOL)animated
 {

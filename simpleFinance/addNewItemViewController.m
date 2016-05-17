@@ -99,9 +99,16 @@
     [self configEditingItem];
 }
 
--(void)viewWillAppear:(BOOL)animated
+
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [MobClick beginLogPageView:@"addNewItem"];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:@"addNewItem"];
 }
 
 -(void)prepareCategoryDataBy:(NSString *)key
@@ -678,6 +685,9 @@
     [self.noteBody resignFirstResponder];
     isInputingNote = NO;
     isAddingCategory = NO;
+    
+    [MobClick event:@"addNote"];
+
 }
 
 -(void)closeVC
@@ -705,6 +715,9 @@
         {
             [self.refreshDelegate refreshData];
             [self dismissViewControllerAnimated:YES completion:nil];
+            
+            [MobClick event:@"editItem"];
+
         }
     }else
     {
@@ -715,6 +728,13 @@
         }else
         {
             [self dismissViewControllerAnimated:YES completion:nil];
+            if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
+                [MobClick event:@"addItem"];
+            }else
+            {
+                [MobClick event:@"addItemIncome"];
+            }
+
         }
 
     }
@@ -917,8 +937,10 @@
             }];
             [self.view layoutIfNeeded];
             [self.inputField resignFirstResponder];
-            
             [self.categoryTableView reloadData];
+            
+            [MobClick event:@"addCategory"];
+
         }
     }
     [db close];
