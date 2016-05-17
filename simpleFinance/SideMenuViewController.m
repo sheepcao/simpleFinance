@@ -30,7 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.menuArray = @[@"同 步 | 备 份",@"分类管理",@"帐目流水",@"帐目日历",@"显示模式",@"关于简簿"];
+    self.menuArray = @[NSLocalizedString(@"同 步 | 备 份",nil),NSLocalizedString(@"分类管理",nil),NSLocalizedString(@"帐目流水",nil),NSLocalizedString(@"帐目日历",nil),NSLocalizedString(@"显示模式",nil),NSLocalizedString(@"关于简簿",nil)];
     
     UITableView *menuTable = [[UITableView alloc] initWithFrame:CGRectMake(0, (SCREEN_HEIGHT-6*(SCREEN_WIDTH/5.5))*2/3, SCREEN_WIDTH*2/3, 6*(SCREEN_WIDTH/5.5))];
     menuTable.delegate = self;
@@ -134,17 +134,27 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
+        
     }
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.menuArray[indexPath.row]];
-    cell.textLabel.textColor = self.myTextColor;
+
+
     UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                           @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
                                                             UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
                                                             UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/20]
                                                             }];
-    [cell.textLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0.0f]];
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.menuArray[indexPath.row]];
+//    cell.textLabel.textColor = self.myTextColor;
+//    [cell.textLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0.0f]];
+//    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+
+    UILabel *cellTitle = [[UILabel alloc] initWithFrame:CGRectMake(tableView.frame.size.width/4, 0, tableView.frame.size.width*3/4, cell.frame.size.height)];
+    cellTitle.textColor = self.myTextColor;
+    [cellTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0.0f]];
+    cellTitle.textAlignment = NSTextAlignmentLeft;
+    cellTitle.text = [NSString stringWithFormat:@"%@", self.menuArray[indexPath.row]];
+    [cell addSubview:cellTitle];
+
     return cell;
 }
 

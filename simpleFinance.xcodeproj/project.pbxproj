@@ -147,6 +147,7 @@
 		A4E6DB201CEABE1A009CBA87 /* QR_en1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB1E1CEABE1A009CBA87 /* QR_en1.png */; };
 		A4E6DB2C1CEAFAEC009CBA87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB2E1CEAFAEC009CBA87 /* InfoPlist.strings */; };
 		A4E6DB351CEAFBA6009CBA87 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB371CEAFBA6009CBA87 /* Localizable.strings */; };
+		A4E6DB3E1CEB26A0009CBA87 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E6DB3D1CEB26A0009CBA87 /* UIDevice-Hardware.m */; };
 		A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */; };
 		A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */; };
 		A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */; };
@@ -394,6 +395,8 @@
 		A4E6DB381CEAFBA8009CBA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A4E6DB391CEAFBAA009CBA87 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A4E6DB3B1CEAFF2F009CBA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		A4E6DB3C1CEB26A0009CBA87 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
+		A4E6DB3D1CEB26A0009CBA87 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
 		A4E938DD1CCB4CF300D5DA77 /* itemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemDetailViewController.h; sourceTree = "<group>"; };
 		A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemDetailViewController.m; sourceTree = "<group>"; };
 		A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemDetailViewController.xib; sourceTree = "<group>"; };
@@ -800,6 +803,8 @@
 		A4CC24261CBCC82E007A94F1 /* 3rd-party */ = {
 			isa = PBXGroup;
 			children = (
+				A4E6DB3C1CEB26A0009CBA87 /* UIDevice-Hardware.h */,
+				A4E6DB3D1CEB26A0009CBA87 /* UIDevice-Hardware.m */,
 				A40F6C101CE461A00010A0CE /* openshare */,
 				A40F6C091CE4619A0010A0CE /* XHShare */,
 				A40F6BE11CE035200010A0CE /* DLog */,
@@ -1143,6 +1148,7 @@
 				A4637AB21CDDD00100BC86AC /* AFURLConnectionOperation.m in Sources */,
 				A45752791CDB4FA40013EFBF /* itemRATableViewCell.m in Sources */,
 				A42D1C8B1CB60AC900C208A0 /* main.m in Sources */,
+				A4E6DB3E1CEB26A0009CBA87 /* UIDevice-Hardware.m in Sources */,
 				A4CC24521CBE239B007A94F1 /* numberPadButton.m in Sources */,
 				A4CC247A1CC0D7DE007A94F1 /* calendarViewController.m in Sources */,
 				A4CC244B1CBCFEA4007A94F1 /* addNewItemViewController.m in Sources */,

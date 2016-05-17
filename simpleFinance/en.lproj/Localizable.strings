@@ -47,3 +47,21 @@
 "下午" = " P.M.";
 "夜间" = "Night";
 
+//////////////////////////////////////////////////////// side menu
+
+"同 步 | 备 份" = "Backup | Recover";
+"分类管理" = "Categories";
+"帐目流水" = "Time Line";
+"帐目日历" = "Calendar";
+"显示模式" = "Modes";
+"关于简簿" = "More  ";
+
+///////////////////////////////////////////////////////about view
+"邀请好友" = "Share Me";
+"邮件反馈" = "Feedback";
+"给简簿评分" = "Rate Me";
+"用户协议" = "Terms of Use";
+"联系方式" = "Contact";
+
+"意见反馈-简簿" = "Feedback - Money On Go";
+"感谢您使用简簿，请留下您的宝贵意见，我们将与您取得联系!" = "Thank you for sharing your feedback.";

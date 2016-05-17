@@ -14,6 +14,7 @@
 #import <MessageUI/MessageUI.h>
 #import "MBProgressHUD.h"
 #import "TermUseViewController.h"
+#import "UIDevice-Hardware.h"
 
 
 @interface aboutViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
@@ -27,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.rowList = @[@"邀请好友",@"邮件反馈",@"给简簿评分",@"用户协议",@"联系方式"];
+    self.rowList = @[NSLocalizedString(@"邀请好友",nil) ,NSLocalizedString(@"邮件反馈",nil) ,NSLocalizedString(@"给简簿评分",nil) ,NSLocalizedString(@"用户协议",nil) ,NSLocalizedString(@"联系方式",nil) ];
     [self configTopbar];
     [self configTable];
 }
@@ -59,21 +60,14 @@
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [closeViewButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     closeViewButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-//    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
+    //    [closeViewButton setTitle:@"返回" forState:UIControlStateNormal];
     [closeViewButton setTitleColor:normalColor forState:UIControlStateNormal];
     [closeViewButton addTarget:self action:@selector(closeVC) forControlEvents:UIControlEventTouchUpInside];
     closeViewButton.backgroundColor = [UIColor clearColor];
     [self.topBar addSubview:closeViewButton];
     
-    [self.topBar.titleLabel  setText:@"关于简簿"];
-//
-//    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 28, 100, 50)];
-//    [titileLabel setText:@"关于简簿"];
-//    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
-//    titileLabel.textAlignment = NSTextAlignmentCenter;
-//    [titileLabel setTextColor:normalColor];
-//    [self.topBar addSubview:titileLabel];
-
+    [self.topBar.titleLabel  setText:NSLocalizedString(@"关于简簿",nil)];
+    
 }
 -(void)closeVC
 {
@@ -90,7 +84,7 @@
     
     UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - logoView.frame.size.width/2, logoView.frame.size.height + logoView.frame.origin.y + 5, logoView.frame.size.width, 20)];
     [versionLabel setText:[NSString stringWithFormat:@"Version:%@",VERSIONNUMBER]];
-    versionLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:13.0f];
+    versionLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:12.0f];
     versionLabel.adjustsFontSizeToFitWidth = YES;
     versionLabel.textAlignment = NSTextAlignmentCenter;
     [versionLabel setTextColor:self.myTextColor];
@@ -143,39 +137,39 @@
     cell.textLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:15.0f];
     [cell.textLabel setTextColor:self.myTextColor];
     [cell.textLabel setText:self.rowList[indexPath.row]];
-
+    
     
     return cell;
-
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     DLogObject(indexPath);
     if (indexPath.row == 0)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-
-        shareViewController *shareVC = [[shareViewController alloc] initWithNibName:@"shareViewController" bundle:nil];
-        [self presentViewController:shareVC animated:YES completion:nil];
+            
+            shareViewController *shareVC = [[shareViewController alloc] initWithNibName:@"shareViewController" bundle:nil];
+            [self presentViewController:shareVC animated:YES completion:nil];
         });
     }else if(indexPath.row == 1)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-
+            
             [self emailTapped];
         });
     }else if(indexPath.row == 2)
     {
         [MobClick event:@"reviewAPP"];
-
+        
         if ([CommonUtility isSystemLangChinese]) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL_CN]];
         }else
         {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
         }
-
+        
     }else if (indexPath.row == 3)
     {
         TermUseViewController *termsVC = [[TermUseViewController alloc] initWithNibName:@"TermUseViewController" bundle:nil];
@@ -199,11 +193,15 @@
     
     [picker setToRecipients:toRecipients];
     
-    NSString *emailBody= @"";
-    [picker setSubject:@"意见反馈-简簿"];
-    emailBody = @"感谢您使用简簿，请留下您的宝贵意见，我们将与您取得联系!";
+    UIDevice *device = [UIDevice currentDevice];
     
-    
+    NSMutableString *emailBody = [NSMutableString string];
+    [picker setSubject:NSLocalizedString(@"意见反馈-简簿",nil) ];
+    [emailBody appendString: NSLocalizedString(@"感谢您使用简簿，请留下您的宝贵意见，我们将与您取得联系!",nil)];
+    [emailBody appendFormat:@"\n\n\n\n\n\nApp Ver: %@\n", VERSIONNUMBER];
+    [emailBody appendFormat:@"Platform: %@\n", [device platform]];
+    [emailBody appendFormat:@"Platform String: %@\n", [device platformString]];
+    [emailBody appendFormat:@"iOS version: %@\n", [device systemVersion]];
     [picker setMessageBody:emailBody isHTML:NO];
     [self presentViewController:picker animated:YES completion:nil];
 }
@@ -216,7 +214,7 @@
     hud.mode = MBProgressHUDModeText;
     hud.labelText = msg;
     [hud hide:YES afterDelay:1.25];
-
+    
 }
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 

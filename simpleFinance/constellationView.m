@@ -47,13 +47,13 @@
 //        [cancelBtn setTitleEdgeInsets:UIEdgeInsetsMake(15, 0, 15, 0)];
         [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         [cancelBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
-        cancelBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        cancelBtn.titleLabel.font =  [UIFont fontWithName:@"SourceHanSansCN-Normal" size:15.0];
         [contentView addSubview:cancelBtn];
         
         UIButton *selectBtn = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-48, 5, 40, 35)];
         [selectBtn setTitle:@"确定" forState:UIControlStateNormal];
         [selectBtn setTitleColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.95] forState:UIControlStateNormal];
-        selectBtn.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+        selectBtn.titleLabel.font =  [UIFont fontWithName:@"SourceHanSansCN-Normal" size:15.0f];
         [contentView addSubview:selectBtn];
         
         [cancelBtn addTarget:self.constellDelegate action:@selector(cancelConstellation) forControlEvents:UIControlEventTouchUpInside];
