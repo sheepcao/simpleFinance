@@ -156,3 +156,38 @@
 "幅 度" = "Ratio";
 
 
+//////////////////////////////////////////////////////////category management
+"排序" = "Sort";
+"系统推荐" = "Recommend";
+"最新添加" = "Date Added";
+"使用最多" = "Mostly Use";
+"删减" = "Delete";
+"添加" = "Add New";
+"类 别 :" = "Category : ";
+"请输入(限5字以内)" = "(11 letters limit)";
+"永久删除该类别?" = "Confirm deleting this category?";
+"是的" = "Yes";
+"不" = "No";
+"您输入的类名过长" = "Please limit your input length 11 letters";
+"+ 新分类" = "+ New";
+"非法输入" = "Invalid input";
+"您输入的类别已经存在" = "Already existed";
+
+
+
+
+
+///////////////////////////////////////////////////////////////////add new
+"备 注" = "Notes";
+"忘记输入记账金额了吧,亲" = "Money amount required";
+
+
+///////////////////////////////////////////////////////////////////item detail
+"永久删除这笔账目?" = "Delete this item permanently?";
+"帐目备注" = "Notes";
+"类别" = "Category";
+"记账日期" = "Date";
+"记账明细" = "Detail Info";
+
+
+

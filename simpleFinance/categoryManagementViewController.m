@@ -201,13 +201,13 @@
     UIButton *sortButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-69, 26, 60, 40)];
     sortButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     sortButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [sortButton setTitle:@"排序" forState:UIControlStateNormal];
+    [sortButton setTitle:NSLocalizedString(@"排序",nil) forState:UIControlStateNormal];
     [sortButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [sortButton addTarget:self action:@selector(showSortView) forControlEvents:UIControlEventTouchUpInside];
     sortButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:sortButton];
     
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:NSLocalizedString(@"支出",nil),NSLocalizedString(@"收入",nil),nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 28, SCREEN_WIDTH*3/7, 30);
     self.moneyTypeSeg.tintColor =  TextColor2;
@@ -218,12 +218,12 @@
 }
 -(void)configSortView
 {
-    UIView *sortView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, topRowHeight, SCREEN_WIDTH/3+10, 150)];
+    UIView *sortView = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, topRowHeight, 150, 150)];
     sortView.layer.cornerRadius = 8;
     sortView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.9 alpha:1.0];
     [self.view addSubview:sortView];
     self.mySortView = sortView;
-    NSArray *buttonTitle = @[@"系统推荐",@"最新添加",@"使用最多"];
+    NSArray *buttonTitle = @[NSLocalizedString(@"系统推荐",nil),NSLocalizedString(@"最新添加",nil),NSLocalizedString(@"使用最多",nil)];
     
     
     for (int i = 0; i<3; i++) {
@@ -313,7 +313,7 @@
     
     UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2-1, bottomHeight)];
     self.myDeleteButton = deleteButton;
-    [deleteButton setTitle:@"删减" forState:UIControlStateNormal];
+    [deleteButton setTitle:NSLocalizedString(@"删减",nil) forState:UIControlStateNormal];
     deleteButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     deleteButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
@@ -321,7 +321,7 @@
 //    [addNewButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -addNewButton.frame.size.width, 0, 0)];
 //    [addNewButton setImageEdgeInsets:UIEdgeInsetsMake(bottomHeight/6, addNewButton.frame.size.width /4, bottomHeight/6, addNewButton.frame.size.width *3/4 - bottomHeight*2/3)];
 //    [addNewButton setImage:[UIImage imageNamed:@"expend"] forState:UIControlStateNormal];
-    [addNewButton setTitle:@"添加" forState:UIControlStateNormal];
+    [addNewButton setTitle:NSLocalizedString(@"添加",nil) forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
 //    addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
@@ -361,19 +361,19 @@
     UIView *inputCategoryView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_WIDTH/6)];
     self.inputView = inputCategoryView;
     inputCategoryView.backgroundColor = [UIColor clearColor];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,5, 50, inputCategoryView.frame.size.height-12)];
-    [titleLabel setText:@"类 别 :"];
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,5, 80, inputCategoryView.frame.size.height-12)];
+    [titleLabel setText:NSLocalizedString(@"类 别 :",nil)];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [UIColor whiteColor];
-    self.inputField = [[UITextField alloc] initWithFrame:CGRectMake(titleLabel.frame.origin.x + titleLabel.frame.size.width , 6, inputCategoryView.frame.size.width-(titleLabel.frame.origin.x + titleLabel.frame.size.width) - 60, inputCategoryView.frame.size.height-12)];
-    //    self.inputField.placeholder = @"限4字以内";
+    self.inputField = [[UITextField alloc] initWithFrame:CGRectMake(titleLabel.frame.origin.x + titleLabel.frame.size.width+8 , 6, inputCategoryView.frame.size.width-(titleLabel.frame.origin.x + titleLabel.frame.size.width) - 60, inputCategoryView.frame.size.height-12)];
     self.inputField.returnKeyType = UIReturnKeyDone;
     self.inputField.delegate = self;
     self.inputField.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.9];
-    self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
     self.inputField.textColor = self.myTextColor;
     self.inputField.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:@"请输入(限4字以内)"
+    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"请输入(限5字以内)",nil)
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.9],
                                                  NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:13.5f]
@@ -472,8 +472,8 @@
         categoryButton = (UIButton *)parentView;
     }
     NSLog(@"categoryButton.text:%@",categoryButton.titleLabel.text);
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"永久删除该类别?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"是的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"永久删除该类别?",nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"是的",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [MobClick event:@"deleteCategory"];
 
         db = [[CommonUtility sharedCommonUtility] db];
@@ -514,7 +514,7 @@
         [db close];
     }];
     
-    UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"不" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"不",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
     [alert addAction:yesAction];
     [alert addAction:noAction];
     [self presentViewController:alert animated:YES completion:nil];
@@ -546,7 +546,7 @@
 }
 -(void)showDelete:(UIButton *)sender
 {
-    [sender setTitle:@"取消" forState:UIControlStateNormal];
+    [sender setTitle:NSLocalizedString(@"取消",nil) forState:UIControlStateNormal];
     [sender setTitleColor:[UIColor colorWithRed:253/255.0f green:197/255.0f blue:65/255.0f alpha:1.0f] forState:UIControlStateNormal];
     willShowDeleteBtn = YES;
     [self.categoryTableView reloadData];
@@ -554,7 +554,7 @@
 }
 -(void)hideDelete:(UIButton *)sender
 {
-    [sender setTitle:@"删减" forState:UIControlStateNormal];
+    [sender setTitle:NSLocalizedString(@"删减",nil) forState:UIControlStateNormal];
 //    sender.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 130);
 //    [sender setImage:[UIImage imageNamed:@"trush"] forState:UIControlStateNormal];
     [sender setTitleColor:self.myTextColor forState:UIControlStateNormal];
@@ -580,24 +580,25 @@
 
     CGFloat width =  [self.inputField.text sizeWithAttributes:@{NSFontAttributeName:self.inputField.font}].width;
     NSLog(@"%f",width);
-    if (width>74)
+//    if (width>  74)
+        if (width>  89)
+
     {
-        
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"您输入的类名过长";
+        hud.labelText = NSLocalizedString(@"您输入的类名过长",nil);
         [hud hide:YES afterDelay:1.5];
         
         return;
-    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"+ 新分类"] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
+    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:NSLocalizedString(@"+ 新分类",nil)] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
     {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"非法输入";
+        hud.labelText = NSLocalizedString(@"非法输入",nil);
         [hud hide:YES afterDelay:1.2];
         return;
     }
@@ -613,7 +614,7 @@
     
     FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where is_deleted = 0 AND category_name = ? AND category_type = ?",[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex]];
     if ([rs next]) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"您输入的类别已经存在" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"您输入的类别已经存在",nil) preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:okAction];
         [self presentViewController:alert animated:YES completion:nil];

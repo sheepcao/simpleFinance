@@ -70,10 +70,10 @@
         self.itemType = [rs intForColumn:@"item_type"];
         if (self.itemType == 0)
         {
-            self.category = [@"支出 > " stringByAppendingString:self.categoryOnly];
+            self.category = [NSLocalizedString(@"支出 > ",nil) stringByAppendingString:self.categoryOnly];
         }else
         {
-            self.category = [@"收入 > " stringByAppendingString:self.categoryOnly];
+            self.category = [NSLocalizedString(@"收入 > ",nil) stringByAppendingString:self.categoryOnly];
         }
 
         self.itemDescription = [rs stringForColumn:@"item_description"];
@@ -105,7 +105,7 @@
     closeViewButton.backgroundColor = [UIColor clearColor];
     [self.topBar addSubview:closeViewButton];
     
-    [self.topBar.titleLabel  setText:@"记账明细"];
+    [self.topBar.titleLabel  setText:NSLocalizedString(@"记账明细",nil)];
 
 //    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 22, 100, 50)];
 //    [titileLabel setText:@"记账明细"];
@@ -169,16 +169,16 @@
 
     switch (indexPath.row) {
         case 0:
-            [cell.leftText setText: @"类别"];
+            [cell.leftText setText: NSLocalizedString(@"类别",nil)];
             [cell.rightText setText:self.category];
             break;
         case 1:
-            [cell.leftText  setText: @"记账日期"];
+            [cell.leftText  setText: NSLocalizedString(@"记账日期",nil)];
             [cell.rightText setText:self.itemCreatedTime];
 
             break;
         case 2:
-            [cell.leftText  setText: @"帐目备注"];
+            [cell.leftText  setText:NSLocalizedString(@"帐目备注",nil)] ;
             [cell.rightText setText:self.itemDescription];
 
             break;
@@ -197,7 +197,7 @@
     [deleteButton addTarget:self action:@selector(deleteTap) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *editButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-SCREEN_WIDTH/5-deleteButton.frame.size.width, deleteButton.frame.origin.y,deleteButton.frame.size.width,deleteButton.frame.size.height)];
-    [editButton setTitle:@"编辑" forState:UIControlStateNormal];
+//    [editButton setTitle:@"编辑" forState:UIControlStateNormal];
     [editButton setImage:[UIImage imageNamed:@"edit"] forState:UIControlStateNormal];
 
     [editButton addTarget:self action:@selector(editTap) forControlEvents:UIControlEventTouchUpInside];
@@ -213,8 +213,8 @@
     if(itemID >=0)
     {
         
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"永久删除这笔账目?" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* yesAction = [UIAlertAction actionWithTitle:@"是的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"永久删除这笔账目?",nil) preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"是的",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [MobClick event:@"deleteItem"];
 
             db = [[CommonUtility sharedCommonUtility] db];
@@ -232,7 +232,7 @@
             [self closeVC];
         }];
         
-        UIAlertAction* noAction = [UIAlertAction actionWithTitle:@"不" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+        UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"不",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:yesAction];
         [alert addAction:noAction];
         [self presentViewController:alert animated:YES completion:nil];

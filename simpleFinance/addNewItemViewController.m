@@ -201,7 +201,7 @@
     
     categoryObject *oneCategory = [[categoryObject alloc] init];
     
-    oneCategory.categoryName = @"+ 新分类";
+    oneCategory.categoryName = NSLocalizedString(@"+ 新分类",nil);
     oneCategory.color_R  =245;
     oneCategory.color_G =245;
     oneCategory.color_B = 245;
@@ -242,7 +242,7 @@
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:NSLocalizedString(@"支出",nil),NSLocalizedString(@"收入",nil),nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 30, SCREEN_WIDTH*3/7, 30);
     self.moneyTypeSeg.tintColor =  TextColor2;
@@ -325,7 +325,7 @@
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
                                                    }];
     [noteTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0]];
-    [noteTitle setText:@"备 注"];
+    [noteTitle setText:NSLocalizedString(@"备 注",nil)];
     [noteTitle setTextColor:[UIColor whiteColor]];
     noteTitle.textAlignment = NSTextAlignmentCenter;
     
@@ -422,18 +422,18 @@
     UIView *inputCategoryView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_WIDTH/6.5)];
     self.inputView = inputCategoryView;
     inputCategoryView.backgroundColor = [UIColor colorWithRed:173/255.0f  green:181/255.0f blue:190/255.0f alpha:1.0f];
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20,5, 50, inputCategoryView.frame.size.height-12)];
-    [titleLabel setText:@"类 别 :"];
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.5f];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,5, 80, inputCategoryView.frame.size.height-12)];
+    [titleLabel setText:NSLocalizedString(@"类 别 :",nil)];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     titleLabel.textColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.18 alpha:0.95f];
     self.inputField = [[UITextField alloc] initWithFrame:CGRectMake(titleLabel.frame.origin.x + titleLabel.frame.size.width , 6, inputCategoryView.frame.size.width-(titleLabel.frame.origin.x + titleLabel.frame.size.width) - 60, inputCategoryView.frame.size.height-12)];
     self.inputField.returnKeyType = UIReturnKeyDone;
     self.inputField.delegate = self;
     self.inputField.tintColor = [UIColor colorWithRed:0.43 green:0.43 blue:0.43 alpha:0.88];
-    self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
     self.inputField.textColor = self.myTextColor;
     self.inputField.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:@"  请输入(限4字以内)"
+    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"请输入(限5字以内)",nil)
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.43 green:0.43 blue:0.43 alpha:0.88],
                                                  NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:13.5f]
@@ -445,7 +445,9 @@
     [inputCategoryView addSubview:self.inputField];
     
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.inputView.frame.size.width-60, (self.inputView.frame.size.height -40)/2, 40, 40)];
-    [doneButton setTitle:@"OK" forState:UIControlStateNormal];
+    [doneButton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
+    [doneButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+//    [doneButton setTitle:@"OK" forState:UIControlStateNormal];
     [doneButton addTarget:self action:@selector(addNewCategory) forControlEvents:UIControlEventTouchUpInside];
     
     [inputCategoryView addSubview:doneButton];
@@ -745,7 +747,7 @@
 -(BOOL)validateData
 {
     if ([self.InputLabel.text doubleValue]<0.001) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"忘记输入记账金额了吧,亲" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"忘记输入记账金额了吧,亲",nil) preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:okAction];
@@ -822,7 +824,7 @@
 
 -(void)categoryTap:(categoryButton *)sender
 {
-    if ([sender.titleLabel.text isEqualToString:@"+ 新分类"])
+    if ([sender.titleLabel.text isEqualToString:NSLocalizedString(@"+ 新分类",nil)])
     {
         isInputingNote = NO;
         isAddingCategory = YES;
@@ -859,17 +861,17 @@
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"您输入的类名过长";
+        hud.labelText = NSLocalizedString(@"您输入的类名过长",nil);
         [hud hide:YES afterDelay:1.5];
         
         return;
-    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@"+ 新分类"] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
+    }else if ([[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:NSLocalizedString(@"+ 新分类",nil)] || [[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""] isEqualToString:@""])
     {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"非法输入";
+        hud.labelText = NSLocalizedString(@"非法输入",nil);
         [hud hide:YES afterDelay:1.2];
         return;
     }
@@ -885,7 +887,7 @@
     
     FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where is_deleted = 0 AND category_name = ? AND category_type = ?",[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex]];
     if ([rs next]) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"您输入的类别已经存在" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"您输入的类别已经存在" ,nil) preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:okAction];
         [self presentViewController:alert animated:YES completion:nil];

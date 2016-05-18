@@ -84,7 +84,7 @@
         categoryLabel.layer.borderWidth = 0.8f;
         [categoryLabel setTitle:oneCategory.categoryName forState:UIControlStateNormal];
         
-        if ([oneCategory.categoryName isEqualToString:@"+ 新分类"]) {
+        if ([oneCategory.categoryName isEqualToString:NSLocalizedString(@"+ 新分类",nil)]) {
             UIFontDescriptor *categoryFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                         @{UIFontDescriptorFamilyAttribute: @"Avenir Next",
                                                           UIFontDescriptorNameAttribute:@"AvenirNext-DemiBold",
