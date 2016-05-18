@@ -29,7 +29,7 @@
     
     topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight+11)];
     topbar.backgroundColor = [UIColor clearColor];
-    [topbar.titleLabel  setText:@"帐目日历"];
+    [topbar.titleLabel  setText:NSLocalizedString(@"帐目日历",nil)];
     [self.view addSubview:topbar];
     
     UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 34, 40, 40)];

@@ -94,7 +94,7 @@
     
 
     UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 32, 100, 40)];
-    [titileLabel setText:@"历史存账"];
+    [titileLabel setText:NSLocalizedString(@"历史存账",nil)];
     titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
     titileLabel.textAlignment = NSTextAlignmentCenter;
     [titileLabel setTextColor:normalColor];
@@ -245,16 +245,23 @@
     [self.view addSubview:bottomView];
     
     // add new item button----------------------------------------------------
-    RoundedButton *addMoneyButton = [[RoundedButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-bottomHeight/2, -9, bottomHeight, bottomHeight)];
-    [addMoneyButton setTitle:@"＋" forState:UIControlStateNormal];
+    UIButton *addMoneyButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-(bottomHeight+11)/2, -16, bottomHeight+11, bottomHeight+11)];
+    addMoneyButton.layer.cornerRadius = addMoneyButton.frame.size.width/2;
+    addMoneyButton.layer.masksToBounds = NO;
+    addMoneyButton.layer.shadowColor = [UIColor blackColor].CGColor;
+    addMoneyButton.layer.shadowOpacity = 0.8;
+    addMoneyButton.layer.shadowRadius = 2;
+    addMoneyButton.layer.shadowOffset = CGSizeMake(0.0f, 1.5f);
+    [addMoneyButton setImage:[UIImage imageNamed:@"add1.png"] forState:UIControlStateNormal];
+    
     addMoneyButton.titleLabel.font = [UIFont boldSystemFontOfSize:42.0f];
     [addMoneyButton addTarget:self action:@selector(popAddNewView:) forControlEvents:UIControlEventTouchUpInside];
     //for button style on diff states.
-    [addMoneyButton addTarget:self action:@selector(tapDownAddNewButton:) forControlEvents:UIControlEventTouchDown];
-    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchCancel];
-    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragExit];
-    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragOutside];
-    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchUpOutside];
+//    [addMoneyButton addTarget:self action:@selector(tapDownAddNewButton:) forControlEvents:UIControlEventTouchDown];
+//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchCancel];
+//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragExit];
+//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragOutside];
+//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchUpOutside];
     
     [bottomView addSubview:addMoneyButton];
     
@@ -353,10 +360,10 @@
             itemTime = oneItem.createdTime;
             if (oneItem.itemType == 0)
             {
-                category = [@"支出 > " stringByAppendingString:categoryOnly];
+                category = [NSLocalizedString(@"支出 > ",nil) stringByAppendingString:categoryOnly];
             }else
             {
-                category = [@"收入 > " stringByAppendingString:categoryOnly];
+                category = [NSLocalizedString(@"收入 > ",nil) stringByAppendingString:categoryOnly];
             }
         }
         itemDetailVC.currentItemID = itemID;
@@ -418,14 +425,14 @@
                 cell.backgroundColor = [UIColor clearColor];
                 cell.textLabel.textAlignment = NSTextAlignmentCenter;
             }
-            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"本日尚无帐目记录"];
+            NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"本日尚无帐目记录",nil)];
             
             UIFontDescriptor *attributeFontDescriptor = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                          @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",
                                                            UIFontDescriptorNameAttribute:@"HelveticaNeue",
-                                                           UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 16.0f]
+                                                           UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: 21.0f]
                                                            }];
-            CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(5 * (CGFloat)M_PI / 180), 1, 0, 0);
+            CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(3 * (CGFloat)M_PI / 180), 1, 0, 0);
             attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
             [attributedText addAttribute:NSFontAttributeName value:[UIFont fontWithDescriptor:attributeFontDescriptor size:0] range:NSMakeRange(0, attributedText.length)];
             [attributedText addAttribute:NSForegroundColorAttributeName value:self.myTextColor range:NSMakeRange(0, attributedText.length)];

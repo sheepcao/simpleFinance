@@ -86,20 +86,14 @@
     }
     
     if (childCount == 0) {
-        [self.expandImage setImage:[UIImage imageNamed:@"equal1.png"]];
+        [self.expandImage setImage:nil];
     }
     
     self.backgroundColor = [UIColor clearColor];
     
 }
 
-//#pragma mark - Properties
-//
-//- (void)setAdditionButtonHidden:(BOOL)additionButtonHidden
-//{
-//  [self setAdditionButtonHidden:additionButtonHidden animated:NO];
-//}
-//
+
 - (void)goExpendAnimated:(BOOL)animated
 {
     [UIView animateWithDuration:animated ? 0.2 : 0 animations:^{

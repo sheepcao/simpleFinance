@@ -27,7 +27,7 @@
         [self addSubview:self.pickerBack];
     
         self.flatDatePicker = [[FlatDatePicker alloc] initWithParentView:self.pickerBack];
-        self.flatDatePicker.title = @"开始时间:";
+        self.flatDatePicker.title = NSLocalizedString(@"开始时间:",nil);
         self.flatDatePicker.datePickerMode = FlatDatePickerModeDate;
 
     }

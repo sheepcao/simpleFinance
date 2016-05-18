@@ -152,7 +152,7 @@
     
     if ([resultCount next]) {
         int moneyCount =  [resultCount intForColumnIndex:0];
-        [self.moneyCountLabel setText:[NSString stringWithFormat:@"%d 笔",moneyCount]];
+        [self.moneyCountLabel setText:[NSString stringWithFormat:NSLocalizedString(@"%d 笔",nil),moneyCount]];
     }
     [db close];
     
@@ -180,7 +180,7 @@
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topBar addSubview:closeViewButton];
     
-    [self.myTopBar.titleLabel  setText:@"分类明细"];
+    [self.myTopBar.titleLabel  setText:NSLocalizedString(@"分类明细",nil)];
 
 //    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 22, 100, 50)];
 //    [titileLabel setText:@"分类明细"];
@@ -277,7 +277,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *startDate = [dateFormatter dateFromString:self.showTimeView.startLabel.text];
     [self.dateView.flatDatePicker setDate:startDate animated:NO];
-    [self.dateView.flatDatePicker.labelTitle setText:[NSString stringWithFormat:@"开始时间: %@",self.showTimeView.startLabel.text]];
+    [self.dateView.flatDatePicker.labelTitle setText:[NSString stringWithFormat:NSLocalizedString(@"开始时间: %@",nil),self.showTimeView.startLabel.text]];
     [self.dateView.flatDatePicker makeTitle];
     
     [self.dateView.flatDatePicker show];
@@ -300,12 +300,12 @@
     
     NSLog(@"date picker:%@",value);
     if (!datePicker.isSelectingEndTime) {
-        [datePicker.labelTitle setText:[NSString stringWithFormat:@"开始时间: %@",value]];
+        [datePicker.labelTitle setText:[NSString stringWithFormat:NSLocalizedString(@"开始时间: %@",nil),value]];
         [datePicker makeTitle];
         
     }else
     {
-        [datePicker.labelTitle setText:[NSString stringWithFormat:@"截止时间: %@",value]];
+        [datePicker.labelTitle setText:[NSString stringWithFormat:NSLocalizedString(@"截止时间: %@",nil),value]];
         [datePicker makeTitle];
         
     }
@@ -330,7 +330,7 @@
     if (!datePicker.isSelectingEndTime) {
         self.startTime = value;
         [self.dateView.flatDatePicker setDate:endDate animated:NO];
-        [datePicker.labelTitle setText:[NSString stringWithFormat:@"截止时间: %@",self.showTimeView.endLabel.text]];
+        [datePicker.labelTitle setText:[NSString stringWithFormat:NSLocalizedString(@"截止时间: %@",nil),self.showTimeView.endLabel.text]];
         [datePicker makeTitle];
         
     }else
@@ -398,10 +398,10 @@
             itemTime = oneItem.createdTime;
             if (oneItem.itemType == 0)
             {
-                category = [@"支出 > " stringByAppendingString:categoryOnly];
+                category = [NSLocalizedString(@"支出 > ",nil) stringByAppendingString:categoryOnly];
             }else
             {
-                category = [@"收入 > " stringByAppendingString:categoryOnly];
+                category = [NSLocalizedString(@"收入 > ",nil) stringByAppendingString:categoryOnly];
             }
         }
         itemDetailVC.currentItemID = itemID;

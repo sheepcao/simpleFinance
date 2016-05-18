@@ -33,7 +33,7 @@
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat:  14.0f]
                                                    }];
     UILabel * midLine = [[UILabel alloc] initWithFrame:CGRectMake(self.selectionButton.frame.size.width/2-15, 0, 30, self.selectionButton.frame.size.height)];
-    [midLine setText:@"至"];
+    [midLine setText:NSLocalizedString(@"至",nil)];
     midLine.textAlignment = NSTextAlignmentCenter;
     [midLine setTextColor:normalColor];
     [midLine setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0f]];

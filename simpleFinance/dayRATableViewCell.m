@@ -47,7 +47,7 @@
     [self.expenseTitle setTextColor:myColor];
 
     
-    self.customTitleLabel.text = [title stringByAppendingString:@"日"];
+    self.customTitleLabel.text = [title stringByAppendingString:NSLocalizedString(@"日",nil)];
     self.expenseLabel.text = [NSString stringWithFormat:@"%@",expense];
     self.incomeLabel.text =  [NSString stringWithFormat:@"%@",income];;
 
@@ -62,7 +62,7 @@
     
 
     if (childCount == 0) {
-        [self.expandImage setImage:[UIImage imageNamed:@"equal1.png"]];
+        [self.expandImage setImage:nil];
     }
     
 }

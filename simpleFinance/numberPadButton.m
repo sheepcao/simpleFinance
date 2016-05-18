@@ -203,7 +203,7 @@
             break;
         case 13:
     
-            self.symbolText = @"备 注";
+            self.symbolText = NSLocalizedString(@"备 注",nil);
             self.isNumber = NO;
             fontType = @"HelveticaNeue-Light";
             fontSize = 16;
@@ -252,12 +252,5 @@
 }
 
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

@@ -62,12 +62,7 @@
     
     [self.centerButton setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
     
-//    UIImageView *switchImage= [[UIImageView alloc] initWithFrame:CGRectMake(self.centerButton.frame.size.width/3, self.centerButton.frame.size.height*3/4, self.centerButton.frame.size.width/3, self.centerButton.frame.size.height/6)];
-//    [switchImage setImage:[UIImage imageNamed:@"switchChart.png"]];
-//    //    switchImage.layer.shadowOffset = CGSizeMake(0.0f, 0.5f);
-//    
-//    [self.centerButton addSubview:switchImage];
-    
+
     
     [self addSubview:self.centerButton];
     
@@ -88,10 +83,10 @@
     style.alignment = NSTextAlignmentCenter;
     
     if (isShowOutcome) {
-        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"支 出\n%@",money]];
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"支 出\n%@",nil),money]];
     }else
     {
-        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"收 入\n%@",money]];
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"收 入\n%@",nil),money]];
     }
     
     NSShadow *shadow = [[NSShadow alloc] init];

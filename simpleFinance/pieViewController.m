@@ -214,7 +214,7 @@
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"支出",@"收入",nil];
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:NSLocalizedString(@"支出",nil) ,NSLocalizedString(@"收入",nil) ,nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 28, SCREEN_WIDTH*3/7, 30);
     self.moneyTypeSeg.tintColor =  TextColor2;
@@ -246,7 +246,7 @@
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat:  14.0f]
                                                    }];
     UILabel * midLine = [[UILabel alloc] initWithFrame:CGRectMake(dateSelectionView.frame.size.width/2-15, 0, 30, dateSelectionView.frame.size.height)];
-    [midLine setText:@"至"];
+    [midLine setText:NSLocalizedString(@"至",nil)];
     midLine.textAlignment = NSTextAlignmentCenter;
     [midLine setTextColor:normalColor];
     [midLine setFont:[UIFont fontWithDescriptor:attributeFontDescriptor size:0.0f]];
@@ -335,10 +335,10 @@
     style.alignment = NSTextAlignmentCenter;
     
     if (isShowOutcome == 0) {
-        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"总支出\n%@",money]];
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"总支出\n%@",nil),money]];
     }else
     {
-        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"总收入\n%@",money]];
+        attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"总收入\n%@",nil),money]];
     }
     
     NSShadow *shadow = [[NSShadow alloc] init];
@@ -396,7 +396,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *startDate = [dateFormatter dateFromString:self.startLabel.text];
     [self.dateView.flatDatePicker setDate:startDate animated:NO];
-    [self.dateView.flatDatePicker.labelTitle setText:[NSString stringWithFormat:@"开始时间: %@",self.startLabel.text]];
+    [self.dateView.flatDatePicker.labelTitle setText:[NSString stringWithFormat:NSLocalizedString(@"开始时间: %@",nil),self.startLabel.text]];
     [self.dateView.flatDatePicker makeTitle];
 
     [self.dateView.flatDatePicker show];
@@ -422,12 +422,12 @@
 
     NSLog(@"date picker:%@",value);
     if (!datePicker.isSelectingEndTime) {
-        [datePicker.labelTitle setText:[NSString stringWithFormat:@"开始时间: %@",value]];
+        [datePicker.labelTitle setText:[NSString stringWithFormat:NSLocalizedString(@"开始时间: %@",nil),value]];
         [datePicker makeTitle];
 
     }else
     {
-        [datePicker.labelTitle setText:[NSString stringWithFormat:@"截止时间: %@",value]];
+        [datePicker.labelTitle setText:[NSString stringWithFormat:NSLocalizedString(@"结束时间: %@",nil),value]];
         [datePicker makeTitle];
 
     }
@@ -452,7 +452,7 @@
     if (!datePicker.isSelectingEndTime) {
         self.tempStartTime = value;
         [self.dateView.flatDatePicker setDate:endDate animated:NO];
-        [datePicker.labelTitle setText:[NSString stringWithFormat:@"截止时间: %@",self.endLabel.text]];
+        [datePicker.labelTitle setText:[NSString stringWithFormat:NSLocalizedString(@"结束时间: %@",nil),self.endLabel.text]];
         [datePicker makeTitle];
 
     }else
