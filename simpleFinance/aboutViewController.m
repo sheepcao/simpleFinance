@@ -220,7 +220,7 @@
 
 {
     
-    NSString *title = @"发送状态";
+    NSString *title = NSLocalizedString(@"发送状态",nil);
     
     NSString *msg;
     
@@ -230,13 +230,13 @@
             
         case MFMailComposeResultCancelled:
             
-            msg = @"Mail canceled";//@"邮件发送取消";
+            msg = NSLocalizedString(@"Mail canceled",nil);//@"邮件发送取消";
             
             break;
             
         case MFMailComposeResultSaved:
             
-            msg = @"邮件保存成功";//@"邮件保存成功";
+            msg = NSLocalizedString(@"邮件保存成功",nil);//@"邮件保存成功";
             
             [self alertWithTitle:title msg:msg];
             
@@ -244,7 +244,7 @@
             
         case MFMailComposeResultSent:
             
-            msg = @"邮件发送成功";//@"邮件发送成功";
+            msg = NSLocalizedString(@"邮件发送成功",nil);//@"邮件发送成功";
             
             [self alertWithTitle:title msg:msg];
             
@@ -252,7 +252,7 @@
             
         case MFMailComposeResultFailed:
             
-            msg = @"邮件发送失败";//@"邮件发送失败";
+            msg = NSLocalizedString(@"邮件发送失败",nil);//@"邮件发送失败";
             
             [self alertWithTitle:title msg:msg];
             
@@ -260,7 +260,7 @@
             
         default:
             
-            msg = @"邮件尚未发送";
+            msg = NSLocalizedString(@"邮件尚未发送",nil);
             
             [self alertWithTitle:title msg:msg];
             

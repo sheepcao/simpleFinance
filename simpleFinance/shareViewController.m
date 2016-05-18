@@ -13,8 +13,8 @@
 #import "topBarView.h"
 #import "global.h"
 #import "CommonUtility.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+//#import <FBSDKCoreKit/FBSDKCoreKit.h>
+//#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
 @interface shareViewController ()<XHShareViewDelegate,MFMessageComposeViewControllerDelegate>
@@ -34,7 +34,7 @@
     sao.textColor = self.myTextColor;
     sao.frame = CGRectMake((size.width - 100) * 0.5, topBarHeight+20, 100,50);
     sao.textAlignment = NSTextAlignmentCenter;
-    sao.text = @"扫码下载";
+    sao.text = NSLocalizedString(@"扫码下载",nil);
     [self.view addSubview:sao];
     
     UIImageView *QRcode = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"QR_en1"]];
@@ -53,7 +53,7 @@
     UILabel *share = [[UILabel alloc]init];
     share.textColor = self.myTextColor;
     share.frame = CGRectMake((size.width - 70) * 0.5,shareView.frame.origin.y - 50 , 70,40);
-    share.text = @"或分享至";
+    share.text =  NSLocalizedString(@"或分享至",nil);
     share.textAlignment = NSTextAlignmentCenter;
 
     [self.view addSubview:share];
@@ -82,7 +82,7 @@
     [self.view addSubview:self.topBar];
     
     
-    [self.topBar.titleLabel setText:@"邀请好友"];
+    [self.topBar.titleLabel setText:NSLocalizedString(@"邀请好友",nil)];
 //    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 26, 100, 50)];
 //    [titileLabel setText:@"邀请好友"];
 //    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
@@ -148,11 +148,11 @@
 //    NSDateFormatter *fmt = [[NSDateFormatter alloc] init];
 //    fmt.dateFormat = @"yyyy年MM月dd日HH时mm分ss秒";
 //    NSString *now = [fmt stringFromDate:[NSDate date]];
-    message.title = [NSString stringWithFormat:@"简簿－简明财务,跃然于簿"];
+    message.title = [NSString stringWithFormat:NSLocalizedString(@"简簿－简明财务,跃然于簿",nil)];
     message.image = [UIImage imageNamed:@"logo"];
     // 缩略图
     message.thumbnail = [UIImage imageNamed:@"switchChart.png"];
-    message.desc = [NSString stringWithFormat:@"简单一点,一目了然。\n财务详情,了然于心"];
+    message.desc = [NSString stringWithFormat:NSLocalizedString(@"简单一点,一目了然。\n财务详情,了然于心",nil)];
     if ([CommonUtility isSystemLangChinese]) {
         message.link=REVIEW_URL_CN;
     }else

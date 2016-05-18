@@ -79,17 +79,18 @@
     [self.topBar addSubview:closeViewButton];
     
     UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 28, 100, 50)];
-    [titileLabel setText:@"同步｜备份"];
+    [titileLabel setText:NSLocalizedString(@"同步｜备份",nil) ];
     titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
     titileLabel.textAlignment = NSTextAlignmentCenter;
     [titileLabel setTextColor:normalColor];
     [self.topBar addSubview:titileLabel];
 
     
-    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-69, 33, 60, 40)];
+    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-90, 33, 80, 40)];
     changeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
-    changeButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [changeButton setTitle:@"切换账号" forState:UIControlStateNormal];
+    changeButton.titleLabel.textAlignment = NSTextAlignmentRight;
+    changeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [changeButton setTitle:NSLocalizedString(@"切换账号",nil) forState:UIControlStateNormal];
     [changeButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [changeButton addTarget:self action:@selector(changeAccount) forControlEvents:UIControlEventTouchUpInside];
     changeButton.backgroundColor = [UIColor clearColor];
@@ -120,7 +121,7 @@
     UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 120, 5, 240, 150)];
     lastTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:50.0f];
     lastTitleLabel.textAlignment = NSTextAlignmentCenter;
-    [lastTitleLabel setText:@"首次备份"];
+    [lastTitleLabel setText:NSLocalizedString(@"首次备份",nil)];
     [lastTitleLabel setTextColor: self.myTextColor];
     lastTitleLabel.backgroundColor = [UIColor clearColor];
     
@@ -137,7 +138,7 @@
     UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 120, 0, 240, 20)];
     lastTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18.0f];
     lastTitleLabel.textAlignment = NSTextAlignmentCenter;
-    [lastTitleLabel setText:@"上次备份时间及设备"];
+    [lastTitleLabel setText:NSLocalizedString(@"上次备份时间及设备",nil)];
     [lastTitleLabel setTextColor: self.myTextColor];
     lastTitleLabel.backgroundColor = [UIColor clearColor];
     [content addSubview:lastTitleLabel];
@@ -214,7 +215,7 @@
     UILabel *uploadText = [[UILabel alloc] initWithFrame:CGRectMake(uploadButton.frame.origin.x, uploadButton.frame.origin.y+uploadButton.frame.size.height + 2, uploadButton.frame.size.width, 20)];
     uploadText.font = [UIFont fontWithName:@"HelveticaNeue" size:16.0f];
     [uploadText setTextColor:self.myTextColor];
-    [uploadText setText:@"备份至云端"];
+    [uploadText setText:NSLocalizedString(@"备份至云端",nil)];
     uploadText.textAlignment = NSTextAlignmentCenter;
     [content addSubview:uploadText];
     
@@ -229,7 +230,7 @@
     UILabel *downText = [[UILabel alloc] initWithFrame:CGRectMake(downLoadButton.frame.origin.x, downLoadButton.frame.origin.y+downLoadButton.frame.size.height + 2, downLoadButton.frame.size.width, 20)];
     downText.font = [UIFont fontWithName:@"HelveticaNeue" size:16.0f];
     [downText setTextColor:self.myTextColor];
-    [downText setText:@"同步到本地"];
+    [downText setText:NSLocalizedString(@"同步到本地",nil)];
     downText.textAlignment = NSTextAlignmentCenter;
     [content addSubview:downText];
     
@@ -299,7 +300,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"正在备份...";
+    hud.labelText = NSLocalizedString(@"正在备份...",nil);
     hud.dimBackground = YES;
     
     NSDictionary *parameters = @{@"tag": @"uploadSQLs",@"name":self.username,@"backup_device":deviceName,@"backupTime":backupTime};
@@ -327,7 +328,7 @@
         [self.firstBackupView setHidden:YES];
         
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"备份成功";
+        hud.labelText = NSLocalizedString(@"备份成功",nil);
         [hud hide:YES afterDelay:1.5];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -336,7 +337,7 @@
         [hud hide:YES afterDelay:1.5];
         
         NSLog(@"Error: %@ ***** %@", operation.responseString, error);
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"%@\n备份失败，请重试",nil)  preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"备份失败，请重试",nil)  preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确认",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         }];
         [alert addAction:yesAction];
@@ -375,7 +376,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.mode = MBProgressHUDModeIndeterminate;
-    hud.labelText = @"正在同步到本地...";
+    hud.labelText = NSLocalizedString(@"正在同步到本地...",nil);
     hud.dimBackground = YES;
     hud.tag = 456;
     NSDictionary *parameters = @{@"tag": @"download",@"name":self.username};

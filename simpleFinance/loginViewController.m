@@ -103,7 +103,7 @@
     
     UITextField *usernameField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, logoView.frame.origin.y + logoView.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
     usernameField.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:@"邮箱"
+    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"邮箱",nil)
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
                                                  NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/19]
@@ -129,7 +129,7 @@
     
     UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, usernameField.frame.origin.y + usernameField.frame.size.height + space, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
     passwordField.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:@"密码"
+    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"密码",nil)
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
                                                  NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/20]
@@ -151,7 +151,7 @@
     
      gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, passwordField.frame.origin.y + passwordField.frame.size.height + space+5, SCREEN_WIDTH*3/4, SCREEN_WIDTH/7.5)];
     loginButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:23.0f];
-    [loginButton setTitle:@"登  录" forState:UIControlStateNormal];
+    [loginButton setTitle:NSLocalizedString(@"登  录",nil) forState:UIControlStateNormal];
     [content addSubview:loginButton];
     self.myLoginBtn = loginButton;
     [loginButton addTarget:self action:@selector(userLogin) forControlEvents:UIControlEventTouchUpInside];
@@ -159,7 +159,7 @@
     
     UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 65, loginButton.frame.origin.y + loginButton.frame.size.height + space+5, 130, 30)];
     [registerButton setBackgroundColor:[UIColor clearColor]];
-    [registerButton setTitle:@"创建新的用户" forState:UIControlStateNormal];
+    [registerButton setTitle:NSLocalizedString(@"创建新的用户",nil) forState:UIControlStateNormal];
     registerButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:15.5f];
     [registerButton setTitleColor:self.myTextColor forState:UIControlStateNormal];
     [registerButton addTarget:self action:@selector(goRegister) forControlEvents:UIControlEventTouchUpInside];
@@ -188,7 +188,7 @@
     [content addSubview:leftGradient];
     [content addSubview:rightGradient];
     
-    NSString *forgotText = @"忘记密码?";
+    NSString *forgotText = NSLocalizedString(@"忘记密码?",nil);
     NSDictionary *attrDict = @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:17.5f],
                                                         NSForegroundColorAttributeName : self.myTextColor};
     NSMutableAttributedString *title =[[NSMutableAttributedString alloc] initWithString:forgotText attributes: attrDict];
@@ -249,7 +249,7 @@
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"请输入正确的邮箱格式";
+        hud.labelText = NSLocalizedString(@"请输入正确的邮箱格式",nil);
         [hud hide:YES afterDelay:2.0];
         [self.userField becomeFirstResponder];
         return  NO;
@@ -261,8 +261,8 @@
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"密码格式不正确";
-        hud.detailsLabelText = @"密码长度6-20位并由大小写字母和数字组成";
+        hud.labelText = NSLocalizedString(@"密码格式不正确",nil);
+        hud.detailsLabelText = NSLocalizedString(@"密码长度6-20位并由大小写字母和数字组成",nil);
         [hud hide:YES afterDelay:2.0];
         [self.pswdField becomeFirstResponder];
         return NO;
@@ -280,7 +280,7 @@
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"请输入您的邮箱";
+        hud.labelText = NSLocalizedString(@"请输入您的邮箱",nil);
         [hud hide:YES afterDelay:1.5];
         [self.userField becomeFirstResponder];
         return;
@@ -291,7 +291,7 @@
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"请输入密码";
+        hud.labelText = NSLocalizedString(@"请输入密码",nil);
         [hud hide:YES afterDelay:1.5];
         [self.userField becomeFirstResponder];
         return;
@@ -314,7 +314,7 @@
     [[CommonUtility sharedCommonUtility] httpGetUrlNoToken:backupService params:parameters success:^(NSDictionary *success){
 //
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = NSLocalizedString(@"注册成功",nil);
+        hud.labelText = NSLocalizedString(@"登录成功",nil);
         [hud hide:YES afterDelay:2.0];
 
         NSString *name = [success objectForKey:@"username"];
@@ -340,7 +340,7 @@
     } failure:^(NSError * failure){
         NSLog(@"%@",failure);
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"邮箱地址或密码错误";
+        hud.labelText = NSLocalizedString(@"邮箱地址或密码错误",nil);
         [hud hide:YES afterDelay:1.5];
     }];
 
