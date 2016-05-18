@@ -310,7 +310,7 @@
 
 -(void)configTopbar
 {
-    topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight + 5)];
+    topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight + 18)];
     topbar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:topbar];
     
@@ -328,7 +328,7 @@
     
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:NSLocalizedString(@"1天",nil),NSLocalizedString(@"1周",nil),NSLocalizedString(@"2周",nil),NSLocalizedString(@"4周",nil),NSLocalizedString(@"13周",nil),nil];
     UISegmentedControl *timeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
-    timeSeg.frame = CGRectMake(SCREEN_WIDTH*0.16, 35, SCREEN_WIDTH*0.7, 28);
+    timeSeg.frame = CGRectMake(SCREEN_WIDTH*0.16, 35, SCREEN_WIDTH*0.7, 35);
     timeSeg.tintColor =  normalColor;
     timeSeg.selectedSegmentIndex = 1;
     [timeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法

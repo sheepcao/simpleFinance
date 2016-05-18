@@ -11,6 +11,7 @@
 @interface itemRATableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *moneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
+@property (weak, nonatomic) IBOutlet UILabel *point;
 
 - (void)setupWithCategory:(NSString *)category andDescription:(NSString *)description andIncome:(NSString *)income andExpense:(NSString *)expense andColor:(UIColor *)myColor;
 @end

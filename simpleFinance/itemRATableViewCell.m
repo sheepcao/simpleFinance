@@ -23,6 +23,9 @@
 
 - (void)setupWithCategory:(NSString *)category andDescription:(NSString *)description andIncome:(NSString *)income andExpense:(NSString *)expense andColor:(UIColor *)myColor
 {
+    self.point.layer.cornerRadius = self.point.frame.size.width/2;
+    self.point.layer.masksToBounds = YES;
+    
     if (!description || [description isEqualToString:@""]) {
         self.categoryLabel.text = category;
     }else

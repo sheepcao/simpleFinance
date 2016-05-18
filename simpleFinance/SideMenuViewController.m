@@ -129,31 +129,29 @@
     NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UILabel *cellTitle  = [[UILabel alloc] init];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         
+        
+        UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
+                                                              @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
+                                                                UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
+                                                                UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/20]
+                                                                }];
+         [cellTitle setFrame:CGRectMake(tableView.frame.size.width/4, 0, tableView.frame.size.width*3/4, cell.frame.size.height)];
+        cellTitle.textColor = self.myTextColor;
+        [cellTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0.0f]];
+        cellTitle.textAlignment = NSTextAlignmentLeft;
+        [cell addSubview:cellTitle];
+        
     }
-
-
-    UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
-                                                          @{UIFontDescriptorFamilyAttribute: @"Source Han Sans CN",
-                                                            UIFontDescriptorNameAttribute:@"SourceHanSansCN-Normal",
-                                                            UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: SCREEN_WIDTH/20]
-                                                            }];
-//    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.menuArray[indexPath.row]];
-//    cell.textLabel.textColor = self.myTextColor;
-//    [cell.textLabel setFont:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0.0f]];
-//    cell.textLabel.textAlignment = NSTextAlignmentCenter;
-
-    UILabel *cellTitle = [[UILabel alloc] initWithFrame:CGRectMake(tableView.frame.size.width/4, 0, tableView.frame.size.width*3/4, cell.frame.size.height)];
-    cellTitle.textColor = self.myTextColor;
-    [cellTitle setFont:[UIFont fontWithDescriptor:attributeFontDescriptorFirstPart size:0.0f]];
-    cellTitle.textAlignment = NSTextAlignmentLeft;
     cellTitle.text = [NSString stringWithFormat:@"%@", self.menuArray[indexPath.row]];
-    [cell addSubview:cellTitle];
+
+
 
     return cell;
 }

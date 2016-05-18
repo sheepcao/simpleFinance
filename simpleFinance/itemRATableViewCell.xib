@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -16,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="vmv-LU-hz5">
-                        <rect key="frame" x="70" y="4.5" width="208" height="21"/>
+                        <rect key="frame" x="70" y="4" width="208" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="dhO-dr-ByB"/>
                             <constraint firstAttribute="width" constant="88" id="v8N-Ay-z9S"/>
@@ -40,14 +41,27 @@
                         <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bz3-qC-LG9">
+                        <rect key="frame" x="57" y="10.5" width="8" height="8"/>
+                        <color key="backgroundColor" red="1" green="0.66873972039999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="bz3-qC-LG9" secondAttribute="height" id="Bce-fg-MIU"/>
+                            <constraint firstAttribute="width" constant="8" id="ShA-RC-oDG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="0.66873972039999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="vmv-LU-hz5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="1Tj-rM-iOY"/>
                     <constraint firstItem="OMm-Hx-yV8" firstAttribute="leading" secondItem="vmv-LU-hz5" secondAttribute="trailing" constant="20" id="3WD-06-qAE"/>
+                    <constraint firstItem="vmv-LU-hz5" firstAttribute="leading" secondItem="bz3-qC-LG9" secondAttribute="trailing" constant="5" id="AtR-w7-KiU"/>
                     <constraint firstItem="OMm-Hx-yV8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="EkF-Gw-IAM"/>
                     <constraint firstItem="vmv-LU-hz5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="86" id="FTk-vf-4mQ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="OMm-Hx-yV8" secondAttribute="trailing" constant="8" id="MZT-Wr-Och"/>
                     <constraint firstItem="vmv-LU-hz5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="62" id="XiO-jv-jrb"/>
+                    <constraint firstItem="bz3-qC-LG9" firstAttribute="centerY" secondItem="vmv-LU-hz5" secondAttribute="centerY" id="ptt-vS-ceh"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -58,7 +72,9 @@
             <connections>
                 <outlet property="categoryLabel" destination="vmv-LU-hz5" id="P5h-q4-ke3"/>
                 <outlet property="moneyLabel" destination="OMm-Hx-yV8" id="rhj-Xv-amf"/>
+                <outlet property="point" destination="bz3-qC-LG9" id="pw9-8N-GQq"/>
             </connections>
+            <point key="canvasLocation" x="148" y="266"/>
         </tableViewCell>
     </objects>
 </document>
