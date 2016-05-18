@@ -90,6 +90,7 @@
 "创建新的用户" ="Sign Up";
 "忘记密码?" = "Forgot Password?";
 "请输入正确的邮箱格式" = "Please input a valid Email";
+"密码格式不正确" ="Please input a valid password";
 "密码长度6-20位并由大小写字母和数字组成" = "letters and numbers with length of 6-20";
 "请输入您的邮箱" = "Please input your email as username";
 "请输入密码" = "Please input your password";
@@ -114,5 +115,44 @@
 "成功同步到本机" = "Recover Success";
 
 
+//////////////////////////////////////////////////////////////register
+"邮箱(用户名)" = "Email(Username)";
+"*重要 : 用于登录及密码找回" = "Note: Use email to find your password";
+"设置密码(大小写字母或数字,6-20位)" = "Password (letters and numbers with length of 6-20)";
+"注  册" = "Register";
+"点击提交，您将同意并遵守简簿的用户使用协议。点击阅读 >" = "By using Money OnGo youagree to this Terms of Use. check it here >";
+//"请输入正确的邮箱格式" = "Please input a valid Email";
+//"密码格式不正确" = "";
+//"密码长度6-20位并由大小写字母和数字组成" = "";
+"注册成功" = "Success";
+"您输入的注册邮箱已存在，换一个吧" = "Email already existed";
+"注册失败，请重试" = "Register failed, please try later.";
+
+/////////////////////////////////////////////////////////////forgot password
+
+"密码找回" = "Find Password";
+"请输入您的注册邮箱" = "Input your registered email";
+"提  交" = "Submit";
+"您的密码将会发送到您的注册邮箱，请注意查收" = "Your password will be sent to your email";
+"请前往您的邮箱查看您的密码" = "Plesae check your email for the password";
+"您输入的注册邮箱不存在，请重新输入" = "Email not exist";
+"提交失败，请检查您的网络并重试" = "Submit failed, please check your network";
+
+
+//////////////////////////////////////////////////////////////////////trend
+"收入" = "Income";
+"支出" = "Expense";
+"1天" = "1D";
+"1周" = "1W";
+"2周" = "2W";
+"4周" = "4W";
+"13周" = "13W";
+"%@  至  %@" = "%@  To  %@";
+"金 额" = "Sum";
+"收支总览" = "Total";
+"支出明细" = "Expense Detail";
+"收入明细" = "Income Detail";
+"环 比" = "Increase";
+"幅 度" = "Ratio";
 
 

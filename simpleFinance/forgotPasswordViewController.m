@@ -54,7 +54,7 @@
     self.topBar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topBarHeight)];
     self.topBar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.topBar];
-    [self.topBar.titleLabel  setText:@"密码找回"];
+    [self.topBar.titleLabel  setText:NSLocalizedString(@"密码找回",nil)];
 //    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 80, 22, 160, 50)];
 //    [titileLabel setText:@"密码找回"];
 //    titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
@@ -99,7 +99,7 @@
     
     UITextField *usernameField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, 0, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
     usernameField.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:@"请输入您的注册邮箱"
+    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"请输入您的注册邮箱",nil)
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
                                                  NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/22]
@@ -121,7 +121,7 @@
     
     gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, usernameField.frame.origin.y + usernameField.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/7.5)];
     loginButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:23.0f];
-    [loginButton setTitle:@"提  交" forState:UIControlStateNormal];
+    [loginButton setTitle:NSLocalizedString(@"提  交",nil) forState:UIControlStateNormal];
     [content addSubview:loginButton];
     [loginButton addTarget:self action:@selector(findPassword) forControlEvents:UIControlEventTouchUpInside];
     
@@ -130,7 +130,7 @@
     hintLabel.textAlignment = NSTextAlignmentCenter;
     hintLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Medium" size:11.0f];
     hintLabel.textColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:0.9];
-    [hintLabel setText:@"您的密码将会发送到您的注册邮箱，请注意查收"];
+    [hintLabel setText:NSLocalizedString(@"您的密码将会发送到您的注册邮箱，请注意查收",nil)];
     hintLabel.numberOfLines = 2;
     [content addSubview:hintLabel];
     
@@ -177,7 +177,7 @@
         lang = @"en";
     }
     
-    NSDictionary *parameters = @{@"tag": @"sendEmail",@"name":self.userField.text,@"Lang":@"en"};
+    NSDictionary *parameters = @{@"tag": @"sendEmail",@"name":self.userField.text,@"Lang":lang};
     
     
     
@@ -223,7 +223,7 @@
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"请输入正确的邮箱格式";
+        hud.labelText = NSLocalizedString(@"请输入正确的邮箱格式",nil);
         [hud hide:YES afterDelay:1.5];
         [self.userField becomeFirstResponder];
     }

@@ -130,7 +130,7 @@
     
     for (int i = 0 ; i<2; i++) {
         NSMutableArray *moneyTotalsArray = [[NSMutableArray alloc] initWithCapacity:4];
-        (i == 1)?[moneyTotalsArray addObject:@"收入"] : [moneyTotalsArray addObject:@"支出"];
+        (i == 1)?[moneyTotalsArray addObject:NSLocalizedString(@"收入",nil)] : [moneyTotalsArray addObject:NSLocalizedString(@"支出",nil)];
         FMResultSet *resultMoney = [db executeQuery:@"select sum(money) from ITEMINFO where strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?) AND item_type = ?", startDate,nextEndDay,[NSNumber numberWithInt:i]];
         if ([resultMoney next]) {
             double totalIncome =  [resultMoney doubleForColumnIndex:0];
@@ -326,7 +326,7 @@
     saveButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:saveButton];
     
-    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:@"1天",@"1周",@"2周",@"4周",@"13周",nil];
+    NSArray *segmentedArray = [[NSArray alloc]initWithObjects:NSLocalizedString(@"1天",nil),NSLocalizedString(@"1周",nil),NSLocalizedString(@"2周",nil),NSLocalizedString(@"4周",nil),NSLocalizedString(@"13周",nil),nil];
     UISegmentedControl *timeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
     timeSeg.frame = CGRectMake(SCREEN_WIDTH*0.16, 35, SCREEN_WIDTH*0.7, 28);
     timeSeg.tintColor =  normalColor;
@@ -345,7 +345,7 @@
     [self.dateRangeLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/23]];
     
     self.dateRangeLabel.textAlignment = NSTextAlignmentCenter;
-    NSString *dateRange = [NSString stringWithFormat:@"%@  至  %@",self.startDate,self.endDate];
+    NSString *dateRange = [NSString stringWithFormat:NSLocalizedString(@"%@  至  %@",nil),self.startDate,self.endDate];
     [self.dateRangeLabel setText:dateRange];
     [self.dateRangeLabel setTextColor:self.myTextColor];
     [self.view addSubview:self.dateRangeLabel];
@@ -374,7 +374,7 @@
     
     
     UILabel *dataExplain = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH -120, tableY, 92, SCREEN_WIDTH/15)];
-    [dataExplain setText:@"金 额"];
+    [dataExplain setText:NSLocalizedString(@"金 额",nil)];
     dataExplain.textAlignment = NSTextAlignmentRight;
     dataExplain.textColor = [UIColor colorWithRed:253/255.0f green:197/255.0f blue:65/255.0f alpha:1.0f];
     dataExplain.font = [UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/24];
@@ -529,7 +529,7 @@
         [self.dateRangeLabel setText:self.startDate];
     }else
     {
-        NSString *dateRange = [NSString stringWithFormat:@"%@  至  %@",self.startDate,self.endDate];
+        NSString *dateRange = [NSString stringWithFormat:NSLocalizedString(@"%@  至  %@",nil),self.startDate,self.endDate];
         [self.dateRangeLabel setText:dateRange];
     }
     
@@ -622,13 +622,13 @@
     [headerView addSubview:dateLabel];
     switch (section) {
         case 0:
-            [dateLabel setText:@"收支总览"];
+            [dateLabel setText:NSLocalizedString(@"收支总览",nil)];
             break;
         case 1:
-            [dateLabel setText:@"支出明细"];
+            [dateLabel setText:NSLocalizedString(@"支出明细",nil)];
             break;
         case 2:
-            [dateLabel setText:@"收入明细"];
+            [dateLabel setText:NSLocalizedString(@"收入明细",nil)];
             break;
             
         default:
@@ -692,7 +692,7 @@
 
 -(void)dataTypeChanged:(UIButton *)sender
 {
-    NSArray *explainArray = @[@"金 额",@"环 比",@"幅 度"];
+    NSArray *explainArray = @[NSLocalizedString(@"金 额",nil),NSLocalizedString(@"环 比",nil),NSLocalizedString(@"幅 度",nil)];
     dataType ++;
     dataType = dataType%3;
     [UIView transitionWithView: self.maintableView

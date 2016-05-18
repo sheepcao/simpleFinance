@@ -91,7 +91,7 @@
     
     UITextField *usernameField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, logoView.frame.origin.y + logoView.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/9)];
     usernameField.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:@"邮箱（用户名）"
+    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"邮箱(用户名)",nil)
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
                                                  NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/22]
@@ -114,7 +114,7 @@
     hintLabel.textAlignment = NSTextAlignmentCenter;
     hintLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.5f];
     hintLabel.textColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:0.9];
-    [hintLabel setText:@"*重要 : 用于登录及密码找回"];
+    [hintLabel setText:NSLocalizedString(@"*重要 : 用于登录及密码找回",nil)];
     [content addSubview:hintLabel];
     
     UIView *leftGradient = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/9, hintLabel.frame.origin.y + hintLabel.frame.size.height/2-1, SCREEN_WIDTH/2 - SCREEN_WIDTH/9 - hintLabel.frame.size.width/2, 2)];
@@ -144,7 +144,7 @@
 
     UITextField *passwordField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, usernameField.frame.origin.y + usernameField.frame.size.height + 24, SCREEN_WIDTH*3/4, SCREEN_WIDTH/9)];
     passwordField.attributedPlaceholder =
-    [[NSAttributedString alloc] initWithString:@"设置密码(大小写字母或数字,6-20位)"
+    [[NSAttributedString alloc] initWithString:NSLocalizedString(@"设置密码(大小写字母或数字,6-20位)",nil)
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
                                                  NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/32]
@@ -164,7 +164,7 @@
     
     gradientButton *loginButton = [[gradientButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, passwordField.frame.origin.y + passwordField.frame.size.height + space+5, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8.5)];
     loginButton.titleLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:23.0f];
-    [loginButton setTitle:@"注  册" forState:UIControlStateNormal];
+    [loginButton setTitle:NSLocalizedString(@"注  册",nil) forState:UIControlStateNormal];
     [content addSubview:loginButton];
     [loginButton addTarget:self action:@selector(userRegister) forControlEvents:UIControlEventTouchUpInside];
     self.myLoginBtn = loginButton;
@@ -174,7 +174,7 @@
     termsLabel.titleLabel.numberOfLines = 2;
     termsLabel.titleLabel.font =  [UIFont fontWithName:@"SourceHanSansCN-Normal" size:11.0f];
     termsLabel.titleLabel.textColor = [UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:0.88];
-    [termsLabel setTitle:@"点击提交，您将同意并遵守简簿的用户使用协议。点击阅读 >" forState:UIControlStateNormal];
+    [termsLabel setTitle:NSLocalizedString(@"点击提交，您将同意并遵守简簿的用户使用协议。点击阅读 >",nil) forState:UIControlStateNormal];
     [termsLabel addTarget: self action:@selector(userTerms) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:termsLabel];
     
@@ -227,7 +227,7 @@
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"请输入正确的邮箱格式";
+        hud.labelText = NSLocalizedString(@"请输入正确的邮箱格式",nil);
         [hud hide:YES afterDelay:2.0];
         [self.userField becomeFirstResponder];
         return  NO;
@@ -239,8 +239,8 @@
         hud.animationType = MBProgressHUDAnimationZoom;
         hud.labelFont = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
         hud.mode = MBProgressHUDModeText;
-        hud.labelText = @"密码格式不正确";
-        hud.detailsLabelText = @"密码长度6-20位并由大小写字母和数字组成";
+        hud.labelText = NSLocalizedString(@"密码格式不正确",nil);
+        hud.detailsLabelText = NSLocalizedString(@"密码长度6-20位并由大小写字母和数字组成",nil);
         [hud hide:YES afterDelay:2.0];
         [self.pswdField becomeFirstResponder];
         return NO;
