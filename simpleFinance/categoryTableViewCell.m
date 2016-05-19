@@ -60,7 +60,7 @@
     return  self;
 }
 
--(void)contentWithCategories:(NSArray *)cateArray;
+-(void)contentWithCategories:(NSArray *)cateArray 
 {
     for (int i = 0; i<4; i++) {
         categoryButton *categoryLabel = (categoryButton *)[self viewWithTag:(i+1)];

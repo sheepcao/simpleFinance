@@ -18,13 +18,13 @@
     {
         CGFloat thisRowHeight = self.frame.size.height;
         
-        self.leftText = [[UILabel alloc] initWithFrame:CGRectMake(25, 2, SCREEN_WIDTH/5, thisRowHeight - 4)];
+        self.leftText = [[UILabel alloc] initWithFrame:CGRectMake(20, 2, SCREEN_WIDTH/5+10, thisRowHeight - 4)];
         
-        self.rightText = [[UILabel alloc] initWithFrame:CGRectMake(self.leftText.frame.origin.x + self.leftText.frame.size.width +30, 2, SCREEN_WIDTH*4/5 - 25-25 -30, thisRowHeight - 4)];
+        self.rightText = [[UILabel alloc] initWithFrame:CGRectMake(self.leftText.frame.origin.x + self.leftText.frame.size.width +30, 2, SCREEN_WIDTH*4/5 -10 - 20-20 -30, thisRowHeight - 4)];
         [self addSubview:self.leftText ];
         [self addSubview:self.rightText ];
         
-        self.leftText.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:15.0f];
+        self.leftText.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:14.5f];
         self.leftText.textAlignment = NSTextAlignmentLeft;
         self.rightText.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:14.0f];
         self.rightText.textAlignment = NSTextAlignmentRight;

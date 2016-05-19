@@ -370,7 +370,7 @@
     self.inputField.delegate = self;
     self.inputField.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.9];
     self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
-    self.inputField.textColor = self.myTextColor;
+    self.inputField.textColor = [UIColor colorWithRed:0.1 green:0.12 blue:0.1 alpha:0.98];
     self.inputField.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:NSLocalizedString(@"请输入(限5字以内)",nil)
                                     attributes:@{

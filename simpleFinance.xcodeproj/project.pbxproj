@@ -111,6 +111,8 @@
 		A4ABB8311CE7A14900EB4879 /* 下午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB82B1CE7A14900EB4879 /* 下午.png */; };
 		A4ABB8381CE8651700EB4879 /* 下午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB8351CE8651700EB4879 /* 下午1.png */; };
 		A4ABB8391CE8651700EB4879 /* 上午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB8361CE8651700EB4879 /* 上午1.png */; };
+		A4B22C261CEE110400C8CC6B /* launchCN.png in Resources */ = {isa = PBXBuildFile; fileRef = A4B22C241CEE110400C8CC6B /* launchCN.png */; };
+		A4B22C271CEE110400C8CC6B /* launchEN.png in Resources */ = {isa = PBXBuildFile; fileRef = A4B22C251CEE110400C8CC6B /* launchEN.png */; };
 		A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC243D1CBCDB8A007A94F1 /* RoundedButton.m */; };
 		A4CC24421CBCE2E0007A94F1 /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24411CBCE2E0007A94F1 /* BottomView.m */; };
 		A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24431CBCE82F007A94F1 /* switchChart.png */; };
@@ -335,6 +337,9 @@
 		A4ABB82B1CE7A14900EB4879 /* 下午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午.png"; sourceTree = "<group>"; };
 		A4ABB8351CE8651700EB4879 /* 下午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午1.png"; sourceTree = "<group>"; };
 		A4ABB8361CE8651700EB4879 /* 上午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午1.png"; sourceTree = "<group>"; };
+		A4B22C241CEE110400C8CC6B /* launchCN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchCN.png; sourceTree = "<group>"; };
+		A4B22C251CEE110400C8CC6B /* launchEN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchEN.png; sourceTree = "<group>"; };
+		A4B22C281CEE115400C8CC6B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		A4CC243C1CBCDB8A007A94F1 /* RoundedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedButton.h; sourceTree = "<group>"; };
 		A4CC243D1CBCDB8A007A94F1 /* RoundedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedButton.m; sourceTree = "<group>"; };
 		A4CC24401CBCE2E0007A94F1 /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomView.h; sourceTree = "<group>"; };
@@ -385,7 +390,6 @@
 		A4E6DB281CEAEB27009CBA87 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		A4E6DB2D1CEAFAEC009CBA87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4E6DB2F1CEAFB11009CBA87 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
-		A4E6DB301CEAFB11009CBA87 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		A4E6DB311CEAFB11009CBA87 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		A4E6DB321CEAFB21009CBA87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4E6DB361CEAFBA6009CBA87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -626,6 +630,8 @@
 			isa = PBXGroup;
 			children = (
 				A4E6DB491CED554D009CBA87 /* logo.png */,
+				A4B22C241CEE110400C8CC6B /* launchCN.png */,
+				A4B22C251CEE110400C8CC6B /* launchEN.png */,
 				A4A141071CE967B6003DF45B /* components */,
 				A4ABB8351CE8651700EB4879 /* 下午1.png */,
 				A4E6DB441CECA86A009CBA87 /* 夜间1.png */,
@@ -979,6 +985,7 @@
 				A40F6BFD1CE338BB0010A0CE /* registerViewController.xib in Resources */,
 				A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */,
 				A4E6DB201CEABE1A009CBA87 /* QR_en1.png in Resources */,
+				A4B22C261CEE110400C8CC6B /* launchCN.png in Resources */,
 				A4E6DB461CECA86B009CBA87 /* 夜间1.png in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
 				A457527A1CDB4FA40013EFBF /* itemRATableViewCell.xib in Resources */,
@@ -993,6 +1000,7 @@
 				A4CC247F1CC4AFE1007A94F1 /* calendar.png in Resources */,
 				A4A141271CE967B6003DF45B /* done.png in Resources */,
 				A4E4A2F61CC9BE6000E36AFE /* FlatDatePicker-Icon-Close.png in Resources */,
+				A4B22C271CEE110400C8CC6B /* launchEN.png in Resources */,
 				A4E6DB2C1CEAFAEC009CBA87 /* InfoPlist.strings in Resources */,
 				A4E4A2F71CC9BE6000E36AFE /* FlatDatePicker-Icon-Close@2x.png in Resources */,
 				A425B2D71CD086440008BFE2 /* trendViewController.xib in Resources */,
@@ -1189,7 +1197,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A42D1C981CB60AC900C208A0 /* Base */,
-				A4E6DB301CEAFB11009CBA87 /* zh-Hans */,
+				A4B22C281CEE115400C8CC6B /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

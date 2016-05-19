@@ -385,7 +385,7 @@
 
 -(void) configCategoryPad
 {
-    UITableView *categoryTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height +10, SCREEN_WIDTH, SCREEN_HEIGHT - (self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height) - self.keyPadView.frame.size.height-20)];
+    UITableView *categoryTable = [[UITableView alloc] initWithFrame:CGRectMake(0, self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height +10, SCREEN_WIDTH, SCREEN_HEIGHT - (self.inputAreaView.frame.origin.y + self.inputAreaView.frame.size.height) - self.keyPadView.frame.size.height-10)];
     
     categoryTable.showsVerticalScrollIndicator = YES;
     categoryTable.indicatorStyle = UIScrollViewIndicatorStyleWhite;
@@ -446,7 +446,7 @@
     self.inputField.delegate = self;
     self.inputField.tintColor = [UIColor colorWithRed:0.43 green:0.43 blue:0.43 alpha:0.88];
     self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
-    self.inputField.textColor = self.myTextColor;
+    self.inputField.textColor = [UIColor colorWithRed:0.1 green:0.12 blue:0.1 alpha:0.98];
     self.inputField.attributedPlaceholder =
     [[NSAttributedString alloc] initWithString:NSLocalizedString(@"请输入(限5字以内)",nil)
                                     attributes:@{
