@@ -21,9 +21,8 @@
     {
 //        CGFloat thisRowHeight = self.frame.size.height;
         
-        self.seperator = [[UIImageView alloc] initWithFrame:CGRectMake(18, SCREEN_WIDTH/10/2-pointRadius, pointRadius*2, pointRadius*2)];
+        self.seperator = [[UIView alloc] initWithFrame:CGRectMake(18, SCREEN_WIDTH/10/2-pointRadius, pointRadius*2, pointRadius*2)];
         self.seperator.backgroundColor = [UIColor colorWithRed:242/255.0f green:191/255.0f blue:109/255.0f alpha:1.0f];
-        [self.seperator setImage:[UIImage imageNamed:@"doneBig"]];
         self.seperator.layer.cornerRadius = pointRadius;
 //        self.seperator.layer.masksToBounds = YES;
         self.seperator.layer.shadowColor = [UIColor colorWithRed:.23 green:.23 blue:.23 alpha:1.0f].CGColor;
@@ -31,7 +30,10 @@
         self.seperator.layer.shadowRadius = 1.5f;
         self.seperator.layer.shadowOffset = CGSizeMake(1.0f, 2.5f);
         
-        
+        UIImageView *doneImage = [[UIImageView alloc] initWithFrame:CGRectMake(2, 3, pointRadius*2-4, pointRadius*2-4)];
+        [doneImage setImage:[UIImage imageNamed:@"doneBig"]];
+        [self.seperator addSubview:doneImage];
+
         self.category = [[UILabel alloc] initWithFrame:CGRectMake(self.seperator.frame.size.width+self.seperator.frame.origin.x+10, 3, (SCREEN_WIDTH-60 - pointRadius - 80), SCREEN_WIDTH/10-3*2)];
         self.money = [[UIButton alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 2, 80, SCREEN_WIDTH/10 - 4)];
         self.category.textAlignment = NSTextAlignmentLeft;

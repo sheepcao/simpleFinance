@@ -103,7 +103,19 @@
         [deleteBtn setImage:[UIImage imageNamed:@"delete.png"] forState:UIControlStateNormal];
         deleteBtn.tag = 10 + 1 + i;
         [deleteBtn addTarget:self.categoryDelegate action:@selector(categoryDeleteTap:) forControlEvents:UIControlEventTouchUpInside];
+
+        
         [deleteBtn setHidden:YES];
+        [deleteBtn setImageEdgeInsets:UIEdgeInsetsMake(-2, -2, -2, -2)];
+        deleteBtn.layer.borderWidth = 2.0f;
+        deleteBtn.layer.borderColor = [UIColor colorWithRed:218/255.0f green:218/255.0f blue:218/255.0f alpha:1.0f].CGColor;
+        deleteBtn.layer.cornerRadius = deleteBtn.frame.size.width/2;
+        deleteBtn.layer.masksToBounds = YES;
+        deleteBtn.layer.shadowColor = [UIColor colorWithRed:.23 green:.23 blue:.23 alpha:1.0f].CGColor;
+        deleteBtn.layer.shadowOpacity = 1.0;
+        deleteBtn.layer.shadowRadius = 1.5f;
+        deleteBtn.layer.shadowOffset = CGSizeMake(.5f, 1.2f);
+
         [self.contentView addSubview:deleteBtn];
         [self.contentView bringSubviewToFront:deleteBtn];
         

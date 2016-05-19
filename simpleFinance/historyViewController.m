@@ -266,20 +266,20 @@
     [bottomView addSubview:addMoneyButton];
     
 }
--(void)tapDownAddNewButton:(RoundedButton *)sender
-{
-    [sender selectedStyle];
-    
-}
--(void)tapUpAddNewButton:(RoundedButton *)sender
-{
-    [sender notSelectedStyle];
-}
+//-(void)tapDownAddNewButton:(RoundedButton *)sender
+//{
+//    [sender selectedStyle];
+//    
+//}
+//-(void)tapUpAddNewButton:(RoundedButton *)sender
+//{
+//    [sender notSelectedStyle];
+//}
 -(void)popAddNewView:(RoundedButton *)sender
 {
-    if (sender) {
-        [sender notSelectedStyle];
-    }
+//    if (sender) {
+//        [sender notSelectedStyle];
+//    }
     
     [self presentViewController:[self nextAddNewItemViewController] animated:YES completion:nil];
     

@@ -402,7 +402,9 @@ CGFloat fontSize;
 {
     for (UITouch *touch in touches) {
         CGPoint touchLocation = [touch locationInView:_contentView];
-        [self didTouchAt:touchLocation];
+        if (_endPercentages.count>0) {
+            [self didTouchAt:touchLocation];
+        }
     }
 }
 

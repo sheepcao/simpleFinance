@@ -106,7 +106,7 @@
                                                  }
      ];
     usernameField.textAlignment = NSTextAlignmentCenter;
-    usernameField.returnKeyType = UIReturnKeyDone;
+    usernameField.returnKeyType = UIReturnKeyDefault;
     usernameField.delegate = self;
     usernameField.tintColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.9];
     usernameField.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:SCREEN_WIDTH/21];

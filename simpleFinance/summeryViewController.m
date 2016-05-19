@@ -109,7 +109,7 @@
         [self.surplusTitle setText:NSLocalizedString(@"月结余",nil)];
     }
     
-    NSLog(@"summeryViewController\viewDidLoad");
+    NSLog(@"summeryViewController\n viewDidLoad");
 
 
 }

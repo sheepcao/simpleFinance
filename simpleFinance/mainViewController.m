@@ -476,10 +476,7 @@
 }
 -(void)popAddNewView:(RoundedButton *)sender
 {
-//    if (sender) {
-//        [sender notSelectedStyle];
-//    }
-    
+
     [self presentViewController:[self nextAddNewItemViewController] animated:YES completion:nil];
     
 }

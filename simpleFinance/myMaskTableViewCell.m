@@ -74,7 +74,7 @@
     
     self.category.textColor = myColor;
     self.title.textColor = myColor;
-    self.money.textColor = myColor;
+//    self.money.textColor = myColor;
     
     UIFontDescriptor *attributeFontDescriptorFirstPart = [UIFontDescriptor fontDescriptorWithFontAttributes:
                                                           @{UIFontDescriptorFamilyAttribute: @"Helvetica Neue",

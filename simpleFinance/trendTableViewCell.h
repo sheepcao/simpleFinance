@@ -12,7 +12,7 @@
 @property (nonatomic,strong) UILabel *category;
 @property (nonatomic,strong) UIButton *money;
 
-@property (nonatomic,strong) UIImageView *seperator;
+@property (nonatomic,strong) UIView *seperator;
 
 - (void)maskCellFromTop:(CGFloat)margin;
 -(void)makeTextColorForIncrease:(NSString *)increase;

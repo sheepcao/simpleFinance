@@ -279,16 +279,56 @@
 
 -(void)insertDefaultCategoryToDB:(FMDatabase *)database
 {
-    BOOL sql = [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('日常',0,71,53,58)"];
-    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('旅游',0,251,15,45)"];
-    [database executeUpdate:@" insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('水电费',0,253,177,85)"];
-    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('阅读',0,250,47,82)"];
-    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('医疗',0,255,250,105)"];
-    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('交通',0,59,237,124)"];
-    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('工资',1,71,53,205)"];
-    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('奖金',1,95,115,218)"];
-    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('外快',1,142,162,29)"];
-    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('红包',1,68,120,119)"];
+    BOOL sql =     [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('正餐',0,242,95,92)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('零食',0,255,224,102)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('交通',0,112,193,179)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('娱乐',0,237,106,90)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('服饰',0,244,241,187)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('旅游',0,155,193,188)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('医疗',0,92,164,169)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('日用品',0,244,91,105)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('水电煤',0,228,253,225)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('话费',0,2,128,144)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('住房',0,254,147,140)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('孩子',0,230,184,156)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('培训',0,234,210,172)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('宠物',0,156,175,183)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('数码',0,254,95,85)"];
+    
+    [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('书籍',0,240,182,127)"];
+     
+     [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('礼品',0,141,153,174)"];
+    
+     
+     
+     
+     
+     
+     [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('工资',1,199,239,207)"];
+     
+     [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('奖金',1,232,63,11)"];
+     
+     [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('兼职',1,255,191,0)"];
+     
+     [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('外快',1,50,147,111)"];
+     
+     [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('红包',1,255,202,212)"];
+     
+     [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('理财收益',1,255,229,217)"];
     
     if (!sql) {
         NSLog(@"CATEGORY ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
@@ -298,13 +338,67 @@
 
 -(void)insertDefaultColorToDB:(FMDatabase *)database
 {
-    BOOL sql = [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (122,50,121,0)"];
-    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (212,150,71,0)"];
-    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (222,53,11,0)"];
-    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (162,150,171,0)"];
-    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (192,31,171,0)"];
-    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (232,230,101,0)"];
-    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (50,200,181,0)"];
+    BOOL sql =  [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (255,185,151,0)"];
+    
+    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (173,82,60,0)"];
+    
+    [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (120,17,87,0)"];
+     
+     [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (242,95,92,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (255,224,102,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (112,193,179,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (237,106,90,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (244,241,187,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (155,193,188,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (92,164,169,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (244,91,105,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (228,253,225,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (2,128,144,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (254,147,140,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (230,184,156,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (234,210,172,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (156,175,183,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (254,95,85,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (240,182,127,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (141,153,174,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (214,209,177,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (199,239,207,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (232,63,11,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (255,191,0,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (50,147,111,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (255,202,212,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (255,229,217,1)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (216,226,220,0)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (157,129,137,0)"];
+      
+      [database executeUpdate:@"insert into COLORINFO (color_R,color_G,color_B, used_count)values (116,84,106,0)"];
+      
+
         if (!sql) {
         NSLog(@"COLOR ERROR: %d - %@", database.lastErrorCode, database.lastErrorMessage);
     }

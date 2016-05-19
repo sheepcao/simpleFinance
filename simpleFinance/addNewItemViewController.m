@@ -26,6 +26,8 @@
     BOOL isInputingNote;
     BOOL isAddingCategory;
     CGFloat btnHeight;
+    
+    
 
 }
 @property (nonatomic ,strong) UILabel *InputLabel;
@@ -41,7 +43,7 @@
 @property (nonatomic ,strong) UIView *keyPadView;
 @property (nonatomic ,strong) UIView *inputAreaView;
 @property (nonatomic ,strong) UITableView *categoryTableView;
-
+@property (nonatomic ,strong) UIAlertController* alert ;
 @property (nonatomic,strong) FMDatabase *db;
 
 @property (nonatomic,strong) NSMutableArray *incomeCategoryArray;
@@ -60,9 +62,11 @@
 
 @implementation addNewItemViewController
 @synthesize db;
+@synthesize alert;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     isInputingNote = NO;
     isAddingCategory = NO;
@@ -78,6 +82,12 @@
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
     
     self.sortType = [[NSUserDefaults standardUserDefaults] objectForKey:@"sortType"];
     if (self.sortType) {
@@ -97,8 +107,15 @@
     
     // for editing item.
     [self configEditingItem];
-}
+    
 
+}
+-(void)dismissKeyboard {
+
+    [self textFieldShouldReturn:self.inputField];
+
+    
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -220,7 +237,7 @@
     topbar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:topbar];
     
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 27, 40, 40)];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 30, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [closeViewButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
@@ -231,12 +248,11 @@
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
     
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-48, 29, 40, 40)];
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-52, 30, 40, 40)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [saveButton setImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
-    saveButton.imageEdgeInsets = UIEdgeInsetsMake(7, 8,7, 8);
-//        [saveButton setTitle:@"保存" forState:UIControlStateNormal];
+    [saveButton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
+    saveButton.imageEdgeInsets = UIEdgeInsetsMake(3.9, 3.9,3.9, 3.9);
     [saveButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [saveButton addTarget:self action:@selector(saveItem:) forControlEvents:UIControlEventTouchUpInside];
     saveButton.backgroundColor = [UIColor clearColor];
@@ -353,7 +369,6 @@
     noteText.textAlignment = NSTextAlignmentLeft;
     noteText.tintColor = [UIColor whiteColor];
     
-    
     self.noteBody = noteText;
     [noteView addSubview:noteTitle];
     [noteView addSubview:noteText];
@@ -427,7 +442,7 @@
     titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     titleLabel.textColor = [UIColor colorWithRed:0.18 green:0.19 blue:0.18 alpha:0.95f];
     self.inputField = [[UITextField alloc] initWithFrame:CGRectMake(titleLabel.frame.origin.x + titleLabel.frame.size.width , 6, inputCategoryView.frame.size.width-(titleLabel.frame.origin.x + titleLabel.frame.size.width) - 60, inputCategoryView.frame.size.height-12)];
-    self.inputField.returnKeyType = UIReturnKeyDone;
+    self.inputField.returnKeyType = UIReturnKeyDefault;
     self.inputField.delegate = self;
     self.inputField.tintColor = [UIColor colorWithRed:0.43 green:0.43 blue:0.43 alpha:0.88];
     self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
@@ -694,6 +709,7 @@
 
 -(void)closeVC
 {
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -747,13 +763,13 @@
 -(BOOL)validateData
 {
     if ([self.InputLabel.text doubleValue]<0.001) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"忘记输入记账金额了吧,亲",nil) preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-        [alert addAction:okAction];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"忘记输入记账金额了吧,亲",nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertview show];
+
         return NO;
     }
+    
     return YES;
 }
 
@@ -887,10 +903,9 @@
     
     FMResultSet *rs = [db executeQuery:@"select * from CATEGORYINFO where is_deleted = 0 AND category_name = ? AND category_type = ?",[newCategory stringByReplacingOccurrencesOfString:@" " withString:@""],[NSNumber numberWithInteger: self.moneyTypeSeg.selectedSegmentIndex]];
     if ([rs next]) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"您输入的类别已经存在" ,nil) preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
-        [alert addAction:okAction];
-        [self presentViewController:alert animated:YES completion:nil];
+        UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"您输入的类别已经存在" ,nil) delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertview show];
+
         [db close];
         return;
     }

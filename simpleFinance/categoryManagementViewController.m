@@ -319,9 +319,6 @@
     deleteButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     UIButton *addNewButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, bottomHeight)];
-//    [addNewButton setTitleEdgeInsets:UIEdgeInsetsMake(0, -addNewButton.frame.size.width, 0, 0)];
-//    [addNewButton setImageEdgeInsets:UIEdgeInsetsMake(bottomHeight/6, addNewButton.frame.size.width /4, bottomHeight/6, addNewButton.frame.size.width *3/4 - bottomHeight*2/3)];
-//    [addNewButton setImage:[UIImage imageNamed:@"expend"] forState:UIControlStateNormal];
     [addNewButton setTitle:NSLocalizedString(@"添加",nil) forState:UIControlStateNormal];
     addNewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     addNewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -369,7 +366,7 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.textColor = [UIColor whiteColor];
     self.inputField = [[UITextField alloc] initWithFrame:CGRectMake(titleLabel.frame.origin.x + titleLabel.frame.size.width+8 , 6, inputCategoryView.frame.size.width-(titleLabel.frame.origin.x + titleLabel.frame.size.width) - 60, inputCategoryView.frame.size.height-12)];
-    self.inputField.returnKeyType = UIReturnKeyDone;
+    self.inputField.returnKeyType = UIReturnKeyDefault;
     self.inputField.delegate = self;
     self.inputField.tintColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:0.9];
     self.inputField.font =  [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
@@ -422,6 +419,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
         cell.categoryDelegate = self;
+
     }
     
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
@@ -525,8 +523,9 @@
 }
 -(void)categoryTap:(UIButton *)sender
 {
-    NSLog(@"do nothing");
+    NSLog(@"do nothing....");
 }
+
 
 -(void)closeVC
 {
