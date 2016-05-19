@@ -78,9 +78,28 @@
 
 -(void)configTable
 {
-    UIImageView *logoView =[[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*3/8, self.topBar.frame.size.height + 20, SCREEN_WIDTH/4, SCREEN_WIDTH/4)];
-    [logoView setImage:[UIImage imageNamed: @"logo.png"]];
+//    UIImageView *logoView =[[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH*3/8, self.topBar.frame.size.height + 20, SCREEN_WIDTH/4, SCREEN_WIDTH/4)];
+//    [logoView setImage:[UIImage imageNamed: @"logo.png"]];
+//    logoView.layer.cornerRadius = logoView.frame.size.width/6.4;
+//    logoView.layer.masksToBounds = YES;
+//    [self.view addSubview:logoView];
+    
+    UILabel *logoView =[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/6, self.topBar.frame.size.height + 20, SCREEN_WIDTH*2/3, SCREEN_WIDTH/7.6)];
+    [logoView setText:NSLocalizedString(@"简 簿",nil)];
+    logoView.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:43.5f];
+    NSLog(@"length:%d",logoView.text.length);
+    if (logoView.text.length>6) {
+        logoView.font =  [UIFont fontWithName:@"HelveticaNeue" size:32.5f];
+    }
+    [logoView setTextColor:normalColor];
+    logoView.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.35];
+    logoView.shadowOffset =  CGSizeMake(0.66, 1.66);
+    
+    logoView.textAlignment = NSTextAlignmentCenter;
+    
+    logoView.layer.cornerRadius = logoView.frame.size.width/6.4;
     [self.view addSubview:logoView];
+
     
     UILabel *versionLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - logoView.frame.size.width/2, logoView.frame.size.height + logoView.frame.origin.y + 5, logoView.frame.size.width, 20)];
     [versionLabel setText:[NSString stringWithFormat:@"Version:%@",VERSIONNUMBER]];

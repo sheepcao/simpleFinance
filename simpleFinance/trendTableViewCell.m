@@ -23,7 +23,7 @@
         
         self.seperator = [[UIImageView alloc] initWithFrame:CGRectMake(18, SCREEN_WIDTH/10/2-pointRadius, pointRadius*2, pointRadius*2)];
         self.seperator.backgroundColor = [UIColor colorWithRed:242/255.0f green:191/255.0f blue:109/255.0f alpha:1.0f];
-        [self.seperator setImage:[UIImage imageNamed:@"done"]];
+        [self.seperator setImage:[UIImage imageNamed:@"doneBig"]];
         self.seperator.layer.cornerRadius = pointRadius;
 //        self.seperator.layer.masksToBounds = YES;
         self.seperator.layer.shadowColor = [UIColor colorWithRed:.23 green:.23 blue:.23 alpha:1.0f].CGColor;

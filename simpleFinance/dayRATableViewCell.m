@@ -33,6 +33,11 @@
     self.layer.mask = gradientLayer;
     [self.layer insertSublayer:gradientLayer atIndex:0];
     
+    [self.incomeTitle setText:NSLocalizedString(@"收入:",nil)];
+    [self.expenseTitle setText:NSLocalizedString(@"支出:",nil)];
+    
+    self.incomeTitle.adjustsFontSizeToFitWidth = YES;
+    self.expenseTitle.adjustsFontSizeToFitWidth = YES;
 }
 
 

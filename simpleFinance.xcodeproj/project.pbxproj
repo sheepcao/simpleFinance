@@ -12,7 +12,6 @@
 		A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A405513B1CC72C0F00306EB0 /* pieViewController.xib */; };
 		A40F6BE41CE035200010A0CE /* DLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BE31CE035200010A0CE /* DLog.m */; };
 		A40F6BEA1CE07D880010A0CE /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BE91CE07D880010A0CE /* loginViewController.m */; };
-		A40F6BEC1CE1767A0010A0CE /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BEB1CE1767A0010A0CE /* logo.png */; };
 		A40F6BEE1CE179EF0010A0CE /* loginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A40F6BED1CE179EF0010A0CE /* loginViewController.xib */; };
 		A40F6BF11CE17CB40010A0CE /* gradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BF01CE17CB40010A0CE /* gradientButton.m */; };
 		A40F6BF71CE1CEC70010A0CE /* backupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A40F6BF51CE1CEC70010A0CE /* backupViewController.m */; };
@@ -110,10 +109,8 @@
 		A4A141671CEA3411003DF45B /* pie.png in Resources */ = {isa = PBXBuildFile; fileRef = A4A141661CEA3411003DF45B /* pie.png */; };
 		A4ABB82F1CE7A14900EB4879 /* 上午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB8291CE7A14900EB4879 /* 上午.png */; };
 		A4ABB8311CE7A14900EB4879 /* 下午.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB82B1CE7A14900EB4879 /* 下午.png */; };
-		A4ABB8331CE7A14900EB4879 /* 夜间.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB82D1CE7A14900EB4879 /* 夜间.png */; };
 		A4ABB8381CE8651700EB4879 /* 下午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB8351CE8651700EB4879 /* 下午1.png */; };
 		A4ABB8391CE8651700EB4879 /* 上午1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB8361CE8651700EB4879 /* 上午1.png */; };
-		A4ABB83A1CE8651700EB4879 /* 夜间1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4ABB8371CE8651700EB4879 /* 夜间1.png */; };
 		A4CC243E1CBCDB8A007A94F1 /* RoundedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC243D1CBCDB8A007A94F1 /* RoundedButton.m */; };
 		A4CC24421CBCE2E0007A94F1 /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24411CBCE2E0007A94F1 /* BottomView.m */; };
 		A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */ = {isa = PBXBuildFile; fileRef = A4CC24431CBCE82F007A94F1 /* switchChart.png */; };
@@ -148,6 +145,10 @@
 		A4E6DB351CEAFBA6009CBA87 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB371CEAFBA6009CBA87 /* Localizable.strings */; };
 		A4E6DB3E1CEB26A0009CBA87 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E6DB3D1CEB26A0009CBA87 /* UIDevice-Hardware.m */; };
 		A4E6DB401CEC112D009CBA87 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E6DB3F1CEC112D009CBA87 /* FBSDKCoreKit.framework */; };
+		A4E6DB421CECA0D7009CBA87 /* doneBig.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB411CECA0D7009CBA87 /* doneBig.png */; };
+		A4E6DB461CECA86B009CBA87 /* 夜间1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB441CECA86A009CBA87 /* 夜间1.png */; };
+		A4E6DB481CECA97C009CBA87 /* 夜间.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB471CECA97C009CBA87 /* 夜间.png */; };
+		A4E6DB4A1CED554D009CBA87 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB491CED554D009CBA87 /* logo.png */; };
 		A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */; };
 		A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */; };
 		A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */; };
@@ -172,7 +173,6 @@
 		A40F6BE51CE0356C0010A0CE /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		A40F6BE81CE07D880010A0CE /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
 		A40F6BE91CE07D880010A0CE /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
-		A40F6BEB1CE1767A0010A0CE /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A40F6BED1CE179EF0010A0CE /* loginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = loginViewController.xib; sourceTree = "<group>"; };
 		A40F6BEF1CE17CB40010A0CE /* gradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gradientButton.h; sourceTree = "<group>"; };
 		A40F6BF01CE17CB40010A0CE /* gradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = gradientButton.m; sourceTree = "<group>"; };
@@ -333,10 +333,8 @@
 		A4A141661CEA3411003DF45B /* pie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pie.png; sourceTree = "<group>"; };
 		A4ABB8291CE7A14900EB4879 /* 上午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午.png"; sourceTree = "<group>"; };
 		A4ABB82B1CE7A14900EB4879 /* 下午.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午.png"; sourceTree = "<group>"; };
-		A4ABB82D1CE7A14900EB4879 /* 夜间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间.png"; sourceTree = "<group>"; };
 		A4ABB8351CE8651700EB4879 /* 下午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "下午1.png"; sourceTree = "<group>"; };
 		A4ABB8361CE8651700EB4879 /* 上午1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "上午1.png"; sourceTree = "<group>"; };
-		A4ABB8371CE8651700EB4879 /* 夜间1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间1.png"; sourceTree = "<group>"; };
 		A4CC243C1CBCDB8A007A94F1 /* RoundedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundedButton.h; sourceTree = "<group>"; };
 		A4CC243D1CBCDB8A007A94F1 /* RoundedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoundedButton.m; sourceTree = "<group>"; };
 		A4CC24401CBCE2E0007A94F1 /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BottomView.h; sourceTree = "<group>"; };
@@ -397,6 +395,10 @@
 		A4E6DB3C1CEB26A0009CBA87 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		A4E6DB3D1CEB26A0009CBA87 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
 		A4E6DB3F1CEC112D009CBA87 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		A4E6DB411CECA0D7009CBA87 /* doneBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doneBig.png; sourceTree = "<group>"; };
+		A4E6DB441CECA86A009CBA87 /* 夜间1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "夜间1.png"; path = "components/夜间1.png"; sourceTree = "<group>"; };
+		A4E6DB471CECA97C009CBA87 /* 夜间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间.png"; sourceTree = "<group>"; };
+		A4E6DB491CED554D009CBA87 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A4E938DD1CCB4CF300D5DA77 /* itemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemDetailViewController.h; sourceTree = "<group>"; };
 		A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemDetailViewController.m; sourceTree = "<group>"; };
 		A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemDetailViewController.xib; sourceTree = "<group>"; };
@@ -623,14 +625,14 @@
 		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A4E6DB491CED554D009CBA87 /* logo.png */,
 				A4A141071CE967B6003DF45B /* components */,
 				A4ABB8351CE8651700EB4879 /* 下午1.png */,
+				A4E6DB441CECA86A009CBA87 /* 夜间1.png */,
+				A4E6DB471CECA97C009CBA87 /* 夜间.png */,
 				A4ABB8361CE8651700EB4879 /* 上午1.png */,
-				A4ABB8371CE8651700EB4879 /* 夜间1.png */,
 				A4ABB8291CE7A14900EB4879 /* 上午.png */,
 				A4ABB82B1CE7A14900EB4879 /* 下午.png */,
-				A4ABB82D1CE7A14900EB4879 /* 夜间.png */,
-				A40F6BEB1CE1767A0010A0CE /* logo.png */,
 				A4CC247E1CC4AFE1007A94F1 /* calendar.png */,
 				A4CC24801CC4AFF8007A94F1 /* calendar1.png */,
 				A4CC24671CBE8EC3007A94F1 /* delete1.png */,
@@ -791,6 +793,7 @@
 				A4A141081CE967B6003DF45B /* add1.png */,
 				A4A141091CE967B6003DF45B /* add2.png */,
 				A4A1410B1CE967B6003DF45B /* back.png */,
+				A4E6DB411CECA0D7009CBA87 /* doneBig.png */,
 				A4A1410F1CE967B6003DF45B /* done.png */,
 				A4A141381CE9C39A003DF45B /* glow.png */,
 				A4A141151CE967B6003DF45B /* menu.png */,
@@ -964,6 +967,7 @@
 				A4A141631CEA316B003DF45B /* return.png in Resources */,
 				A40F6C281CE57B4A0010A0CE /* TermUseViewController.xib in Resources */,
 				A4ECE27D1CD62FC0000FF10D /* categoryManagementViewController.xib in Resources */,
+				A4E6DB421CECA0D7009CBA87 /* doneBig.png in Resources */,
 				A4CC246B1CBE8EC3007A94F1 /* delete1.png in Resources */,
 				A4A1415B1CEA2E79003DF45B /* save.png in Resources */,
 				A40F6C021CE456EC0010A0CE /* aboutViewController.xib in Resources */,
@@ -975,6 +979,7 @@
 				A40F6BFD1CE338BB0010A0CE /* registerViewController.xib in Resources */,
 				A405513D1CC72C0F00306EB0 /* pieViewController.xib in Resources */,
 				A4E6DB201CEABE1A009CBA87 /* QR_en1.png in Resources */,
+				A4E6DB461CECA86B009CBA87 /* 夜间1.png in Resources */,
 				A42D1C991CB60AC900C208A0 /* LaunchScreen.storyboard in Resources */,
 				A457527A1CDB4FA40013EFBF /* itemRATableViewCell.xib in Resources */,
 				A45752701CDB35350013EFBF /* Info.plist in Resources */,
@@ -983,7 +988,6 @@
 				A4ECE2861CDA2997000FF10D /* monthListViewController.xib in Resources */,
 				A4A141441CEA1D58003DF45B /* download.png in Resources */,
 				A4CC246E1CBE8EC3007A94F1 /* plus1.png in Resources */,
-				A4ABB83A1CE8651700EB4879 /* 夜间1.png in Resources */,
 				A42D1C961CB60AC900C208A0 /* Assets.xcassets in Resources */,
 				A425B2C41CCE04710008BFE2 /* categoryDetailViewController.xib in Resources */,
 				A4CC247F1CC4AFE1007A94F1 /* calendar.png in Resources */,
@@ -999,13 +1003,14 @@
 				A4CC247B1CC0D7DE007A94F1 /* calendarViewController.xib in Resources */,
 				A4ECE28B1CDA422B000FF10D /* baseViewController.xib in Resources */,
 				A4ABB8311CE7A14900EB4879 /* 下午.png in Resources */,
-				A40F6BEC1CE1767A0010A0CE /* logo.png in Resources */,
 				A4A141371CE967B6003DF45B /* trush.png in Resources */,
 				A4A141451CEA1D58003DF45B /* edit.png in Resources */,
+				A4E6DB481CECA97C009CBA87 /* 夜间.png in Resources */,
 				A4A141231CE967B6003DF45B /* back.png in Resources */,
 				A4A141201CE967B6003DF45B /* add1.png in Resources */,
 				A4CC24811CC4AFF8007A94F1 /* calendar1.png in Resources */,
 				A425B2D11CCF72400008BFE2 /* historyViewController.xib in Resources */,
+				A4E6DB4A1CED554D009CBA87 /* logo.png in Resources */,
 				A4A141211CE967B6003DF45B /* add2.png in Resources */,
 				A4A141571CEA2C0D003DF45B /* delete.png in Resources */,
 				A4A141391CE9C39A003DF45B /* glow.png in Resources */,
@@ -1017,7 +1022,6 @@
 				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
 				A4A141421CEA1D58003DF45B /* cancel.png in Resources */,
 				A4CC244C1CBCFEA4007A94F1 /* addNewItemViewController.xib in Resources */,
-				A4ABB8331CE7A14900EB4879 /* 夜间.png in Resources */,
 				A40F6BEE1CE179EF0010A0CE /* loginViewController.xib in Resources */,
 				A4A1412D1CE967B6003DF45B /* menu.png in Resources */,
 				A4A141361CE967B6003DF45B /* trend.png in Resources */,

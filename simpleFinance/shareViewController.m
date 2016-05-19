@@ -32,7 +32,7 @@
     
     UILabel *sao = [[UILabel alloc]init];
     sao.textColor = self.myTextColor;
-    sao.frame = CGRectMake((size.width - 100) * 0.5, topBarHeight+20, 100,50);
+    sao.frame = CGRectMake(SCREEN_WIDTH/6, topBarHeight+20, SCREEN_WIDTH*2/3,50);
     sao.textAlignment = NSTextAlignmentCenter;
     sao.text = NSLocalizedString(@"扫码下载",nil);
     [self.view addSubview:sao];
@@ -52,7 +52,7 @@
     
     UILabel *share = [[UILabel alloc]init];
     share.textColor = self.myTextColor;
-    share.frame = CGRectMake((size.width - 70) * 0.5,shareView.frame.origin.y - 50 , 70,40);
+    share.frame = CGRectMake(SCREEN_WIDTH/6,shareView.frame.origin.y - 50 , SCREEN_WIDTH*2/3,40);
     share.text =  NSLocalizedString(@"或分享至",nil);
     share.textAlignment = NSTextAlignmentCenter;
 

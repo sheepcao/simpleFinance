@@ -216,11 +216,11 @@
 
 -(void)configTopbar
 {
-    topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight)];
+    topBarView *topbar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight+6)];
     topbar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:topbar];
     
-    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 27, 40, 40)];
+    UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(8, 27, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     closeViewButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [closeViewButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
@@ -231,7 +231,7 @@
     closeViewButton.backgroundColor = [UIColor clearColor];
     [topbar addSubview:closeViewButton];
     
-    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-60, 26, 40, 40)];
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-48, 29, 40, 40)];
     saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     [saveButton setImage:[UIImage imageNamed:@"save"] forState:UIControlStateNormal];
@@ -244,7 +244,7 @@
     
     NSArray *segmentedArray = [[NSArray alloc]initWithObjects:NSLocalizedString(@"支出",nil),NSLocalizedString(@"收入",nil),nil];
     self.moneyTypeSeg = [[UISegmentedControl alloc]initWithItems:segmentedArray];
-    self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 30, SCREEN_WIDTH*3/7, 30);
+    self.moneyTypeSeg.frame = CGRectMake(SCREEN_WIDTH*2/7, 32, SCREEN_WIDTH*3/7, 30);
     self.moneyTypeSeg.tintColor =  TextColor2;
     self.moneyTypeSeg.selectedSegmentIndex = 0;
     [self.moneyTypeSeg addTarget:self action:@selector(segmentAction:)forControlEvents:UIControlEventValueChanged];  //添加委托方法
@@ -331,7 +331,7 @@
     
 
     UIButton *finishNoteButton = [[UIButton alloc] initWithFrame:CGRectMake(noteView.frame.size.width - 70, noteView.frame.size.height - btnHeight +4, 70, btnHeight)];
-    [finishNoteButton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
+    [finishNoteButton setImage:[UIImage imageNamed:@"doneBig"] forState:UIControlStateNormal];
     [finishNoteButton setImageEdgeInsets:UIEdgeInsetsMake(0, 15, 2, 15)];
 //    [finishNoteButton setTitle:@"完成" forState:UIControlStateNormal];
     finishNoteButton.layer.cornerRadius = 4.0f;
@@ -445,7 +445,7 @@
     [inputCategoryView addSubview:self.inputField];
     
     UIButton *doneButton = [[UIButton alloc] initWithFrame:CGRectMake(self.inputView.frame.size.width-60, (self.inputView.frame.size.height -40)/2, 40, 40)];
-    [doneButton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
+    [doneButton setImage:[UIImage imageNamed:@"doneBig"] forState:UIControlStateNormal];
     [doneButton setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
 //    [doneButton setTitle:@"OK" forState:UIControlStateNormal];
     [doneButton addTarget:self action:@selector(addNewCategory) forControlEvents:UIControlEventTouchUpInside];

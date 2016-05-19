@@ -95,11 +95,26 @@
     content.backgroundColor = [UIColor clearColor];
     [self.view addSubview:content];
     
-    UIImageView *logoView =[[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/3, SCREEN_HEIGHT/5.5, SCREEN_WIDTH/3, SCREEN_WIDTH/3)];
-    [logoView setImage:[UIImage imageNamed: @"logo.png"]];
+//    UIImageView *logoView =[[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/3, SCREEN_HEIGHT/5.5, SCREEN_WIDTH/3, SCREEN_WIDTH/3)];
+//    [logoView setImage:[UIImage imageNamed: @"logo.png"]];
+//    [content addSubview:logoView];
+//    self.contentView = content;
+    
+    UILabel *logoView =[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/6, SCREEN_HEIGHT/6.6, SCREEN_WIDTH*2/3, SCREEN_WIDTH/6)];
+    [logoView setText:NSLocalizedString(@"简 簿",nil)];
+    logoView.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:43.5f];
+    if (logoView.text.length>6) {
+        logoView.font =  [UIFont fontWithName:@"HelveticaNeue" size:32.5f];
+    }
+    [logoView setTextColor:normalColor];
+    logoView.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.35];
+    logoView.shadowOffset =  CGSizeMake(0.66, 1.66);
+    
+    logoView.textAlignment = NSTextAlignmentCenter;
+    
+    logoView.layer.cornerRadius = logoView.frame.size.width/6.4;
     [content addSubview:logoView];
     self.contentView = content;
-
     
     UITextField *usernameField = [[UITextField alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/8, logoView.frame.origin.y + logoView.frame.size.height + 30, SCREEN_WIDTH*3/4, SCREEN_WIDTH/8)];
     usernameField.attributedPlaceholder =
@@ -189,11 +204,12 @@
     [content addSubview:rightGradient];
     
     NSString *forgotText = NSLocalizedString(@"忘记密码?",nil);
-    NSDictionary *attrDict = @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:17.5f],
+    NSDictionary *attrDict = @{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f],
                                                         NSForegroundColorAttributeName : self.myTextColor};
     NSMutableAttributedString *title =[[NSMutableAttributedString alloc] initWithString:forgotText attributes: attrDict];
+    
     [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0,[forgotText length])];
-    UIButton *forgotButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 120, SCREEN_HEIGHT-60, 100, 30)];
+    UIButton *forgotButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 150, SCREEN_HEIGHT-60, 140, 30)];
     if (IS_IPHONE_4_OR_LESS)
     {
         [forgotButton setFrame:CGRectMake(SCREEN_WIDTH - 120, SCREEN_HEIGHT-35, 100, 20)];

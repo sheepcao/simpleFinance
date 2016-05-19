@@ -83,8 +83,24 @@
     content.backgroundColor = [UIColor clearColor];
     [self.view addSubview:content];
     
-    UIImageView *logoView =[[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/3, SCREEN_HEIGHT/5.5, SCREEN_WIDTH/3, SCREEN_WIDTH/3)];
-    [logoView setImage:[UIImage imageNamed: @"logo.png"]];
+//    UIImageView *logoView =[[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/3, SCREEN_HEIGHT/5.5, SCREEN_WIDTH/3, SCREEN_WIDTH/3)];
+//    [logoView setImage:[UIImage imageNamed: @"logo.png"]];
+//    [content addSubview:logoView];
+//    self.contentView = content;
+    
+    UILabel *logoView =[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/6, SCREEN_HEIGHT/6.6, SCREEN_WIDTH*2/3, SCREEN_WIDTH/6)];
+    [logoView setText:NSLocalizedString(@"简 簿",nil)];
+    logoView.font =  [UIFont fontWithName:@"HelveticaNeue-Light" size:43.5f];
+    if (logoView.text.length>6) {
+        logoView.font =  [UIFont fontWithName:@"HelveticaNeue" size:32.5f];
+    }
+    [logoView setTextColor:normalColor];
+    logoView.shadowColor = [[UIColor blackColor] colorWithAlphaComponent:0.35];
+    logoView.shadowOffset =  CGSizeMake(0.66, 1.66);
+    
+    logoView.textAlignment = NSTextAlignmentCenter;
+    
+    logoView.layer.cornerRadius = logoView.frame.size.width/6.4;
     [content addSubview:logoView];
     self.contentView = content;
     
@@ -112,7 +128,7 @@
     
     UILabel *hintLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 80 , usernameField.frame.origin.y + usernameField.frame.size.height + 2, 160, 20)];
     hintLabel.textAlignment = NSTextAlignmentCenter;
-    hintLabel.font =  [UIFont fontWithName:@"HelveticaNeue-Medium" size:12.5f];
+    hintLabel.font =  [UIFont fontWithName:@"HelveticaNeue" size:11.5f];
     hintLabel.textColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:0.9];
     [hintLabel setText:NSLocalizedString(@"*重要 : 用于登录及密码找回",nil)];
     [content addSubview:hintLabel];
@@ -147,7 +163,7 @@
     [[NSAttributedString alloc] initWithString:NSLocalizedString(@"设置密码(大小写字母或数字,6-20位)",nil)
                                     attributes:@{
                                                  NSForegroundColorAttributeName: [UIColor colorWithRed:0.41 green:0.41 blue:0.41 alpha:0.9],
-                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/32]
+                                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:SCREEN_WIDTH/22]
                                                  }
      ];
     passwordField.textAlignment = NSTextAlignmentCenter;
