@@ -23,7 +23,7 @@
                     <point key="value" x="0.5" y="1"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="inputColor0">
-                    <color key="value" red="0.98039215686274506" green="0.25490196078431371" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="value" red="0.84705882352941175" green="0.29411764705882354" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>
                 <userDefinedRuntimeAttribute type="color" keyPath="inputColor1">
                     <color key="value" red="0.0" green="0.12549019610000001" blue="0.70343338820000001" alpha="1" colorSpace="calibratedRGB"/>

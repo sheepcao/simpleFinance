@@ -359,7 +359,7 @@
 {
     UIView *inputCategoryView = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_WIDTH/6)];
     self.inputView = inputCategoryView;
-    inputCategoryView.backgroundColor = [UIColor clearColor];
+    inputCategoryView.backgroundColor = [UIColor colorWithRed:173/255.0f  green:181/255.0f blue:190/255.0f alpha:1.0f];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,5, 80, inputCategoryView.frame.size.height-12)];
     [titleLabel setText:NSLocalizedString(@"类 别 :",nil)];
     titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];

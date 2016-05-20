@@ -682,7 +682,11 @@
         [cell.category setText:oneRowData[0]];
         NSString *money = [NSString stringWithFormat:@"%@",oneRowData[dataType + 1]];
         
-        money = [money componentsSeparatedByString:@".00"][0];
+        NSArray *moneyArray = [money componentsSeparatedByString:@".00"];
+        money = moneyArray[0];
+        if (moneyArray.count>1&&dataType == 2 && ![money isEqualToString:@"+100%"] &&![money isEqualToString:@"-100%"]) {
+                    money = [money stringByAppendingString:@"%"];
+        }
         [cell.money setTitle:money forState:UIControlStateNormal];
         [cell makeTextColorForIncrease:oneRowData[3]];
     }

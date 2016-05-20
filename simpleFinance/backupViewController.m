@@ -78,16 +78,16 @@
     closeViewButton.backgroundColor = [UIColor clearColor];
     [self.topBar addSubview:closeViewButton];
     
-    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, 28, 100, 50)];
-    [titileLabel setText:NSLocalizedString(@"同步｜备份",nil) ];
+    UILabel *titileLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 90, 28, 180, 50)];
+    [titileLabel setText:NSLocalizedString(@"同 步 | 备 份",nil) ];
     titileLabel.font = [UIFont fontWithName:@"SourceHanSansCN-Normal" size:titleSize];
     titileLabel.textAlignment = NSTextAlignmentCenter;
     [titileLabel setTextColor:normalColor];
     [self.topBar addSubview:titileLabel];
 
     
-    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-90, 33, 80, 40)];
-    changeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
+    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-83, 33.5, 80, 40)];
+    changeButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
     changeButton.titleLabel.textAlignment = NSTextAlignmentRight;
     changeButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     [changeButton setTitle:NSLocalizedString(@"切换账号",nil) forState:UIControlStateNormal];
@@ -118,8 +118,9 @@
     UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height + (SCREEN_HEIGHT - 480) /3, SCREEN_WIDTH, 200)];
     self.firstBackupView = content;
     
-    UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 120, 5, 240, 150)];
+    UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 150, 5, 300, 150)];
     lastTitleLabel.font = [UIFont fontWithName:@"HelveticaNeue-UltraLight" size:50.0f];
+    lastTitleLabel.adjustsFontSizeToFitWidth = YES;
     lastTitleLabel.textAlignment = NSTextAlignmentCenter;
     [lastTitleLabel setText:NSLocalizedString(@"首次备份",nil)];
     [lastTitleLabel setTextColor: self.myTextColor];
@@ -132,7 +133,7 @@
 
 -(void)configFirstBackupView
 {
-    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height + (SCREEN_HEIGHT - 480) /2, SCREEN_WIDTH, 200)];
+    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, self.topBar.frame.size.height + (SCREEN_HEIGHT - 480) /3, SCREEN_WIDTH, 200)];
     self.lastBackupView = content;
     
     UILabel *lastTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 120, 0, 240, 20)];
@@ -200,7 +201,7 @@
 
 -(void)configOperaView
 {
-    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT/2, SCREEN_WIDTH, SCREEN_HEIGHT/2)];
+    UIView *content = [[UIView alloc] initWithFrame:CGRectMake(0, self.lastBackupView.frame.origin.y + self.lastBackupView.frame.size.height+5, SCREEN_WIDTH, SCREEN_HEIGHT/2)];
     
 //    UIView *midLine = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-0.5, 30, 0.5, SCREEN_HEIGHT/2-60)];
 //    midLine.backgroundColor = [UIColor whiteColor];

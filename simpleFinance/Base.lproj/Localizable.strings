@@ -100,7 +100,7 @@
 
 /////////////////////////////////////////////////////////Back up
 
-"切换账号" = "Change Account";
+"切换账号" = "Account";
 "首次备份" = "Initial Backup";
 "上次备份时间及设备" = "Last backup Info";
 "备份至云端" = "Back up";
