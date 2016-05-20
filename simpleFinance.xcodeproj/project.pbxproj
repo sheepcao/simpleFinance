@@ -931,6 +931,7 @@
 				TargetAttributes = {
 					A42D1C851CB60AC900C208A0 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = DBBLJY69ER;
 					};
 				};
 			};
@@ -1295,6 +1296,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: CAO GUANGXU (JTX9TS223Q)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1333,6 +1335,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sheepcao.simpleFinance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "035d1242-0d5f-4e1d-97cc-9ad4f3a6d870";
 			};
 			name = Debug;
 		};
@@ -1342,6 +1345,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: CAO GUANGXU (DBBLJY69ER)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1380,6 +1384,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sheepcao.simpleFinance;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4bbaf8e2-5519-4a68-b6e7-928c0ad3babf";
 			};
 			name = Release;
 		};
