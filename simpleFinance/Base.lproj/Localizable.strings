@@ -222,5 +222,17 @@
 "支出:" = "Expense :";
 "结余:" ="Balance :";
 
-"launchEN640-1136" = "launchEN640-1136";
-
+////////////////////////////////////////////////////////export
+"数据导出-简簿.csv" = "Money OnGo.csv";
+"数据导出-简簿.xls" = "Money OnGo.xls";
+"日期" = "Date";
+"收/支" = "Type";
+"类别" = "Category";
+"描述" = "Description";
+"金额" = "Amount";
+"导出数据" = "Data Export";
+"请选择以下任意格式将数据发送到您的邮箱" = "Choose a file format to export to your email";
+"导出CSV文件" = ".CSV";
+"导出XLS文件" = ".XLS";
+"数据导出-简簿" = "Data Export - Money OnGo";
+"请查收附件中的数据文件" = "Please check your data in attachment.";

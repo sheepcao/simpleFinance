@@ -16,6 +16,7 @@
 #import "itemRATableViewCell.h"
 #import "CommonUtility.h"
 #import "itemObj.h"
+#import "exportViewController.h"
 
 @interface monthListViewController ()<RATreeViewDelegate, RATreeViewDataSource>
 
@@ -24,14 +25,19 @@
 @property (nonatomic,strong) topBarView *topBar;
 @property (nonatomic,strong) FMDatabase *db;
 @property (nonatomic,strong) NSMutableDictionary *monthlyDataDict;
+@property (nonatomic,strong) UIButton *exportButton;
 
 @end
 
 @implementation monthListViewController
 @synthesize db;
+@synthesize exportButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
+    
     [self prepareDB];
     
     // Do any additional setup after loading the view from its nib.
@@ -56,6 +62,8 @@
     self.topBar = [[topBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, topRowHeight + 5)];
     self.topBar.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.topBar];
+    [self.topBar.titleLabel  setText:NSLocalizedString(@"帐目流水",nil)];
+
     
     UIButton * closeViewButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 32, 40, 40)];
     closeViewButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
@@ -68,9 +76,29 @@
     closeViewButton.backgroundColor = [UIColor clearColor];
     [self.topBar addSubview:closeViewButton];
     
-    [self.topBar.titleLabel  setText:NSLocalizedString(@"帐目流水",nil)];
-
+    exportButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 65, 32, 50, 40)];
+    exportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+    exportButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    //    [exportButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    //    exportButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     
+    [exportButton setTitle:@"Export" forState:UIControlStateNormal];
+    [exportButton setTitleColor:   normalColor forState:UIControlStateNormal];
+    [exportButton addTarget:self action:@selector(exportVC) forControlEvents:UIControlEventTouchUpInside];
+    exportButton.backgroundColor = [UIColor clearColor];
+    [self.topBar addSubview:exportButton];
+    
+
+
+}
+
+-(void)exportVC
+{
+    exportViewController *myExport = [[exportViewController alloc] initWithNibName:@"exportViewController" bundle:nil];
+    [self.navigationController pushViewController:myExport animated:YES];
+//    historyViewController *historyVC = [[historyViewController alloc] initWithNibName:@"historyViewController" bundle:nil];
+//    historyVC.recordDate = @"2016-05-20";
+//    [self.navigationController pushViewController:historyVC animated:YES];
     
 }
 -(void)closeVC
@@ -328,6 +356,7 @@
         [tempMonthArray addObject:allMonth[i]];
     }
     self.data = [NSArray arrayWithArray:tempMonthArray];
+
 }
 
 -( RADataObject *)dailyDataFrom:(NSString *)monthName  withArray:(NSArray *)monthlyArray duringStart:(NSString *)startDate andEnd:(NSString *)endDate
