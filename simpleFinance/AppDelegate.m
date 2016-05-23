@@ -282,7 +282,7 @@
     if ([CommonUtility isSystemLangChinese]) {
         
         
-        BOOL sql =   [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('正餐',0,70,32,76)"];
+        BOOL sql =   [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('正餐',0,82,199,191)"];
         
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('零食',0,255,224,102)"];
         
@@ -298,7 +298,7 @@
         
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('日用品',0,244,91,105)"];
         
-        [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('水电煤',0,82,199,191)"];
+        [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('水电煤',0,170,132,176)"];
         
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('话费',0,2,128,144)"];
         
@@ -333,7 +333,7 @@
         }
     }else
     {
-        BOOL sql =  [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('Dining',0,70,32,76)"];
+        BOOL sql =  [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('Dining',0,82,199,191)"];
         
         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('Grocery',0,214,209,177)"];
          
@@ -351,7 +351,7 @@
          
          [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('Utilities',0,244,91,105)"];
          
-         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('Home',0,82,199,191)"];
+         [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('Home',0,170,132,176)"];
           
           [database executeUpdate:@"insert into CATEGORYINFO (category_name,category_type,color_R,color_G,color_B) values ('Telephone',0,2,128,144)"];
            

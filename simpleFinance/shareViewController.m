@@ -151,7 +151,7 @@
     message.title = [NSString stringWithFormat:NSLocalizedString(@"简簿－简明财务,跃然于簿",nil)];
     message.image = [UIImage imageNamed:@"logo"];
     // 缩略图
-    message.thumbnail = [UIImage imageNamed:@"switchChart.png"];
+    message.thumbnail = [UIImage imageNamed:@"logo.png"];
     message.desc = [NSString stringWithFormat:NSLocalizedString(@"简单一点,一目了然。\n财务详情,了然于心",nil)];
     if ([CommonUtility isSystemLangChinese]) {
         message.link=REVIEW_URL_CN;

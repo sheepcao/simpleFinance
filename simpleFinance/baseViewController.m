@@ -10,7 +10,6 @@
 #import "global.h"
 
 @interface baseViewController ()
-@property(nonatomic,strong) UIImageView *myBackImage;
 @end
 
 @implementation baseViewController

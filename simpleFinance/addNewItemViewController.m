@@ -206,8 +206,9 @@
             NSString *cateName = [rs2 stringForColumn:@"item_category"];
             for (categoryObject *oneCate in self.incomeCategoryArray) {
                 if ([oneCate.categoryName isEqualToString:cateName]) {
+                    categoryObject *oneCateTemp = oneCate;
                     [self.incomeCategoryArray removeObject:oneCate];
-                    [self.incomeCategoryArray insertObject:oneCate atIndex:j];
+                    [self.incomeCategoryArray insertObject:oneCateTemp atIndex:j];
                     j++;
                     break;
                 }

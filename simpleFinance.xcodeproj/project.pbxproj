@@ -132,6 +132,7 @@
 		A4CC24871CC4E964007A94F1 /* itemObj.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC24861CC4E964007A94F1 /* itemObj.m */; };
 		A4CC248B1CC60E69007A94F1 /* roundFrameLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */; };
 		A4CC248E1CC61BC5007A94F1 /* categoryObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A4CC248D1CC61BC5007A94F1 /* categoryObject.m */; };
+		A4D5354A1CF08F9900B476E3 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4D535491CF08F9900B476E3 /* logo.png */; };
 		A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */; };
 		A4E4A2EC1CC8B60B00E36AFE /* dateSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */; };
 		A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2EE1CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png */; };
@@ -148,7 +149,6 @@
 		A4E6DB421CECA0D7009CBA87 /* doneBig.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB411CECA0D7009CBA87 /* doneBig.png */; };
 		A4E6DB461CECA86B009CBA87 /* 夜间1.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB441CECA86A009CBA87 /* 夜间1.png */; };
 		A4E6DB481CECA97C009CBA87 /* 夜间.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB471CECA97C009CBA87 /* 夜间.png */; };
-		A4E6DB4A1CED554D009CBA87 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E6DB491CED554D009CBA87 /* logo.png */; };
 		A4E938E01CCB4CF300D5DA77 /* itemDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */; };
 		A4E938E11CCB4CF300D5DA77 /* itemDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */; };
 		A4E938E41CCB5E8A00D5DA77 /* itemDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E938E31CCB5E8A00D5DA77 /* itemDetailTableViewCell.m */; };
@@ -367,6 +367,7 @@
 		A4CC248A1CC60E69007A94F1 /* roundFrameLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = roundFrameLabel.m; sourceTree = "<group>"; };
 		A4CC248C1CC61BC5007A94F1 /* categoryObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = categoryObject.h; sourceTree = "<group>"; };
 		A4CC248D1CC61BC5007A94F1 /* categoryObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = categoryObject.m; sourceTree = "<group>"; };
+		A4D535491CF08F9900B476E3 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A4E4A2E21CC7831C00E36AFE /* PieExplainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieExplainTableViewCell.h; sourceTree = "<group>"; };
 		A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieExplainTableViewCell.m; sourceTree = "<group>"; };
 		A4E4A2EA1CC8B60B00E36AFE /* dateSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateSelectView.h; sourceTree = "<group>"; };
@@ -396,7 +397,6 @@
 		A4E6DB411CECA0D7009CBA87 /* doneBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doneBig.png; sourceTree = "<group>"; };
 		A4E6DB441CECA86A009CBA87 /* 夜间1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "夜间1.png"; path = "components/夜间1.png"; sourceTree = "<group>"; };
 		A4E6DB471CECA97C009CBA87 /* 夜间.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "夜间.png"; sourceTree = "<group>"; };
-		A4E6DB491CED554D009CBA87 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		A4E938DD1CCB4CF300D5DA77 /* itemDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = itemDetailViewController.h; sourceTree = "<group>"; };
 		A4E938DE1CCB4CF300D5DA77 /* itemDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = itemDetailViewController.m; sourceTree = "<group>"; };
 		A4E938DF1CCB4CF300D5DA77 /* itemDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = itemDetailViewController.xib; sourceTree = "<group>"; };
@@ -622,7 +622,7 @@
 		A42D1C891CB60AC900C208A0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A4E6DB491CED554D009CBA87 /* logo.png */,
+				A4D535491CF08F9900B476E3 /* logo.png */,
 				A4A141071CE967B6003DF45B /* components */,
 				A4ABB8351CE8651700EB4879 /* 下午1.png */,
 				A4E6DB441CECA86A009CBA87 /* 夜间1.png */,
@@ -1007,7 +1007,6 @@
 				A4A141201CE967B6003DF45B /* add1.png in Resources */,
 				A4CC24811CC4AFF8007A94F1 /* calendar1.png in Resources */,
 				A425B2D11CCF72400008BFE2 /* historyViewController.xib in Resources */,
-				A4E6DB4A1CED554D009CBA87 /* logo.png in Resources */,
 				A4A141211CE967B6003DF45B /* add2.png in Resources */,
 				A4A141571CEA2C0D003DF45B /* delete.png in Resources */,
 				A4A141391CE9C39A003DF45B /* glow.png in Resources */,
@@ -1016,6 +1015,7 @@
 				A4A141481CEA1D58003DF45B /* switch.png in Resources */,
 				A4B22C4C1CEE1FA200C8CC6B /* Info.plist in Resources */,
 				A4A141621CEA316B003DF45B /* expend.png in Resources */,
+				A4D5354A1CF08F9900B476E3 /* logo.png in Resources */,
 				A4E6DB351CEAFBA6009CBA87 /* Localizable.strings in Resources */,
 				A4CC24441CBCE82F007A94F1 /* switchChart.png in Resources */,
 				A4A141421CEA1D58003DF45B /* cancel.png in Resources */,

@@ -36,11 +36,11 @@
 {
     
     if (IS_IPHONE_5_OR_LESS) {
-        fontSize = 11.0f;
-        lineSpace = 0.3f;
+        fontSize = 12.5f;
+        lineSpace = 0.27f;
     }else if(IS_IPHONE_6)
     {
-        fontSize = 13.0f;
+        fontSize = 14.0f;
         lineSpace = 0.43;
     }else
     {
@@ -55,7 +55,7 @@
                                                    UIFontDescriptorSizeAttribute: [NSNumber numberWithFloat: fontSize]
                                                    }];
     
-    CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(10 * (CGFloat)M_PI / 180), 1, 0, 0);
+    CGAffineTransform matrix =  CGAffineTransformMake(1, 0, tanf(7 * (CGFloat)M_PI / 180), 1, 0, 0);
     attributeFontDescriptor = [attributeFontDescriptor fontDescriptorWithMatrix:matrix];
     self.font = [UIFont fontWithDescriptor:attributeFontDescriptor size:0.0];
     

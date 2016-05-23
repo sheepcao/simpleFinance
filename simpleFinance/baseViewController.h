@@ -10,5 +10,6 @@
 
 @interface baseViewController : UIViewController
 @property (nonatomic,strong) UIColor *myTextColor;
+@property(nonatomic,strong) UIImageView *myBackImage;
 - (void)configUIAppearance;
 @end

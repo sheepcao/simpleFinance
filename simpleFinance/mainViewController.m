@@ -54,6 +54,43 @@
 @implementation mainViewController
 @synthesize db;
 
+
+- (void)configUIAppearance{
+    NSLog(@"base config ui ");
+    NSString *showModel =  [[NSUserDefaults standardUserDefaults] objectForKey:SHOWMODEL];
+    if ([showModel isEqualToString:@"上午"]) {
+        self.myTextColor = TextColor0;
+    }else if([showModel isEqualToString:@"下午"]) {
+        self.myTextColor = TextColor1;
+    }else if([showModel isEqualToString:@"夜间"]) {
+        self.myTextColor = TextColor3;
+    }
+    NSString *backName;
+    if (!showModel) {
+        backName = @"上午.png";
+    }else
+    {
+        backName  = [NSString stringWithFormat:@"%@.png",showModel];
+    }
+    
+    if (!self.myBackImage)
+    {
+        self.myBackImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [self.myBackImage setImage:[UIImage imageNamed:backName]];
+        [self.view addSubview:self.myBackImage];
+        [self.view sendSubviewToBack:self.myBackImage];
+        [self.view setNeedsDisplay];
+    }else
+    {
+        [self.myBackImage setImage:[UIImage imageNamed:backName]];
+    }
+    
+    [self.maintableView reloadData];
+    [self configTextColor];
+    
+    
+}
+
 - (void)registerLuckChangedNotification{
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(configLuckyText)
