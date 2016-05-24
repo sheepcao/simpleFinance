@@ -80,9 +80,12 @@
 #define SHOWMODEL @"showModel"
 #define AUTOSWITCH @"autoSwitch"
 #define DEFAULT_USER @"defaultUser"
+#define EXPORTBUY @"ExportBuy"
+
 
 #define ThemeChanged  @"modelNotification"
 #define LuckChanged  @"luckNotification"
+
 
 #define VERSIONNUMBER   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
 

@@ -236,3 +236,9 @@
 "导出XLS文件" = ".XLS";
 "数据导出-简簿" = "Data Export - Money OnGo";
 "请查收附件中的数据文件" = "Please check your data in attachment.";
+"购 买" = "BUY";
+"失败" = "Fail";
+"您禁止了应用内购买权限,请到设置中开启" = "Please enable In App Purchase from system setting";
+"关闭" = "close";
+"无法连接App store!" = "Could not connect to App store";
+"6元购买永久使用数据导出功能" = "$1 to unlock data export FOREVER";
