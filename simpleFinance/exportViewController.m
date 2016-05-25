@@ -10,6 +10,7 @@
 #import "CommonUtility.h"
 #import "global.h"
 #import "topBarView.h"
+#import "MBProgressHUD.h"
 #import <MessageUI/MessageUI.h>
 #import "CHCSVParser.h"
 #import "MLIAPManager.h"
@@ -22,14 +23,16 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
 @property (nonatomic, strong) UIView *tipView;
 @property (nonatomic, strong) UIView *buyView;
 @property (nonatomic, strong) UIView *operationView;
+@property (nonatomic, strong) UIButton *myRestoreButton;
 
 @property (nonatomic, strong) UIButton *myUploadButton;
 @property (nonatomic, strong) UIButton *myDownloadButton;
-
+@property (nonatomic, strong) MBProgressHUD *hud;
 @end
 
 @implementation exportViewController
 @synthesize db;
+@synthesize hud;
 
 
 -(NSString *)dataFilePath {
@@ -44,8 +47,14 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     return [documentsDirectory stringByAppendingPathComponent:NSLocalizedString(@"数据导出-简簿.xls",nil) ];
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
+    
+    [MLIAPManager sharedManager].delegate = self;
 
     [self prepareData];
     [self configTopbar];
@@ -63,6 +72,7 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     }
 }
 
+
 -(void)showBoughtView
 {
     [self.tipView setHidden:NO];
@@ -70,6 +80,7 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     self.myUploadButton.enabled = YES;
     self.myDownloadButton.enabled = YES;
     self.operationView.alpha = 1.0f;
+    [self.myRestoreButton setHidden:YES];
 }
 
 -(void)unBoughtView
@@ -79,6 +90,7 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     self.myUploadButton.enabled = NO;
     self.myDownloadButton.enabled = NO;
     self.operationView.alpha = 0.6f;
+    [self.myRestoreButton setHidden:NO];
 
 }
 
@@ -203,12 +215,6 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     [xlsstring writeToFile:[self xlsFilePath] atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
-//-(void)testxls
-//{
-//    NSString *test = @"<?xml version=\"1.0\"?><Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\" xmlns:o=\"urn:schemas-microsoft-com:office:office\" xmlns:x=\"urn:schemas-microsoft-com:office:excel\" xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\" xmlns:html=\"http://www.w3.org/TR/REC-html40\"><Worksheet ss:Name=\"Sheet1\"><Table ss:ExpandedColumnCount=\"2\" ss:ExpandedRowCount=\"2\" x:FullColumns=\"1\" x:FullRows=\"1\"><Row><Cell><Data ss:Type=\"String\">Name</Data></Cell><Cell><Data ss:Type=\"String\">Example</Data></Cell></Row><Row><Cell><Data ss:Type=\"String\">Value</Data></Cell><Cell><Data ss:Type=\"Number\">123</Data></Cell></Row></Table></Worksheet></Workbook>";
-//    [test writeToFile:[self xlsFilePath] atomically:YES encoding:NSUTF16StringEncoding error:nil];
-//
-//}
 
 -(void)closeVC
 {
@@ -233,7 +239,30 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     closeViewButton.backgroundColor = [UIColor clearColor];
     [self.topBar addSubview:closeViewButton];
     
+    
+    UIButton *saveButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-70, 30, 60, 40)];
+    saveButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0f];
+    saveButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [saveButton setTitle:NSLocalizedString(@"恢复购买",nil) forState:UIControlStateNormal];
+    
+//    [saveButton setImage:[UIImage imageNamed:@"done"] forState:UIControlStateNormal];
+//    saveButton.imageEdgeInsets = UIEdgeInsetsMake(3.9, 3.9,3.9, 3.9);
+    [saveButton setTitleColor:   normalColor forState:UIControlStateNormal];
+    [saveButton addTarget:self action:@selector(restoreBuy:) forControlEvents:UIControlEventTouchUpInside];
+    saveButton.backgroundColor = [UIColor clearColor];
+    self.myRestoreButton = saveButton;
+    [self.topBar addSubview:saveButton];
 }
+
+-(void)restoreBuy:(UIButton *)sender
+{
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.dimBackground = YES;
+    
+    [[MLIAPManager sharedManager] restorePurchase];
+}
+
 
 -(void)configLastBackupView
 {
@@ -285,7 +314,6 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     
     [self.view addSubview:content];
     
-    [MLIAPManager sharedManager].delegate = self;
 
     
 }
@@ -330,6 +358,11 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
 
 -(void)buyExport
 {
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.dimBackground = YES;
+
+    
     [[MLIAPManager sharedManager] requestProductWithId:productId];
 }
 
@@ -369,7 +402,7 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     
     NSMutableString *emailBody = [NSMutableString string];
     [picker setSubject:NSLocalizedString(@"数据导出-简簿",nil) ];
-    [emailBody appendString: NSLocalizedString(@"将查收附件中的数据文件",nil)];
+    [emailBody appendString: NSLocalizedString(@"请查收附件中的数据文件",nil)];
     [picker setMessageBody:emailBody isHTML:NO];
     
     
@@ -410,34 +443,62 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     }
 }
 
+
+
 - (void)successfulPurchaseOfId:(NSString *)productId andReceipt:(NSData *)transactionReceipt {
     NSLog(@"购买成功");
-    
+    [hud hide:YES afterDelay:0.5f];
 //    NSString  *transactionReceiptString = [transactionReceipt base64EncodedStringWithOptions:0];
 //    NSLog(@"transactionReceiptString:%@",transactionReceiptString);
     
     [self showBoughtView];
     [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:EXPORTBUY];
 
-    
-    
-//    if ([transactionReceiptString length] > 0) {
-//        // 向自己的服务器验证购买凭证（此处应该考虑将凭证本地保存,对服务器有失败重发机制）
-//        /**
-//         服务器要做的事情:
-//         接收ios端发过来的购买凭证。
-//         判断凭证是否已经存在或验证过，然后存储该凭证。
-//         将该凭证发送到苹果的服务器验证，并将验证结果返回给客户端。
-//         如果需要，修改用户相应的会员权限
-//         */
-//    }
 }
 
 - (void)failedPurchaseWithError:(NSString *)errorDescripiton {
     NSLog(@"购买失败");
+    [hud hide:YES afterDelay:0.5f];
+
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"失败",nil) message:errorDescripiton delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
     [alert show];
 }
+
+-(void)restorePurchaseSuccess:(SKPaymentTransactionState)state
+{
+    [hud hide:YES afterDelay:0.5f];
+
+    [self showBoughtView];
+    [[NSUserDefaults standardUserDefaults] setObject:@"yes" forKey:EXPORTBUY];
+    
+    NSLog(@"state:%ldl",(long)state);
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"成功",nil) message:NSLocalizedString(@"成功恢复购买",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+    [alert show];
+
+}
+
+-(void)nonePurchase
+{
+    [hud hide:YES afterDelay:0.5f];
+
+    NSLog(@"nonePurchase");
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"失败",nil) message:NSLocalizedString(@"您没有购买记录",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+    [alert show];
+}
+-(void)restorePurchaseFailed
+{
+    [hud hide:YES afterDelay:0.5f];
+
+    NSLog(@"restorePurchaseFailed");
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"失败",nil) message:NSLocalizedString(@"恢复失败，请重新尝试",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"关闭",nil) otherButtonTitles:nil, nil];
+    [alert show];
+}
+
+- (void)cancelPurchase
+{
+    [hud hide:YES afterDelay:0.5f];
+}
+
 
 
 @end

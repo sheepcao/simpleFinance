@@ -75,6 +75,20 @@
     return NO;
 }
 
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
+    
+    NSLog(@"received restored transactions: %i", queue.transactions.count);
+    if(queue.transactions.count == 0)
+        [_delegate nonePurchase];
+
+}
+
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error
+{
+    NSLog(@"error %@",error);
+    [_delegate restorePurchaseFailed];
+}
+
 
 #pragma mark - ****************  SKProductsRequest Delegate
 
@@ -98,6 +112,7 @@
         switch (transaction.transactionState) {
             case SKPaymentTransactionStatePurchasing: //商品添加进列表
                 NSLog(@"商品:%@被添加进购买列表",myProduct.localizedTitle);
+
                 break;
             case SKPaymentTransactionStatePurchased://交易成功
                 [self completeTransaction:transaction];
@@ -106,6 +121,8 @@
                 [self failedTransaction:transaction];
                 break;
             case SKPaymentTransactionStateRestored://已购买过该商品
+                [self restoreTransaction:transaction];
+
                 break;
             case SKPaymentTransactionStateDeferred://交易延迟
                 break;
@@ -118,6 +135,7 @@
 
 
 #pragma mark - ****************  Private Methods
+
 
 - (void)completeTransaction:(SKPaymentTransaction *)transaction {
     
@@ -132,8 +150,18 @@
     
     if (transaction.error.code != SKErrorPaymentCancelled && transaction.error.code != SKErrorUnknown) {
         [_delegate failedPurchaseWithError:transaction.error.localizedDescription];
+    }else if (transaction.error.code == SKErrorPaymentCancelled )
+    {
+        [_delegate cancelPurchase];
     }
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
+
+}
+
+- (void)restoreTransaction:(SKPaymentTransaction *)transaction {
+            [_delegate restorePurchaseSuccess:transaction.transactionState];
+    
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
 
 @end

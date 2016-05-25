@@ -363,6 +363,9 @@
         UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"确认",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self downloadURLFromServer];
         }];
+        UIAlertAction* noAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"取消",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        [alert addAction:noAction];
         [alert addAction:yesAction];
         [self presentViewController:alert animated:YES completion:nil];
 

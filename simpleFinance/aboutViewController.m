@@ -15,6 +15,7 @@
 #import "MBProgressHUD.h"
 #import "TermUseViewController.h"
 #import "UIDevice-Hardware.h"
+#import "exportViewController.h"
 
 
 @interface aboutViewController ()<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
@@ -28,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.rowList = @[NSLocalizedString(@"邀请好友",nil) ,NSLocalizedString(@"邮件反馈",nil) ,NSLocalizedString(@"给简簿评分",nil) ,NSLocalizedString(@"用户协议",nil) ,NSLocalizedString(@"联系方式",nil) ];
+    self.rowList = @[NSLocalizedString(@"导出账本",nil),NSLocalizedString(@"邀请好友",nil) ,NSLocalizedString(@"邮件反馈",nil) ,NSLocalizedString(@"给简簿评分",nil) ,NSLocalizedString(@"用户协议",nil) ,NSLocalizedString(@"联系方式",nil) ];
     [self configTopbar];
     [self configTable];
 }
@@ -129,7 +130,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return 6;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -141,7 +142,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
     }
-    if (indexPath.row < 4) {
+    if (indexPath.row < 5) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else
     {
@@ -169,16 +170,23 @@
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             
+            exportViewController *exportVC = [[exportViewController alloc] initWithNibName:@"exportViewController" bundle:nil];
+            [self.navigationController pushViewController:exportVC animated:YES];
+        });
+    }else if (indexPath.row == 1)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
             shareViewController *shareVC = [[shareViewController alloc] initWithNibName:@"shareViewController" bundle:nil];
             [self presentViewController:shareVC animated:YES completion:nil];
         });
-    }else if(indexPath.row == 1)
+    }else if(indexPath.row == 2)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self emailTapped];
         });
-    }else if(indexPath.row == 2)
+    }else if(indexPath.row == 3)
     {
         [MobClick event:@"reviewAPP"];
         
@@ -189,7 +197,7 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:REVIEW_URL]];
         }
         
-    }else if (indexPath.row == 3)
+    }else if (indexPath.row == 4)
     {
         TermUseViewController *termsVC = [[TermUseViewController alloc] initWithNibName:@"TermUseViewController" bundle:nil];
         [self.navigationController pushViewController:termsVC animated:YES];

@@ -18,6 +18,10 @@
 - (void)successfulPurchaseOfId:(NSString *)productId andReceipt:(NSData *)transactionReceipt;
 
 - (void)failedPurchaseWithError:(NSString *)errorDescripiton;
+-(void)restorePurchaseSuccess:(SKPaymentTransactionState)state;
+-(void)restorePurchaseFailed;
+-(void)nonePurchase;
+- (void)cancelPurchase;
 
 
 @end

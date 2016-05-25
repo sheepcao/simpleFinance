@@ -76,13 +76,13 @@
     closeViewButton.backgroundColor = [UIColor clearColor];
     [self.topBar addSubview:closeViewButton];
     
-    exportButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 65, 32, 50, 40)];
-    exportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0f];
+    exportButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 65, 35, 50, 40)];
+    exportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15.0f];
     exportButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     //    [exportButton setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
     //    exportButton.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     
-    [exportButton setTitle:@"Export" forState:UIControlStateNormal];
+    [exportButton setTitle:NSLocalizedString(@"导出",nil) forState:UIControlStateNormal];
     [exportButton setTitleColor:   normalColor forState:UIControlStateNormal];
     [exportButton addTarget:self action:@selector(exportVC) forControlEvents:UIControlEventTouchUpInside];
     exportButton.backgroundColor = [UIColor clearColor];
