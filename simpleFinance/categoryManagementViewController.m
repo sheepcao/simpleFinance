@@ -684,6 +684,9 @@
 
 -(void)keyboardWasShown:(NSNotification*)notification
 {
+    if ([[UIApplication sharedApplication] applicationState] !=UIApplicationStateActive) {
+        return;
+    }
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
     [UIView animateWithDuration:0.25f animations:^{

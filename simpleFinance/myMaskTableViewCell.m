@@ -29,7 +29,6 @@
         self.category = [[UILabel alloc] initWithFrame:CGRectMake(self.seperator.frame.size.width+self.seperator.frame.origin.x+10, 6, (SCREEN_WIDTH-40-20-pointRadius*2)*3/5, rowHeight-6*2)];
         
         
-        
         self.money = [[UILabel alloc] initWithFrame:CGRectMake(self.category.frame.origin.x+self.category.frame.size.width, 7, (SCREEN_WIDTH-6-20-pointRadius*2)*2/5, rowHeight-6*2)];
         self.category.textAlignment = NSTextAlignmentLeft;
         self.title.textAlignment = NSTextAlignmentLeft;

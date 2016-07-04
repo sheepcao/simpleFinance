@@ -150,7 +150,7 @@
     
     if (transaction.error.code != SKErrorPaymentCancelled && transaction.error.code != SKErrorUnknown) {
         [_delegate failedPurchaseWithError:transaction.error.localizedDescription];
-    }else if (transaction.error.code == SKErrorPaymentCancelled )
+    }else 
     {
         [_delegate cancelPurchase];
     }

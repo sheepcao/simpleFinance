@@ -249,3 +249,7 @@
 "您没有购买记录" = "No purchase record";
 "恢复失败，请重新尝试" = "Restore failed,please try again.";
 "导出账本" = "Data Export";
+
+
+"%ld年" = "%ld";
+"%ld日" = "%ld";

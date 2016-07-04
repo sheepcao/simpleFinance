@@ -138,6 +138,8 @@
 		A4D535771CF2D39C00B476E3 /* exportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D535751CF2D39C00B476E3 /* exportViewController.m */; };
 		A4D535781CF2D39C00B476E3 /* exportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A4D535761CF2D39C00B476E3 /* exportViewController.xib */; };
 		A4D5357D1CF2E14600B476E3 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A4D5357B1CF2E14600B476E3 /* CHCSVParser.m */; };
+		A4E26D861CF9DF07004DFBC3 /* xls.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D841CF9DF07004DFBC3 /* xls.png */; };
+		A4E26D881CF9E1FE004DFBC3 /* csv.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E26D871CF9E1FE004DFBC3 /* csv.png */; };
 		A4E4A2E41CC7831C00E36AFE /* PieExplainTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */; };
 		A4E4A2EC1CC8B60B00E36AFE /* dateSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = A4E4A2EB1CC8B60B00E36AFE /* dateSelectView.m */; };
 		A4E4A2F41CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png in Resources */ = {isa = PBXBuildFile; fileRef = A4E4A2EE1CC9BE6000E36AFE /* FlatDatePicker-Icon-Check.png */; };
@@ -381,6 +383,8 @@
 		A4D535761CF2D39C00B476E3 /* exportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = exportViewController.xib; sourceTree = "<group>"; };
 		A4D5357A1CF2E14600B476E3 /* CHCSVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHCSVParser.h; sourceTree = "<group>"; };
 		A4D5357B1CF2E14600B476E3 /* CHCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHCSVParser.m; sourceTree = "<group>"; };
+		A4E26D841CF9DF07004DFBC3 /* xls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xls.png; sourceTree = "<group>"; };
+		A4E26D871CF9E1FE004DFBC3 /* csv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = csv.png; sourceTree = "<group>"; };
 		A4E4A2E21CC7831C00E36AFE /* PieExplainTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieExplainTableViewCell.h; sourceTree = "<group>"; };
 		A4E4A2E31CC7831C00E36AFE /* PieExplainTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieExplainTableViewCell.m; sourceTree = "<group>"; };
 		A4E4A2EA1CC8B60B00E36AFE /* dateSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dateSelectView.h; sourceTree = "<group>"; };
@@ -803,6 +807,8 @@
 		A4A141071CE967B6003DF45B /* components */ = {
 			isa = PBXGroup;
 			children = (
+				A4E26D871CF9E1FE004DFBC3 /* csv.png */,
+				A4E26D841CF9DF07004DFBC3 /* xls.png */,
 				A4E6DB1D1CEABE1A009CBA87 /* QR_cn1.png */,
 				A4E6DB1E1CEABE1A009CBA87 /* QR_en1.png */,
 				A4A141661CEA3411003DF45B /* pie.png */,
@@ -1044,6 +1050,7 @@
 				A4ECE28B1CDA422B000FF10D /* baseViewController.xib in Resources */,
 				A4ABB8311CE7A14900EB4879 /* 下午.png in Resources */,
 				A4A141371CE967B6003DF45B /* trush.png in Resources */,
+				A4E26D881CF9E1FE004DFBC3 /* csv.png in Resources */,
 				A4A141451CEA1D58003DF45B /* edit.png in Resources */,
 				A4E6DB481CECA97C009CBA87 /* 夜间.png in Resources */,
 				A4A141231CE967B6003DF45B /* back.png in Resources */,
@@ -1066,6 +1073,7 @@
 				A40F6BEE1CE179EF0010A0CE /* loginViewController.xib in Resources */,
 				A4D535781CF2D39C00B476E3 /* exportViewController.xib in Resources */,
 				A4A1412D1CE967B6003DF45B /* menu.png in Resources */,
+				A4E26D861CF9DF07004DFBC3 /* xls.png in Resources */,
 				A4A141361CE967B6003DF45B /* trend.png in Resources */,
 				A4ABB82F1CE7A14900EB4879 /* 上午.png in Resources */,
 				A4E4A2F51CC9BE6000E36AFE /* FlatDatePicker-Icon-Check@2x.png in Resources */,

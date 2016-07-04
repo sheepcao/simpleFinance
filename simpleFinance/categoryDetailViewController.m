@@ -84,7 +84,7 @@
     NSString *nextEndDay = [[CommonUtility sharedCommonUtility] dateByAddingDays:endDate andDaysToAdd:1];
     
     
-    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO where item_category = ? AND item_type = ? AND strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", self.categoryName,[NSNumber numberWithInteger:self.categoryType],startDate,nextEndDay];
+    FMResultSet *rs = [db executeQuery:@"select * from ITEMINFO  where item_category = ? AND item_type = ? AND strftime('%s', target_date) BETWEEN strftime('%s', ?) AND strftime('%s', ?)", self.categoryName,[NSNumber numberWithInteger:self.categoryType],startDate,nextEndDay];
     
     while ([rs next]) {
         itemObj *oneItem = [[itemObj alloc] init];
@@ -124,9 +124,15 @@
     {
         [self.timeWindowItems removeAllObjects];
     }
-    for (NSString *key in [itemsDic allKeys]) {
+    
+    NSArray *keys = [itemsDic allKeys];
+    keys = [keys sortedArrayUsingComparator:^(id a, id b) {
+        return [b compare:a options:NSNumericSearch];
+    }];
+    for (NSString *key in keys) {
         [self.timeWindowItems addObject:[itemsDic objectForKey:key]];
     }
+
     
     //
     double catgoryMoney = 0.0f;

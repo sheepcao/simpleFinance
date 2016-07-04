@@ -106,7 +106,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.16470588235294117" green="0.49411764705882355" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="aVT-32-h2x" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="HAa-mx-TFT"/>
+                            <constraint firstItem="aVT-32-h2x" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="9EN-2W-dvv"/>
                             <constraint firstItem="aVT-32-h2x" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="4:13" id="cKu-vP-6Nl"/>
                             <constraint firstItem="aVT-32-h2x" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="gBE-jb-bq0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aVT-32-h2x" secondAttribute="trailing" constant="-20" id="tk9-mN-b5w"/>

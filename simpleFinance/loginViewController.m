@@ -228,6 +228,9 @@
 
 -(void)keyboardWasShown:(NSNotification*)notification
 {
+    if ([[UIApplication sharedApplication] applicationState] !=UIApplicationStateActive) {
+        return;
+    }
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     
     [UIView animateWithDuration:0.25f animations:^{
@@ -354,10 +357,19 @@
         NSLog(@"%@",success);
 
     } failure:^(NSError * failure){
-        NSLog(@"%@",failure);
-        hud.mode = MBProgressHUDModeText;
-        hud.labelText = NSLocalizedString(@"邮箱地址或密码错误",nil);
-        [hud hide:YES afterDelay:1.5];
+        NSLog(@"%ld--------%@",(long)failure.code,failure.localizedDescription);
+        if([CommonUtility myContainsStringFrom:failure.localizedDescription forSubstring:@"417"] )
+        {
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = NSLocalizedString(@"邮箱地址或密码错误",nil);
+            [hud hide:YES afterDelay:1.5];
+        }else
+        {
+            hud.mode = MBProgressHUDModeText;
+            hud.labelText = NSLocalizedString(@"提交失败，请检查您的网络并重试",nil);
+            [hud hide:YES afterDelay:1.5];
+        }
+
     }];
 
 }

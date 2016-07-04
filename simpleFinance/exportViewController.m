@@ -324,7 +324,7 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     self.operationView = content;
     
     UIButton *uploadButton = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/6)/2,  content.frame.size.height/2 - (SCREEN_WIDTH/3)/0.83, SCREEN_WIDTH/3, (SCREEN_WIDTH/3)/0.83)];
-    [uploadButton setImage:[UIImage imageNamed:@"backup"] forState:UIControlStateNormal];
+    [uploadButton setImage:[UIImage imageNamed:@"csv"] forState:UIControlStateNormal];
     uploadButton.backgroundColor = [UIColor clearColor];
     [uploadButton addTarget:self action:@selector(csvExport) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:uploadButton];
@@ -339,7 +339,7 @@ static NSString * const productId = @"sheepcao.simpleFinance.exportData";
     [content addSubview:uploadText];
     
     UIButton *downLoadButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 +(SCREEN_WIDTH/6)/2, content.frame.size.height/2 - (SCREEN_WIDTH/3)/0.83, SCREEN_WIDTH/3, (SCREEN_WIDTH/3)/0.83)];
-    [downLoadButton setImage:[UIImage imageNamed:@"download"] forState:UIControlStateNormal];
+    [downLoadButton setImage:[UIImage imageNamed:@"xls"] forState:UIControlStateNormal];
     downLoadButton.backgroundColor = [UIColor clearColor];
     [downLoadButton addTarget:self action:@selector(xlsExport) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:downLoadButton];
