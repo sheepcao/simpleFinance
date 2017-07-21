@@ -52,7 +52,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"categoryDetail"];
+    //[MobClick beginLogPageView:@"categoryDetail"];
 
     [self prepareDataFrom:self.startDate toDate:self.endDate];
     [self.itemsTable reloadData];
@@ -62,7 +62,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"categoryDetail"];
+    //[MobClick endLogPageView:@"categoryDetail"];
 }
 
 - (void)didReceiveMemoryWarning {

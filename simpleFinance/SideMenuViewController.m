@@ -48,12 +48,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"SideMenu"];
+//    //[MobClick beginLogPageView:@"SideMenu"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"SideMenu"];
+//    //[MobClick endLogPageView:@"SideMenu"];
 }
 
 - (void)didReceiveMemoryWarning {

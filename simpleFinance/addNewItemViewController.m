@@ -120,12 +120,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"addNewItem"];
+    //[MobClick beginLogPageView:@"addNewItem"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"addNewItem"];
+    //[MobClick endLogPageView:@"addNewItem"];
 }
 
 -(void)prepareCategoryDataBy:(NSString *)key
@@ -707,7 +707,7 @@
     isInputingNote = NO;
     isAddingCategory = NO;
     
-    [MobClick event:@"addNote"];
+    //[MobClick event:@"addNote"];
 
 }
 
@@ -738,7 +738,7 @@
             [self.refreshDelegate refreshData];
             [self dismissViewControllerAnimated:YES completion:nil];
             
-            [MobClick event:@"editItem"];
+            //[MobClick event:@"editItem"];
 
         }
     }else
@@ -751,10 +751,10 @@
         {
             [self dismissViewControllerAnimated:YES completion:nil];
             if (self.moneyTypeSeg.selectedSegmentIndex == 0) {
-                [MobClick event:@"addItem"];
+                //[MobClick event:@"addItem"];
             }else
             {
-                [MobClick event:@"addItemIncome"];
+                //[MobClick event:@"addItemIncome"];
             }
 
         }
@@ -960,7 +960,7 @@
             [self.inputField resignFirstResponder];
             [self.categoryTableView reloadData];
             
-            [MobClick event:@"addCategory"];
+            //[MobClick event:@"addCategory"];
 
         }
     }

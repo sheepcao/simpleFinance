@@ -67,12 +67,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"categoryManage"];
+    //[MobClick beginLogPageView:@"categoryManage"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"categoryManage"];
+    //[MobClick endLogPageView:@"categoryManage"];
 }
 
 -(void)dismissKeyboard {
@@ -475,7 +475,7 @@
     NSLog(@"categoryButton.text:%@",categoryButton.titleLabel.text);
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"永久删除该类别?",nil) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"是的",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [MobClick event:@"deleteCategory"];
+        //[MobClick event:@"deleteCategory"];
 
         db = [[CommonUtility sharedCommonUtility] db];
         if (![db open]) {
@@ -671,7 +671,7 @@
             
             [self.categoryTableView reloadData];
             
-            [MobClick event:@"addCategory"];
+            //[MobClick event:@"addCategory"];
         }
     }
     [db close];

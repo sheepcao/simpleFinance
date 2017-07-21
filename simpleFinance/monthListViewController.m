@@ -49,12 +49,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"Flow"];
+    //[MobClick beginLogPageView:@"Flow"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"Flow"];
+    //[MobClick endLogPageView:@"Flow"];
 }
 
 -(void)configTopbar

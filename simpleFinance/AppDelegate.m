@@ -11,8 +11,6 @@
 #import "SideMenuViewController.h"
 #import "MFSideMenuContainerViewController.h"
 #import "CommonUtility.h"
-#import "OpenShareHeader.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface AppDelegate ()
 @property (nonatomic,strong) FMDatabase *db;
@@ -54,9 +52,7 @@
     
     [self initDB];
     [self judgeTimeFrame];
-    [self configShare];
-    [[FBSDKApplicationDelegate sharedInstance] application:application
-                             didFinishLaunchingWithOptions:launchOptions];
+//    [self configShare];
     
     if ([CommonUtility isSystemLangChinese]) {
         [self loadLuckInfoFromServer];
@@ -72,21 +68,7 @@
     return YES;
 }
 
--(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    //第二步：添加回调
-    if ([OpenShare handleOpenURL:url]) {
-        return YES;
-    }else if ([CommonUtility myContainsStringFrom:[NSString stringWithFormat:@"%@",url]  forSubstring:@"fb"] )
-    {
-        return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                              openURL:url
-                                                    sourceApplication:sourceApplication
-                                                           annotation:annotation];
-    }
-    
-    
-    return YES;
-}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -105,7 +87,6 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [FBSDKAppEvents activateApp];
     if ([CommonUtility isSystemLangChinese]) {
         [self loadLuckInfoFromServer];
     }else
@@ -458,14 +439,14 @@
     
 }
 
--(void)configShare
-{
-    [MobClick startWithAppkey:@"573ab031e0f55ac2c900313c" reportPolicy:REALTIME   channelId:nil];
-    [MobClick setAppVersion:VERSIONNUMBER];
-    
-    
-    [OpenShare connectQQWithAppId:@"1105385156"];
-    [OpenShare connectWeiboWithAppKey:@"3086417886"];
-    [OpenShare connectWeixinWithAppId:@"wx0932d291dbf97131"];
-}
+//-(void)configShare
+//{
+//    //[MobClick startWithAppkey:@"573ab031e0f55ac2c900313c" reportPolicy:REALTIME   channelId:nil];
+//    //[MobClick setAppVersion:VERSIONNUMBER];
+//    
+//    
+//    [OpenShare connectQQWithAppId:@"1105385156"];
+//    [OpenShare connectWeiboWithAppKey:@"3086417886"];
+//    [OpenShare connectWeixinWithAppId:@"wx0932d291dbf97131"];
+//}
 @end

@@ -87,7 +87,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"calendar"];
+    //[MobClick beginLogPageView:@"calendar"];
     [self prepareData];
     [self.calendar reloadData];
 }
@@ -95,7 +95,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"calendar"];
+    //[MobClick endLogPageView:@"calendar"];
 }
 
 

@@ -41,7 +41,7 @@
     self = [super init];
     if ( self ) {
         _transitionTime = kRZSlideTransitionTime;
-        _horizontalOrientation = NO;
+        _horizontalOrientation = YES;
         _containerBackgroundColor = [UIColor blackColor];
     }
     return self;

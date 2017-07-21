@@ -68,14 +68,14 @@
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     [[CommonUtility sharedCommonUtility] shimmerRegisterButton:self.myLoginBtn];
-    [MobClick beginLogPageView:@"login"];
+    //[MobClick beginLogPageView:@"login"];
 
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"login"];
+    //[MobClick endLogPageView:@"login"];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -49,12 +49,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"backup"];
+    //[MobClick beginLogPageView:@"backup"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"backup"];
+    //[MobClick endLogPageView:@"backup"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -286,7 +286,7 @@
 
 -(void)uploadDB
 {
-    [MobClick event:@"backup"];
+    //[MobClick event:@"backup"];
 
     NSString *dbPath = [[CommonUtility sharedCommonUtility] dbPath];
     
@@ -375,7 +375,7 @@
 -(void)downloadURLFromServer
 {
     
-    [MobClick event:@"download"];
+    //[MobClick event:@"download"];
 
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];

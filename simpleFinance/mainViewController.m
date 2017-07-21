@@ -231,13 +231,13 @@
     [self prepareData];
     NSIndexSet *indexSet=[[NSIndexSet alloc]initWithIndex:1];
     [self.maintableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-    [MobClick beginLogPageView:@"homePage"];
+    //[MobClick beginLogPageView:@"homePage"];
 
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"homePage"];
+    //[MobClick endLogPageView:@"homePage"];
 }
 
 -(void)prepareData
@@ -378,7 +378,7 @@
 
 -(void)constellationChoose
 {
-    [MobClick event:@"setConstellation"];
+    //[MobClick event:@"setConstellation"];
 
     
     NSString *constellationOnly = [constellationSelected componentsSeparatedByString:@" "][0];
@@ -956,7 +956,7 @@
 
 -(void)showingModel
 {
-    [MobClick event:@"showModel"];
+    //[MobClick event:@"showModel"];
     
     UIView *dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     dimView.backgroundColor = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:0.7];

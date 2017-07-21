@@ -64,12 +64,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"register"];
+    //[MobClick beginLogPageView:@"register"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"register"];
+    //[MobClick endLogPageView:@"register"];
 }
 -(void)configInputArea
 {

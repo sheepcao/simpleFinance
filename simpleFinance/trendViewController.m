@@ -96,12 +96,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"trend"];
+    //[MobClick beginLogPageView:@"trend"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"trend"];
+    //[MobClick endLogPageView:@"trend"];
 }
 -(void)viewDidAppear:(BOOL)animated
 {

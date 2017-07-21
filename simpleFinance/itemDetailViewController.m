@@ -41,12 +41,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"itemDetail"];
+    //[MobClick beginLogPageView:@"itemDetail"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"itemDetail"];
+    //[MobClick endLogPageView:@"itemDetail"];
 }
 
 
@@ -215,7 +215,7 @@
         
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:NSLocalizedString(@"永久删除这笔账目?",nil) preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"是的",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [MobClick event:@"deleteItem"];
+            //[MobClick event:@"deleteItem"];
 
             db = [[CommonUtility sharedCommonUtility] db];
             if (![db open]) {

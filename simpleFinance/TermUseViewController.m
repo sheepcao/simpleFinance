@@ -35,12 +35,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [MobClick beginLogPageView:@"userTerm"];
+    //[MobClick beginLogPageView:@"userTerm"];
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [MobClick endLogPageView:@"userTerm"];
+    //[MobClick endLogPageView:@"userTerm"];
 }
 
 -(void)configTopbar

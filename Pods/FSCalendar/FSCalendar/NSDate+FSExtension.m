@@ -305,10 +305,7 @@
     static id instance;
     static dispatch_once_t fs_sharedCalendar_onceToken;
     dispatch_once(&fs_sharedCalendar_onceToken, ^{
-//        instance = [NSCalendar currentCalendar];
-        NSCalendar *cal = [[NSCalendar alloc]
-                           initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-        instance = cal;
+        instance = [NSCalendar currentCalendar];
     });
     return instance;
 }
