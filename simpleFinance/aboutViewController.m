@@ -130,7 +130,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return self.rowList.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -142,7 +142,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
     }
-    if (indexPath.row < 5) {
+    if (indexPath.row < 4) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }else
     {
@@ -209,6 +209,12 @@
     
     
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    if (!picker)
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry",nil) message:NSLocalizedString(@"no account",nil) delegate:self cancelButtonTitle: NSLocalizedString(@"Cancel",nil) otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
     [picker.view setFrame:CGRectMake(0,20 , 320, self.view.frame.size.height-20)];
     picker.mailComposeDelegate = self;
     

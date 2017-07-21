@@ -253,3 +253,8 @@
 
 "%ld年" = "%ld";
 "%ld日" = "%ld";
+
+
+"Sorry" = "Sorry";
+"Cancel" = "Cancel";
+"no account" ="You don't have a email account setup in your device";

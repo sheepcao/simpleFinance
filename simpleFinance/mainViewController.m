@@ -91,12 +91,12 @@
     
 }
 
-- (void)registerLuckChangedNotification{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(configLuckyText)
-                                                 name:LuckChanged
-                                               object:nil];
-}
+//- (void)registerLuckChangedNotification{
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(configLuckyText)
+//                                                 name:LuckChanged
+//                                               object:nil];
+//}
 
 -(void)configTextColor
 {
@@ -111,7 +111,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"main view....");
-    [self registerLuckChangedNotification];
+//    [self registerLuckChangedNotification];
     
     if (IS_IPHONE_6P) {
         bottomHeight = 65;
@@ -137,7 +137,7 @@
     [self configTextColor];
 
     
-    [self configLuckyText];
+//    [self configLuckyText];
     
     self.titleTextLabel.alpha = 1.0f;
     self.moneyBookText.alpha = 0.0f;
@@ -179,14 +179,14 @@
     }
 //    NSLog(@"moneyLuckSpace---:%f",moneyLuckSpace);
     
-    if ([CommonUtility isSystemLangChinese]) {
-        [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
-    }else
-    {
+//    if ([CommonUtility isSystemLangChinese]) {
+//        [self.maintableView addObserver: self forKeyPath: @"contentOffset" options: NSKeyValueObservingOptionNew context: nil];
+//    }else
+//    {
         self.moneyBookText.alpha = 1.0f;
         self.titleTextLabel.alpha =0.0f;
         self.luckyText.alpha = 0.0f;
-    }
+//    }
     
     [self configBottomBar];
     
@@ -347,21 +347,21 @@
     return itemsArray;
 }
 
--(void)configLuckyText
-{
-    
-    NSString *Constellation = [[NSUserDefaults standardUserDefaults] objectForKey:@"Constellation"];
-    if (!Constellation) {
-        [self.luckyText makeText:@"设置星座，随时掌握财运 >"];
-        return;
-    }
-    
-    if ([CommonUtility isSystemLangChinese]) {
-        [[CommonUtility sharedCommonUtility] fetchConstellation:Constellation ForView:self.luckyText];
-    }
-    
-
-}
+//-(void)configLuckyText
+//{
+//    
+//    NSString *Constellation = [[NSUserDefaults standardUserDefaults] objectForKey:@"Constellation"];
+//    if (!Constellation) {
+//        [self.luckyText makeText:@"设置星座，随时掌握财运 >"];
+//        return;
+//    }
+//    
+//    if ([CommonUtility isSystemLangChinese]) {
+//        [[CommonUtility sharedCommonUtility] fetchConstellation:Constellation ForView:self.luckyText];
+//    }
+//    
+//
+//}
 
 - (IBAction)configConstellation:(id)sender {
     
@@ -461,12 +461,7 @@
 
     addMoneyButton.titleLabel.font = [UIFont boldSystemFontOfSize:42.0f];
     [addMoneyButton addTarget:self action:@selector(popAddNewView:) forControlEvents:UIControlEventTouchUpInside];
-    //for button style on diff states.
-//    [addMoneyButton addTarget:self action:@selector(tapDownAddNewButton:) forControlEvents:UIControlEventTouchDown];
-//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchCancel];
-//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragExit];
-//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchDragOutside];
-//    [addMoneyButton addTarget:self action:@selector(tapUpAddNewButton:) forControlEvents:UIControlEventTouchUpOutside];
+
     
     [bottomView addSubview:addMoneyButton];
     
@@ -570,9 +565,9 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if ([CommonUtility isSystemLangChinese]) {
-            return moneyLuckSpace;
-        }
+//        if ([CommonUtility isSystemLangChinese]) {
+//            return moneyLuckSpace;
+//        }
         return 0;
     }else if(indexPath.section == 1 && indexPath.row == self.todayItems.count){
         if (self.todayItems.count == 0) {
@@ -893,29 +888,29 @@
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView// called when scroll view grinds to a halt
 {
-    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
-
-//    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
-        [UIView animateWithDuration:0.35f animations:^(void){
-            [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
-        }];
-    }else
+//    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+//
+////    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+//        [UIView animateWithDuration:0.35f animations:^(void){
+//            [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
+//        }];
+//    }else
         return;
 }
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
-
-//    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
-        
-        if (!decelerate) {
-            [UIView animateWithDuration:0.35f animations:^(void){
-                [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
-            }];
-        }else
-            return;
-        
-    }else
+//    if ([CommonUtility isSystemLangChinese] && scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+//
+////    if (scrollView.contentOffset.y<moneyLuckSpace && scrollView.contentOffset.y>0.001) {
+//        
+//        if (!decelerate) {
+//            [UIView animateWithDuration:0.35f animations:^(void){
+//                [scrollView setContentOffset:CGPointMake(0, moneyLuckSpace)];
+//            }];
+//        }else
+//            return;
+//        
+//    }else
         return;
 }
 
